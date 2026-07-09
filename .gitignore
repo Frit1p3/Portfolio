@@ -1,4 +1,6 @@
 .ia/
 .idea/
+.vs/
 bin/
 obj/
+*.csproj.user

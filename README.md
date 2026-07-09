@@ -23,6 +23,7 @@ Hebergement vise : GitHub Pages ou Azure Static Web Apps Free.
 - `docs/product/positionnement.md` : proposition de valeur, messages cles et angles de communication.
 - `docs/product/personas.md` : publics cibles et attentes.
 - `docs/architecture/choix-techniques.md` : decisions techniques initiales.
+- `docs/architecture/strategie-tests.md` : strategie de tests unitaires, composants et navigateur.
 - `docs/design-system/figma-code-mapping.md` : mapping entre les composants Figma et les futurs composants Blazor.
 
 Les fichiers de contexte de travail locaux sont exclus du depot public via `.gitignore`.

@@ -1,0 +1,62 @@
+using Bunit;
+using Portfolio.Components.Layout;
+using Portfolio.Components.UI;
+
+namespace Portfolio.Tests;
+
+public sealed class ComponentTests : BunitContext
+{
+    [Fact]
+    public void Button_renders_link_with_variant_and_content()
+    {
+        var cut = Render<Button>(parameters => parameters
+            .Add(component => component.Href, "#proof")
+            .Add(component => component.Variant, "secondary")
+            .AddChildContent("Voir la demonstration"));
+
+        var link = cut.Find("a");
+
+        Assert.Equal("#proof", link.GetAttribute("href"));
+        Assert.Contains("button", link.ClassList);
+        Assert.Contains("button--secondary", link.ClassList);
+        Assert.Contains("Voir la demonstration", link.TextContent);
+    }
+
+    [Fact]
+    public void Badge_renders_tone_and_content()
+    {
+        var cut = Render<Badge>(parameters => parameters
+            .Add(component => component.Tone, "accent")
+            .AddChildContent("Portfolio applicatif"));
+
+        var badge = cut.Find("span");
+
+        Assert.Contains("badge", badge.ClassList);
+        Assert.Contains("badge--accent", badge.ClassList);
+        Assert.Contains("Portfolio applicatif", badge.TextContent);
+    }
+
+    [Fact]
+    public void HeaderNavigation_exposes_main_navigation_landmarks()
+    {
+        var cut = Render<HeaderNavigation>();
+
+        Assert.NotNull(cut.Find("header"));
+        Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
+        Assert.Contains("Merryl", cut.Markup);
+        Assert.Contains("#proof", cut.Markup);
+        Assert.Contains("#contact", cut.Markup);
+    }
+
+    [Fact]
+    public void SiteFooter_exposes_contact_area()
+    {
+        var cut = Render<SiteFooter>();
+
+        var footer = cut.Find("footer");
+
+        Assert.Equal("contact", footer.Id);
+        Assert.Contains("Front-End .NET", footer.TextContent);
+        Assert.StartsWith("mailto:", cut.Find("a").GetAttribute("href"));
+    }
+}

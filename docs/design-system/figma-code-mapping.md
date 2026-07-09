@@ -15,7 +15,7 @@ Le but est d'eviter deux derives :
 ## Source Figma
 
 - Fichier : `Portfolio - Design System & Maquettes`
-- URL : `https://www.figma.com/design/tuTDp423ZWyCEz5IYzYgHE`
+- URL : privee, conservee hors depot public.
 - Page layouts : `03 - Layouts`
 - Page prototype : `05 - Prototype`
 - Page composants : `02 - Components`
