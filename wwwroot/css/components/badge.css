@@ -1,0 +1,20 @@
+.badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    padding: var(--space-4) var(--space-12);
+    font-size: var(--text-small);
+    font-weight: 700;
+}
+
+.badge--accent {
+    background: var(--color-accent-soft);
+    color: var(--color-brand);
+}
+
+.badge--neutral {
+    background: var(--color-surface-muted);
+    color: var(--color-text-secondary);
+}
