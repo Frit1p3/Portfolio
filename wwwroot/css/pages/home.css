@@ -30,6 +30,13 @@
     gap: var(--space-12);
 }
 
+.hero-shell__kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-12);
+    max-width: 720px;
+}
+
 .section-band {
     width: min(1120px, calc(100% - 32px));
     margin: 0 auto;
@@ -61,6 +68,10 @@
     .hero-shell {
         grid-template-columns: 1fr;
     }
+
+    .hero-shell__kpis {
+        max-width: none;
+    }
 }
 
 @media (max-width: 560px) {
@@ -77,6 +88,10 @@
     .hero-shell__actions {
         align-items: stretch;
         flex-direction: column;
+    }
+
+    .hero-shell__kpis {
+        grid-template-columns: 1fr;
     }
 
     .button {

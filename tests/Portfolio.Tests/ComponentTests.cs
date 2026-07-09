@@ -103,6 +103,27 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void HeroKpiCard_renders_kpi_content_and_tone()
+    {
+        var cut = Render<HeroKpiCard>(parameters => parameters
+            .Add(component => component.Label, "Experience")
+            .Add(component => component.Value, "3 ans")
+            .Add(component => component.Delta, "Industrie")
+            .Add(component => component.Caption, "Interfaces metier, KPI et donnees operationnelles.")
+            .Add(component => component.Tone, "accent"));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("hero-kpi-card", card.ClassList);
+        Assert.Contains("hero-kpi-card--accent", card.ClassList);
+        Assert.Equal("Experience - 3 ans - Industrie", card.GetAttribute("aria-label"));
+        Assert.Contains("Experience", card.TextContent);
+        Assert.Contains("3 ans", card.TextContent);
+        Assert.Contains("Industrie", card.TextContent);
+        Assert.Contains("Interfaces metier, KPI et donnees operationnelles.", card.TextContent);
+    }
+
+    [Fact]
     public void ProductDemoPanel_composes_sources_and_decision_cards()
     {
         var cut = Render<ProductDemoPanel>();
