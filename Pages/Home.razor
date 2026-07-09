@@ -25,18 +25,23 @@
             <Badge Tone="neutral">Demo</Badge>
         </div>
         <div class="hero-proof__grid">
-            <article>
-                <strong>ERP</strong>
-                <span>Commandes et stocks</span>
-            </article>
-            <article>
-                <strong>Atelier</strong>
-                <span>Incidents et qualite</span>
-            </article>
-            <article>
-                <strong>BI</strong>
-                <span>KPI et tendances</span>
-            </article>
+            <SourceCompactCard
+                Label="ERP"
+                Type="Source metier"
+                Description="Commandes, stocks et factures synchronises."
+                Status="sync"
+                Tone="accent" />
+            <SourceCompactCard
+                Label="Atelier"
+                Type="Terrain"
+                Description="Incidents, temps reels et qualite atelier."
+                Status="live"
+                Tone="success" />
+            <SourceCompactCard
+                Label="GED"
+                Type="Documentation"
+                Description="Procedures et preuves associees aux flux."
+                Status="ok" />
         </div>
         <div class="hero-proof__decision">
             <span>Lecture decisionnelle</span>

@@ -59,4 +59,24 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Front-End .NET", footer.TextContent);
         Assert.StartsWith("mailto:", cut.Find("a").GetAttribute("href"));
     }
+
+    [Fact]
+    public void SourceCompactCard_renders_source_content_and_tone()
+    {
+        var cut = Render<SourceCompactCard>(parameters => parameters
+            .Add(component => component.Label, "ERP")
+            .Add(component => component.Type, "Source metier")
+            .Add(component => component.Description, "Commandes, stocks et factures synchronises.")
+            .Add(component => component.Status, "sync")
+            .Add(component => component.Tone, "accent"));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("source-compact-card", card.ClassList);
+        Assert.Contains("source-compact-card--accent", card.ClassList);
+        Assert.Equal("ERP - Source metier - sync", card.GetAttribute("aria-label"));
+        Assert.Contains("ERP", card.TextContent);
+        Assert.Contains("Commandes, stocks et factures synchronises.", card.TextContent);
+        Assert.Contains("sync", card.TextContent);
+    }
 }
