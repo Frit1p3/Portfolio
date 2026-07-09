@@ -1,1 +1,4 @@
 .ia/
+.idea/
+bin/
+obj/

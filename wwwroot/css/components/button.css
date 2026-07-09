@@ -1,0 +1,21 @@
+.button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-4);
+    border: 1px solid transparent;
+    padding: 0 var(--space-16);
+    font-weight: 700;
+}
+
+.button--primary {
+    background: var(--color-accent);
+    color: var(--color-surface-dark);
+}
+
+.button--secondary {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.28);
+    color: var(--color-text-inverse);
+}

@@ -2,7 +2,7 @@
 
 ## Decision retenue
 
-Le portfolio sera une application Blazor WebAssembly responsive desktop/mobile, sans back-office et sans outil payant obligatoire.
+Le portfolio sera une application .NET 10 Blazor WebAssembly responsive desktop/mobile, sans back-office et sans outil payant obligatoire.
 
 Le projet est un portfolio de demonstration : le contenu sera maintenu dans le depot sous forme de fichiers statiques et versionnes, plutot que pilote par un CMS ou une interface d'administration.
 
