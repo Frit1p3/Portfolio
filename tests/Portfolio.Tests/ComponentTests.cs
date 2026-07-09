@@ -79,4 +79,25 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Commandes, stocks et factures synchronises.", card.TextContent);
         Assert.Contains("sync", card.TextContent);
     }
+
+    [Fact]
+    public void DecisionTimelineCard_renders_decision_content_and_tone()
+    {
+        var cut = Render<DecisionTimelineCard>(parameters => parameters
+            .Add(component => component.Step, "01")
+            .Add(component => component.Meta, "OEE atelier")
+            .Add(component => component.Title, "87% de rendement")
+            .Add(component => component.Description, "+6 pts vs semaine precedente")
+            .Add(component => component.Tone, "success"));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("decision-timeline-card", card.ClassList);
+        Assert.Contains("decision-timeline-card--success", card.ClassList);
+        Assert.Equal("01 - OEE atelier - 87% de rendement", card.GetAttribute("aria-label"));
+        Assert.Contains("01", card.TextContent);
+        Assert.Contains("OEE atelier", card.TextContent);
+        Assert.Contains("87% de rendement", card.TextContent);
+        Assert.Contains("+6 pts vs semaine precedente", card.TextContent);
+    }
 }

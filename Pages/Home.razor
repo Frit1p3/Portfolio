@@ -43,9 +43,25 @@
                 Description="Procedures et preuves associees aux flux."
                 Status="ok" />
         </div>
-        <div class="hero-proof__decision">
-            <span>Lecture decisionnelle</span>
-            <strong>3 priorites actionnables</strong>
+        <div class="hero-proof__decision" aria-label="Lecture decisionnelle">
+            <DecisionTimelineCard
+                Step="01"
+                Meta="OEE atelier"
+                Title="87% de rendement"
+                Description="+6 pts vs semaine precedente"
+                Tone="success" />
+            <DecisionTimelineCard
+                Step="02"
+                Meta="Alertes critiques"
+                Title="12 points ouverts"
+                Description="3 priorites qualite a traiter"
+                Tone="warning" />
+            <DecisionTimelineCard
+                Step="03"
+                Meta="Cycle moyen"
+                Title="2.8 j / objectif 3 j"
+                Description="Delai compatible avec la cible"
+                Tone="neutral" />
         </div>
     </div>
 </section>
