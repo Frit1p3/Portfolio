@@ -1,0 +1,28 @@
+<article class="decision-timeline-card decision-timeline-card--@Tone" aria-label="@AriaLabel">
+    <span class="decision-timeline-card__step">@Step</span>
+
+    <div class="decision-timeline-card__content">
+        <p class="decision-timeline-card__meta">@Meta</p>
+        <h3 class="decision-timeline-card__title">@Title</h3>
+        <p class="decision-timeline-card__description">@Description</p>
+    </div>
+</article>
+
+@code {
+    [Parameter]
+    public string Step { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Meta { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    private string AriaLabel => $"{Step} - {Meta} - {Title}";
+}
