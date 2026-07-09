@@ -33,6 +33,7 @@ public sealed class FoundationTests
         Assert.Contains("base/reset.css", appCss, StringComparison.Ordinal);
         Assert.Contains("layout/shell.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/button.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/source-compact-card.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
     }
 

@@ -1,0 +1,28 @@
+<article class="source-compact-card source-compact-card--@Tone" aria-label="@AriaLabel">
+    <div class="source-compact-card__header">
+        <span class="source-compact-card__label">@Label</span>
+        <span class="source-compact-card__status">@Status</span>
+    </div>
+
+    <p class="source-compact-card__type">@Type</p>
+    <p class="source-compact-card__description">@Description</p>
+</article>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Type { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Status { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    private string AriaLabel => $"{Label} - {Type} - {Status}";
+}
