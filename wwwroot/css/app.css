@@ -8,6 +8,7 @@
 @import url("components/badge.css");
 @import url("components/source-compact-card.css");
 @import url("components/decision-timeline-card.css");
+@import url("components/product-demo-panel.css");
 @import url("pages/home.css");
 
 #blazor-error-ui {

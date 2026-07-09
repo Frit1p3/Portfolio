@@ -1,0 +1,57 @@
+<section id="@Id" class="product-demo-panel" aria-label="@AriaLabel">
+    <div class="product-demo-panel__header">
+        <span>@Title</span>
+        <Badge Tone="neutral">Demo</Badge>
+    </div>
+
+    <div class="product-demo-panel__sources" aria-label="Sources connectees">
+        <SourceCompactCard
+            Label="ERP"
+            Type="Source metier"
+            Description="Commandes, stocks et factures synchronises."
+            Status="sync"
+            Tone="accent" />
+        <SourceCompactCard
+            Label="Atelier"
+            Type="Terrain"
+            Description="Incidents, temps reels et qualite atelier."
+            Status="live"
+            Tone="success" />
+        <SourceCompactCard
+            Label="GED"
+            Type="Documentation"
+            Description="Procedures et preuves associees aux flux."
+            Status="ok" />
+    </div>
+
+    <div class="product-demo-panel__decisions" aria-label="Lecture decisionnelle">
+        <DecisionTimelineCard
+            Step="01"
+            Meta="OEE atelier"
+            Title="87% de rendement"
+            Description="+6 pts vs semaine precedente"
+            Tone="success" />
+        <DecisionTimelineCard
+            Step="02"
+            Meta="Alertes critiques"
+            Title="12 points ouverts"
+            Description="3 priorites qualite a traiter"
+            Tone="warning" />
+        <DecisionTimelineCard
+            Step="03"
+            Meta="Cycle moyen"
+            Title="2.8 j / objectif 3 j"
+            Description="Delai compatible avec la cible"
+            Tone="neutral" />
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = "proof";
+
+    [Parameter]
+    public string Title { get; set; } = "Cartographie des flux metier";
+
+    private string AriaLabel => $"Apercu de demonstration produit - {Title}";
+}

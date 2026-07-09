@@ -1,5 +1,6 @@
 using Bunit;
 using Portfolio.Components.Layout;
+using Portfolio.Components.Sections;
 using Portfolio.Components.UI;
 
 namespace Portfolio.Tests;
@@ -99,5 +100,22 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("OEE atelier", card.TextContent);
         Assert.Contains("87% de rendement", card.TextContent);
         Assert.Contains("+6 pts vs semaine precedente", card.TextContent);
+    }
+
+    [Fact]
+    public void ProductDemoPanel_composes_sources_and_decision_cards()
+    {
+        var cut = Render<ProductDemoPanel>();
+
+        var panel = cut.Find("section");
+
+        Assert.Equal("proof", panel.Id);
+        Assert.Contains("product-demo-panel", panel.ClassList);
+        Assert.Equal("Apercu de demonstration produit - Cartographie des flux metier", panel.GetAttribute("aria-label"));
+        Assert.Equal(3, cut.FindAll(".source-compact-card").Count);
+        Assert.Equal(3, cut.FindAll(".decision-timeline-card").Count);
+        Assert.Contains("Cartographie des flux metier", panel.TextContent);
+        Assert.Contains("OEE atelier", panel.TextContent);
+        Assert.Contains("GED", panel.TextContent);
     }
 }
