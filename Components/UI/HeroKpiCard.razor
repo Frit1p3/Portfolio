@@ -1,0 +1,28 @@
+<article class="hero-kpi-card hero-kpi-card--@Tone" aria-label="@AriaLabel">
+    <div class="hero-kpi-card__header">
+        <span class="hero-kpi-card__label">@Label</span>
+        <span class="hero-kpi-card__delta">@Delta</span>
+    </div>
+
+    <strong class="hero-kpi-card__value">@Value</strong>
+    <p class="hero-kpi-card__caption">@Caption</p>
+</article>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Delta { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Caption { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    private string AriaLabel => $"{Label} - {Value} - {Delta}";
+}
