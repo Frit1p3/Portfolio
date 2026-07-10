@@ -18,7 +18,7 @@ public sealed class FoundationTests
         Assert.Equal(4, LandingContent.ConceptSources.Count);
         Assert.Equal(3, LandingContent.ConceptStack.Count);
         Assert.Equal(4, LandingContent.ConceptSteps.Count);
-        Assert.Equal(3, LandingContent.ConceptDemos.Count);
+        Assert.Equal(4, LandingContent.ConceptDemos.Count);
         Assert.Equal(3, LandingContent.HeroKpis.Count);
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
     }

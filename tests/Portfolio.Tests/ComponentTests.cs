@@ -193,10 +193,32 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Interfaces metier industrielles", section.TextContent);
         Assert.Equal(4, cut.FindAll(".concept-source-chip").Count);
         Assert.Equal(4, cut.FindAll(".concept-tab").Count);
-        Assert.Equal(3, cut.FindAll(".concept-demo-card").Count);
+        Assert.Equal(4, cut.FindAll(".concept-demo-card").Count);
         Assert.Equal(3, cut.FindAll(".hero-kpi-card").Count);
         Assert.NotNull(cut.Find(".product-demo-panel"));
         Assert.Contains("Structurer l'interface", section.TextContent);
+    }
+
+    [Fact]
+    public void ConceptHeroSection_updates_active_step_and_highlighted_demo_card()
+    {
+        var cut = Render<ConceptHeroSection>();
+
+        var tabs = cut.FindAll(".concept-tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Contains("concept-demo-card--highlighted", cut.FindAll(".concept-demo-card")[1].ClassList);
+
+        tabs[3].Click();
+
+        tabs = cut.FindAll(".concept-tab");
+        var cards = cut.FindAll(".concept-demo-card");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("true", tabs[3].GetAttribute("aria-selected"));
+        Assert.DoesNotContain("concept-demo-card--highlighted", cards[1].ClassList);
+        Assert.Contains("concept-demo-card--highlighted", cards[3].ClassList);
+        Assert.Contains("Decider plus vite", cards[3].TextContent);
     }
 
     [Fact]
