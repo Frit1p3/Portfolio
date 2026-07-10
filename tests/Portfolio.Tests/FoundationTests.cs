@@ -12,6 +12,28 @@ public sealed class FoundationTests
     }
 
     [Fact]
+    public void Landing_concept_hero_content_is_available()
+    {
+        Assert.Contains("Interfaces metier industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
+        Assert.Equal(4, LandingContent.ConceptSources.Count);
+        Assert.Equal(3, LandingContent.ConceptStack.Count);
+        Assert.Equal(4, LandingContent.ConceptSteps.Count);
+        Assert.Equal(3, LandingContent.ConceptDemos.Count);
+        Assert.Equal(3, LandingContent.HeroKpis.Count);
+        Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
+    }
+
+    [Fact]
+    public void Landing_product_demo_content_is_available()
+    {
+        Assert.Contains("Cartographie", LandingContent.ProductDemoTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.ProductSources.Count);
+        Assert.Equal(3, LandingContent.ProductDecisionMetrics.Count);
+        Assert.Contains(LandingContent.ProductSources, source => source.Label == "ERP");
+        Assert.Contains(LandingContent.ProductDecisionMetrics, metric => metric.Meta == "OEE atelier");
+    }
+
+    [Fact]
     public void Gitignore_keeps_private_and_generated_files_out_of_the_repository()
     {
         var root = FindRepositoryRoot();
