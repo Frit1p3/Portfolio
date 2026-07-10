@@ -1,0 +1,36 @@
+<article class="@ClassName" aria-label="@AriaLabel">
+    @if (!string.IsNullOrWhiteSpace(Marker))
+    {
+        <span class="concept-demo-card__marker">@Marker</span>
+    }
+
+    <div class="concept-demo-card__content">
+        <h3 class="concept-demo-card__title">@Title</h3>
+        <p class="concept-demo-card__body">@Body</p>
+    </div>
+</article>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Body { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Marker { get; set; }
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    [Parameter]
+    public bool IsHighlighted { get; set; }
+
+    private string ClassName => IsHighlighted
+        ? $"concept-demo-card concept-demo-card--{Tone} concept-demo-card--highlighted"
+        : $"concept-demo-card concept-demo-card--{Tone}";
+
+    private string AriaLabel => string.IsNullOrWhiteSpace(Marker)
+        ? Title
+        : $"{Marker} - {Title}";
+}

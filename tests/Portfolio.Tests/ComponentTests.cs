@@ -162,6 +162,27 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ConceptDemoCard_renders_highlighted_concept_content()
+    {
+        var cut = Render<ConceptDemoCard>(parameters => parameters
+            .Add(component => component.Title, "Unifier les donnees")
+            .Add(component => component.Body, "Transformer plusieurs sources metier en lecture decisionnelle commune.")
+            .Add(component => component.Marker, "03")
+            .Add(component => component.Tone, "accent")
+            .Add(component => component.IsHighlighted, true));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("concept-demo-card", card.ClassList);
+        Assert.Contains("concept-demo-card--accent", card.ClassList);
+        Assert.Contains("concept-demo-card--highlighted", card.ClassList);
+        Assert.Equal("03 - Unifier les donnees", card.GetAttribute("aria-label"));
+        Assert.Contains("03", card.TextContent);
+        Assert.Contains("Unifier les donnees", card.TextContent);
+        Assert.Contains("Transformer plusieurs sources metier en lecture decisionnelle commune.", card.TextContent);
+    }
+
+    [Fact]
     public void ProductDemoPanel_composes_sources_and_decision_cards()
     {
         var cut = Render<ProductDemoPanel>();
