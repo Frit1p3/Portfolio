@@ -141,6 +141,27 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ConceptTab_renders_active_tab_with_step_and_tone()
+    {
+        var cut = Render<ConceptTab>(parameters => parameters
+            .Add(component => component.Label, "Structurer")
+            .Add(component => component.Step, "02")
+            .Add(component => component.Tone, "accent")
+            .Add(component => component.IsActive, true));
+
+        var tab = cut.Find("button");
+
+        Assert.Contains("concept-tab", tab.ClassList);
+        Assert.Contains("concept-tab--accent", tab.ClassList);
+        Assert.Contains("concept-tab--active", tab.ClassList);
+        Assert.Equal("tab", tab.GetAttribute("role"));
+        Assert.Equal("true", tab.GetAttribute("aria-selected"));
+        Assert.Equal("02 - Structurer", tab.GetAttribute("aria-label"));
+        Assert.Contains("02", tab.TextContent);
+        Assert.Contains("Structurer", tab.TextContent);
+    }
+
+    [Fact]
     public void ProductDemoPanel_composes_sources_and_decision_cards()
     {
         var cut = Render<ProductDemoPanel>();
