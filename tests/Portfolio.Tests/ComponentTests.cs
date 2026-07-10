@@ -183,6 +183,23 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ConceptHeroSection_composes_landing_concept_components()
+    {
+        var cut = Render<ConceptHeroSection>();
+
+        var section = cut.Find("section.concept-hero");
+
+        Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("Interfaces metier industrielles", section.TextContent);
+        Assert.Equal(4, cut.FindAll(".concept-source-chip").Count);
+        Assert.Equal(4, cut.FindAll(".concept-tab").Count);
+        Assert.Equal(3, cut.FindAll(".concept-demo-card").Count);
+        Assert.Equal(3, cut.FindAll(".hero-kpi-card").Count);
+        Assert.NotNull(cut.Find(".product-demo-panel"));
+        Assert.Contains("Structurer l'interface", section.TextContent);
+    }
+
+    [Fact]
     public void ProductDemoPanel_composes_sources_and_decision_cards()
     {
         var cut = Render<ProductDemoPanel>();

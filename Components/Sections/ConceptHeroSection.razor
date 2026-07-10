@@ -1,0 +1,68 @@
+<section class="concept-hero" aria-labelledby="concept-hero-title">
+    <div class="concept-hero__inner">
+        <div class="concept-hero__content">
+            <Badge Tone="accent">Portfolio applicatif</Badge>
+
+            <h1 id="concept-hero-title">Interfaces metier industrielles, lisibles et orientees decision.</h1>
+
+            <p>
+                Developpeur Front-End .NET specialise dans les experiences B2B, les dashboards KPI
+                et les design systems pour environnements industriels.
+            </p>
+
+            <div class="concept-hero__actions" aria-label="Actions principales">
+                <Button Href="#proof">Voir la demonstration</Button>
+                <Button Href="#contact" Variant="secondary">Me contacter</Button>
+            </div>
+        </div>
+
+        <div class="concept-hero__scene" aria-label="Scene conceptuelle des flux metier">
+            <div class="concept-hero__sources" aria-label="Sources metier connectees">
+                <ConceptSourceChip Label="ERP" Description="Commandes et stocks" Tone="accent" />
+                <ConceptSourceChip Label="Atelier" Description="Terrain et qualite" Tone="success" />
+                <ConceptSourceChip Label="BI" Description="KPI consolides" Tone="warning" />
+                <ConceptSourceChip Label="GED" Description="Preuves et procedures" Tone="muted" />
+            </div>
+
+            <div class="concept-hero__stack" aria-label="Stack de conception">
+                <span>UX industrielle</span>
+                <span>Design system</span>
+                <span>KPI decisionnels</span>
+            </div>
+
+            <div class="concept-hero__tabs" role="tablist" aria-label="Etapes de conception">
+                <ConceptTab Label="Cadrer" Step="01" Tone="muted" />
+                <ConceptTab Label="Structurer" Step="02" Tone="accent" IsActive="true" />
+                <ConceptTab Label="Unifier" Step="03" Tone="accent" />
+                <ConceptTab Label="Decider" Step="04" Tone="success" />
+            </div>
+
+            <div class="concept-hero__cards" aria-label="Concepts demonstres">
+                <ConceptDemoCard
+                    Marker="01"
+                    Title="Cadrer les flux"
+                    Body="Identifier les sources, les contraintes terrain et les decisions attendues."
+                    Tone="muted" />
+                <ConceptDemoCard
+                    Marker="02"
+                    Title="Structurer l'interface"
+                    Body="Transformer la complexite metier en modules lisibles, hierarchises et reutilisables."
+                    Tone="accent"
+                    IsHighlighted="true" />
+                <ConceptDemoCard
+                    Marker="03"
+                    Title="Rendre la donnee exploitable"
+                    Body="Relier KPI, statut et contexte pour accelerer la lecture operationnelle."
+                    Tone="success" />
+            </div>
+        </div>
+
+        <div class="concept-hero__kpis" aria-label="Preuves metier">
+            <HeroKpiCard Label="Experience" Value="3 ans" Delta="Industrie" Caption="Interfaces metier, KPI et donnees operationnelles." Tone="accent" />
+            <HeroKpiCard Label="Objectif UX" Value="- friction" Delta="Decision" Caption="Des parcours plus lisibles pour accelerer l'action." Tone="success" />
+            <HeroKpiCard Label="Socle" Value=".NET" Delta="Blazor" Caption="Composants reutilisables, CSS Vanilla et accessibilite." />
+        </div>
+
+        <ProductDemoPanel />
+    </div>
+</section>

@@ -13,6 +13,7 @@
 @import url("components/concept-tab.css");
 @import url("components/concept-demo-card.css");
 @import url("components/product-demo-panel.css");
+@import url("components/concept-hero-section.css");
 @import url("pages/home.css");
 
 #blazor-error-ui {
