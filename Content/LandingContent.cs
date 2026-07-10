@@ -53,6 +53,11 @@ public static class LandingContent
             "03",
             "Rendre la donnee exploitable",
             "Relier KPI, statut et contexte pour accelerer la lecture operationnelle.",
+            "success"),
+        new ConceptDemo(
+            "04",
+            "Decider plus vite",
+            "Transformer les signaux consolides en priorites claires et actionnables.",
             "success")
     };
 

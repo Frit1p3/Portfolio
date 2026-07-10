@@ -33,7 +33,12 @@
             <div class="concept-hero__tabs" role="tablist" aria-label="Etapes de conception">
                 @foreach (var step in LandingContent.ConceptSteps)
                 {
-                    <ConceptTab Label="@step.Label" Step="@step.Step" Tone="@step.Tone" IsActive="@step.IsActive" />
+                    <ConceptTab
+                        Label="@step.Label"
+                        Step="@step.Step"
+                        Tone="@step.Tone"
+                        IsActive="@(step.Step == activeStep)"
+                        OnSelected="@(() => SelectStep(step.Step))" />
                 }
             </div>
 
@@ -45,7 +50,7 @@
                         Title="@demo.Title"
                         Body="@demo.Body"
                         Tone="@demo.Tone"
-                        IsHighlighted="@demo.IsHighlighted" />
+                        IsHighlighted="@(demo.Marker == activeStep)" />
                 }
             </div>
         </div>
@@ -65,3 +70,13 @@
         <ProductDemoPanel />
     </div>
 </section>
+
+@code {
+    private string activeStep = LandingContent.ConceptSteps.FirstOrDefault(step => step.IsActive)?.Step
+        ?? LandingContent.ConceptSteps.First().Step;
+
+    private void SelectStep(string step)
+    {
+        activeStep = step;
+    }
+}
