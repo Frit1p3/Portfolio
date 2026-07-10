@@ -30,7 +30,7 @@
     font-size: clamp(2.6rem, 8vw, var(--text-hero));
 }
 
-.concept-hero p {
+.concept-hero__content > p {
     max-width: 680px;
     color: rgba(247, 251, 255, 0.72);
     font-size: var(--text-large);
