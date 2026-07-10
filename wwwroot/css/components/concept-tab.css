@@ -1,0 +1,80 @@
+.concept-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: var(--space-8);
+    border: 1px solid rgba(247, 251, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(247, 251, 255, 0.74);
+    cursor: pointer;
+    font: inherit;
+    padding: var(--space-8) var(--space-16);
+    text-align: left;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.concept-tab:hover {
+    border-color: rgba(22, 191, 209, 0.42);
+    background: rgba(22, 191, 209, 0.1);
+    color: var(--color-text-inverse);
+    transform: translateY(-1px);
+}
+
+.concept-tab:focus-visible {
+    outline: 3px solid rgba(22, 191, 209, 0.44);
+    outline-offset: 3px;
+}
+
+.concept-tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+    transform: none;
+}
+
+.concept-tab__step {
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: var(--text-small);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.concept-tab__label {
+    overflow-wrap: anywhere;
+    font-size: var(--text-small);
+    font-weight: 800;
+}
+
+.concept-tab--active {
+    border-color: rgba(22, 191, 209, 0.58);
+    background: rgba(22, 191, 209, 0.16);
+    color: var(--color-text-inverse);
+    box-shadow: inset 0 0 0 1px rgba(22, 191, 209, 0.18);
+}
+
+.concept-tab--success.concept-tab--active {
+    border-color: rgba(143, 230, 176, 0.52);
+    background: rgba(143, 230, 176, 0.14);
+}
+
+.concept-tab--warning.concept-tab--active {
+    border-color: rgba(255, 209, 102, 0.48);
+    background: rgba(255, 209, 102, 0.14);
+}
+
+.concept-tab--muted {
+    border-color: rgba(247, 251, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .concept-tab {
+        transition: none;
+    }
+
+    .concept-tab:hover {
+        transform: none;
+    }
+}

@@ -1,0 +1,51 @@
+<button
+    class="@ClassName"
+    type="button"
+    role="tab"
+    aria-selected="@IsActive.ToString().ToLowerInvariant()"
+    aria-label="@AriaLabel"
+    disabled="@IsDisabled"
+    @onclick="HandleClick">
+    @if (!string.IsNullOrWhiteSpace(Step))
+    {
+        <span class="concept-tab__step">@Step</span>
+    }
+
+    <span class="concept-tab__label">@Label</span>
+</button>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Step { get; set; }
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public EventCallback OnSelected { get; set; }
+
+    private string ClassName => IsActive
+        ? $"concept-tab concept-tab--{Tone} concept-tab--active"
+        : $"concept-tab concept-tab--{Tone}";
+
+    private string AriaLabel => string.IsNullOrWhiteSpace(Step)
+        ? Label
+        : $"{Step} - {Label}";
+
+    private async Task HandleClick()
+    {
+        if (!IsDisabled)
+        {
+            await OnSelected.InvokeAsync();
+        }
+    }
+}
