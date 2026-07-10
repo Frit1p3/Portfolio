@@ -1,0 +1,26 @@
+<span class="concept-source-chip concept-source-chip--@Tone" aria-label="@AriaLabel">
+    <span class="concept-source-chip__signal" aria-hidden="true"></span>
+    <span class="concept-source-chip__content">
+        <span class="concept-source-chip__label">@Label</span>
+
+        @if (!string.IsNullOrWhiteSpace(Description))
+        {
+            <span class="concept-source-chip__description">@Description</span>
+        }
+    </span>
+</span>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    private string AriaLabel => string.IsNullOrWhiteSpace(Description)
+        ? Label
+        : $"{Label} - {Description}";
+}
