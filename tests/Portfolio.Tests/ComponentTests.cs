@@ -124,6 +124,23 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ConceptSourceChip_renders_source_label_description_and_tone()
+    {
+        var cut = Render<ConceptSourceChip>(parameters => parameters
+            .Add(component => component.Label, "ERP")
+            .Add(component => component.Description, "Donnees synchronisees")
+            .Add(component => component.Tone, "accent"));
+
+        var chip = cut.Find("span.concept-source-chip");
+
+        Assert.Contains("concept-source-chip", chip.ClassList);
+        Assert.Contains("concept-source-chip--accent", chip.ClassList);
+        Assert.Equal("ERP - Donnees synchronisees", chip.GetAttribute("aria-label"));
+        Assert.Contains("ERP", chip.TextContent);
+        Assert.Contains("Donnees synchronisees", chip.TextContent);
+    }
+
+    [Fact]
     public void ProductDemoPanel_composes_sources_and_decision_cards()
     {
         var cut = Render<ProductDemoPanel>();
