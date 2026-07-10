@@ -103,6 +103,10 @@
         flex-direction: column;
     }
 
+    .concept-hero__actions .button {
+        width: 100%;
+    }
+
     .concept-hero__scene {
         padding: var(--space-16);
     }
