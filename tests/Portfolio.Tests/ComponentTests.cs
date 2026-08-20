@@ -195,6 +195,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(4, cut.FindAll(".concept-tab").Count);
         Assert.Equal(4, cut.FindAll(".concept-demo-card").Count);
         Assert.Equal(3, cut.FindAll(".hero-kpi-card").Count);
+        Assert.NotNull(cut.Find(".motion-sequence"));
         Assert.NotNull(cut.Find(".product-demo-panel"));
         Assert.Contains("Structurer l'interface", section.TextContent);
     }
@@ -219,6 +220,25 @@ public sealed class ComponentTests : BunitContext
         Assert.DoesNotContain("concept-demo-card--highlighted", cards[1].ClassList);
         Assert.Contains("concept-demo-card--highlighted", cards[3].ClassList);
         Assert.Contains("Decider plus vite", cards[3].TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_updates_active_motion_state()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Contains("Message lisible", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[5].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Contains("Demo produit", cut.Find(".motion-sequence__stage").TextContent);
     }
 
     [Fact]
