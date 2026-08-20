@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Portfolio.Components.Layout;
 using Portfolio.Components.Sections;
 using Portfolio.Components.UI;
+using Portfolio.Content;
 
 namespace Portfolio.Tests;
 
@@ -256,6 +257,68 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("motion-sequence-panel", stage.Id);
         Assert.Equal("motion-sequence-tab-demo-takeover", stage.GetAttribute("aria-labelledby"));
         Assert.Contains("Demo produit", stage.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionStage_renders_active_state_with_accessibility_links()
+    {
+        var state = LandingContent.LandingMotionStates[1];
+
+        var cut = Render<LandingMotionStage>(parameters => parameters
+            .Add(component => component.State, state)
+            .Add(component => component.PanelId, "motion-sequence-panel")
+            .Add(component => component.ActiveTabId, "motion-sequence-tab-message-reveal"));
+
+        var stage = cut.Find(".motion-sequence__stage");
+
+        Assert.Equal("motion-sequence-panel", stage.Id);
+        Assert.Equal("tabpanel", stage.GetAttribute("role"));
+        Assert.Equal("motion-sequence-tab-message-reveal", stage.GetAttribute("aria-labelledby"));
+        Assert.Contains("motion-sequence__stage--accent", stage.ClassList);
+        Assert.Contains("Message lisible", stage.TextContent);
+        Assert.Contains("Faire apparaitre la promesse", stage.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionControls_renders_auto_play_states()
+    {
+        var cut = Render<LandingMotionControls>(parameters => parameters
+            .Add(component => component.IsAutoPlaying, true)
+            .Add(component => component.IsAutoPlayDisabled, true));
+
+        var controls = cut.FindAll(".motion-sequence__control");
+        var autoPlayControl = controls[3];
+
+        Assert.Equal(4, controls.Count);
+        Assert.Contains("Precedent", controls[0].TextContent);
+        Assert.Contains("Suivant", controls[1].TextContent);
+        Assert.Contains("Rejouer", controls[2].TextContent);
+        Assert.True(autoPlayControl.HasAttribute("disabled"));
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-disabled"));
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto indisponible", autoPlayControl.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionTabs_renders_tablist_with_active_state()
+    {
+        var cut = Render<LandingMotionTabs>(parameters => parameters
+            .Add(component => component.States, LandingContent.LandingMotionStates)
+            .Add(component => component.ActiveStateKey, "message-reveal")
+            .Add(component => component.PanelId, "motion-sequence-panel"));
+
+        var tablist = cut.Find(".motion-sequence__tabs");
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("tablist", tablist.GetAttribute("role"));
+        Assert.Equal(6, tabs.Count);
+        Assert.Equal("motion-sequence-tab-message-reveal", tabs[1].Id);
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[1].GetAttribute("tabindex"));
+        Assert.Equal("motion-sequence-panel", tabs[1].GetAttribute("aria-controls"));
+        Assert.Contains("motion-sequence__tab--active", tabs[1].ClassList);
+        Assert.Equal("false", tabs[0].GetAttribute("aria-selected"));
+        Assert.Equal("-1", tabs[0].GetAttribute("tabindex"));
     }
 
     [Fact]
