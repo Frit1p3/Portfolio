@@ -1,4 +1,6 @@
 @using Portfolio.Content
+@implements IDisposable
+@inject IJSRuntime JSRuntime
 
 <section class="motion-sequence" aria-labelledby="motion-sequence-title">
     <div class="motion-sequence__header">
@@ -11,6 +13,15 @@
             <button class="motion-sequence__control" type="button" @onclick="SelectPrevious">Precedent</button>
             <button class="motion-sequence__control" type="button" @onclick="SelectNext">Suivant</button>
             <button class="motion-sequence__control" type="button" @onclick="ReplaySequence">Rejouer</button>
+            <button
+                class="motion-sequence__control"
+                type="button"
+                disabled="@prefersReducedMotion"
+                aria-disabled="@prefersReducedMotion.ToString().ToLowerInvariant()"
+                aria-pressed="@isAutoPlaying.ToString().ToLowerInvariant()"
+                @onclick="ToggleAutoPlay">
+                @GetAutoPlayLabel()
+            </button>
         </div>
     </div>
 
@@ -55,6 +66,9 @@
 @code {
     private readonly ElementReference[] tabReferences = new ElementReference[LandingContent.LandingMotionStates.Count];
     private int? pendingFocusIndex;
+    private CancellationTokenSource? autoPlayCancellation;
+    private bool isAutoPlaying;
+    private bool prefersReducedMotion;
 
     private string activeStateKey = LandingContent.LandingMotionStates.FirstOrDefault(state => state.IsActive)?.Key
         ?? LandingContent.LandingMotionStates.First().Key;
@@ -64,9 +78,11 @@
     private string ActiveTabId => GetTabId(ActiveState);
 
     private const string PanelId = "motion-sequence-panel";
+    private const int AutoPlayDelayInMilliseconds = 4200;
 
     private void SelectState(string key)
     {
+        StopAutoPlayForManualInteraction();
         activeStateKey = key;
     }
 
@@ -82,17 +98,74 @@
 
     private void SelectPrevious()
     {
+        StopAutoPlayForManualInteraction();
         SelectPreviousFrom(activeStateKey);
     }
 
     private void SelectNext()
     {
+        StopAutoPlayForManualInteraction();
         SelectNextFrom(activeStateKey);
     }
 
     private void ReplaySequence()
     {
+        StopAutoPlayForManualInteraction();
         SelectFirst(true);
+    }
+
+    private void ToggleAutoPlay()
+    {
+        if (prefersReducedMotion)
+        {
+            StopAutoPlay();
+            return;
+        }
+
+        if (isAutoPlaying)
+        {
+            StopAutoPlay();
+            return;
+        }
+
+        StartAutoPlay();
+    }
+
+    private void StartAutoPlay()
+    {
+        if (prefersReducedMotion)
+        {
+            StopAutoPlay();
+            return;
+        }
+
+        StopAutoPlay();
+
+        isAutoPlaying = true;
+        autoPlayCancellation = new CancellationTokenSource();
+        _ = RunAutoPlayAsync(autoPlayCancellation.Token);
+    }
+
+    private void StopAutoPlay()
+    {
+        if (autoPlayCancellation is null)
+        {
+            isAutoPlaying = false;
+            return;
+        }
+
+        autoPlayCancellation.Cancel();
+        autoPlayCancellation.Dispose();
+        autoPlayCancellation = null;
+        isAutoPlaying = false;
+    }
+
+    private void StopAutoPlayForManualInteraction()
+    {
+        if (isAutoPlaying)
+        {
+            StopAutoPlay();
+        }
     }
 
     private void SelectPreviousFrom(string key, bool shouldFocus = false)
@@ -117,16 +190,20 @@
         {
             case "ArrowRight":
             case "ArrowDown":
+                StopAutoPlayForManualInteraction();
                 SelectNextFrom(stateKey, true);
                 break;
             case "ArrowLeft":
             case "ArrowUp":
+                StopAutoPlayForManualInteraction();
                 SelectPreviousFrom(stateKey, true);
                 break;
             case "Home":
+                StopAutoPlayForManualInteraction();
                 SelectFirst(true);
                 break;
             case "End":
+                StopAutoPlayForManualInteraction();
                 SelectLast(true);
                 break;
         }
@@ -134,6 +211,18 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+        {
+            prefersReducedMotion = await JSRuntime.InvokeAsync<bool>("portfolioMotion.prefersReducedMotion");
+
+            if (prefersReducedMotion)
+            {
+                StopAutoPlay();
+            }
+
+            StateHasChanged();
+        }
+
         if (pendingFocusIndex is not { } focusIndex)
         {
             return;
@@ -141,6 +230,25 @@
 
         pendingFocusIndex = null;
         await tabReferences[focusIndex].FocusAsync();
+    }
+
+    private async Task RunAutoPlayAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await Task.Delay(AutoPlayDelayInMilliseconds, cancellationToken);
+                await InvokeAsync(() =>
+                {
+                    SelectNextFrom(activeStateKey);
+                    StateHasChanged();
+                });
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
     }
 
     private void SelectIndex(int index, bool shouldFocus = false)
@@ -165,4 +273,19 @@
     private string GetTabClassName(MotionState state) => IsActive(state)
         ? $"motion-sequence__tab motion-sequence__tab--{state.Tone} motion-sequence__tab--active"
         : $"motion-sequence__tab motion-sequence__tab--{state.Tone}";
+
+    private string GetAutoPlayLabel()
+    {
+        if (prefersReducedMotion)
+        {
+            return "Lecture auto indisponible";
+        }
+
+        return isAutoPlaying ? "Pause" : "Lecture auto";
+    }
+
+    public void Dispose()
+    {
+        StopAutoPlay();
+    }
 }
