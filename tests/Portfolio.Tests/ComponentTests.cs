@@ -1,4 +1,5 @@
 using Bunit;
+using Microsoft.AspNetCore.Components.Web;
 using Portfolio.Components.Layout;
 using Portfolio.Components.Sections;
 using Portfolio.Components.UI;
@@ -7,6 +8,11 @@ namespace Portfolio.Tests;
 
 public sealed class ComponentTests : BunitContext
 {
+    public ComponentTests()
+    {
+        JSInterop.Setup<bool>("portfolioMotion.prefersReducedMotion").SetResult(false);
+    }
+
     [Fact]
     public void Button_renders_link_with_variant_and_content()
     {
@@ -100,6 +106,289 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("OEE atelier", card.TextContent);
         Assert.Contains("87% de rendement", card.TextContent);
         Assert.Contains("+6 pts vs semaine precedente", card.TextContent);
+    }
+
+    [Fact]
+    public void HeroKpiCard_renders_kpi_content_and_tone()
+    {
+        var cut = Render<HeroKpiCard>(parameters => parameters
+            .Add(component => component.Label, "Experience")
+            .Add(component => component.Value, "3 ans")
+            .Add(component => component.Delta, "Industrie")
+            .Add(component => component.Caption, "Interfaces metier, KPI et donnees operationnelles.")
+            .Add(component => component.Tone, "accent"));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("hero-kpi-card", card.ClassList);
+        Assert.Contains("hero-kpi-card--accent", card.ClassList);
+        Assert.Equal("Experience - 3 ans - Industrie", card.GetAttribute("aria-label"));
+        Assert.Contains("Experience", card.TextContent);
+        Assert.Contains("3 ans", card.TextContent);
+        Assert.Contains("Industrie", card.TextContent);
+        Assert.Contains("Interfaces metier, KPI et donnees operationnelles.", card.TextContent);
+    }
+
+    [Fact]
+    public void ConceptSourceChip_renders_source_label_description_and_tone()
+    {
+        var cut = Render<ConceptSourceChip>(parameters => parameters
+            .Add(component => component.Label, "ERP")
+            .Add(component => component.Description, "Donnees synchronisees")
+            .Add(component => component.Tone, "accent"));
+
+        var chip = cut.Find("span.concept-source-chip");
+
+        Assert.Contains("concept-source-chip", chip.ClassList);
+        Assert.Contains("concept-source-chip--accent", chip.ClassList);
+        Assert.Equal("ERP - Donnees synchronisees", chip.GetAttribute("aria-label"));
+        Assert.Contains("ERP", chip.TextContent);
+        Assert.Contains("Donnees synchronisees", chip.TextContent);
+    }
+
+    [Fact]
+    public void ConceptTab_renders_active_tab_with_step_and_tone()
+    {
+        var cut = Render<ConceptTab>(parameters => parameters
+            .Add(component => component.Label, "Structurer")
+            .Add(component => component.Step, "02")
+            .Add(component => component.Tone, "accent")
+            .Add(component => component.IsActive, true));
+
+        var tab = cut.Find("button");
+
+        Assert.Contains("concept-tab", tab.ClassList);
+        Assert.Contains("concept-tab--accent", tab.ClassList);
+        Assert.Contains("concept-tab--active", tab.ClassList);
+        Assert.Equal("tab", tab.GetAttribute("role"));
+        Assert.Equal("true", tab.GetAttribute("aria-selected"));
+        Assert.Equal("02 - Structurer", tab.GetAttribute("aria-label"));
+        Assert.Contains("02", tab.TextContent);
+        Assert.Contains("Structurer", tab.TextContent);
+    }
+
+    [Fact]
+    public void ConceptDemoCard_renders_highlighted_concept_content()
+    {
+        var cut = Render<ConceptDemoCard>(parameters => parameters
+            .Add(component => component.Title, "Unifier les donnees")
+            .Add(component => component.Body, "Transformer plusieurs sources metier en lecture decisionnelle commune.")
+            .Add(component => component.Marker, "03")
+            .Add(component => component.Tone, "accent")
+            .Add(component => component.IsHighlighted, true));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("concept-demo-card", card.ClassList);
+        Assert.Contains("concept-demo-card--accent", card.ClassList);
+        Assert.Contains("concept-demo-card--highlighted", card.ClassList);
+        Assert.Equal("03 - Unifier les donnees", card.GetAttribute("aria-label"));
+        Assert.Contains("03", card.TextContent);
+        Assert.Contains("Unifier les donnees", card.TextContent);
+        Assert.Contains("Transformer plusieurs sources metier en lecture decisionnelle commune.", card.TextContent);
+    }
+
+    [Fact]
+    public void ConceptHeroSection_composes_landing_concept_components()
+    {
+        var cut = Render<ConceptHeroSection>();
+
+        var section = cut.Find("section.concept-hero");
+
+        Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("Interfaces metier industrielles", section.TextContent);
+        Assert.Equal(4, cut.FindAll(".concept-source-chip").Count);
+        Assert.Equal(4, cut.FindAll(".concept-tab").Count);
+        Assert.Equal(4, cut.FindAll(".concept-demo-card").Count);
+        Assert.Equal(3, cut.FindAll(".hero-kpi-card").Count);
+        Assert.NotNull(cut.Find(".motion-sequence"));
+        Assert.NotNull(cut.Find(".product-demo-panel"));
+        Assert.Contains("Structurer l'interface", section.TextContent);
+    }
+
+    [Fact]
+    public void ConceptHeroSection_updates_active_step_and_highlighted_demo_card()
+    {
+        var cut = Render<ConceptHeroSection>();
+
+        var tabs = cut.FindAll(".concept-tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Contains("concept-demo-card--highlighted", cut.FindAll(".concept-demo-card")[1].ClassList);
+
+        tabs[3].Click();
+
+        tabs = cut.FindAll(".concept-tab");
+        var cards = cut.FindAll(".concept-demo-card");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("true", tabs[3].GetAttribute("aria-selected"));
+        Assert.DoesNotContain("concept-demo-card--highlighted", cards[1].ClassList);
+        Assert.Contains("concept-demo-card--highlighted", cards[3].ClassList);
+        Assert.Contains("Decider plus vite", cards[3].TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_updates_active_motion_state()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+        var stage = cut.Find(".motion-sequence__stage");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("motion-sequence-tab-message-reveal", tabs[1].Id);
+        Assert.All(tabs, tab => Assert.Equal("motion-sequence-panel", tab.GetAttribute("aria-controls")));
+        Assert.Equal("tabpanel", stage.GetAttribute("role"));
+        Assert.Equal("motion-sequence-panel", stage.Id);
+        Assert.Equal("motion-sequence-tab-message-reveal", stage.GetAttribute("aria-labelledby"));
+        Assert.Contains("Message lisible", stage.TextContent);
+
+        tabs[5].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+        stage = cut.Find(".motion-sequence__stage");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Equal("motion-sequence-tab-demo-takeover", tabs[5].Id);
+        Assert.All(tabs, tab => Assert.Equal("motion-sequence-panel", tab.GetAttribute("aria-controls")));
+        Assert.Equal("motion-sequence-panel", stage.Id);
+        Assert.Equal("motion-sequence-tab-demo-takeover", stage.GetAttribute("aria-labelledby"));
+        Assert.Contains("Demo produit", stage.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_supports_keyboard_navigation()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[1].GetAttribute("tabindex"));
+
+        tabs[1].KeyDown(new KeyboardEventArgs { Key = "ArrowRight" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("-1", tabs[1].GetAttribute("tabindex"));
+        Assert.Equal("true", tabs[2].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[2].GetAttribute("tabindex"));
+        Assert.Contains("Assemblage du systeme", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[2].KeyDown(new KeyboardEventArgs { Key = "ArrowLeft" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Contains("Message lisible", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[1].KeyDown(new KeyboardEventArgs { Key = "Home" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[0].GetAttribute("aria-selected"));
+        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[0].KeyDown(new KeyboardEventArgs { Key = "End" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Contains("Demo produit", cut.Find(".motion-sequence__stage").TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_replays_from_first_motion_state()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        tabs[5].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Contains("Demo produit", cut.Find(".motion-sequence__stage").TextContent);
+
+        cut.FindAll(".motion-sequence__control")[2].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[0].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[0].GetAttribute("tabindex"));
+        Assert.Equal("-1", tabs[5].GetAttribute("tabindex"));
+        Assert.Equal("motion-sequence-tab-grid-wake", cut.Find(".motion-sequence__stage").GetAttribute("aria-labelledby"));
+        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_toggles_optional_auto_play()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", autoPlayControl.TextContent);
+
+        autoPlayControl.Click();
+        autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Pause", autoPlayControl.TextContent);
+
+        autoPlayControl.Click();
+        autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", autoPlayControl.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_stops_auto_play_on_manual_interaction()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var controls = cut.FindAll(".motion-sequence__control");
+
+        controls[3].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("true", controls[3].GetAttribute("aria-pressed"));
+
+        controls[1].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", controls[3].TextContent);
+
+        controls[3].Click();
+        var tabs = cut.FindAll(".motion-sequence__tab");
+        tabs[4].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+
+        controls[3].Click();
+        tabs = cut.FindAll(".motion-sequence__tab");
+        tabs[4].KeyDown(new KeyboardEventArgs { Key = "ArrowRight" });
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+    }
+
+    [Fact]
+    public void LandingMotionSequence_disables_auto_play_when_reduced_motion_is_preferred()
+    {
+        JSInterop.Setup<bool>("portfolioMotion.prefersReducedMotion").SetResult(true);
+
+        var cut = Render<LandingMotionSequence>();
+
+        var autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.True(autoPlayControl.HasAttribute("disabled"));
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-disabled"));
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto indisponible", autoPlayControl.TextContent);
     }
 
     [Fact]

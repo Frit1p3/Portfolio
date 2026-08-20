@@ -26,6 +26,11 @@
         <a href="." class="reload">Recharger</a>
         <span class="dismiss">x</span>
     </div>
+    <script>
+        window.portfolioMotion = {
+            prefersReducedMotion: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        };
+    </script>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
 </body>
 

@@ -1,0 +1,113 @@
+.concept-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(247, 251, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 251, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 72% 22%, rgba(22, 191, 209, 0.16), transparent 32%),
+        var(--color-surface-dark);
+    background-size: 56px 56px, 56px 56px, auto, auto;
+    color: var(--color-text-inverse);
+}
+
+.concept-hero__inner {
+    display: grid;
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    gap: var(--space-48);
+    padding: var(--space-64) 0 var(--space-96);
+}
+
+.concept-hero__content {
+    display: grid;
+    max-width: 820px;
+    gap: var(--space-24);
+}
+
+.concept-hero h1 {
+    max-width: 900px;
+    color: var(--color-text-inverse);
+    font-size: clamp(2.6rem, 8vw, var(--text-hero));
+}
+
+.concept-hero__content > p {
+    max-width: 680px;
+    color: rgba(247, 251, 255, 0.72);
+    font-size: var(--text-large);
+}
+
+.concept-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12);
+}
+
+.concept-hero__scene {
+    display: grid;
+    gap: var(--space-24);
+    border: 1px solid rgba(247, 251, 255, 0.12);
+    border-radius: var(--radius-8);
+    background: rgba(255, 255, 255, 0.045);
+    padding: var(--space-24);
+}
+
+.concept-hero__sources,
+.concept-hero__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12);
+}
+
+.concept-hero__stack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-12);
+}
+
+.concept-hero__stack span {
+    border: 1px solid rgba(22, 191, 209, 0.32);
+    border-radius: var(--radius-4);
+    background: rgba(22, 191, 209, 0.1);
+    color: var(--color-text-inverse);
+    font-family: var(--font-display);
+    font-size: var(--text-small);
+    font-weight: 800;
+    padding: var(--space-16);
+    text-align: center;
+}
+
+.concept-hero__cards,
+.concept-hero__kpis {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-12);
+}
+
+@media (max-width: 900px) {
+    .concept-hero__stack,
+    .concept-hero__cards,
+    .concept-hero__kpis {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .concept-hero__inner {
+        width: min(100% - 24px, 1180px);
+        gap: var(--space-32);
+        padding-top: var(--space-32);
+    }
+
+    .concept-hero__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .concept-hero__actions .button {
+        width: 100%;
+    }
+
+    .concept-hero__scene {
+        padding: var(--space-16);
+    }
+}

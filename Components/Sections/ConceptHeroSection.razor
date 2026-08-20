@@ -1,0 +1,84 @@
+@using Portfolio.Content
+
+<section class="concept-hero" aria-labelledby="concept-hero-title">
+    <div class="concept-hero__inner">
+        <div class="concept-hero__content">
+            <Badge Tone="accent">@LandingContent.HeroEyebrow</Badge>
+
+            <h1 id="concept-hero-title">@LandingContent.HeroTitle</h1>
+
+            <p>@LandingContent.HeroIntro</p>
+
+            <div class="concept-hero__actions" aria-label="Actions principales">
+                <Button Href="#proof">Voir la demonstration</Button>
+                <Button Href="#contact" Variant="secondary">Me contacter</Button>
+            </div>
+        </div>
+
+        <div class="concept-hero__scene" aria-label="Scene conceptuelle des flux metier">
+            <div class="concept-hero__sources" aria-label="Sources metier connectees">
+                @foreach (var source in LandingContent.ConceptSources)
+                {
+                    <ConceptSourceChip Label="@source.Label" Description="@source.Description" Tone="@source.Tone" />
+                }
+            </div>
+
+            <div class="concept-hero__stack" aria-label="Stack de conception">
+                @foreach (var layer in LandingContent.ConceptStack)
+                {
+                    <span>@layer</span>
+                }
+            </div>
+
+            <div class="concept-hero__tabs" role="tablist" aria-label="Etapes de conception">
+                @foreach (var step in LandingContent.ConceptSteps)
+                {
+                    <ConceptTab
+                        Label="@step.Label"
+                        Step="@step.Step"
+                        Tone="@step.Tone"
+                        IsActive="@(step.Step == activeStep)"
+                        OnSelected="@(() => SelectStep(step.Step))" />
+                }
+            </div>
+
+            <div class="concept-hero__cards" aria-label="Concepts demonstres">
+                @foreach (var demo in LandingContent.ConceptDemos)
+                {
+                    <ConceptDemoCard
+                        Marker="@demo.Marker"
+                        Title="@demo.Title"
+                        Body="@demo.Body"
+                        Tone="@demo.Tone"
+                        IsHighlighted="@(demo.Marker == activeStep)" />
+                }
+            </div>
+        </div>
+
+        <LandingMotionSequence />
+
+        <div class="concept-hero__kpis" aria-label="Preuves metier">
+            @foreach (var kpi in LandingContent.HeroKpis)
+            {
+                <HeroKpiCard
+                    Label="@kpi.Label"
+                    Value="@kpi.Value"
+                    Delta="@kpi.Delta"
+                    Caption="@kpi.Caption"
+                    Tone="@kpi.Tone" />
+            }
+        </div>
+
+        <ProductDemoPanel />
+    </div>
+</section>
+
+@code {
+    private string activeStep = LandingContent.ConceptSteps.FirstOrDefault(step => step.IsActive)?.Step
+        ?? LandingContent.ConceptSteps.First().Step;
+
+    private void SelectStep(string step)
+    {
+        activeStep = step;
+    }
+}
