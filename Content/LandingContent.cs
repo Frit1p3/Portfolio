@@ -128,6 +128,47 @@ public static class LandingContent
             "Delai compatible avec la cible",
             "neutral")
     };
+
+    public static readonly IReadOnlyList<MotionState> LandingMotionStates = new[]
+    {
+        new MotionState(
+            "grid-wake",
+            "01",
+            "Reveil de la grille",
+            "Installer le cadre technique avant d'introduire les sources metier.",
+            "muted"),
+        new MotionState(
+            "message-reveal",
+            "02",
+            "Message lisible",
+            "Faire apparaitre la promesse sans separer artificiellement texte et demonstration.",
+            "accent",
+            true),
+        new MotionState(
+            "system-assembly",
+            "03",
+            "Assemblage du systeme",
+            "Structurer UX, design system et KPI comme un meme outil de decision.",
+            "accent"),
+        new MotionState(
+            "data-convergence",
+            "04",
+            "Convergence des donnees",
+            "Relier ERP, atelier, BI et GED vers une lecture operationnelle commune.",
+            "success"),
+        new MotionState(
+            "concept-switch",
+            "05",
+            "Focus narratif",
+            "Passer d'un concept a l'autre pour expliquer la methode sans surcharge.",
+            "warning"),
+        new MotionState(
+            "demo-takeover",
+            "06",
+            "Demo produit",
+            "Donner la priorite a la surface applicative et aux preuves metier.",
+            "success")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -141,3 +182,5 @@ public sealed record HeroKpi(string Label, string Value, string Delta, string Ca
 public sealed record ProductSource(string Label, string Type, string Description, string Status, string Tone);
 
 public sealed record DecisionMetric(string Step, string Meta, string Title, string Description, string Tone);
+
+public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);

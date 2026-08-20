@@ -21,6 +21,8 @@ public sealed class FoundationTests
         Assert.Equal(4, LandingContent.ConceptDemos.Count);
         Assert.Equal(3, LandingContent.HeroKpis.Count);
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
+        Assert.Equal(6, LandingContent.LandingMotionStates.Count);
+        Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
     }
 
     [Fact]
@@ -63,6 +65,7 @@ public sealed class FoundationTests
         Assert.Contains("components/concept-demo-card.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/product-demo-panel.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
     }
 
