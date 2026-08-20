@@ -9,62 +9,31 @@
             <h2 id="motion-sequence-title">Ouvrir la demonstration par etats progressifs.</h2>
         </div>
 
-        <div class="motion-sequence__controls" aria-label="Controle de la sequence">
-            <button class="motion-sequence__control" type="button" @onclick="SelectPrevious">Precedent</button>
-            <button class="motion-sequence__control" type="button" @onclick="SelectNext">Suivant</button>
-            <button class="motion-sequence__control" type="button" @onclick="ReplaySequence">Rejouer</button>
-            <button
-                class="motion-sequence__control"
-                type="button"
-                disabled="@prefersReducedMotion"
-                aria-disabled="@prefersReducedMotion.ToString().ToLowerInvariant()"
-                aria-pressed="@isAutoPlaying.ToString().ToLowerInvariant()"
-                @onclick="ToggleAutoPlay">
-                @GetAutoPlayLabel()
-            </button>
-        </div>
+        <LandingMotionControls
+            IsAutoPlaying="@isAutoPlaying"
+            IsAutoPlayDisabled="@prefersReducedMotion"
+            OnPrevious="SelectPrevious"
+            OnNext="SelectNext"
+            OnReplay="ReplaySequence"
+            OnAutoPlayToggle="ToggleAutoPlay" />
     </div>
 
-    <div
-        id="@PanelId"
-        class="motion-sequence__stage motion-sequence__stage--@ActiveState.Tone"
-        role="tabpanel"
-        aria-labelledby="@ActiveTabId"
-        aria-live="polite">
-        <span class="motion-sequence__step">@ActiveState.Step</span>
-        <div class="motion-sequence__copy">
-            <h3>@ActiveState.Title</h3>
-            <p>@ActiveState.Description</p>
-        </div>
-    </div>
+    <LandingMotionStage
+        State="@ActiveState"
+        PanelId="@PanelId"
+        ActiveTabId="@ActiveTabId" />
 
-    <div class="motion-sequence__tabs" role="tablist" aria-label="Etats de la sequence motion">
-        @for (var index = 0; index < LandingContent.LandingMotionStates.Count; index++)
-        {
-            var tabIndex = index;
-            var state = LandingContent.LandingMotionStates[index];
-
-            <button
-                class="@GetTabClassName(state)"
-                id="@GetTabId(state)"
-                @ref="tabReferences[tabIndex]"
-                type="button"
-                role="tab"
-                aria-selected="@IsActive(state).ToString().ToLowerInvariant()"
-                aria-controls="@PanelId"
-                aria-label="@($"{state.Step} - {state.Title}")"
-                tabindex="@(IsActive(state) ? "0" : "-1")"
-                @onkeydown="@((keyboardEvent) => HandleTabKeyDown(keyboardEvent, state.Key))"
-                @onclick="@(() => SelectState(state.Key))">
-                <span>@state.Step</span>
-                <span>@state.Title</span>
-            </button>
-        }
-    </div>
+    <LandingMotionTabs
+        @ref="motionTabs"
+        States="@LandingContent.LandingMotionStates"
+        ActiveStateKey="@activeStateKey"
+        PanelId="@PanelId"
+        OnSelected="SelectState"
+        OnKeyDown="HandleTabKeyDown" />
 </section>
 
 @code {
-    private readonly ElementReference[] tabReferences = new ElementReference[LandingContent.LandingMotionStates.Count];
+    private LandingMotionTabs? motionTabs;
     private int? pendingFocusIndex;
     private CancellationTokenSource? autoPlayCancellation;
     private bool isAutoPlaying;
@@ -75,7 +44,7 @@
 
     private MotionState ActiveState => LandingContent.LandingMotionStates.First(state => state.Key == activeStateKey);
 
-    private string ActiveTabId => GetTabId(ActiveState);
+    private string ActiveTabId => LandingMotionTabs.GetTabId(ActiveState);
 
     private const string PanelId = "motion-sequence-panel";
     private const int AutoPlayDelayInMilliseconds = 4200;
@@ -184,19 +153,19 @@
         SelectIndex(nextIndex, shouldFocus);
     }
 
-    private void HandleTabKeyDown(KeyboardEventArgs keyboardEvent, string stateKey)
+    private void HandleTabKeyDown(MotionTabKeyDown keyDown)
     {
-        switch (keyboardEvent.Key)
+        switch (keyDown.KeyboardEvent.Key)
         {
             case "ArrowRight":
             case "ArrowDown":
                 StopAutoPlayForManualInteraction();
-                SelectNextFrom(stateKey, true);
+                SelectNextFrom(keyDown.StateKey, true);
                 break;
             case "ArrowLeft":
             case "ArrowUp":
                 StopAutoPlayForManualInteraction();
-                SelectPreviousFrom(stateKey, true);
+                SelectPreviousFrom(keyDown.StateKey, true);
                 break;
             case "Home":
                 StopAutoPlayForManualInteraction();
@@ -229,7 +198,10 @@
         }
 
         pendingFocusIndex = null;
-        await tabReferences[focusIndex].FocusAsync();
+        if (motionTabs is not null)
+        {
+            await motionTabs.FocusTabAsync(focusIndex);
+        }
     }
 
     private async Task RunAutoPlayAsync(CancellationToken cancellationToken)
@@ -265,24 +237,6 @@
         .Select((state, index) => new { state.Key, index })
         .First(item => item.Key == key)
         .index;
-
-    private bool IsActive(MotionState state) => state.Key == activeStateKey;
-
-    private static string GetTabId(MotionState state) => $"motion-sequence-tab-{state.Key}";
-
-    private string GetTabClassName(MotionState state) => IsActive(state)
-        ? $"motion-sequence__tab motion-sequence__tab--{state.Tone} motion-sequence__tab--active"
-        : $"motion-sequence__tab motion-sequence__tab--{state.Tone}";
-
-    private string GetAutoPlayLabel()
-    {
-        if (prefersReducedMotion)
-        {
-            return "Lecture auto indisponible";
-        }
-
-        return isAutoPlaying ? "Pause" : "Lecture auto";
-    }
 
     public void Dispose()
     {

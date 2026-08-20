@@ -1,0 +1,57 @@
+@using Portfolio.Content
+
+<div class="motion-sequence__tabs" role="tablist" aria-label="Etats de la sequence motion">
+    @for (var index = 0; index < States.Count; index++)
+    {
+        var tabIndex = index;
+        var state = States[index];
+
+        <button
+            class="@GetTabClassName(state)"
+            id="@GetTabId(state)"
+            @ref="tabReferences[tabIndex]"
+            type="button"
+            role="tab"
+            aria-selected="@IsActive(state).ToString().ToLowerInvariant()"
+            aria-controls="@PanelId"
+            aria-label="@($"{state.Step} - {state.Title}")"
+            tabindex="@(IsActive(state) ? "0" : "-1")"
+            @onkeydown="@((keyboardEvent) => OnKeyDown.InvokeAsync(new MotionTabKeyDown(state.Key, keyboardEvent)))"
+            @onclick="@(() => OnSelected.InvokeAsync(state.Key))">
+            <span>@state.Step</span>
+            <span>@state.Title</span>
+        </button>
+    }
+</div>
+
+@code {
+    private readonly ElementReference[] tabReferences = new ElementReference[LandingContent.LandingMotionStates.Count];
+
+    [Parameter, EditorRequired]
+    public IReadOnlyList<MotionState> States { get; set; } = Array.Empty<MotionState>();
+
+    [Parameter, EditorRequired]
+    public string ActiveStateKey { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string PanelId { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> OnSelected { get; set; }
+
+    [Parameter]
+    public EventCallback<MotionTabKeyDown> OnKeyDown { get; set; }
+
+    public async Task FocusTabAsync(int index)
+    {
+        await tabReferences[index].FocusAsync();
+    }
+
+    public static string GetTabId(MotionState state) => $"motion-sequence-tab-{state.Key}";
+
+    private bool IsActive(MotionState state) => state.Key == ActiveStateKey;
+
+    private string GetTabClassName(MotionState state) => IsActive(state)
+        ? $"motion-sequence__tab motion-sequence__tab--{state.Tone} motion-sequence__tab--active"
+        : $"motion-sequence__tab motion-sequence__tab--{state.Tone}";
+}

@@ -1,0 +1,47 @@
+<div class="motion-sequence__controls" aria-label="Controle de la sequence">
+    <button class="motion-sequence__control" type="button" @onclick="OnPrevious">Precedent</button>
+    <button class="motion-sequence__control" type="button" @onclick="OnNext">Suivant</button>
+    <button class="motion-sequence__control" type="button" @onclick="OnReplay">Rejouer</button>
+    <button
+        class="motion-sequence__control"
+        type="button"
+        disabled="@IsAutoPlayDisabled"
+        aria-disabled="@IsAutoPlayDisabled.ToString().ToLowerInvariant()"
+        aria-pressed="@IsAutoPlaying.ToString().ToLowerInvariant()"
+        @onclick="OnAutoPlayToggle">
+        @AutoPlayLabel
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public bool IsAutoPlaying { get; set; }
+
+    [Parameter]
+    public bool IsAutoPlayDisabled { get; set; }
+
+    [Parameter]
+    public EventCallback OnPrevious { get; set; }
+
+    [Parameter]
+    public EventCallback OnNext { get; set; }
+
+    [Parameter]
+    public EventCallback OnReplay { get; set; }
+
+    [Parameter]
+    public EventCallback OnAutoPlayToggle { get; set; }
+
+    private string AutoPlayLabel
+    {
+        get
+        {
+            if (IsAutoPlayDisabled)
+            {
+                return "Lecture auto indisponible";
+            }
+
+            return IsAutoPlaying ? "Pause" : "Lecture auto";
+        }
+    }
+}
