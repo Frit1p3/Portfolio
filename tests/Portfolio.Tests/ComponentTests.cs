@@ -1,4 +1,5 @@
 using Bunit;
+using Microsoft.AspNetCore.Components.Web;
 using Portfolio.Components.Layout;
 using Portfolio.Components.Sections;
 using Portfolio.Components.UI;
@@ -7,6 +8,11 @@ namespace Portfolio.Tests;
 
 public sealed class ComponentTests : BunitContext
 {
+    public ComponentTests()
+    {
+        JSInterop.Setup<bool>("portfolioMotion.prefersReducedMotion").SetResult(false);
+    }
+
     [Fact]
     public void Button_renders_link_with_variant_and_content()
     {
@@ -228,17 +234,161 @@ public sealed class ComponentTests : BunitContext
         var cut = Render<LandingMotionSequence>();
 
         var tabs = cut.FindAll(".motion-sequence__tab");
+        var stage = cut.Find(".motion-sequence__stage");
 
         Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
-        Assert.Contains("Message lisible", cut.Find(".motion-sequence__stage").TextContent);
+        Assert.Equal("motion-sequence-tab-message-reveal", tabs[1].Id);
+        Assert.All(tabs, tab => Assert.Equal("motion-sequence-panel", tab.GetAttribute("aria-controls")));
+        Assert.Equal("tabpanel", stage.GetAttribute("role"));
+        Assert.Equal("motion-sequence-panel", stage.Id);
+        Assert.Equal("motion-sequence-tab-message-reveal", stage.GetAttribute("aria-labelledby"));
+        Assert.Contains("Message lisible", stage.TextContent);
 
         tabs[5].Click();
 
         tabs = cut.FindAll(".motion-sequence__tab");
+        stage = cut.Find(".motion-sequence__stage");
 
         Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
         Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Equal("motion-sequence-tab-demo-takeover", tabs[5].Id);
+        Assert.All(tabs, tab => Assert.Equal("motion-sequence-panel", tab.GetAttribute("aria-controls")));
+        Assert.Equal("motion-sequence-panel", stage.Id);
+        Assert.Equal("motion-sequence-tab-demo-takeover", stage.GetAttribute("aria-labelledby"));
+        Assert.Contains("Demo produit", stage.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_supports_keyboard_navigation()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[1].GetAttribute("tabindex"));
+
+        tabs[1].KeyDown(new KeyboardEventArgs { Key = "ArrowRight" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("false", tabs[1].GetAttribute("aria-selected"));
+        Assert.Equal("-1", tabs[1].GetAttribute("tabindex"));
+        Assert.Equal("true", tabs[2].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[2].GetAttribute("tabindex"));
+        Assert.Contains("Assemblage du systeme", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[2].KeyDown(new KeyboardEventArgs { Key = "ArrowLeft" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[1].GetAttribute("aria-selected"));
+        Assert.Contains("Message lisible", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[1].KeyDown(new KeyboardEventArgs { Key = "Home" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[0].GetAttribute("aria-selected"));
+        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+
+        tabs[0].KeyDown(new KeyboardEventArgs { Key = "End" });
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
         Assert.Contains("Demo produit", cut.Find(".motion-sequence__stage").TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_replays_from_first_motion_state()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var tabs = cut.FindAll(".motion-sequence__tab");
+
+        tabs[5].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+        Assert.Equal("true", tabs[5].GetAttribute("aria-selected"));
+        Assert.Contains("Demo produit", cut.Find(".motion-sequence__stage").TextContent);
+
+        cut.FindAll(".motion-sequence__control")[2].Click();
+
+        tabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Equal("true", tabs[0].GetAttribute("aria-selected"));
+        Assert.Equal("0", tabs[0].GetAttribute("tabindex"));
+        Assert.Equal("-1", tabs[5].GetAttribute("tabindex"));
+        Assert.Equal("motion-sequence-tab-grid-wake", cut.Find(".motion-sequence__stage").GetAttribute("aria-labelledby"));
+        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_toggles_optional_auto_play()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", autoPlayControl.TextContent);
+
+        autoPlayControl.Click();
+        autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Pause", autoPlayControl.TextContent);
+
+        autoPlayControl.Click();
+        autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", autoPlayControl.TextContent);
+    }
+
+    [Fact]
+    public void LandingMotionSequence_stops_auto_play_on_manual_interaction()
+    {
+        var cut = Render<LandingMotionSequence>();
+
+        var controls = cut.FindAll(".motion-sequence__control");
+
+        controls[3].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("true", controls[3].GetAttribute("aria-pressed"));
+
+        controls[1].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto", controls[3].TextContent);
+
+        controls[3].Click();
+        var tabs = cut.FindAll(".motion-sequence__tab");
+        tabs[4].Click();
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+
+        controls[3].Click();
+        tabs = cut.FindAll(".motion-sequence__tab");
+        tabs[4].KeyDown(new KeyboardEventArgs { Key = "ArrowRight" });
+        controls = cut.FindAll(".motion-sequence__control");
+
+        Assert.Equal("false", controls[3].GetAttribute("aria-pressed"));
+    }
+
+    [Fact]
+    public void LandingMotionSequence_disables_auto_play_when_reduced_motion_is_preferred()
+    {
+        JSInterop.Setup<bool>("portfolioMotion.prefersReducedMotion").SetResult(true);
+
+        var cut = Render<LandingMotionSequence>();
+
+        var autoPlayControl = cut.FindAll(".motion-sequence__control")[3];
+
+        Assert.True(autoPlayControl.HasAttribute("disabled"));
+        Assert.Equal("true", autoPlayControl.GetAttribute("aria-disabled"));
+        Assert.Equal("false", autoPlayControl.GetAttribute("aria-pressed"));
+        Assert.Contains("Lecture auto indisponible", autoPlayControl.TextContent);
     }
 
     [Fact]
