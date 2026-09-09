@@ -41,6 +41,10 @@ public sealed class PlaywrightSmokeTests
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Unifier les signaux atelier dans un tableau de bord exploitable." }))
             .ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Construisons une interface metier plus lisible." }))
+            .ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Link, new() { Name = "Demarrer un echange" }))
+            .ToBeVisibleAsync();
     }
 
     [Fact]

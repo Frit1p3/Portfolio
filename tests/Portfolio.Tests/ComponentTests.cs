@@ -63,7 +63,7 @@ public sealed class ComponentTests : BunitContext
 
         var footer = cut.Find("footer");
 
-        Assert.Equal("contact", footer.Id);
+        Assert.Contains("site-footer", footer.ClassList);
         Assert.Contains("Front-End .NET", footer.TextContent);
         Assert.StartsWith("mailto:", cut.Find("a").GetAttribute("href"));
     }
@@ -518,5 +518,22 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Probleme", section.TextContent);
         Assert.Contains("Reponse UX", section.TextContent);
         Assert.Contains("Livrable", section.TextContent);
+    }
+
+    [Fact]
+    public void LandingContactSection_composes_contact_call_to_action()
+    {
+        var cut = Render<LandingContactSection>();
+
+        var section = cut.Find("section.contact-section");
+        var link = cut.Find("a.button");
+
+        Assert.Equal("contact", section.Id);
+        Assert.Equal("contact-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("Construisons une interface metier", section.TextContent);
+        Assert.Contains("Demarrer un echange", link.TextContent);
+        Assert.Equal($"mailto:{LandingContent.ContactEmail}", link.GetAttribute("href"));
+        Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
+        Assert.Contains("Cadrage rapide", section.TextContent);
     }
 }
