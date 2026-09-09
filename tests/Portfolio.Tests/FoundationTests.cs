@@ -25,6 +25,8 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
         Assert.Contains("complexite metier", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
+        Assert.Contains("decisions terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.ProjectUseCases.Count);
     }
 
     [Fact]
@@ -69,6 +71,7 @@ public sealed class FoundationTests
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
     }
 
