@@ -53,6 +53,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Contains("Merryl", cut.Markup);
         Assert.Contains("#proof", cut.Markup);
+        Assert.Contains("#approach", cut.Markup);
         Assert.Contains("#contact", cut.Markup);
     }
 
@@ -478,6 +479,7 @@ public sealed class ComponentTests : BunitContext
 
         var section = cut.Find("section.method-section");
 
+        Assert.Equal("approach", section.Id);
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("De la complexite metier", section.TextContent);
         Assert.Contains("parcours lisibles", section.TextContent);
