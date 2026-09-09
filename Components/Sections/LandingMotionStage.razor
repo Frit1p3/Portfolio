@@ -1,0 +1,25 @@
+@using Portfolio.Content
+
+<div
+    id="@PanelId"
+    class="motion-sequence__stage motion-sequence__stage--@State.Tone"
+    role="tabpanel"
+    aria-labelledby="@ActiveTabId"
+    aria-live="polite">
+    <span class="motion-sequence__step">@State.Step</span>
+    <div class="motion-sequence__copy">
+        <h3>@State.Title</h3>
+        <p>@State.Description</p>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public MotionState State { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string PanelId { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string ActiveTabId { get; set; } = string.Empty;
+}
