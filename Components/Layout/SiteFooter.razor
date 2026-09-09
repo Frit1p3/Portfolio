@@ -1,4 +1,6 @@
-<footer class="site-footer" id="contact">
+@using Portfolio.Content
+
+<footer class="site-footer">
     <p>Front-End .NET, UI/UX industrielle et interfaces data-oriented.</p>
-    <a href="mailto:contact@example.com">contact@example.com</a>
+    <a href="@($"mailto:{LandingContent.ContactEmail}")">@LandingContent.ContactEmail</a>
 </footer>

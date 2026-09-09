@@ -30,6 +30,9 @@ public sealed class FoundationTests
         Assert.Contains("tableau de bord", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
+        Assert.Contains("interface metier", LandingContent.ContactTitle, StringComparison.Ordinal);
+        Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }
 
     [Fact]
@@ -76,6 +79,7 @@ public sealed class FoundationTests
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-contact-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
     }
 

@@ -260,6 +260,25 @@ public static class LandingContent
         new CaseStudyMetric("1", "lecture priorisee", "statut, criticite, action", "success"),
         new CaseStudyMetric("0", "rupture de contexte", "preuve et decision au meme endroit", "warning")
     };
+
+    public const string ContactEyebrow = "Contact";
+
+    public const string ContactTitle =
+        "Construisons une interface metier plus lisible.";
+
+    public const string ContactIntro =
+        "Disponible pour cadrer, concevoir ou renforcer une experience front-end .NET orientee operations, data et decision.";
+
+    public const string ContactEmail = "contact@example.com";
+
+    public const string ContactAvailability = "Ouvert aux missions front-end .NET, UI industrielle et design system.";
+
+    public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
+    {
+        new ContactHighlight("Cadrage rapide", "Clarifier le besoin, les flux et les priorites produit.", "accent"),
+        new ContactHighlight("Prototype utile", "Transformer l'idee en surface testable avec composants reutilisables.", "success"),
+        new ContactHighlight("Passage a l'echelle", "Stabiliser CSS, accessibilite et tests pour livrer sereinement.", "warning")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -283,3 +302,5 @@ public sealed record ProjectUseCase(string Step, string Title, string Descriptio
 public sealed record CaseStudyPoint(string Title, string Description, string Tone);
 
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
+
+public sealed record ContactHighlight(string Title, string Description, string Tone);
