@@ -169,6 +169,33 @@ public static class LandingContent
             "Donner la priorite a la surface applicative et aux preuves metier.",
             "success")
     };
+
+    public const string MethodEyebrow = "Methode";
+
+    public const string MethodTitle =
+        "De la complexite metier a l'interface exploitable.";
+
+    public const string MethodIntro =
+        "Une approche courte et structuree pour transformer les flux industriels en parcours lisibles, testables et maintenables.";
+
+    public static readonly IReadOnlyList<MethodStep> MethodSteps = new[]
+    {
+        new MethodStep(
+            "01",
+            "Cadrer",
+            "Identifier les sources, les contraintes terrain et les decisions attendues avant de dessiner l'interface.",
+            "muted"),
+        new MethodStep(
+            "02",
+            "Structurer",
+            "Organiser les parcours, la hierarchie visuelle et les composants reutilisables autour des usages critiques.",
+            "accent"),
+        new MethodStep(
+            "03",
+            "Livrer",
+            "Valider le rendu responsive, l'accessibilite et les tests pour garder une base evolutive.",
+            "success")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -184,3 +211,5 @@ public sealed record ProductSource(string Label, string Type, string Description
 public sealed record DecisionMetric(string Step, string Meta, string Title, string Description, string Tone);
 
 public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);
+
+public sealed record MethodStep(string Step, string Title, string Description, string Tone);
