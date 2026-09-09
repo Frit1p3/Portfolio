@@ -470,4 +470,20 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("OEE atelier", panel.TextContent);
         Assert.Contains("GED", panel.TextContent);
     }
+
+    [Fact]
+    public void LandingMethodSection_composes_method_steps()
+    {
+        var cut = Render<LandingMethodSection>();
+
+        var section = cut.Find("section.method-section");
+
+        Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("De la complexite metier", section.TextContent);
+        Assert.Contains("parcours lisibles", section.TextContent);
+        Assert.Equal(3, cut.FindAll(".method-section__step").Count);
+        Assert.Contains("Cadrer", section.TextContent);
+        Assert.Contains("Structurer", section.TextContent);
+        Assert.Contains("Livrer", section.TextContent);
+    }
 }
