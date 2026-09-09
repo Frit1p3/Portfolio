@@ -502,4 +502,21 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Flux ERP", section.TextContent);
         Assert.Contains("Reporting decisionnel", section.TextContent);
     }
+
+    [Fact]
+    public void LandingCaseStudySection_composes_story_points_and_metrics()
+    {
+        var cut = Render<LandingCaseStudySection>();
+
+        var section = cut.Find("section.case-study-section");
+
+        Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("Unifier les signaux atelier", section.TextContent);
+        Assert.Contains("equipes terrain", section.TextContent);
+        Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
+        Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
+        Assert.Contains("Probleme", section.TextContent);
+        Assert.Contains("Reponse UX", section.TextContent);
+        Assert.Contains("Livrable", section.TextContent);
+    }
 }

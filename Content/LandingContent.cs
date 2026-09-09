@@ -226,6 +226,40 @@ public static class LandingContent
             "Synthese exec",
             "warning")
     };
+
+    public const string CaseStudyEyebrow = "Preuve projet";
+
+    public const string CaseStudyTitle =
+        "Unifier les signaux atelier dans un tableau de bord exploitable.";
+
+    public const string CaseStudyIntro =
+        "Un exemple de cadrage produit pour rendre les priorites operationnelles visibles sans multiplier les ecrans.";
+
+    public const string CaseStudyContext =
+        "Les equipes terrain consultent plusieurs sources pour suivre les incidents, les delais et la qualite. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes.";
+
+    public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
+    {
+        new CaseStudyPoint(
+            "Probleme",
+            "Des indicateurs disperses entre ERP, atelier et reporting ralentissent les arbitrages quotidiens.",
+            "warning"),
+        new CaseStudyPoint(
+            "Reponse UX",
+            "Prioriser une lecture par statut, niveau de criticite et prochaine action attendue.",
+            "accent"),
+        new CaseStudyPoint(
+            "Livrable",
+            "Un dashboard responsive avec composants reutilisables, KPI contextualises et parcours de decision court.",
+            "success")
+    };
+
+    public static readonly IReadOnlyList<CaseStudyMetric> CaseStudyMetrics = new[]
+    {
+        new CaseStudyMetric("3", "sources reliees", "ERP, atelier, reporting", "accent"),
+        new CaseStudyMetric("1", "lecture priorisee", "statut, criticite, action", "success"),
+        new CaseStudyMetric("0", "rupture de contexte", "preuve et decision au meme endroit", "warning")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -245,3 +279,7 @@ public sealed record MotionState(string Key, string Step, string Title, string D
 public sealed record MethodStep(string Step, string Title, string Description, string Tone);
 
 public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
+
+public sealed record CaseStudyPoint(string Title, string Description, string Tone);
+
+public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
