@@ -27,6 +27,9 @@ public sealed class FoundationTests
         Assert.Equal(3, LandingContent.MethodSteps.Count);
         Assert.Contains("decisions terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
+        Assert.Contains("tableau de bord", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
+        Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
     }
 
     [Fact]
@@ -72,6 +75,7 @@ public sealed class FoundationTests
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
     }
 

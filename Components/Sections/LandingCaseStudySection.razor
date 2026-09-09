@@ -1,0 +1,36 @@
+@using Portfolio.Content
+
+<section class="case-study-section" aria-labelledby="case-study-section-title">
+    <div class="case-study-section__heading">
+        <span class="case-study-section__eyebrow">@LandingContent.CaseStudyEyebrow</span>
+        <h2 id="case-study-section-title">@LandingContent.CaseStudyTitle</h2>
+        <p>@LandingContent.CaseStudyIntro</p>
+    </div>
+
+    <div class="case-study-section__layout">
+        <article class="case-study-section__story" aria-label="Synthese de la preuve projet">
+            <p>@LandingContent.CaseStudyContext</p>
+
+            <div class="case-study-section__points">
+                @foreach (var point in LandingContent.CaseStudyPoints)
+                {
+                    <div class="case-study-section__point case-study-section__point--@point.Tone">
+                        <span>@point.Title</span>
+                        <p>@point.Description</p>
+                    </div>
+                }
+            </div>
+        </article>
+
+        <div class="case-study-section__metrics" aria-label="Indicateurs de cadrage">
+            @foreach (var metric in LandingContent.CaseStudyMetrics)
+            {
+                <article class="case-study-section__metric case-study-section__metric--@metric.Tone" aria-label="@($"{metric.Value} {metric.Label}")">
+                    <strong>@metric.Value</strong>
+                    <span>@metric.Label</span>
+                    <p>@metric.Detail</p>
+                </article>
+            }
+        </div>
+    </div>
+</section>
