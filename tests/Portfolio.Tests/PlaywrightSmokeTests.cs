@@ -37,6 +37,8 @@ public sealed class PlaywrightSmokeTests
         await Expect(page.GetByText("Cartographie des flux metier")).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexite metier a l'interface exploitable." }))
             .ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des interfaces pensees pour les decisions terrain." }))
+            .ToBeVisibleAsync();
     }
 
     [Fact]

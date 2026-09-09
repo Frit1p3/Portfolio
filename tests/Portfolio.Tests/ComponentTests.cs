@@ -486,4 +486,20 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Structurer", section.TextContent);
         Assert.Contains("Livrer", section.TextContent);
     }
+
+    [Fact]
+    public void LandingProjectsSection_composes_project_use_cases()
+    {
+        var cut = Render<LandingProjectsSection>();
+
+        var section = cut.Find("section.projects-section");
+
+        Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("Des interfaces pensees", section.TextContent);
+        Assert.Contains("decisions terrain", section.TextContent);
+        Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
+        Assert.Contains("Pilotage atelier", section.TextContent);
+        Assert.Contains("Flux ERP", section.TextContent);
+        Assert.Contains("Reporting decisionnel", section.TextContent);
+    }
 }

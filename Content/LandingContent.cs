@@ -196,6 +196,36 @@ public static class LandingContent
             "Valider le rendu responsive, l'accessibilite et les tests pour garder une base evolutive.",
             "success")
     };
+
+    public const string ProjectsEyebrow = "Cas d'usage";
+
+    public const string ProjectsTitle =
+        "Des interfaces pensees pour les decisions terrain.";
+
+    public const string ProjectsIntro =
+        "Trois familles de produits pour relier operations, donnees et pilotage sans perdre le contexte metier.";
+
+    public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
+    {
+        new ProjectUseCase(
+            "01",
+            "Pilotage atelier",
+            "Suivre OEE, incidents, alertes qualite et temps reels pour prioriser l'action terrain.",
+            "KPI temps reel",
+            "success"),
+        new ProjectUseCase(
+            "02",
+            "Flux ERP / operations",
+            "Rendre commandes, stocks, documents et statuts synchronises lisibles dans une meme interface.",
+            "Flux synchronises",
+            "accent"),
+        new ProjectUseCase(
+            "03",
+            "Reporting decisionnel",
+            "Transformer les signaux consolides en priorites, syntheses et arbitrages exploitables.",
+            "Synthese exec",
+            "warning")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -213,3 +243,5 @@ public sealed record DecisionMetric(string Step, string Meta, string Title, stri
 public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);
 
 public sealed record MethodStep(string Step, string Title, string Description, string Tone);
+
+public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
