@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Portfolio.Content;
 
 namespace Portfolio.Tests;
@@ -81,6 +82,25 @@ public sealed class FoundationTests
         Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-contact-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Css_spacing_token_references_are_defined()
+    {
+        var root = FindRepositoryRoot();
+        var cssRoot = Path.Combine(root, "wwwroot", "css");
+        var spacingCss = File.ReadAllText(Path.Combine(cssRoot, "tokens", "spacing.css"));
+        var definedTokens = Regex.Matches(spacingCss, @"--space-[\w-]+(?=\s*:)")
+            .Select(match => match.Value)
+            .ToHashSet(StringComparer.Ordinal);
+        var undefinedTokens = Directory.EnumerateFiles(cssRoot, "*.css", SearchOption.AllDirectories)
+            .SelectMany(path => Regex.Matches(File.ReadAllText(path), @"var\((--space-[\w-]+)").Select(match => match.Groups[1].Value))
+            .Where(token => !definedTokens.Contains(token))
+            .Distinct(StringComparer.Ordinal)
+            .Order(StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.True(undefinedTokens.Length == 0, $"Undefined spacing tokens: {string.Join(", ", undefinedTokens)}");
     }
 
     private static string FindRepositoryRoot()
