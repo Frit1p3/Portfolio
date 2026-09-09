@@ -8,6 +8,29 @@
     padding: var(--space-24);
 }
 
+.motion-sequence__control,
+.motion-sequence__tab {
+    border: 1px solid rgba(247, 251, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(247, 251, 255, 0.76);
+    cursor: pointer;
+    font: inherit;
+}
+
+.motion-sequence__control:not(:disabled):hover,
+.motion-sequence__tab:hover {
+    border-color: rgba(22, 191, 209, 0.42);
+    background: rgba(22, 191, 209, 0.1);
+    color: var(--color-text-inverse);
+}
+
+.motion-sequence__control:focus-visible,
+.motion-sequence__tab:focus-visible {
+    outline: 3px solid rgba(22, 191, 209, 0.44);
+    outline-offset: 3px;
+}
+
 .motion-sequence__header {
     display: flex;
     align-items: end;
@@ -22,7 +45,7 @@
     text-transform: uppercase;
 }
 
-.motion-sequence h2 {
+.motion-sequence__header h2 {
     margin-top: var(--space-8);
     color: var(--color-text-inverse);
     font-size: var(--text-h3);
@@ -34,33 +57,17 @@
     gap: var(--space-8);
 }
 
-.motion-sequence__control,
-.motion-sequence__tab {
-    border: 1px solid rgba(247, 251, 255, 0.14);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(247, 251, 255, 0.76);
-    cursor: pointer;
-    font: inherit;
-}
-
 .motion-sequence__control {
     padding: var(--space-8) var(--space-16);
     font-size: var(--text-small);
     font-weight: 800;
 }
 
-.motion-sequence__control:hover,
-.motion-sequence__tab:hover {
-    border-color: rgba(22, 191, 209, 0.42);
-    background: rgba(22, 191, 209, 0.1);
-    color: var(--color-text-inverse);
-}
-
-.motion-sequence__control:focus-visible,
-.motion-sequence__tab:focus-visible {
-    outline: 3px solid rgba(22, 191, 209, 0.44);
-    outline-offset: 3px;
+.motion-sequence__control:disabled {
+    border-color: rgba(247, 251, 255, 0.08);
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(247, 251, 255, 0.45);
+    cursor: not-allowed;
 }
 
 .motion-sequence__stage {
@@ -120,12 +127,6 @@
     font-size: var(--text-small);
 }
 
-.motion-sequence__tabs {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: var(--space-8);
-}
-
 .motion-sequence__tab {
     display: grid;
     align-content: center;
@@ -148,6 +149,12 @@
     font-size: var(--text-small);
     font-weight: 800;
     line-height: 1.15;
+}
+
+.motion-sequence__tabs {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-8);
 }
 
 .motion-sequence__tab--active {
