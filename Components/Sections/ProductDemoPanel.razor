@@ -6,7 +6,7 @@
         <Badge Tone="neutral">Demo</Badge>
     </div>
 
-    <div class="product-demo-panel__sources" aria-label="Sources connectees">
+    <div class="product-demo-panel__sources" aria-label="Sources connectées">
         @foreach (var source in LandingContent.ProductSources)
         {
             <SourceCompactCard
@@ -18,7 +18,7 @@
         }
     </div>
 
-    <div class="product-demo-panel__decisions" aria-label="Lecture decisionnelle">
+    <div class="product-demo-panel__decisions" aria-label="Lecture décisionnelle">
         @foreach (var metric in LandingContent.ProductDecisionMetrics)
         {
             <DecisionTimelineCard
@@ -38,5 +38,5 @@
     [Parameter]
     public string Title { get; set; } = LandingContent.ProductDemoTitle;
 
-    private string AriaLabel => $"Apercu de demonstration produit - {Title}";
+    private string AriaLabel => $"Aperçu de démonstration produit - {Title}";
 }

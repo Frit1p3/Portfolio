@@ -10,13 +10,13 @@
             <p>@LandingContent.HeroIntro</p>
 
             <div class="concept-hero__actions" aria-label="Actions principales">
-                <Button Href="#proof">Voir la demonstration</Button>
+                <Button Href="#proof">Voir la démonstration</Button>
                 <Button Href="#contact" Variant="secondary">Me contacter</Button>
             </div>
         </div>
 
-        <div class="concept-hero__scene" aria-label="Scene conceptuelle des flux metier">
-            <div class="concept-hero__sources" aria-label="Sources metier connectees">
+        <div class="concept-hero__scene" aria-label="Scene conceptuelle des flux métier">
+            <div class="concept-hero__sources" aria-label="Sources métier connectées">
                 @foreach (var source in LandingContent.ConceptSources)
                 {
                     <ConceptSourceChip Label="@source.Label" Description="@source.Description" Tone="@source.Tone" />
@@ -42,7 +42,7 @@
                 }
             </div>
 
-            <div class="concept-hero__cards" aria-label="Concepts demonstres">
+            <div class="concept-hero__cards" aria-label="Concepts démonstratifs">
                 @foreach (var demo in LandingContent.ConceptDemos)
                 {
                     <ConceptDemoCard
@@ -57,7 +57,7 @@
 
         <LandingMotionSequence />
 
-        <div class="concept-hero__kpis" aria-label="Preuves metier">
+        <div class="concept-hero__kpis" aria-label="Preuves métier">
             @foreach (var kpi in LandingContent.HeroKpis)
             {
                 <HeroKpiCard
