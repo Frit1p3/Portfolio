@@ -96,6 +96,79 @@ public sealed class PlaywrightSmokeTests
     }
 
     [Fact]
+    public async Task Home_page_keeps_landing_sections_within_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 1024, Height = 900 },
+            new ViewportSize { Width = 768, Height = 960 },
+            new ViewportSize { Width = 390, Height = 900 },
+            new ViewportSize { Width = 360, Height = 800 }
+        };
+        var sectionSelectors = new[]
+        {
+            ".concept-hero",
+            ".product-demo-panel",
+            ".method-section",
+            ".projects-section",
+            ".case-study-section",
+            ".contact-section",
+            ".site-footer"
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions
+            {
+                ViewportSize = viewport
+            });
+
+            await page.GotoAsync(baseUrl, new PageGotoOptions
+            {
+                WaitUntil = WaitUntilState.NetworkIdle
+            });
+
+            foreach (var selector in sectionSelectors)
+            {
+                await Expect(page.Locator(selector)).ToBeVisibleAsync();
+            }
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"Viewport {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            var overflowingSelectors = await page.EvaluateAsync<string[]>(
+                @"(selectors) => selectors.filter((selector) => {
+                    const element = document.querySelector(selector);
+                    if (!element) {
+                        return true;
+                    }
+
+                    const rect = element.getBoundingClientRect();
+                    return rect.left < -1 || rect.right > window.innerWidth + 1;
+                })",
+                sectionSelectors);
+
+            Assert.True(
+                overflowingSelectors.Length == 0,
+                $"Viewport {viewport.Width}px has overflowing sections: {string.Join(", ", overflowingSelectors)}");
+
+            await page.CloseAsync();
+        }
+    }
+
+    [Fact]
     public async Task Home_page_disables_motion_auto_play_when_reduced_motion_is_preferred()
     {
         if (!TryGetBaseUrl(out var baseUrl))
