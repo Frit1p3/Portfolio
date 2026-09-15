@@ -198,7 +198,7 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.concept-hero");
 
         Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Interfaces metier industrielles", section.TextContent);
+        Assert.Contains("Interfaces industrielles", section.TextContent);
         Assert.Equal(4, cut.FindAll(".concept-source-chip").Count);
         Assert.Equal(4, cut.FindAll(".concept-tab").Count);
         Assert.Equal(4, cut.FindAll(".concept-demo-card").Count);
@@ -481,8 +481,8 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("approach", section.Id);
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("De la complexite metier", section.TextContent);
-        Assert.Contains("parcours lisibles", section.TextContent);
+        Assert.Contains("De la complexite terrain", section.TextContent);
+        Assert.Contains("ecrans testables", section.TextContent);
         Assert.Equal(3, cut.FindAll(".method-section__step").Count);
         Assert.Contains("Cadrer", section.TextContent);
         Assert.Contains("Structurer", section.TextContent);
@@ -497,8 +497,8 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.projects-section");
 
         Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Des interfaces pensees", section.TextContent);
-        Assert.Contains("decisions terrain", section.TextContent);
+        Assert.Contains("Des produits front-end", section.TextContent);
+        Assert.Contains("usages terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
         Assert.Contains("Pilotage atelier", section.TextContent);
         Assert.Contains("Flux ERP", section.TextContent);
@@ -513,7 +513,7 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.case-study-section");
 
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Unifier les signaux atelier", section.TextContent);
+        Assert.Contains("Rassembler les signaux atelier", section.TextContent);
         Assert.Contains("equipes terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
@@ -532,7 +532,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("contact", section.Id);
         Assert.Equal("contact-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Construisons une interface metier", section.TextContent);
+        Assert.Contains("Passons d'un besoin metier", section.TextContent);
         Assert.Contains("Demarrer un echange", link.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", link.GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);

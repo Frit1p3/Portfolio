@@ -32,16 +32,16 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces metier industrielles, lisibles et orientees decision." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui transforment la donnee en decision." }))
             .ToBeVisibleAsync();
         await Expect(page.GetByText("Cartographie des flux metier")).ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexite metier a l'interface exploitable." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexite terrain au parcours utilisable." }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des interfaces pensees pour les decisions terrain." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour les usages terrain." }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Unifier les signaux atelier dans un tableau de bord exploitable." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable." }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Construisons une interface metier plus lisible." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Passons d'un besoin metier a une interface utile." }))
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Link, new() { Name = "Demarrer un echange" }))
             .ToBeVisibleAsync();
