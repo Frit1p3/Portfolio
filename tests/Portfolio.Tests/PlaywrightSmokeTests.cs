@@ -32,12 +32,12 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui transforment la donnee en decision." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui rendent la donnee actionnable." }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByText("Cartographie des flux metier")).ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexite terrain au parcours utilisable." }))
+        await Expect(page.GetByText("Cartographie operationnelle des flux")).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexite terrain a l'ecran utile." }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour les usages terrain." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour usages industriels." }))
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable." }))
             .ToBeVisibleAsync();
@@ -282,13 +282,13 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        Assert.Equal("Merryl - Front-End .NET industriel", await page.TitleAsync());
+        Assert.Equal("Merryl - Interfaces industrielles .NET", await page.TitleAsync());
         Assert.Equal("fr", await page.Locator("html").GetAttributeAsync("lang"));
         Assert.Equal(
             "width=device-width, initial-scale=1.0",
             await page.Locator("meta[name='viewport']").GetAttributeAsync("content"));
         Assert.Equal(
-            "Portfolio Front-End .NET oriente interfaces metier industrielles, data visualisation et UI/UX B2B.",
+            "Portfolio Front-End .NET pour interfaces industrielles, dashboards metier et outils terrain B2B.",
             await page.Locator("meta[name='description']").GetAttributeAsync("content"));
         Assert.Equal("#091521", await page.Locator("meta[name='theme-color']").GetAttributeAsync("content"));
         Assert.Equal("/", await page.Locator("base").GetAttributeAsync("href"));

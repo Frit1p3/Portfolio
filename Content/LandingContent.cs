@@ -3,15 +3,15 @@ namespace Portfolio.Content;
 public static class LandingContent
 {
     public const string Positioning =
-        "Front-End .NET specialise dans les interfaces metier industrielles.";
+        "Front-End .NET pour interfaces metier industrielles, dashboards et outils terrain.";
 
     public const string HeroEyebrow = "Portfolio applicatif";
 
     public const string HeroTitle =
-        "Interfaces industrielles qui transforment la donnee en decision.";
+        "Interfaces industrielles qui rendent la donnee actionnable.";
 
     public const string HeroIntro =
-        "Developpeur Front-End .NET, je concois des experiences B2B ou dashboards, design systems et contraintes terrain avancent ensemble.";
+        "Developpeur Front-End .NET, je concois des experiences B2B ou dashboards, design systems et contraintes terrain convergent vers des decisions plus rapides.";
 
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {
@@ -41,7 +41,7 @@ public static class LandingContent
         new ConceptDemo(
             "01",
             "Cadrer les flux",
-            "Identifier les sources, les contraintes terrain et les choix attendus.",
+            "Identifier les sources, les contraintes terrain et les arbitrages a rendre visibles.",
             "muted"),
         new ConceptDemo(
             "02",
@@ -52,12 +52,12 @@ public static class LandingContent
         new ConceptDemo(
             "03",
             "Mettre les signaux en contexte",
-            "Relier KPI, statuts et preuves pour accelerer la lecture terrain.",
+            "Relier KPI, statuts et preuves pour rendre la lecture terrain immediate.",
             "success"),
         new ConceptDemo(
             "04",
             "Decider plus vite",
-            "Faire remonter les priorites utiles au bon moment.",
+            "Faire remonter les priorites utiles, au bon niveau de detail.",
             "success")
     };
 
@@ -67,23 +67,23 @@ public static class LandingContent
             "Experience",
             "3 ans",
             "Industrie",
-            "Dashboards, KPI et parcours terrain.",
+            "Dashboards, KPI et parcours metier.",
             "accent"),
         new HeroKpi(
             "Objectif UX",
             "- friction",
             "Decision",
-            "Moins d'allers-retours pour passer a l'action.",
+            "Moins d'allers-retours entre signal, preuve et action.",
             "success"),
         new HeroKpi(
             "Socle",
             ".NET",
             "Blazor",
-            "Composants reutilisables, CSS Vanilla et accessibilite.",
+            "Composants reutilisables, CSS Vanilla et tests.",
             "neutral")
     };
 
-    public const string ProductDemoTitle = "Cartographie des flux metier";
+    public const string ProductDemoTitle = "Cartographie operationnelle des flux";
 
     public static readonly IReadOnlyList<ProductSource> ProductSources = new[]
     {
@@ -96,7 +96,7 @@ public static class LandingContent
         new ProductSource(
             "Atelier",
             "Terrain",
-            "Incidents, temps reels et qualite atelier.",
+            "Incidents, temps reels et qualite terrain.",
             "live",
             "success"),
         new ProductSource(
@@ -113,19 +113,19 @@ public static class LandingContent
             "01",
             "OEE atelier",
             "87% de rendement",
-            "+6 pts vs semaine precedente",
+            "+6 pts face a la semaine precedente",
             "success"),
         new DecisionMetric(
             "02",
             "Alertes critiques",
             "12 points ouverts",
-            "3 priorites qualite a traiter",
+            "3 priorites qualite a traiter en premier",
             "warning"),
         new DecisionMetric(
             "03",
             "Cycle moyen",
             "2.8 j / objectif 3 j",
-            "Delai compatible avec la cible",
+            "Delai sous controle face a la cible",
             "neutral")
     };
 
@@ -135,20 +135,20 @@ public static class LandingContent
             "grid-wake",
             "01",
             "Reveil de la grille",
-            "Installer le cadre technique avant d'introduire les sources metier.",
+            "Installer le cadre visuel avant d'introduire les sources metier.",
             "muted"),
         new MotionState(
             "message-reveal",
             "02",
             "Message lisible",
-            "Faire apparaitre la promesse sans separer artificiellement texte et demonstration.",
+            "Faire apparaitre la promesse sans separer le discours de la demonstration.",
             "accent",
             true),
         new MotionState(
             "system-assembly",
             "03",
             "Assemblage du systeme",
-            "Structurer UX, design system et KPI comme un meme outil de decision.",
+            "Faire tenir UX, design system et KPI dans un meme outil de decision.",
             "accent"),
         new MotionState(
             "data-convergence",
@@ -160,7 +160,7 @@ public static class LandingContent
             "concept-switch",
             "05",
             "Focus narratif",
-            "Passer d'un concept a l'autre pour expliquer la methode sans surcharge.",
+            "Passer d'un concept a l'autre pour expliquer la methode sans surcharge visuelle.",
             "warning"),
         new MotionState(
             "demo-takeover",
@@ -173,34 +173,34 @@ public static class LandingContent
     public const string MethodEyebrow = "Methode";
 
     public const string MethodTitle =
-        "De la complexite terrain au parcours utilisable.";
+        "De la complexite terrain a l'ecran utile.";
 
     public const string MethodIntro =
-        "Une approche courte et structuree pour transformer les contraintes industrielles en ecrans testables et maintenables.";
+        "Une approche courte pour transformer contraintes industrielles, donnees et arbitrages en ecrans testables et maintenables.";
 
     public static readonly IReadOnlyList<MethodStep> MethodSteps = new[]
     {
         new MethodStep(
             "01",
             "Cadrer",
-            "Identifier les sources, les contraintes terrain et les arbitrages attendus avant de dessiner l'interface.",
+            "Identifier les sources, les irritants terrain et les arbitrages attendus avant de dessiner l'interface.",
             "muted"),
         new MethodStep(
             "02",
             "Structurer",
-            "Organiser les parcours, la hierarchie visuelle et les composants reutilisables autour des usages critiques.",
+            "Organiser parcours, hierarchie visuelle et composants reutilisables autour des usages critiques.",
             "accent"),
         new MethodStep(
             "03",
             "Livrer",
-            "Valider le rendu responsive, l'accessibilite et les tests pour garder une base evolutive.",
+            "Valider responsive, accessibilite et tests pour garder une base claire et evolutive.",
             "success")
     };
 
     public const string ProjectsEyebrow = "Cas d'usage";
 
     public const string ProjectsTitle =
-        "Des produits front-end pour les usages terrain.";
+        "Des produits front-end pour usages industriels.";
 
     public const string ProjectsIntro =
         "Trois familles de produits pour connecter operations, donnees et pilotage sans perdre le contexte metier.";
@@ -222,7 +222,7 @@ public static class LandingContent
         new ProjectUseCase(
             "03",
             "Reporting decisionnel",
-            "Transformer les signaux consolides en syntheses courtes et arbitrages actionnables.",
+            "Transformer les signaux consolides en syntheses courtes, lisibles et actionnables.",
             "Synthese exec",
             "warning")
     };
@@ -233,10 +233,10 @@ public static class LandingContent
         "Rassembler les signaux atelier dans un dashboard actionnable.";
 
     public const string CaseStudyIntro =
-        "Un exemple de cadrage produit pour faire ressortir les priorites terrain sans multiplier les ecrans.";
+        "Un exemple de cadrage produit pour faire ressortir les priorites sans multiplier les ecrans.";
 
     public const string CaseStudyContext =
-        "Les equipes terrain consultent plusieurs sources pour suivre les incidents, les delais et la qualite. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes.";
+        "Les equipes terrain consultent plusieurs sources pour suivre incidents, delais et qualite. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes.";
 
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
@@ -275,7 +275,7 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
     {
-        new ContactHighlight("Cadrage rapide", "Clarifier le besoin, les donnees sources et les priorites produit.", "accent"),
+        new ContactHighlight("Cadrage rapide", "Clarifier besoin, donnees sources et priorites produit.", "accent"),
         new ContactHighlight("Prototype utile", "Transformer l'idee en ecran testable avec composants reutilisables.", "success"),
         new ContactHighlight("Passage a l'echelle", "Stabiliser CSS, accessibilite et tests pour livrer sereinement.", "warning")
     };

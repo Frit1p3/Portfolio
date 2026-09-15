@@ -26,7 +26,7 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
         Assert.Contains("complexite terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
-        Assert.Contains("usages terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
+        Assert.Contains("usages industriels", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
         Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
