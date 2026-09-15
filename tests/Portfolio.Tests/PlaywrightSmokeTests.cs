@@ -169,6 +169,81 @@ public sealed class PlaywrightSmokeTests
     }
 
     [Fact]
+    public async Task Home_page_exposes_accessible_landmarks_anchors_and_motion_tabs()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+
+        var page = await browser.NewPageAsync(new BrowserNewPageOptions
+        {
+            ViewportSize = new ViewportSize
+            {
+                Width = 1440,
+                Height = 1000
+            }
+        });
+
+        await page.GotoAsync(baseUrl, new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.NetworkIdle
+        });
+
+        await Expect(page.GetByRole(AriaRole.Banner)).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Main)).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Contentinfo)).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Navigation principale" })).ToBeVisibleAsync();
+
+        Assert.Equal(1, await page.Locator("h1").CountAsync());
+        Assert.Equal(5, await page.Locator("main h2").CountAsync());
+
+        var anchorAudit = await page.EvaluateAsync<AnchorAudit>(
+            @"() => {
+                const links = [...document.querySelectorAll('a[href^=""#""]')];
+                const brokenLinks = links
+                    .map((link) => link.getAttribute('href'))
+                    .filter((href) => !href || !document.querySelector(href));
+                const ids = [...document.querySelectorAll('[id]')].map((element) => element.id);
+                const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+
+                return {
+                    brokenLinks: [...new Set(brokenLinks)],
+                    duplicateIds: [...new Set(duplicateIds)]
+                };
+            }");
+
+        Assert.Empty(anchorAudit.BrokenLinks);
+        Assert.Empty(anchorAudit.DuplicateIds);
+
+        Assert.Equal(6, await page.Locator(".motion-sequence [role='tab']").CountAsync());
+        await Expect(page.GetByRole(AriaRole.Tablist, new() { Name = "Etats de la sequence motion" }))
+            .ToBeVisibleAsync();
+        await Expect(page.Locator("#motion-sequence-panel")).ToHaveAttributeAsync("role", "tabpanel");
+        await Expect(page.Locator("#motion-sequence-panel"))
+            .ToHaveAttributeAsync("aria-labelledby", "motion-sequence-tab-message-reveal");
+
+        await page.Locator("#motion-sequence-tab-message-reveal").PressAsync("End");
+        await Expect(page.Locator("#motion-sequence-tab-demo-takeover")).ToHaveAttributeAsync("aria-selected", "true");
+        await Expect(page.Locator("#motion-sequence-panel"))
+            .ToHaveAttributeAsync("aria-labelledby", "motion-sequence-tab-demo-takeover");
+        Assert.Equal(
+            "motion-sequence-tab-demo-takeover",
+            await page.EvaluateAsync<string>("() => document.activeElement?.id ?? ''"));
+
+        await page.Locator("#motion-sequence-tab-demo-takeover").PressAsync("Home");
+        await Expect(page.Locator("#motion-sequence-tab-grid-wake")).ToHaveAttributeAsync("aria-selected", "true");
+        await Expect(page.Locator("#motion-sequence-panel"))
+            .ToHaveAttributeAsync("aria-labelledby", "motion-sequence-tab-grid-wake");
+    }
+
+    [Fact]
     public async Task Home_page_disables_motion_auto_play_when_reduced_motion_is_preferred()
     {
         if (!TryGetBaseUrl(out var baseUrl))
@@ -211,5 +286,12 @@ public sealed class PlaywrightSmokeTests
     private static ILocatorAssertions Expect(ILocator locator)
     {
         return Assertions.Expect(locator);
+    }
+
+    private sealed class AnchorAudit
+    {
+        public string[] BrokenLinks { get; set; } = Array.Empty<string>();
+
+        public string[] DuplicateIds { get; set; } = Array.Empty<string>();
     }
 }
