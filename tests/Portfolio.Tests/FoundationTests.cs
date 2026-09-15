@@ -9,7 +9,7 @@ public sealed class FoundationTests
     public void Landing_positioning_content_is_available()
     {
         Assert.Contains(".NET", LandingContent.Positioning, StringComparison.Ordinal);
-        Assert.Contains("interfaces metier industrielles", LandingContent.Positioning, StringComparison.Ordinal);
+        Assert.Contains("interfaces métier industrielles", LandingContent.Positioning, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -24,14 +24,14 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
         Assert.Equal(6, LandingContent.LandingMotionStates.Count);
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
-        Assert.Contains("complexite terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
+        Assert.Contains("complexité terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
         Assert.Contains("usages industriels", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
         Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
-        Assert.Contains("besoin metier", LandingContent.ContactTitle, StringComparison.Ordinal);
+        Assert.Contains("besoin métier", LandingContent.ContactTitle, StringComparison.Ordinal);
         Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }

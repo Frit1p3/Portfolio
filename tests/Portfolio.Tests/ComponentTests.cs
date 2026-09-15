@@ -227,7 +227,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("true", tabs[3].GetAttribute("aria-selected"));
         Assert.DoesNotContain("concept-demo-card--highlighted", cards[1].ClassList);
         Assert.Contains("concept-demo-card--highlighted", cards[3].ClassList);
-        Assert.Contains("Decider plus vite", cards[3].TextContent);
+        Assert.Contains("Décider plus vite", cards[3].TextContent);
     }
 
     [Fact]
@@ -277,7 +277,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("motion-sequence-tab-message-reveal", stage.GetAttribute("aria-labelledby"));
         Assert.Contains("motion-sequence__stage--accent", stage.ClassList);
         Assert.Contains("Message lisible", stage.TextContent);
-        Assert.Contains("Faire apparaitre la promesse", stage.TextContent);
+        Assert.Contains("Faire apparaître la promesse", stage.TextContent);
     }
 
     [Fact]
@@ -339,7 +339,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("-1", tabs[1].GetAttribute("tabindex"));
         Assert.Equal("true", tabs[2].GetAttribute("aria-selected"));
         Assert.Equal("0", tabs[2].GetAttribute("tabindex"));
-        Assert.Contains("Assemblage du systeme", cut.Find(".motion-sequence__stage").TextContent);
+        Assert.Contains("Assemblage du système", cut.Find(".motion-sequence__stage").TextContent);
 
         tabs[2].KeyDown(new KeyboardEventArgs { Key = "ArrowLeft" });
         tabs = cut.FindAll(".motion-sequence__tab");
@@ -351,7 +351,7 @@ public sealed class ComponentTests : BunitContext
         tabs = cut.FindAll(".motion-sequence__tab");
 
         Assert.Equal("true", tabs[0].GetAttribute("aria-selected"));
-        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+        Assert.Contains("Réveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
 
         tabs[0].KeyDown(new KeyboardEventArgs { Key = "End" });
         tabs = cut.FindAll(".motion-sequence__tab");
@@ -381,7 +381,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("0", tabs[0].GetAttribute("tabindex"));
         Assert.Equal("-1", tabs[5].GetAttribute("tabindex"));
         Assert.Equal("motion-sequence-tab-grid-wake", cut.Find(".motion-sequence__stage").GetAttribute("aria-labelledby"));
-        Assert.Contains("Reveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
+        Assert.Contains("Réveil de la grille", cut.Find(".motion-sequence__stage").TextContent);
     }
 
     [Fact]
@@ -464,10 +464,10 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("proof", panel.Id);
         Assert.Contains("product-demo-panel", panel.ClassList);
-        Assert.Equal("Apercu de demonstration produit - Cartographie operationnelle des flux", panel.GetAttribute("aria-label"));
+        Assert.Equal("Aperçu de démonstration produit - Cartographie opérationnelle des flux", panel.GetAttribute("aria-label"));
         Assert.Equal(3, cut.FindAll(".source-compact-card").Count);
         Assert.Equal(3, cut.FindAll(".decision-timeline-card").Count);
-        Assert.Contains("Cartographie operationnelle des flux", panel.TextContent);
+        Assert.Contains("Cartographie opérationnelle des flux", panel.TextContent);
         Assert.Contains("OEE atelier", panel.TextContent);
         Assert.Contains("GED", panel.TextContent);
     }
@@ -481,8 +481,8 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("approach", section.Id);
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("De la complexite terrain", section.TextContent);
-        Assert.Contains("ecrans testables", section.TextContent);
+        Assert.Contains("De la complexité terrain", section.TextContent);
+        Assert.Contains("écrans testables", section.TextContent);
         Assert.Equal(3, cut.FindAll(".method-section__step").Count);
         Assert.Contains("Cadrer", section.TextContent);
         Assert.Contains("Structurer", section.TextContent);
@@ -502,7 +502,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
         Assert.Contains("Pilotage atelier", section.TextContent);
         Assert.Contains("Flux ERP", section.TextContent);
-        Assert.Contains("Reporting decisionnel", section.TextContent);
+        Assert.Contains("Reporting décisionnel", section.TextContent);
     }
 
     [Fact]
@@ -514,11 +514,11 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("Rassembler les signaux atelier", section.TextContent);
-        Assert.Contains("equipes terrain", section.TextContent);
+        Assert.Contains("équipes terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
-        Assert.Contains("Probleme", section.TextContent);
-        Assert.Contains("Reponse UX", section.TextContent);
+        Assert.Contains("Problème", section.TextContent);
+        Assert.Contains("Réponse UX", section.TextContent);
         Assert.Contains("Livrable", section.TextContent);
     }
 
@@ -532,7 +532,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("contact", section.Id);
         Assert.Equal("contact-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Passons d'un besoin metier", section.TextContent);
+        Assert.Contains("Passons d'un besoin métier", section.TextContent);
         Assert.Contains("Demarrer un echange", link.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", link.GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);

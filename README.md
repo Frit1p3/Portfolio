@@ -54,6 +54,17 @@ dotnet test Portfolio.slnx
 
 Sans `PORTFOLIO_BASE_URL`, les tests Playwright sont ignores afin de garder une boucle de tests rapide. Les avertissements `NU1902` lies a AngleSharp peuvent apparaitre pendant les commandes .NET.
 
+## Publication
+
+La publication prioritaire utilise GitHub Pages depuis la branche `main`.
+
+- Workflow : `.github/workflows/pages.yml`.
+- URL attendue : `https://frit1p3.github.io/Portfolio/`.
+- Documentation : `docs/architecture/deploiement.md`.
+
+Le workflow ajuste le `base href` dans l'artefact publie, ajoute le fallback `404.html`
+et cree `.nojekyll` pour servir correctement Blazor WebAssembly.
+
 ## Qualite
 
 La suite de tests couvre :
