@@ -244,6 +244,61 @@ public sealed class PlaywrightSmokeTests
     }
 
     [Fact]
+    public async Task Home_page_exposes_document_metadata_without_browser_errors()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        var consoleErrors = new List<string>();
+        var pageErrors = new List<string>();
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+
+        var page = await browser.NewPageAsync(new BrowserNewPageOptions
+        {
+            ViewportSize = new ViewportSize
+            {
+                Width = 1440,
+                Height = 1000
+            }
+        });
+        page.Console += (_, message) =>
+        {
+            if (message.Type == "error")
+            {
+                consoleErrors.Add(message.Text);
+            }
+        };
+        page.PageError += (_, error) => pageErrors.Add(error);
+
+        await page.GotoAsync(baseUrl, new PageGotoOptions
+        {
+            WaitUntil = WaitUntilState.NetworkIdle
+        });
+
+        Assert.Equal("Merryl - Front-End .NET industriel", await page.TitleAsync());
+        Assert.Equal("fr", await page.Locator("html").GetAttributeAsync("lang"));
+        Assert.Equal(
+            "width=device-width, initial-scale=1.0",
+            await page.Locator("meta[name='viewport']").GetAttributeAsync("content"));
+        Assert.Equal(
+            "Portfolio Front-End .NET oriente interfaces metier industrielles, data visualisation et UI/UX B2B.",
+            await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+        Assert.Equal("#091521", await page.Locator("meta[name='theme-color']").GetAttributeAsync("content"));
+        Assert.Equal("/", await page.Locator("base").GetAttributeAsync("href"));
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Level = 1 })).ToBeVisibleAsync();
+
+        Assert.Empty(consoleErrors);
+        Assert.Empty(pageErrors);
+    }
+
+    [Fact]
     public async Task Home_page_disables_motion_auto_play_when_reduced_motion_is_preferred()
     {
         if (!TryGetBaseUrl(out var baseUrl))
