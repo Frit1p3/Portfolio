@@ -15,7 +15,7 @@ public sealed class FoundationTests
     [Fact]
     public void Landing_concept_hero_content_is_available()
     {
-        Assert.Contains("Interfaces metier industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
+        Assert.Contains("Interfaces industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
         Assert.Equal(4, LandingContent.ConceptSources.Count);
         Assert.Equal(3, LandingContent.ConceptStack.Count);
         Assert.Equal(4, LandingContent.ConceptSteps.Count);
@@ -24,14 +24,14 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
         Assert.Equal(6, LandingContent.LandingMotionStates.Count);
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
-        Assert.Contains("complexite metier", LandingContent.MethodTitle, StringComparison.Ordinal);
+        Assert.Contains("complexite terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
-        Assert.Contains("decisions terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
+        Assert.Contains("usages terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
-        Assert.Contains("tableau de bord", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
+        Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
-        Assert.Contains("interface metier", LandingContent.ContactTitle, StringComparison.Ordinal);
+        Assert.Contains("besoin metier", LandingContent.ContactTitle, StringComparison.Ordinal);
         Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }
