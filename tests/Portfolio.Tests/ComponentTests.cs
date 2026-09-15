@@ -464,10 +464,10 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("proof", panel.Id);
         Assert.Contains("product-demo-panel", panel.ClassList);
-        Assert.Equal("Apercu de demonstration produit - Cartographie des flux metier", panel.GetAttribute("aria-label"));
+        Assert.Equal("Apercu de demonstration produit - Cartographie operationnelle des flux", panel.GetAttribute("aria-label"));
         Assert.Equal(3, cut.FindAll(".source-compact-card").Count);
         Assert.Equal(3, cut.FindAll(".decision-timeline-card").Count);
-        Assert.Contains("Cartographie des flux metier", panel.TextContent);
+        Assert.Contains("Cartographie operationnelle des flux", panel.TextContent);
         Assert.Contains("OEE atelier", panel.TextContent);
         Assert.Contains("GED", panel.TextContent);
     }
@@ -498,7 +498,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("Des produits front-end", section.TextContent);
-        Assert.Contains("usages terrain", section.TextContent);
+        Assert.Contains("usages industriels", section.TextContent);
         Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
         Assert.Contains("Pilotage atelier", section.TextContent);
         Assert.Contains("Flux ERP", section.TextContent);
