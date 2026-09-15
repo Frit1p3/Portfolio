@@ -15,6 +15,10 @@
 @import url("components/product-demo-panel.css");
 @import url("components/concept-hero-section.css");
 @import url("components/landing-motion-sequence.css");
+@import url("components/landing-method-section.css");
+@import url("components/landing-projects-section.css");
+@import url("components/landing-case-study-section.css");
+@import url("components/landing-contact-section.css");
 @import url("pages/home.css");
 
 #blazor-error-ui {

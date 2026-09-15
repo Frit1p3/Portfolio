@@ -8,10 +8,10 @@ public static class LandingContent
     public const string HeroEyebrow = "Portfolio applicatif";
 
     public const string HeroTitle =
-        "Interfaces metier industrielles, lisibles et orientees decision.";
+        "Interfaces industrielles qui transforment la donnee en decision.";
 
     public const string HeroIntro =
-        "Developpeur Front-End .NET specialise dans les experiences B2B, les dashboards KPI et les design systems pour environnements industriels.";
+        "Developpeur Front-End .NET, je concois des experiences B2B ou dashboards, design systems et contraintes terrain avancent ensemble.";
 
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {
@@ -41,23 +41,23 @@ public static class LandingContent
         new ConceptDemo(
             "01",
             "Cadrer les flux",
-            "Identifier les sources, les contraintes terrain et les decisions attendues.",
+            "Identifier les sources, les contraintes terrain et les choix attendus.",
             "muted"),
         new ConceptDemo(
             "02",
             "Structurer l'interface",
-            "Transformer la complexite metier en modules lisibles, hierarchises et reutilisables.",
+            "Transformer la complexite metier en modules clairs, hierarchises et reutilisables.",
             "accent",
             true),
         new ConceptDemo(
             "03",
-            "Rendre la donnee exploitable",
-            "Relier KPI, statut et contexte pour accelerer la lecture operationnelle.",
+            "Mettre les signaux en contexte",
+            "Relier KPI, statuts et preuves pour accelerer la lecture terrain.",
             "success"),
         new ConceptDemo(
             "04",
             "Decider plus vite",
-            "Transformer les signaux consolides en priorites claires et actionnables.",
+            "Faire remonter les priorites utiles au bon moment.",
             "success")
     };
 
@@ -67,13 +67,13 @@ public static class LandingContent
             "Experience",
             "3 ans",
             "Industrie",
-            "Interfaces metier, KPI et donnees operationnelles.",
+            "Dashboards, KPI et parcours terrain.",
             "accent"),
         new HeroKpi(
             "Objectif UX",
             "- friction",
             "Decision",
-            "Des parcours plus lisibles pour accelerer l'action.",
+            "Moins d'allers-retours pour passer a l'action.",
             "success"),
         new HeroKpi(
             "Socle",
@@ -169,6 +169,116 @@ public static class LandingContent
             "Donner la priorite a la surface applicative et aux preuves metier.",
             "success")
     };
+
+    public const string MethodEyebrow = "Methode";
+
+    public const string MethodTitle =
+        "De la complexite terrain au parcours utilisable.";
+
+    public const string MethodIntro =
+        "Une approche courte et structuree pour transformer les contraintes industrielles en ecrans testables et maintenables.";
+
+    public static readonly IReadOnlyList<MethodStep> MethodSteps = new[]
+    {
+        new MethodStep(
+            "01",
+            "Cadrer",
+            "Identifier les sources, les contraintes terrain et les arbitrages attendus avant de dessiner l'interface.",
+            "muted"),
+        new MethodStep(
+            "02",
+            "Structurer",
+            "Organiser les parcours, la hierarchie visuelle et les composants reutilisables autour des usages critiques.",
+            "accent"),
+        new MethodStep(
+            "03",
+            "Livrer",
+            "Valider le rendu responsive, l'accessibilite et les tests pour garder une base evolutive.",
+            "success")
+    };
+
+    public const string ProjectsEyebrow = "Cas d'usage";
+
+    public const string ProjectsTitle =
+        "Des produits front-end pour les usages terrain.";
+
+    public const string ProjectsIntro =
+        "Trois familles de produits pour connecter operations, donnees et pilotage sans perdre le contexte metier.";
+
+    public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
+    {
+        new ProjectUseCase(
+            "01",
+            "Pilotage atelier",
+            "Suivre rendement, incidents, alertes qualite et temps reels pour prioriser l'action terrain.",
+            "KPI temps reel",
+            "success"),
+        new ProjectUseCase(
+            "02",
+            "Flux ERP / operations",
+            "Rendre commandes, stocks, documents et statuts synchronises lisibles dans une meme interface.",
+            "Flux synchronises",
+            "accent"),
+        new ProjectUseCase(
+            "03",
+            "Reporting decisionnel",
+            "Transformer les signaux consolides en syntheses courtes et arbitrages actionnables.",
+            "Synthese exec",
+            "warning")
+    };
+
+    public const string CaseStudyEyebrow = "Preuve projet";
+
+    public const string CaseStudyTitle =
+        "Rassembler les signaux atelier dans un dashboard actionnable.";
+
+    public const string CaseStudyIntro =
+        "Un exemple de cadrage produit pour faire ressortir les priorites terrain sans multiplier les ecrans.";
+
+    public const string CaseStudyContext =
+        "Les equipes terrain consultent plusieurs sources pour suivre les incidents, les delais et la qualite. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes.";
+
+    public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
+    {
+        new CaseStudyPoint(
+            "Probleme",
+            "Des indicateurs disperses entre ERP, atelier et reporting ralentissent les arbitrages quotidiens.",
+            "warning"),
+        new CaseStudyPoint(
+            "Reponse UX",
+            "Organiser la lecture par statut, niveau de criticite et prochaine action attendue.",
+            "accent"),
+        new CaseStudyPoint(
+            "Livrable",
+            "Un dashboard responsive avec composants reutilisables, KPI contextualises et parcours court.",
+            "success")
+    };
+
+    public static readonly IReadOnlyList<CaseStudyMetric> CaseStudyMetrics = new[]
+    {
+        new CaseStudyMetric("3", "sources reliees", "ERP, atelier, reporting", "accent"),
+        new CaseStudyMetric("1", "lecture priorisee", "statut, criticite, action", "success"),
+        new CaseStudyMetric("0", "rupture de contexte", "preuve et action au meme endroit", "warning")
+    };
+
+    public const string ContactEyebrow = "Contact";
+
+    public const string ContactTitle =
+        "Passons d'un besoin metier a une interface utile.";
+
+    public const string ContactIntro =
+        "Disponible pour cadrer, concevoir ou renforcer une experience front-end .NET orientee operations, data et usage quotidien.";
+
+    public const string ContactEmail = "contact@example.com";
+
+    public const string ContactAvailability = "Ouvert aux missions front-end .NET, UI industrielle et design system.";
+
+    public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
+    {
+        new ContactHighlight("Cadrage rapide", "Clarifier le besoin, les donnees sources et les priorites produit.", "accent"),
+        new ContactHighlight("Prototype utile", "Transformer l'idee en ecran testable avec composants reutilisables.", "success"),
+        new ContactHighlight("Passage a l'echelle", "Stabiliser CSS, accessibilite et tests pour livrer sereinement.", "warning")
+    };
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
@@ -184,3 +294,13 @@ public sealed record ProductSource(string Label, string Type, string Description
 public sealed record DecisionMetric(string Step, string Meta, string Title, string Description, string Tone);
 
 public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);
+
+public sealed record MethodStep(string Step, string Title, string Description, string Tone);
+
+public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
+
+public sealed record CaseStudyPoint(string Title, string Description, string Tone);
+
+public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
+
+public sealed record ContactHighlight(string Title, string Description, string Tone);

@@ -1,0 +1,23 @@
+@using Portfolio.Content
+
+<section class="projects-section" aria-labelledby="projects-section-title">
+    <div class="projects-section__heading">
+        <span class="projects-section__eyebrow">@LandingContent.ProjectsEyebrow</span>
+        <h2 id="projects-section-title">@LandingContent.ProjectsTitle</h2>
+        <p>@LandingContent.ProjectsIntro</p>
+    </div>
+
+    <div class="projects-section__grid" aria-label="Cas d'usage representatifs">
+        @foreach (var project in LandingContent.ProjectUseCases)
+        {
+            <article class="projects-section__card projects-section__card--@project.Tone" aria-label="@($"{project.Step} - {project.Title}")">
+                <div class="projects-section__card-header">
+                    <span class="projects-section__index">@project.Step</span>
+                    <span class="projects-section__meta">@project.Meta</span>
+                </div>
+                <h3>@project.Title</h3>
+                <p>@project.Description</p>
+            </article>
+        }
+    </div>
+</section>

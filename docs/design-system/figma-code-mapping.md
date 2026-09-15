@@ -1,10 +1,10 @@
-# Mapping Figma vers code - landing animee
+# Mapping Figma vers code - landing
 
 ## Objectif
 
-Ce document sert de pont entre la maquette Figma et la future implementation Blazor.
-Il liste les composants Figma stabilises pour la landing animee, leur equivalent code
-pressenti, leur role dans l'interface et les regles a respecter pendant le developpement.
+Ce document sert de pont entre la maquette Figma et l'implementation Blazor.
+Il liste les composants Figma stabilises pour la landing, leur equivalent code,
+leur role dans l'interface et les regles a respecter pendant les evolutions.
 
 Le but est d'eviter deux derives :
 
@@ -39,33 +39,36 @@ Frames de reference :
 
 ## Mapping composants Figma vers Blazor
 
-| Figma | Composant Blazor pressenti | Dossier cible | Role |
+| Figma | Composant Blazor | Dossier | Role |
 | --- | --- | --- | --- |
 | `Project Card / Source Compact` | `SourceCompactCard` | `Components/UI` | Carte compacte de source connectee dans la demo produit. |
 | `Timeline / Decision Compact` | `DecisionTimelineCard` | `Components/UI` | Lecture decisionnelle courte associee a une metrique. |
 | `KPI Card / Hero Compact` | `HeroKpiCard` | `Components/UI` | Preuve chiffree compacte dans le hero ou les sections de preuve. |
-| `Timeline / Method Compact` | `MethodTimelineCard` | `Components/UI` | Etape de methode en carte horizontale compacte. |
 | `Concept Source Chip` | `ConceptSourceChip` | `Components/UI` | Source de donnees dans la scene conceptuelle sombre. |
 | `Concept Tab` | `ConceptTab` | `Components/UI` | Repere narratif de la sequence conceptuelle. |
 | `Concept Demo Card` | `ConceptDemoCard` | `Components/UI` | Carte pedagogique sous la scene conceptuelle. |
 | `Large product demo / Data explorer` | `ProductDemoPanel` | `Components/Sections` | Surface de demonstration applicative structuree. |
 | `Hero / Full Concept Scene` | `ConceptHeroSection` | `Components/Sections` | Hero sombre DOSS-like avec schema conceptuel anime. |
 | `Prototype / Concept Landing Motion` | `LandingMotionSequence` | `Components/Sections` | Orchestration des etats d'ouverture et de demonstration. |
+| `Prototype / Motion Controls` | `LandingMotionControls` | `Components/Sections` | Navigation precedente, suivante, replay et lecture auto. |
+| `Prototype / Motion Stage` | `LandingMotionStage` | `Components/Sections` | Scene active associee a l'etat motion courant. |
+| `Prototype / Motion Tabs` | `LandingMotionTabs` | `Components/Sections` | Liste de tabs accessible pilotant les etats motion. |
+| `Method / Timeline` | `LandingMethodSection` | `Components/Sections` | Methode de conception en etapes depuis les donnees de contenu. |
+| `Projects / Use Cases` | `LandingProjectsSection` | `Components/Sections` | Cas d'usage projets et preuves d'expertise. |
+| `Case Study / Proof Block` | `LandingCaseStudySection` | `Components/Sections` | Recit de cas client, points de preuve et metriques. |
+| `Contact / CTA` | `LandingContactSection` | `Components/Sections` | Bloc de contact final et appel a l'echange. |
 
-## Composants de layout existants a prevoir
+## Composants de layout et UI transposes
 
-Ces composants existent deja en Figma dans le design system principal et devront etre
-developpes comme base avant ou pendant la landing :
+Ces composants existent dans le design system principal et servent de base a la landing :
 
 - `Header / Navigation` -> `HeaderNavigation`
 - `Footer` -> `SiteFooter`
 - `Button` -> `Button`
 - `Badge` -> `Badge`
-- `Project Card` -> `ProjectCard`
-- `Case Study Block` -> `CaseStudyBlock`
-- `Contact Form` -> `ContactForm`
-- `Alert / Status` -> `AlertStatus`
-- `Tabs` -> `Tabs`
+
+Les blocs projet, etude de cas et contact sont implementes comme sections dediees,
+car ils portent une composition propre a la page d'accueil actuelle.
 
 ## Structure de fichiers recommandee
 
@@ -83,16 +86,21 @@ Portfolio/
       ConceptTab.razor
       DecisionTimelineCard.razor
       HeroKpiCard.razor
-      MethodTimelineCard.razor
       SourceCompactCard.razor
     Sections/
       ConceptHeroSection.razor
-      ProductDemoPanel.razor
+      LandingCaseStudySection.razor
+      LandingContactSection.razor
+      LandingMethodSection.razor
       LandingMotionSequence.razor
-    CaseStudies/
+      LandingMotionControls.razor
+      LandingMotionStage.razor
+      LandingMotionTabs.razor
+      LandingProjectsSection.razor
+      MotionTabKeyDown.cs
+      ProductDemoPanel.razor
   Content/
-    landing/
-      landing-content.cs
+    LandingContent.cs
   Pages/
     Home.razor
   wwwroot/
@@ -104,10 +112,12 @@ Portfolio/
       pages/
 ```
 
-## Donnees de contenu pressenties
+## Donnees de contenu
 
 Les composants suivants doivent recevoir leurs contenus depuis des modeles simples,
 afin d'eviter de figer les textes dans le markup.
+
+Les donnees de la landing sont centralisees dans `Content/LandingContent.cs`.
 
 ### `ConceptSourceChip`
 
@@ -170,9 +180,12 @@ Les noms ci-dessous sont indicatifs et devront rester alignes avec les conventio
 .source-compact-card
 .decision-timeline-card
 .hero-kpi-card
-.method-timeline-card
 .motion-sequence
 .motion-state
+.method-section
+.projects-section
+.case-study-section
+.contact-section
 ```
 
 ## Animation web cible
@@ -196,16 +209,18 @@ Regles :
 - Les etats doivent pouvoir etre controles ou rejoues.
 - Les elements essentiels doivent exister dans le DOM avec une structure semantique claire.
 
-## Priorite d'implementation
+## Etat d'implementation
 
-1. Initialiser le socle Blazor et les tokens CSS.
-2. Developper les composants UI de base : `Button`, `Badge`, `HeaderNavigation`, `SiteFooter`.
-3. Developper les nouveaux composants compacts issus de la landing animee.
-4. Construire `ProductDemoPanel` en version statique.
-5. Construire `ConceptHeroSection` en version statique.
-6. Ajouter `LandingMotionSequence` avec animation progressive.
-7. Tester responsive desktop, tablette et mobile.
-8. Tester accessibilite : clavier, focus, contrastes, reduced motion.
+Le socle Blazor, les tokens CSS, les composants UI principaux, la landing animee,
+les sections de contenu et les tests de non-regression sont implementes.
+
+Les evolutions suivantes doivent conserver :
+
+1. les contenus de landing dans `LandingContent` quand ils peuvent evoluer ;
+2. des composants Blazor reutilisables plutot que du HTML ponctuel ;
+3. des tests bUnit pour les nouveaux composants ou variantes significatives ;
+4. des audits Playwright quand une modification touche le responsive, l'accessibilite,
+   la motion ou les metadonnees navigateur.
 
 ## Points de vigilance
 

@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Portfolio.Content;
 
 namespace Portfolio.Tests;
@@ -14,7 +15,7 @@ public sealed class FoundationTests
     [Fact]
     public void Landing_concept_hero_content_is_available()
     {
-        Assert.Contains("Interfaces metier industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
+        Assert.Contains("Interfaces industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
         Assert.Equal(4, LandingContent.ConceptSources.Count);
         Assert.Equal(3, LandingContent.ConceptStack.Count);
         Assert.Equal(4, LandingContent.ConceptSteps.Count);
@@ -23,6 +24,16 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
         Assert.Equal(6, LandingContent.LandingMotionStates.Count);
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
+        Assert.Contains("complexite terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.MethodSteps.Count);
+        Assert.Contains("usages terrain", LandingContent.ProjectsTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.ProjectUseCases.Count);
+        Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
+        Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
+        Assert.Contains("besoin metier", LandingContent.ContactTitle, StringComparison.Ordinal);
+        Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
+        Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }
 
     [Fact]
@@ -66,7 +77,30 @@ public sealed class FoundationTests
         Assert.Contains("components/product-demo-panel.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-contact-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Css_spacing_token_references_are_defined()
+    {
+        var root = FindRepositoryRoot();
+        var cssRoot = Path.Combine(root, "wwwroot", "css");
+        var spacingCss = File.ReadAllText(Path.Combine(cssRoot, "tokens", "spacing.css"));
+        var definedTokens = Regex.Matches(spacingCss, @"--space-[\w-]+(?=\s*:)")
+            .Select(match => match.Value)
+            .ToHashSet(StringComparer.Ordinal);
+        var undefinedTokens = Directory.EnumerateFiles(cssRoot, "*.css", SearchOption.AllDirectories)
+            .SelectMany(path => Regex.Matches(File.ReadAllText(path), @"var\((--space-[\w-]+)").Select(match => match.Groups[1].Value))
+            .Where(token => !definedTokens.Contains(token))
+            .Distinct(StringComparer.Ordinal)
+            .Order(StringComparer.Ordinal)
+            .ToArray();
+
+        Assert.True(undefinedTokens.Length == 0, $"Undefined spacing tokens: {string.Join(", ", undefinedTokens)}");
     }
 
     private static string FindRepositoryRoot()

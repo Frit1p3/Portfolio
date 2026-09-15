@@ -1,0 +1,24 @@
+@using Portfolio.Content
+
+<section class="contact-section" id="contact" aria-labelledby="contact-section-title">
+    <div class="contact-section__content">
+        <span class="contact-section__eyebrow">@LandingContent.ContactEyebrow</span>
+        <h2 id="contact-section-title">@LandingContent.ContactTitle</h2>
+        <p>@LandingContent.ContactIntro</p>
+
+        <div class="contact-section__actions" aria-label="Actions de contact">
+            <Button Href="@($"mailto:{LandingContent.ContactEmail}")">Demarrer un echange</Button>
+            <span>@LandingContent.ContactAvailability</span>
+        </div>
+    </div>
+
+    <div class="contact-section__highlights" aria-label="Modes de collaboration">
+        @foreach (var highlight in LandingContent.ContactHighlights)
+        {
+            <article class="contact-section__highlight contact-section__highlight--@highlight.Tone" aria-label="@highlight.Title">
+                <h3>@highlight.Title</h3>
+                <p>@highlight.Description</p>
+            </article>
+        }
+    </div>
+</section>
