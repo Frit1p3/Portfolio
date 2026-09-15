@@ -19,6 +19,8 @@ jobs:
   build:
     name: Build static site
     runs-on: ubuntu-latest
+    env:
+      HAS_PAGES_TOKEN: ${{ secrets.PAGES_TOKEN != '' }}
 
     steps:
       - name: Checkout repository
@@ -38,7 +40,15 @@ jobs:
       - name: Publish Blazor WebAssembly
         run: dotnet publish Portfolio.csproj --configuration Release --no-restore --output publish
 
+      - name: Configure GitHub Pages with enablement
+        if: env.HAS_PAGES_TOKEN == 'true'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+          token: ${{ secrets.PAGES_TOKEN }}
+
       - name: Configure GitHub Pages
+        if: env.HAS_PAGES_TOKEN != 'true'
         uses: actions/configure-pages@v5
 
       - name: Prepare GitHub Pages artifact
