@@ -22,11 +22,103 @@ Le but est d'eviter deux derives :
 
 Frames de reference :
 
-- `Home / Desktop`
+- `Home / Desktop` (`64:2`)
 - `Home / Desktop - Animated Product Proof`
-- `Home / Desktop - Concept Demo Landing`
+- `Home / Desktop - Concept Demo Landing` (`90:377`)
 - `Prototype / Concept Landing Motion / 01 - Grid wake`
 - `Prototype / Concept Landing Motion / 06 - Demo takeover`
+
+Planche de composants :
+
+- `02 - Components` (`2:3`)
+
+Le noeud `90:377` est la direction visuelle principale de la landing publiee. Le noeud
+`64:2` reste la reference fonctionnelle pour les sections de preuve, de contact et de
+navigation qui ne sont pas encore transposees dans la direction conceptuelle sombre.
+
+## Legende de parite
+
+| Statut | Signification |
+| --- | --- |
+| `present` | Le besoin Figma est couvert par un composant ou une section reutilisable. |
+| `partiel` | Le besoin existe, mais il manque du contenu, des variantes ou une composition importante. |
+| `absent` | Aucun equivalent fonctionnel n'existe encore dans le code. |
+| `ignore` | L'ecart est intentionnel ou ne sert pas la landing publique cible. |
+
+## Inventaire des ecrans de reference
+
+### `90:377` - Home / Desktop - Concept Demo Landing
+
+| Element Figma | Equivalent code | Statut | Ecart restant |
+| --- | --- | --- | --- |
+| Header sombre et navigation | `HeaderNavigation` | `partiel` | Navigation plus courte, pas de lien Projets/Vision et CTA moins proche de la composition Figma. |
+| Hero conceptuel plein ecran | `ConceptHeroSection` | `partiel` | Structure, sources et stack presentes ; la grille, le globe, les rails de flux et la composition spatiale restent simplifies. |
+| Sources ERP, Atelier, BI, GED | `ConceptSourceChip` | `present` | Les quatre sources sont pilotees par `LandingContent`. |
+| Stack UX / design system / KPI | markup de `ConceptHeroSection` | `present` | La representation est adaptee au responsive web plutot que reproduite en perspective stricte. |
+| Tabs Cadrer, Structurer, Unifier, Animer, Decider, Documenter | `ConceptTab` et `LandingContent.ConceptSteps` | `partiel` | Quatre etapes seulement ; `Animer` et `Documenter` manquent et les micro-descriptions Figma ne sont pas modelisees. |
+| Cartes Flux metier, Diagnostic KPI, Design system | `ConceptDemoCard` | `partiel` | Le composant existe et reagit au tab actif, mais le contenu actuel suit quatre etapes et n'a pas la section Modules distincte. |
+| Sequence motion en six etats | `LandingMotionSequence` et sous-composants | `present` | Six etats controles, navigation clavier et reduction de mouvement sont couverts. |
+| Large product demo / Data explorer | `ProductDemoPanel` | `partiel` | Surface produit presente ; navigation laterale, cartographie libre et densite du data explorer Figma restent a rapprocher. |
+| Section Concept Demonstrations / Modules | cartes integrees au hero | `partiel` | Les cartes existent, mais pas comme section claire apres la demonstration produit. |
+| CTA final sombre | `LandingContactSection` | `partiel` | Passage a l'action couvert plus bas, avec une composition differente et sans CTA intermediaire dedie. |
+
+### `64:2` - Home / Desktop
+
+| Element Figma | Equivalent code | Statut | Ecart restant |
+| --- | --- | --- | --- |
+| Header complet | `HeaderNavigation` | `partiel` | Marque et ancres presentes ; hierarchie, liens Expertise/Projets/Methode/Vision et CTA Contact restent a aligner. |
+| Hero clair classique | `ConceptHeroSection` | `ignore` | Divergence intentionnelle : la landing publiee retient le hero conceptuel de `90:377`. |
+| Panneau de KPI hero | `HeroKpiCard` dans `ConceptHeroSection` | `partiel` | Trois KPI contextualises existent, sans reprendre le panneau lateral clair de `64:2`. |
+| Expertise en six skill cards | aucune carte reutilisable | `absent` | Les competences sont seulement exprimees indirectement par la methode et les cas d'usage. |
+| Methode / timeline | `LandingMethodSection` | `partiel` | Trois etapes sont presentes ; la composition et les preuves associees restent plus simples que Figma. |
+| Filtres de projets | aucun equivalent | `absent` | Aucun controle de filtrage ni etat actif pour les familles de projets. |
+| Project cards riches | cartes internes de `LandingProjectsSection` | `partiel` | Les cas d'usage existent, sans visuel, role, stack, statut et action secondaire de la carte Figma. |
+| Case Study Block / Homepage Proof | `LandingCaseStudySection` | `partiel` | Recit, points et metriques presents ; tags, mockup, comparaison et hierarchie Figma manquent. |
+| Alert / Status de materialite | aucun equivalent | `absent` | Le bandeau de contexte et son composant generique ne sont pas implementes. |
+| Contact Panel / Guidance | highlights de `LandingContactSection` | `partiel` | Les modes de collaboration couvrent l'intention, mais pas le panneau de recommandations structure. |
+| Contact Form / Homepage Wide | aucun equivalent | `absent` | Pas de champs, validation, etats erreur/succes ni strategie d'envoi. |
+| Footer / Layout Wide | `SiteFooter` | `partiel` | Baseline et email presents ; colonnes, ancres, CTA, disponibilite et ligne legale manquent. |
+
+## Inventaire du design system `2:3`
+
+| Composant Figma | Equivalent code | Statut | Decision |
+| --- | --- | --- | --- |
+| Button | `Button` | `present` | Conserver le composant et etendre ses variantes uniquement au besoin. |
+| Badge | `Badge` | `present` | Conserver les tons existants. |
+| KPI Card / Hero Compact | `HeroKpiCard` | `present` | Couverture suffisante pour la landing actuelle. |
+| Project Card / Source Compact | `SourceCompactCard` | `present` | Utilise dans la demonstration produit. |
+| Section Header | aucun composant partage | `absent` | Priorite structurelle : les sections dupliquent actuellement eyebrow, titre et introduction. |
+| Header / Navigation | `HeaderNavigation` | `partiel` | Completer les ancres, le CTA et le comportement responsive. |
+| Footer / Layout Wide | `SiteFooter` | `partiel` | Passer du footer minimal a une navigation de fin de page utile. |
+| Link | liens HTML et liens internes a `Button` | `partiel` | Formaliser seulement si plusieurs variantes de lien deviennent necessaires. |
+| Skill Card | aucun equivalent | `absent` | A creer pour la section expertise. |
+| Project Card | cartes internes de `LandingProjectsSection` | `partiel` | Extraire une carte reutilisable lors de la parite projets. |
+| Timeline | `LandingMethodSection`, `DecisionTimelineCard` | `partiel` | Deux usages specialises existent, sans composant timeline generique. |
+| Tabs | `ConceptTab`, `LandingMotionTabs` | `partiel` | Les tabs conceptuels sont accessibles ; les filtres projets restent absents. |
+| Accordion | aucun equivalent | `ignore` | Aucun parcours actuel ne justifie encore un accordion. |
+| Alert / Status | aucun equivalent | `absent` | A introduire avec le bandeau de materialite, pas comme composant isole. |
+| Contact Panel | highlights de `LandingContactSection` | `partiel` | Recomposer avec la guidance Figma. |
+| Contact Form | aucun equivalent | `absent` | Necessite validation accessible et decision sur le transport du message. |
+| Case Study Block | `LandingCaseStudySection` | `partiel` | Extraire les sous-composants seulement si une seconde etude de cas les reutilise. |
+
+## Ordre d'implementation issu de l'inventaire
+
+Les travaux restent decoupes en branches courtes depuis `develop`. Chaque branche doit
+conserver la landing publiable et ses ancres existantes.
+
+| Ordre | Branche | Perimetre | Definition of Done |
+| --- | --- | --- | --- |
+| 1 | `LandingSectionHeaderParity` | Creer un `SectionHeader` reutilisable et migrer methode, projets, case study et contact. | Une seule structure d'en-tete, variantes d'alignement explicites, tests bUnit et rendu responsive stable. |
+| 2 | `LandingHeaderFooterParity` | Completer les ancres du header et transformer le footer minimal en navigation utile. | Toutes les ancres pointent vers un id reel, focus visible, CTA contact et footer responsive. |
+| 3 | `LandingExpertiseMethodParity` | Ajouter les six skill cards utiles et enrichir la timeline methode. | Contenu data-driven, composant `SkillCard`, hierarchie proche de `64:2`, sans repetition editoriale. |
+| 4 | `LandingProjectsCaseStudyParity` | Creer les project cards riches, les filtres accessibles et completer la preuve projet. | Filtrage clavier, cartes reutilisables, tags/role/stack/impact, case study enrichi et bandeau de materialite. |
+| 5 | `LandingContactFormParity` | Recomposer la guidance et ajouter un formulaire accessible. | Validation textuelle, etats erreur/succes et strategie d'envoi documentee sans exposer de secret client. |
+| 6 | `LandingConceptDemoParity` | Completer les six tabs, isoler Modules et rapprocher le data explorer de `90:377`. | Six etapes coherentes, relation tab/carte conservee, section Modules distincte et demo responsive. |
+| 7 | `LandingVisualParityQa` | Audit visuel, responsive, accessibilite, performance et nettoyage CSS. | Tests Playwright desktop/tablette/mobile, console propre, contraste et reduced motion verifies. |
+
+La premiere branche est volontairement structurelle : `SectionHeader` supprime une
+duplication deja visible dans quatre sections et fournit la fondation attendue par les
+branches expertise, projets et contact.
 
 ## Regles generales de transposition
 
