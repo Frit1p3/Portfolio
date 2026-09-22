@@ -57,7 +57,7 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Stack UX / design system / KPI | markup de `ConceptHeroSection` | `present` | La representation est adaptee au responsive web plutot que reproduite en perspective stricte. |
 | Tabs Cadrer, Structurer, Unifier, Animer, Decider, Documenter | `ConceptTab` et `LandingContent.ConceptSteps` | `partiel` | Quatre etapes seulement ; `Animer` et `Documenter` manquent et les micro-descriptions Figma ne sont pas modelisees. |
 | Cartes Flux metier, Diagnostic KPI, Design system | `ConceptDemoCard` | `partiel` | Le composant existe et reagit au tab actif, mais le contenu actuel suit quatre etapes et n'a pas la section Modules distincte. |
-| Sequence motion en six etats | `LandingMotionSequence` et sous-composants | `present` | Six etats controles, navigation clavier et reduction de mouvement sont couverts. |
+| Sequence motion en six etats | `LandingMotionSequence` et sous-composants | `present` | Les six etats pilotent le hero, la scene conceptuelle et la demo produit. Les controles, le responsive, l'accessibilite et `prefers-reduced-motion` sont couverts. |
 | Large product demo / Data explorer | `ProductDemoPanel` | `partiel` | Surface produit presente ; navigation laterale, cartographie libre et densite du data explorer Figma restent a rapprocher. |
 | Section Concept Demonstrations / Modules | cartes integrees au hero | `partiel` | Les cartes existent, mais pas comme section claire apres la demonstration produit. |
 | CTA final sombre | `LandingContactSection` | `partiel` | Passage a l'action couvert plus bas, avec une composition differente et sans CTA intermediaire dedie. |
@@ -108,13 +108,14 @@ conserver la landing publiable et ses ancres existantes.
 
 | Ordre | Branche | Perimetre | Definition of Done |
 | --- | --- | --- | --- |
-| 1 | `LandingSectionHeaderParity` | Creer un `SectionHeader` reutilisable et migrer methode, projets, case study et contact. | Une seule structure d'en-tete, variantes d'alignement explicites, tests bUnit et rendu responsive stable. |
-| 2 | `LandingHeaderFooterParity` | Completer les ancres du header et transformer le footer minimal en navigation utile. | Toutes les ancres pointent vers un id reel, focus visible, CTA contact et footer responsive. |
-| 3 | `LandingExpertiseMethodParity` | Ajouter les six skill cards utiles et enrichir la timeline methode. | Contenu data-driven, composant `SkillCard`, hierarchie proche de `64:2`, sans repetition editoriale. |
-| 4 | `LandingProjectsCaseStudyParity` | Creer les project cards riches, les filtres accessibles et completer la preuve projet. | Filtrage clavier, cartes reutilisables, tags/role/stack/impact, case study enrichi et bandeau de materialite. |
-| 5 | `LandingContactFormParity` | Recomposer la guidance et ajouter un formulaire accessible. | Validation textuelle, etats erreur/succes et strategie d'envoi documentee sans exposer de secret client. |
-| 6 | `LandingConceptDemoParity` | Completer les six tabs, isoler Modules et rapprocher le data explorer de `90:377`. | Six etapes coherentes, relation tab/carte conservee, section Modules distincte et demo responsive. |
-| 7 | `LandingVisualParityQa` | Audit visuel, responsive, accessibilite, performance et nettoyage CSS. | Tests Playwright desktop/tablette/mobile, console propre, contraste et reduced motion verifies. |
+| 1 | `LandingHeroMotionParity` | Relier les six etats du storyboard `2:6` a la scene du hero. | Grille, message, assemblage, convergence, switch et takeover visibles ; controles, responsive et reduced motion conserves. |
+| 2 | `LandingSectionHeaderParity` | Creer un `SectionHeader` reutilisable et migrer methode, projets, case study et contact. | Une seule structure d'en-tete, variantes d'alignement explicites, tests bUnit et rendu responsive stable. |
+| 3 | `LandingHeaderFooterParity` | Completer les ancres du header et transformer le footer minimal en navigation utile. | Toutes les ancres pointent vers un id reel, focus visible, CTA contact et footer responsive. |
+| 4 | `LandingExpertiseMethodParity` | Ajouter les six skill cards utiles et enrichir la timeline methode. | Contenu data-driven, composant `SkillCard`, hierarchie proche de `64:2`, sans repetition editoriale. |
+| 5 | `LandingProjectsCaseStudyParity` | Creer les project cards riches, les filtres accessibles et completer la preuve projet. | Filtrage clavier, cartes reutilisables, tags/role/stack/impact, case study enrichi et bandeau de materialite. |
+| 6 | `LandingContactFormParity` | Recomposer la guidance et ajouter un formulaire accessible. | Validation textuelle, etats erreur/succes et strategie d'envoi documentee sans exposer de secret client. |
+| 7 | `LandingConceptDemoParity` | Completer les six tabs, isoler Modules et rapprocher le data explorer de `90:377`. | Six etapes coherentes, relation tab/carte conservee, section Modules distincte et demo responsive. |
+| 8 | `LandingVisualParityQa` | Audit visuel, responsive, accessibilite, performance et nettoyage CSS. | Tests Playwright desktop/tablette/mobile, console propre, contraste et reduced motion verifies. |
 
 La premiere branche est volontairement structurelle : `SectionHeader` supprime une
 duplication deja visible dans quatre sections et fournit la fondation attendue par les

@@ -12,7 +12,8 @@
         background 180ms ease,
         border-color 180ms ease,
         box-shadow 180ms ease,
-        transform 180ms ease;
+        opacity 420ms ease,
+        transform 420ms ease;
 }
 
 .concept-demo-card__marker {

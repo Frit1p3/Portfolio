@@ -231,6 +231,65 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ConceptHeroSection_applies_selected_motion_state_to_the_scene()
+    {
+        var cut = Render<ConceptHeroSection>();
+
+        var section = cut.Find("section.concept-hero");
+        var motionTabs = cut.FindAll(".motion-sequence__tab");
+
+        Assert.Contains("concept-hero--motion-message-reveal", section.ClassList);
+        Assert.Equal("message-reveal", section.GetAttribute("data-motion-state"));
+        Assert.NotNull(cut.Find(".concept-hero__opening-signal"));
+        Assert.NotNull(cut.Find(".concept-hero__globe"));
+        Assert.Equal(3, cut.FindAll(".concept-hero__stack-layer").Count);
+
+        motionTabs[0].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-grid-wake", section.ClassList);
+        Assert.Equal("grid-wake", section.GetAttribute("data-motion-state"));
+
+        cut.FindAll(".motion-sequence__tab")[1].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-message-reveal", section.ClassList);
+        Assert.Equal("message-reveal", section.GetAttribute("data-motion-state"));
+
+        cut.FindAll(".motion-sequence__tab")[2].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-system-assembly", section.ClassList);
+        Assert.Equal("system-assembly", section.GetAttribute("data-motion-state"));
+        Assert.Equal("true", cut.FindAll(".concept-tab")[2].GetAttribute("aria-selected"));
+
+        cut.FindAll(".motion-sequence__tab")[3].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-data-convergence", section.ClassList);
+        Assert.Equal("data-convergence", section.GetAttribute("data-motion-state"));
+        Assert.NotNull(cut.Find(".concept-hero__convergence"));
+        Assert.Equal(4, cut.FindAll(".concept-hero__flow-path").Count);
+        Assert.Equal("true", cut.FindAll(".concept-tab")[2].GetAttribute("aria-selected"));
+
+        cut.FindAll(".motion-sequence__tab")[4].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-concept-switch", section.ClassList);
+        Assert.Equal("concept-switch", section.GetAttribute("data-motion-state"));
+        Assert.Equal("true", cut.FindAll(".concept-tab")[2].GetAttribute("aria-selected"));
+        Assert.Contains("concept-demo-card--highlighted", cut.FindAll(".concept-demo-card")[2].ClassList);
+
+        cut.FindAll(".motion-sequence__tab")[5].Click();
+        section = cut.Find("section.concept-hero");
+
+        Assert.Contains("concept-hero--motion-demo-takeover", section.ClassList);
+        Assert.Equal("demo-takeover", section.GetAttribute("data-motion-state"));
+        Assert.Equal("true", cut.FindAll(".concept-tab")[3].GetAttribute("aria-selected"));
+        Assert.NotNull(cut.Find(".product-demo-panel"));
+    }
+
+    [Fact]
     public void LandingMotionSequence_updates_active_motion_state()
     {
         var cut = Render<LandingMotionSequence>();
