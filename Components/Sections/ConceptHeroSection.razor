@@ -1,6 +1,9 @@
 @using Portfolio.Content
 
-<section class="concept-hero" aria-labelledby="concept-hero-title">
+<section
+    class="@MotionClassName"
+    data-motion-state="@activeMotionStateKey"
+    aria-labelledby="concept-hero-title">
     <div class="concept-hero__inner">
         <div class="concept-hero__content">
             <Badge Tone="accent">@LandingContent.HeroEyebrow</Badge>
@@ -16,6 +19,26 @@
         </div>
 
         <div class="concept-hero__scene" aria-label="Scene conceptuelle des flux métier">
+            <div class="concept-hero__opening-signal" aria-hidden="true">
+                <span class="concept-hero__scan-ring"></span>
+                <span class="concept-hero__scan-beam"></span>
+                <span class="concept-hero__scan-core"></span>
+                <span class="concept-hero__scan-sweep"></span>
+                <span class="concept-hero__scan-spark concept-hero__scan-spark--one"></span>
+                <span class="concept-hero__scan-spark concept-hero__scan-spark--two"></span>
+                <span class="concept-hero__scan-spark concept-hero__scan-spark--three"></span>
+                <span class="concept-hero__globe">
+                    <span class="concept-hero__globe-meridian"></span>
+                    <span class="concept-hero__globe-ring"></span>
+                </span>
+                <span class="concept-hero__convergence">
+                    <span class="concept-hero__flow-path concept-hero__flow-path--erp"></span>
+                    <span class="concept-hero__flow-path concept-hero__flow-path--atelier"></span>
+                    <span class="concept-hero__flow-path concept-hero__flow-path--bi"></span>
+                    <span class="concept-hero__flow-path concept-hero__flow-path--ged"></span>
+                </span>
+            </div>
+
             <div class="concept-hero__sources" aria-label="Sources métier connectées">
                 @foreach (var source in LandingContent.ConceptSources)
                 {
@@ -26,7 +49,9 @@
             <div class="concept-hero__stack" aria-label="Stack de conception">
                 @foreach (var layer in LandingContent.ConceptStack)
                 {
-                    <span>@layer</span>
+                    <span class="concept-hero__stack-layer">
+                        <span class="concept-hero__stack-label">@layer</span>
+                    </span>
                 }
             </div>
 
@@ -55,7 +80,7 @@
             </div>
         </div>
 
-        <LandingMotionSequence />
+        <LandingMotionSequence ActiveStateChanged="SelectMotionState" />
 
         <div class="concept-hero__kpis" aria-label="Preuves métier">
             @foreach (var kpi in LandingContent.HeroKpis)
@@ -77,8 +102,26 @@
     private string activeStep = LandingContent.ConceptSteps.FirstOrDefault(step => step.IsActive)?.Step
         ?? LandingContent.ConceptSteps.First().Step;
 
+    private string activeMotionStateKey = LandingContent.LandingMotionStates.FirstOrDefault(state => state.IsActive)?.Key
+        ?? LandingContent.LandingMotionStates.First().Key;
+
+    private string MotionClassName => $"concept-hero concept-hero--motion-{activeMotionStateKey}";
+
     private void SelectStep(string step)
     {
         activeStep = step;
+    }
+
+    private void SelectMotionState(string stateKey)
+    {
+        activeMotionStateKey = stateKey;
+        activeStep = stateKey switch
+        {
+            "grid-wake" => "01",
+            "message-reveal" => "02",
+            "system-assembly" or "data-convergence" or "concept-switch" => "03",
+            "demo-takeover" => "04",
+            _ => activeStep
+        };
     }
 }

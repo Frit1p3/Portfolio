@@ -49,10 +49,13 @@
     private const string PanelId = "motion-sequence-panel";
     private const int AutoPlayDelayInMilliseconds = 4200;
 
+    [Parameter]
+    public EventCallback<string> ActiveStateChanged { get; set; }
+
     private void SelectState(string key)
     {
         StopAutoPlayForManualInteraction();
-        activeStateKey = key;
+        SetActiveState(key);
     }
 
     private void SelectFirst(bool shouldFocus = false)
@@ -225,11 +228,21 @@
 
     private void SelectIndex(int index, bool shouldFocus = false)
     {
-        activeStateKey = LandingContent.LandingMotionStates[index].Key;
+        SetActiveState(LandingContent.LandingMotionStates[index].Key);
 
         if (shouldFocus)
         {
             pendingFocusIndex = index;
+        }
+    }
+
+    private void SetActiveState(string key)
+    {
+        activeStateKey = key;
+
+        if (ActiveStateChanged.HasDelegate)
+        {
+            _ = ActiveStateChanged.InvokeAsync(key);
         }
     }
 
