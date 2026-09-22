@@ -87,7 +87,7 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Badge | `Badge` | `present` | Conserver les tons existants. |
 | KPI Card / Hero Compact | `HeroKpiCard` | `present` | Couverture suffisante pour la landing actuelle. |
 | Project Card / Source Compact | `SourceCompactCard` | `present` | Utilise dans la demonstration produit. |
-| Section Header | aucun composant partage | `absent` | Priorite structurelle : les sections dupliquent actuellement eyebrow, titre et introduction. |
+| Section Header | `SectionHeader` | `present` | Structure partagee, largeurs explicites, alignement start/center et contenu additionnel optionnel. |
 | Header / Navigation | `HeaderNavigation` | `partiel` | Completer les ancres, le CTA et le comportement responsive. |
 | Footer / Layout Wide | `SiteFooter` | `partiel` | Passer du footer minimal a une navigation de fin de page utile. |
 | Link | liens HTML et liens internes a `Button` | `partiel` | Formaliser seulement si plusieurs variantes de lien deviennent necessaires. |
@@ -137,6 +137,7 @@ branches expertise, projets et contact.
 | `Project Card / Source Compact` | `SourceCompactCard` | `Components/UI` | Carte compacte de source connectee dans la demo produit. |
 | `Timeline / Decision Compact` | `DecisionTimelineCard` | `Components/UI` | Lecture decisionnelle courte associee a une metrique. |
 | `KPI Card / Hero Compact` | `HeroKpiCard` | `Components/UI` | Preuve chiffree compacte dans le hero ou les sections de preuve. |
+| `Section Header` | `SectionHeader` | `Components/UI` | En-tete reutilisable avec eyebrow, titre identifie, introduction et contenu optionnel. |
 | `Concept Source Chip` | `ConceptSourceChip` | `Components/UI` | Source de donnees dans la scene conceptuelle sombre. |
 | `Concept Tab` | `ConceptTab` | `Components/UI` | Repere narratif de la sequence conceptuelle. |
 | `Concept Demo Card` | `ConceptDemoCard` | `Components/UI` | Carte pedagogique sous la scene conceptuelle. |

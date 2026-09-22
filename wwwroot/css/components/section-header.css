@@ -1,0 +1,41 @@
+.section-header {
+    display: grid;
+    width: 100%;
+    max-width: 780px;
+    gap: var(--space-16);
+}
+
+.section-header--narrow {
+    max-width: 760px;
+}
+
+.section-header--wide {
+    max-width: 800px;
+}
+
+.section-header--fluid {
+    max-width: none;
+}
+
+.section-header--center {
+    justify-items: center;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.section-header__eyebrow {
+    color: var(--color-accent);
+    font-size: var(--text-small);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.section-header h2 {
+    color: var(--color-text-primary);
+    font-size: var(--text-h2);
+}
+
+.section-header > p {
+    color: var(--color-text-secondary);
+    font-size: var(--text-large);
+}

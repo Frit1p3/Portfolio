@@ -6,6 +6,7 @@
 @import url("layout/shell.css");
 @import url("components/button.css");
 @import url("components/badge.css");
+@import url("components/section-header.css");
 @import url("components/source-compact-card.css");
 @import url("components/decision-timeline-card.css");
 @import url("components/hero-kpi-card.css");

@@ -8,27 +8,8 @@
     padding: 0 0 var(--space-96);
 }
 
-.contact-section__content {
-    display: grid;
-    gap: var(--space-16);
-}
-
-.contact-section__eyebrow {
-    color: var(--color-accent);
-    font-size: var(--text-small);
-    font-weight: 800;
-    text-transform: uppercase;
-}
-
-.contact-section__content h2 {
-    color: var(--color-text-primary);
-    font-size: var(--text-h2);
-}
-
-.contact-section__content p {
+.contact-section .section-header > p {
     max-width: 680px;
-    color: var(--color-text-secondary);
-    font-size: var(--text-large);
 }
 
 .contact-section__actions {

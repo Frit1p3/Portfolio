@@ -6,29 +6,6 @@
     padding: 0 0 var(--space-96);
 }
 
-.case-study-section__heading {
-    display: grid;
-    max-width: 800px;
-    gap: var(--space-16);
-}
-
-.case-study-section__eyebrow {
-    color: var(--color-accent);
-    font-size: var(--text-small);
-    font-weight: 800;
-    text-transform: uppercase;
-}
-
-.case-study-section__heading h2 {
-    color: var(--color-text-primary);
-    font-size: var(--text-h2);
-}
-
-.case-study-section__heading p {
-    color: var(--color-text-secondary);
-    font-size: var(--text-large);
-}
-
 .case-study-section__layout {
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
