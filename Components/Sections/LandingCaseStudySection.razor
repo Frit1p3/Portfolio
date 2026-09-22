@@ -1,11 +1,12 @@
 @using Portfolio.Content
 
 <section class="case-study-section" aria-labelledby="case-study-section-title">
-    <div class="case-study-section__heading">
-        <span class="case-study-section__eyebrow">@LandingContent.CaseStudyEyebrow</span>
-        <h2 id="case-study-section-title">@LandingContent.CaseStudyTitle</h2>
-        <p>@LandingContent.CaseStudyIntro</p>
-    </div>
+    <SectionHeader
+        Eyebrow="@LandingContent.CaseStudyEyebrow"
+        Title="@LandingContent.CaseStudyTitle"
+        TitleId="case-study-section-title"
+        Description="@LandingContent.CaseStudyIntro"
+        Width="wide" />
 
     <div class="case-study-section__layout">
         <article class="case-study-section__story" aria-label="Synthese de la preuve projet">

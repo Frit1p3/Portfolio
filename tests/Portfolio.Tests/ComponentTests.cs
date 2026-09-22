@@ -45,6 +45,28 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void SectionHeader_renders_content_variants_and_optional_child_content()
+    {
+        var cut = Render<SectionHeader>(parameters => parameters
+            .Add(component => component.Eyebrow, "Expertise")
+            .Add(component => component.Title, "Concevoir pour décider")
+            .Add(component => component.TitleId, "expertise-title")
+            .Add(component => component.Description, "Une introduction métier.")
+            .Add(component => component.Width, "wide")
+            .Add(component => component.Alignment, "center")
+            .AddChildContent("<div class=\"section-header-action\">Action</div>"));
+
+        var header = cut.Find(".section-header");
+
+        Assert.Contains("section-header--wide", header.ClassList);
+        Assert.Contains("section-header--center", header.ClassList);
+        Assert.Equal("expertise-title", cut.Find("h2").Id);
+        Assert.Equal("Expertise", cut.Find(".section-header__eyebrow").TextContent);
+        Assert.Contains("Une introduction métier.", header.TextContent);
+        Assert.Equal("Action", cut.Find(".section-header-action").TextContent);
+    }
+
+    [Fact]
     public void HeaderNavigation_exposes_main_navigation_landmarks()
     {
         var cut = Render<HeaderNavigation>();
@@ -540,6 +562,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("approach", section.Id);
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("section-header--narrow", cut.Find(".section-header").ClassList);
         Assert.Contains("De la complexité terrain", section.TextContent);
         Assert.Contains("écrans testables", section.TextContent);
         Assert.Equal(3, cut.FindAll(".method-section__step").Count);
@@ -556,6 +579,7 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.projects-section");
 
         Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("section-header--default", cut.Find(".section-header").ClassList);
         Assert.Contains("Des produits front-end", section.TextContent);
         Assert.Contains("usages industriels", section.TextContent);
         Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
@@ -572,6 +596,7 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.case-study-section");
 
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("section-header--wide", cut.Find(".section-header").ClassList);
         Assert.Contains("Rassembler les signaux atelier", section.TextContent);
         Assert.Contains("équipes terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
@@ -591,6 +616,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("contact", section.Id);
         Assert.Equal("contact-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("section-header--fluid", cut.Find(".section-header").ClassList);
         Assert.Contains("Passons d'un besoin métier", section.TextContent);
         Assert.Contains("Demarrer un echange", link.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", link.GetAttribute("href"));

@@ -1,11 +1,12 @@
 @using Portfolio.Content
 
 <section class="method-section" id="approach" aria-labelledby="method-section-title">
-    <div class="method-section__heading">
-        <span class="method-section__eyebrow">@LandingContent.MethodEyebrow</span>
-        <h2 id="method-section-title">@LandingContent.MethodTitle</h2>
-        <p>@LandingContent.MethodIntro</p>
-    </div>
+    <SectionHeader
+        Eyebrow="@LandingContent.MethodEyebrow"
+        Title="@LandingContent.MethodTitle"
+        TitleId="method-section-title"
+        Description="@LandingContent.MethodIntro"
+        Width="narrow" />
 
     <div class="method-section__steps" aria-label="Etapes de methode">
         @foreach (var step in LandingContent.MethodSteps)
