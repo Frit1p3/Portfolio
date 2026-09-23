@@ -7,6 +7,7 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
     {
+        new NavigationLink("Expertise", "#expertise"),
         new NavigationLink("Démo", "#proof"),
         new NavigationLink("Méthode", "#approach"),
         new NavigationLink("Projets", "#projects"),
@@ -178,6 +179,39 @@ public static class LandingContent
             "success")
     };
 
+    public const string ExpertiseEyebrow = "Domaines d'intervention";
+
+    public const string ExpertiseTitle =
+        "UI, front-end et data réunis autour des usages métier";
+
+    public const string ExpertiseIntro =
+        "Une expertise pensée pour des équipes qui doivent lire vite, agir juste et transmettre des décisions fiables";
+
+    public static readonly IReadOnlyList<ExpertiseSkill> ExpertiseSkills = new[]
+    {
+        new ExpertiseSkill(
+            "UX",
+            "Conception métier",
+            "UX métier",
+            "Transformer une contrainte opérationnelle en parcours clair, mesurable et testable",
+            new[] { "Audit", "Parcours", "Figma" },
+            "accent"),
+        new ExpertiseSkill(
+            ".NET",
+            "Front-end durable",
+            "Front-End .NET",
+            "Concevoir des interfaces Blazor robustes, maintenables et alignées avec le design system",
+            new[] { "Blazor", "Composants", "CSS" },
+            "success"),
+        new ExpertiseSkill(
+            "KPI",
+            "Pilotage par la donnée",
+            "Data & KPI",
+            "Rendre les indicateurs lisibles pour suivre l'activité, comprendre les écarts et arbitrer",
+            new[] { "Dashboards", "KPI", "Data" },
+            "warning")
+    };
+
     public const string MethodEyebrow = "Méthode";
 
     public const string MethodTitle =
@@ -190,18 +224,25 @@ public static class LandingContent
     {
         new MethodStep(
             "01",
-            "Cadrer",
-            "Identifier les sources, les irritants terrain et les arbitrages attendus avant de dessiner l'interface",
+            "Cadrage",
+            "Comprendre les contraintes",
+            "Identifier les sources, les irritants terrain et les arbitrages attendus",
+            "Flux et priorités alignés",
             "muted"),
         new MethodStep(
             "02",
-            "Structurer",
-            "Organiser parcours, hiérarchie visuelle et composants réutilisables autour des usages critiques",
-            "accent"),
+            "Conception",
+            "Structurer les écrans",
+            "Hiérarchiser les parcours, tester les hypothèses et documenter les composants",
+            "Prototype testable",
+            "accent",
+            true),
         new MethodStep(
             "03",
-            "Livrer",
-            "Valider le responsive, l'accessibilité et les tests pour garder une base claire et évolutive",
+            "Industrialisation",
+            "Passer au code",
+            "Assembler Blazor, CSS Vanilla, accessibilité et tests dans une base maintenable",
+            "Composants documentés",
             "success")
     };
 
@@ -303,7 +344,22 @@ public sealed record DecisionMetric(string Step, string Meta, string Title, stri
 
 public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);
 
-public sealed record MethodStep(string Step, string Title, string Description, string Tone);
+public sealed record ExpertiseSkill(
+    string Code,
+    string Category,
+    string Title,
+    string Description,
+    IReadOnlyList<string> Tags,
+    string Tone);
+
+public sealed record MethodStep(
+    string Step,
+    string Meta,
+    string Title,
+    string Description,
+    string Evidence,
+    string Tone,
+    bool IsHighlighted = false);
 
 public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
 

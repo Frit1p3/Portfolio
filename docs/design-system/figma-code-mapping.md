@@ -69,8 +69,8 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Header complet | `HeaderNavigation` | `present` | Marque, lien d'evitement, navigation vers les sections disponibles et CTA Contact sont couverts. |
 | Hero clair classique | `ConceptHeroSection` | `ignore` | Divergence intentionnelle : la landing publiee retient le hero conceptuel de `90:377`. |
 | Panneau de KPI hero | `HeroKpiCard` dans `ConceptHeroSection` | `partiel` | Trois KPI contextualises existent, sans reprendre le panneau lateral clair de `64:2`. |
-| Expertise en six skill cards | aucune carte reutilisable | `absent` | Les competences sont seulement exprimees indirectement par la methode et les cas d'usage. |
-| Methode / timeline | `LandingMethodSection` | `partiel` | Trois etapes sont presentes ; la composition et les preuves associees restent plus simples que Figma. |
+| Expertise en trois skill cards | `LandingExpertiseSection`, `SkillCard` | `present` | UX metier, Front-End .NET et Data & KPI sont pilotes par `LandingContent`, avec tags et variantes de ton. |
+| Methode / timeline | `LandingMethodSection` | `present` | Trois etapes enrichies avec meta, preuve de sortie, fil conducteur et mise en avant de la conception. |
 | Filtres de projets | aucun equivalent | `absent` | Aucun controle de filtrage ni etat actif pour les familles de projets. |
 | Project cards riches | cartes internes de `LandingProjectsSection` | `partiel` | Les cas d'usage existent, sans visuel, role, stack, statut et action secondaire de la carte Figma. |
 | Case Study Block / Homepage Proof | `LandingCaseStudySection` | `partiel` | Recit, points et metriques presents ; tags, mockup, comparaison et hierarchie Figma manquent. |
@@ -91,9 +91,9 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Header / Navigation | `HeaderNavigation` | `present` | Ancres reelles, CTA Contact, lien d'evitement et navigation mobile en grille. |
 | Footer / Layout Wide | `SiteFooter` | `present` | Composition en colonnes responsive avec navigation et zone de contact. |
 | Link | liens HTML et liens internes a `Button` | `partiel` | Formaliser seulement si plusieurs variantes de lien deviennent necessaires. |
-| Skill Card | aucun equivalent | `absent` | A creer pour la section expertise. |
+| Skill Card | `SkillCard` | `present` | Code, categorie, titre, description, tags et ton sont configurables. |
 | Project Card | cartes internes de `LandingProjectsSection` | `partiel` | Extraire une carte reutilisable lors de la parite projets. |
-| Timeline | `LandingMethodSection`, `DecisionTimelineCard` | `partiel` | Deux usages specialises existent, sans composant timeline generique. |
+| Timeline | `LandingMethodSection`, `DecisionTimelineCard` | `present` | Les deux timelines specialisees couvrent leurs usages sans abstraction generique prematuree. |
 | Tabs | `ConceptTab`, `LandingMotionTabs` | `partiel` | Les tabs conceptuels sont accessibles ; les filtres projets restent absents. |
 | Accordion | aucun equivalent | `ignore` | Aucun parcours actuel ne justifie encore un accordion. |
 | Alert / Status | aucun equivalent | `absent` | A introduire avec le bandeau de materialite, pas comme composant isole. |
@@ -111,7 +111,7 @@ conserver la landing publiable et ses ancres existantes.
 | 1 | `LandingHeroMotionParity` | Relier les six etats du storyboard `2:6` a la scene du hero. | Grille, message, assemblage, convergence, switch et takeover visibles ; controles, responsive et reduced motion conserves. |
 | 2 | `LandingSectionHeaderParity` | Creer un `SectionHeader` reutilisable et migrer methode, projets, case study et contact. | Une seule structure d'en-tete, variantes d'alignement explicites, tests bUnit et rendu responsive stable. |
 | 3 | `LandingHeaderFooterParity` | Completer les ancres du header et transformer le footer minimal en navigation utile. | Toutes les ancres pointent vers un id reel, focus visible, CTA contact et footer responsive. |
-| 4 | `LandingExpertiseMethodParity` | Ajouter les six skill cards utiles et enrichir la timeline methode. | Contenu data-driven, composant `SkillCard`, hierarchie proche de `64:2`, sans repetition editoriale. |
+| 4 | `LandingExpertiseMethodParity` | Ajouter les trois skill cards et enrichir la timeline methode observees dans `64:2`. | Contenu data-driven, composant `SkillCard`, timeline en trois etapes, navigation et responsive couverts. |
 | 5 | `LandingProjectsCaseStudyParity` | Creer les project cards riches, les filtres accessibles et completer la preuve projet. | Filtrage clavier, cartes reutilisables, tags/role/stack/impact, case study enrichi et bandeau de materialite. |
 | 6 | `LandingContactFormParity` | Recomposer la guidance et ajouter un formulaire accessible. | Validation textuelle, etats erreur/succes et strategie d'envoi documentee sans exposer de secret client. |
 | 7 | `LandingConceptDemoParity` | Completer les six tabs, isoler Modules et rapprocher le data explorer de `90:377`. | Six etapes coherentes, relation tab/carte conservee, section Modules distincte et demo responsive. |
@@ -138,6 +138,7 @@ branches expertise, projets et contact.
 | `Timeline / Decision Compact` | `DecisionTimelineCard` | `Components/UI` | Lecture decisionnelle courte associee a une metrique. |
 | `KPI Card / Hero Compact` | `HeroKpiCard` | `Components/UI` | Preuve chiffree compacte dans le hero ou les sections de preuve. |
 | `Section Header` | `SectionHeader` | `Components/UI` | En-tete reutilisable avec eyebrow, titre identifie, introduction et contenu optionnel. |
+| `Skill Card` | `SkillCard` | `Components/UI` | Domaine d'expertise avec categorie, description et tags associes. |
 | `Header / Navigation` | `HeaderNavigation` | `Components/Layout` | Navigation principale, lien d'evitement et CTA de contact. |
 | `Footer / Layout Wide` | `SiteFooter` | `Components/Layout` | Navigation de fin de page, disponibilite et acces direct au contact. |
 | `Concept Source Chip` | `ConceptSourceChip` | `Components/UI` | Source de donnees dans la scene conceptuelle sombre. |

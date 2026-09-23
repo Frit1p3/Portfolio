@@ -1,23 +1,38 @@
 @using Portfolio.Content
 
 <section class="method-section" id="approach" aria-labelledby="method-section-title">
-    <SectionHeader
-        Eyebrow="@LandingContent.MethodEyebrow"
-        Title="@LandingContent.MethodTitle"
-        TitleId="method-section-title"
-        Description="@LandingContent.MethodIntro"
-        Width="narrow" />
+    <div class="method-section__inner">
+        <SectionHeader
+            Eyebrow="@LandingContent.MethodEyebrow"
+            Title="@LandingContent.MethodTitle"
+            TitleId="method-section-title"
+            Description="@LandingContent.MethodIntro"
+            Width="narrow"
+            Alignment="center" />
 
-    <div class="method-section__steps" aria-label="Etapes de methode">
-        @foreach (var step in LandingContent.MethodSteps)
-        {
-            <article class="method-section__step method-section__step--@step.Tone" aria-label="@($"{step.Step} - {step.Title}")">
-                <span class="method-section__index">@step.Step</span>
-                <div>
-                    <h3>@step.Title</h3>
-                    <p>@step.Description</p>
-                </div>
-            </article>
-        }
+        <div class="method-section__steps" aria-label="Etapes de méthode">
+            @foreach (var step in LandingContent.MethodSteps)
+            {
+                <article
+                    class="@GetStepClass(step)"
+                    aria-label="@($"{step.Step} - {step.Meta} - {step.Title}")"
+                    aria-current="@(step.IsHighlighted ? "step" : null)">
+                    <div class="method-section__step-header">
+                        <span class="method-section__index">@step.Step</span>
+                        <span class="method-section__meta">@step.Meta</span>
+                    </div>
+                    <div class="method-section__step-content">
+                        <h3>@step.Title</h3>
+                        <p>@step.Description</p>
+                    </div>
+                    <span class="method-section__evidence">@step.Evidence</span>
+                </article>
+            }
+        </div>
     </div>
 </section>
+
+@code {
+    private static string GetStepClass(MethodStep step) =>
+        $"method-section__step method-section__step--{step.Tone}{(step.IsHighlighted ? " method-section__step--highlighted" : string.Empty)}";
+}
