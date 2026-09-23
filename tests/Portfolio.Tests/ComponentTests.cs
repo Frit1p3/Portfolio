@@ -86,6 +86,29 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void ProjectCard_renders_project_evidence_and_action()
+    {
+        var cut = Render<ProjectCard>(parameters => parameters
+            .Add(component => component.Step, "01")
+            .Add(component => component.Category, "Opérations")
+            .Add(component => component.Title, "Pilotage atelier")
+            .Add(component => component.Description, "Une vue métier actionnable.")
+            .Add(component => component.Role, "Conception UX et front-end")
+            .Add(component => component.Stack, new[] { "Blazor", "KPI" })
+            .Add(component => component.Impact, "Décisions plus rapides")
+            .Add(component => component.Status, "Prototype validé")
+            .Add(component => component.ActionLabel, "Voir la preuve")
+            .Add(component => component.ActionHref, "#case-study")
+            .Add(component => component.Tone, "success"));
+
+        Assert.Contains("project-card--success", cut.Find("article").ClassList);
+        Assert.Equal(2, cut.FindAll(".project-card__stack li").Count);
+        Assert.Contains("Conception UX", cut.Markup);
+        Assert.Contains("Décisions plus rapides", cut.Markup);
+        Assert.Equal("#case-study", cut.Find(".project-card__link").GetAttribute("href"));
+    }
+
+    [Fact]
     public void HeaderNavigation_exposes_main_navigation_landmarks()
     {
         var cut = Render<HeaderNavigation>();
@@ -632,9 +655,16 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("section-header--default", cut.Find(".section-header").ClassList);
         Assert.Contains("Des produits front-end", section.TextContent);
         Assert.Contains("usages industriels", section.TextContent);
-        Assert.Equal(3, cut.FindAll(".projects-section__card").Count);
+        Assert.Equal(4, cut.FindAll(".projects-section__filter").Count);
+        Assert.Equal(3, cut.FindAll(".project-card").Count);
         Assert.Contains("Pilotage atelier", section.TextContent);
         Assert.Contains("Flux ERP", section.TextContent);
+        Assert.Contains("Reporting décisionnel", section.TextContent);
+
+        cut.Find("[data-filter='data']").Click();
+
+        Assert.Equal("true", cut.Find("[data-filter='data']").GetAttribute("aria-pressed"));
+        Assert.Single(cut.FindAll(".project-card"));
         Assert.Contains("Reporting décisionnel", section.TextContent);
     }
 
@@ -652,6 +682,10 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("équipes terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
+        Assert.Equal(2, cut.FindAll(".case-study-section__comparison-item").Count);
+        Assert.Contains("Cas anonymisé", section.TextContent);
+        Assert.Contains("Lecture fragmentée", section.TextContent);
+        Assert.Contains("Décision contextualisée", section.TextContent);
         Assert.Contains("Problème", section.TextContent);
         Assert.Contains("Réponse UX", section.TextContent);
         Assert.Contains("Livrable", section.TextContent);

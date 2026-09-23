@@ -71,10 +71,10 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Panneau de KPI hero | `HeroKpiCard` dans `ConceptHeroSection` | `partiel` | Trois KPI contextualises existent, sans reprendre le panneau lateral clair de `64:2`. |
 | Expertise en trois skill cards | `LandingExpertiseSection`, `SkillCard` | `present` | UX metier, Front-End .NET et Data & KPI sont pilotes par `LandingContent`, avec tags et variantes de ton. |
 | Methode / timeline | `LandingMethodSection` | `present` | Trois etapes enrichies avec meta, preuve de sortie, fil conducteur et mise en avant de la conception. |
-| Filtres de projets | aucun equivalent | `absent` | Aucun controle de filtrage ni etat actif pour les familles de projets. |
-| Project cards riches | cartes internes de `LandingProjectsSection` | `partiel` | Les cas d'usage existent, sans visuel, role, stack, statut et action secondaire de la carte Figma. |
-| Case Study Block / Homepage Proof | `LandingCaseStudySection` | `partiel` | Recit, points et metriques presents ; tags, mockup, comparaison et hierarchie Figma manquent. |
-| Alert / Status de materialite | aucun equivalent | `absent` | Le bandeau de contexte et son composant generique ne sont pas implementes. |
+| Filtres de projets | `LandingProjectsSection` | `present` | Controle segmente accessible avec etat actif et annonce du nombre de resultats. |
+| Project cards riches | `ProjectCard` | `present` | Categorie, role, stack, impact, statut et action secondaire sont pilotes par les donnees. |
+| Case Study Block / Homepage Proof | `LandingCaseStudySection` | `present` | Recit, points, apercu dashboard, metriques et comparaison avant/apres composent la preuve. |
+| Alert / Status de materialite | bandeau de `LandingCaseStudySection` | `present` | Le contexte d'anonymisation est explicite avant la preuve projet. |
 | Contact Panel / Guidance | highlights de `LandingContactSection` | `partiel` | Les modes de collaboration couvrent l'intention, mais pas le panneau de recommandations structure. |
 | Contact Form / Homepage Wide | aucun equivalent | `absent` | Pas de champs, validation, etats erreur/succes ni strategie d'envoi. |
 | Footer / Layout Wide | `SiteFooter` | `present` | Identite, navigation, disponibilite, contact, copyright et retour en haut sont couverts. |
@@ -92,14 +92,14 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Footer / Layout Wide | `SiteFooter` | `present` | Composition en colonnes responsive avec navigation et zone de contact. |
 | Link | liens HTML et liens internes a `Button` | `partiel` | Formaliser seulement si plusieurs variantes de lien deviennent necessaires. |
 | Skill Card | `SkillCard` | `present` | Code, categorie, titre, description, tags et ton sont configurables. |
-| Project Card | cartes internes de `LandingProjectsSection` | `partiel` | Extraire une carte reutilisable lors de la parite projets. |
+| Project Card | `ProjectCard` | `present` | Carte reutilisable pilotee par donnees avec preuves et action contextuelle. |
 | Timeline | `LandingMethodSection`, `DecisionTimelineCard` | `present` | Les deux timelines specialisees couvrent leurs usages sans abstraction generique prematuree. |
-| Tabs | `ConceptTab`, `LandingMotionTabs` | `partiel` | Les tabs conceptuels sont accessibles ; les filtres projets restent absents. |
+| Tabs | `ConceptTab`, `LandingMotionTabs`, filtres de `LandingProjectsSection` | `present` | Les vues conceptuelles et le filtrage projets exposent leurs etats actifs. |
 | Accordion | aucun equivalent | `ignore` | Aucun parcours actuel ne justifie encore un accordion. |
-| Alert / Status | aucun equivalent | `absent` | A introduire avec le bandeau de materialite, pas comme composant isole. |
+| Alert / Status | bandeau de materialite du case study | `present` | Composition locale adaptee au contexte unique d'anonymisation. |
 | Contact Panel | highlights de `LandingContactSection` | `partiel` | Recomposer avec la guidance Figma. |
 | Contact Form | aucun equivalent | `absent` | Necessite validation accessible et decision sur le transport du message. |
-| Case Study Block | `LandingCaseStudySection` | `partiel` | Extraire les sous-composants seulement si une seconde etude de cas les reutilise. |
+| Case Study Block | `LandingCaseStudySection` | `present` | Les sous-composants restent locaux tant qu'une seconde etude de cas ne justifie pas leur extraction. |
 
 ## Ordre d'implementation issu de l'inventaire
 

@@ -254,25 +254,54 @@ public static class LandingContent
     public const string ProjectsIntro =
         "Trois familles de produits pour connecter opérations, données et pilotage sans perdre le contexte métier";
 
+    public static readonly IReadOnlyList<ProjectFilter> ProjectFilters = new[]
+    {
+        new ProjectFilter("all", "Tous"),
+        new ProjectFilter("operations", "Opérations"),
+        new ProjectFilter("integration", "Intégration"),
+        new ProjectFilter("data", "Data & KPI")
+    };
+
     public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
     {
         new ProjectUseCase(
             "01",
+            "operations",
+            "Opérations",
             "Pilotage atelier",
             "Suivre rendement, incidents, alertes qualité et temps réels pour prioriser l'action terrain",
-            "KPI temps réel",
+            "Conception UX et front-end",
+            new[] { "Blazor", "KPI", "Temps réel" },
+            "Une lecture priorisée des écarts et des actions attendues",
+            "Prototype validé",
+            "Voir la preuve",
+            "#case-study",
             "success"),
         new ProjectUseCase(
             "02",
+            "integration",
+            "Intégration",
             "Flux ERP / opérations",
             "Rendre commandes, stocks, documents et statuts synchronisés et lisibles dans une même interface",
-            "Flux synchronisés",
+            "Architecture d'interface",
+            new[] { "ERP", "GED", "API" },
+            "Moins de ruptures entre consultation, contrôle et décision",
+            "Cadrage métier",
+            "Échanger sur ce besoin",
+            "#contact",
             "accent"),
         new ProjectUseCase(
             "03",
+            "data",
+            "Data & KPI",
             "Reporting décisionnel",
             "Transformer les signaux consolidés en synthèses courtes, lisibles et actionnables",
-            "Synthèse exec",
+            "Design data et restitution",
+            new[] { "BI", "Dashboard", "DataViz" },
+            "Des indicateurs contextualisés pour arbitrer plus vite",
+            "Concept produit",
+            "Échanger sur ce besoin",
+            "#contact",
             "warning")
     };
 
@@ -286,6 +315,9 @@ public static class LandingContent
 
     public const string CaseStudyContext =
         "Les équipes terrain consultent plusieurs sources pour suivre incidents, délais et qualité. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes";
+
+    public const string CaseStudyDisclosure =
+        "Cas anonymisé : la structure, les libellés et les données ont été adaptés pour préserver le contexte client.";
 
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
@@ -308,6 +340,20 @@ public static class LandingContent
         new CaseStudyMetric("3", "sources reliées", "ERP, atelier, reporting", "accent"),
         new CaseStudyMetric("1", "lecture priorisée", "statut, criticité, action", "success"),
         new CaseStudyMetric("0", "rupture de contexte", "preuve et action au même endroit", "warning")
+    };
+
+    public static readonly IReadOnlyList<CaseStudyComparison> CaseStudyComparisons = new[]
+    {
+        new CaseStudyComparison(
+            "Avant",
+            "Lecture fragmentée",
+            "Plusieurs outils à rapprocher manuellement avant de comprendre la priorité du jour.",
+            "warning"),
+        new CaseStudyComparison(
+            "Après",
+            "Décision contextualisée",
+            "Une vue rassemble statut, criticité, preuve et prochaine action sans changer d'écran.",
+            "success")
     };
 
     public const string ContactEyebrow = "Contact";
@@ -361,11 +407,27 @@ public sealed record MethodStep(
     string Tone,
     bool IsHighlighted = false);
 
-public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
+public sealed record ProjectFilter(string Key, string Label);
+
+public sealed record ProjectUseCase(
+    string Step,
+    string CategoryKey,
+    string Category,
+    string Title,
+    string Description,
+    string Role,
+    IReadOnlyList<string> Stack,
+    string Impact,
+    string Status,
+    string ActionLabel,
+    string ActionHref,
+    string Tone);
 
 public sealed record CaseStudyPoint(string Title, string Description, string Tone);
 
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
+
+public sealed record CaseStudyComparison(string Label, string Title, string Description, string Tone);
 
 public sealed record ContactHighlight(string Title, string Description, string Tone);
 

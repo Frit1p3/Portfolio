@@ -1,0 +1,67 @@
+<article class="project-card project-card--@Tone" aria-label="@($"{Title} - {Category}")">
+    <div class="project-card__header">
+        <span class="project-card__index">@Step</span>
+        <span class="project-card__status">@Status</span>
+    </div>
+
+    <div class="project-card__content">
+        <p class="project-card__category">@Category</p>
+        <h3>@Title</h3>
+        <p class="project-card__description">@Description</p>
+    </div>
+
+    <dl class="project-card__details">
+        <div>
+            <dt>Rôle</dt>
+            <dd>@Role</dd>
+        </div>
+        <div>
+            <dt>Impact</dt>
+            <dd>@Impact</dd>
+        </div>
+    </dl>
+
+    <ul class="project-card__stack" aria-label="Technologies et domaines associés">
+        @foreach (var item in Stack)
+        {
+            <li>@item</li>
+        }
+    </ul>
+
+    <a class="project-card__link" href="@ActionHref">@ActionLabel</a>
+</article>
+
+@code {
+    [Parameter]
+    public string Step { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Category { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Role { get; set; } = string.Empty;
+
+    [Parameter]
+    public IReadOnlyList<string> Stack { get; set; } = Array.Empty<string>();
+
+    [Parameter]
+    public string Impact { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Status { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ActionLabel { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ActionHref { get; set; } = "#contact";
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+}

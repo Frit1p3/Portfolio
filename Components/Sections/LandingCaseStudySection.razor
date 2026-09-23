@@ -8,6 +8,11 @@
         Description="@LandingContent.CaseStudyIntro"
         Width="wide" />
 
+    <aside class="case-study-section__disclosure" aria-label="Contexte de publication">
+        <Badge Tone="accent">Preuve contextualisée</Badge>
+        <p>@LandingContent.CaseStudyDisclosure</p>
+    </aside>
+
     <div class="case-study-section__layout">
         <article class="case-study-section__story" aria-label="Synthese de la preuve projet">
             <p>@LandingContent.CaseStudyContext</p>
@@ -23,15 +28,36 @@
             </div>
         </article>
 
-        <div class="case-study-section__metrics" aria-label="Indicateurs de cadrage">
-            @foreach (var metric in LandingContent.CaseStudyMetrics)
-            {
-                <article class="case-study-section__metric case-study-section__metric--@metric.Tone" aria-label="@($"{metric.Value} {metric.Label}")">
-                    <strong>@metric.Value</strong>
-                    <span>@metric.Label</span>
-                    <p>@metric.Detail</p>
-                </article>
-            }
-        </div>
+        <article class="case-study-section__preview" aria-label="Aperçu du dashboard atelier">
+            <header class="case-study-section__preview-header">
+                <div>
+                    <span>Vue opérations</span>
+                    <strong>Priorités atelier</strong>
+                </div>
+                <Badge Tone="neutral">Données contextualisées</Badge>
+            </header>
+
+            <div class="case-study-section__metrics" aria-label="Indicateurs de cadrage">
+                @foreach (var metric in LandingContent.CaseStudyMetrics)
+                {
+                    <div class="case-study-section__metric case-study-section__metric--@metric.Tone" aria-label="@($"{metric.Value} {metric.Label}")">
+                        <strong>@metric.Value</strong>
+                        <span>@metric.Label</span>
+                        <p>@metric.Detail</p>
+                    </div>
+                }
+            </div>
+        </article>
+    </div>
+
+    <div class="case-study-section__comparison" aria-label="Comparaison avant et après">
+        @foreach (var comparison in LandingContent.CaseStudyComparisons)
+        {
+            <article class="case-study-section__comparison-item case-study-section__comparison-item--@comparison.Tone">
+                <span>@comparison.Label</span>
+                <h3>@comparison.Title</h3>
+                <p>@comparison.Description</p>
+            </article>
+        }
     </div>
 </section>
