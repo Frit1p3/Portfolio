@@ -7,17 +7,66 @@
         TitleId="projects-section-title"
         Description="@LandingContent.ProjectsIntro" />
 
-    <div class="projects-section__grid" aria-label="Cas d'usage representatifs">
-        @foreach (var project in LandingContent.ProjectUseCases)
+    <div class="projects-section__filters" role="group" aria-label="Filtrer les projets">
+        @foreach (var filter in LandingContent.ProjectFilters)
         {
-            <article class="projects-section__card projects-section__card--@project.Tone" aria-label="@($"{project.Step} - {project.Title}")">
-                <div class="projects-section__card-header">
-                    <span class="projects-section__index">@project.Step</span>
-                    <span class="projects-section__meta">@project.Meta</span>
-                </div>
-                <h3>@project.Title</h3>
-                <p>@project.Description</p>
-            </article>
+            <button
+                class="@GetFilterClass(filter.Key)"
+                type="button"
+                data-filter="@filter.Key"
+                aria-pressed="@(selectedFilter == filter.Key ? "true" : "false")"
+                @onclick="() => SelectFilter(filter.Key)">
+                @filter.Label
+            </button>
+        }
+    </div>
+
+    <p class="projects-section__result" aria-live="polite">
+        @VisibleProjects.Count @GetResultLabel()
+    </p>
+
+    <div class="projects-section__grid" aria-label="Cas d'usage representatifs">
+        @foreach (var project in VisibleProjects)
+        {
+            <ProjectCard
+                Step="@project.Step"
+                Category="@project.Category"
+                Title="@project.Title"
+                Description="@project.Description"
+                Role="@project.Role"
+                Stack="@project.Stack"
+                Impact="@project.Impact"
+                Status="@project.Status"
+                ActionLabel="@project.ActionLabel"
+                ActionHref="@project.ActionHref"
+                Tone="@project.Tone" />
         }
     </div>
 </section>
+
+@code {
+    private string selectedFilter = "all";
+
+    private IReadOnlyList<ProjectUseCase> VisibleProjects => selectedFilter == "all"
+        ? LandingContent.ProjectUseCases
+        : LandingContent.ProjectUseCases
+            .Where(project => project.CategoryKey == selectedFilter)
+            .ToArray();
+
+    private void SelectFilter(string filterKey)
+    {
+        selectedFilter = filterKey;
+    }
+
+    private string GetFilterClass(string filterKey)
+    {
+        return selectedFilter == filterKey
+            ? "projects-section__filter projects-section__filter--active"
+            : "projects-section__filter";
+    }
+
+    private string GetResultLabel()
+    {
+        return VisibleProjects.Count > 1 ? "projets affichés" : "projet affiché";
+    }
+}
