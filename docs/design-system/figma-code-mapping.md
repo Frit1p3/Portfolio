@@ -66,7 +66,7 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 
 | Element Figma | Equivalent code | Statut | Ecart restant |
 | --- | --- | --- | --- |
-| Header complet | `HeaderNavigation` | `partiel` | Marque et ancres presentes ; hierarchie, liens Expertise/Projets/Methode/Vision et CTA Contact restent a aligner. |
+| Header complet | `HeaderNavigation` | `present` | Marque, lien d'evitement, navigation vers les sections disponibles et CTA Contact sont couverts. |
 | Hero clair classique | `ConceptHeroSection` | `ignore` | Divergence intentionnelle : la landing publiee retient le hero conceptuel de `90:377`. |
 | Panneau de KPI hero | `HeroKpiCard` dans `ConceptHeroSection` | `partiel` | Trois KPI contextualises existent, sans reprendre le panneau lateral clair de `64:2`. |
 | Expertise en six skill cards | aucune carte reutilisable | `absent` | Les competences sont seulement exprimees indirectement par la methode et les cas d'usage. |
@@ -77,7 +77,7 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Alert / Status de materialite | aucun equivalent | `absent` | Le bandeau de contexte et son composant generique ne sont pas implementes. |
 | Contact Panel / Guidance | highlights de `LandingContactSection` | `partiel` | Les modes de collaboration couvrent l'intention, mais pas le panneau de recommandations structure. |
 | Contact Form / Homepage Wide | aucun equivalent | `absent` | Pas de champs, validation, etats erreur/succes ni strategie d'envoi. |
-| Footer / Layout Wide | `SiteFooter` | `partiel` | Baseline et email presents ; colonnes, ancres, CTA, disponibilite et ligne legale manquent. |
+| Footer / Layout Wide | `SiteFooter` | `present` | Identite, navigation, disponibilite, contact, copyright et retour en haut sont couverts. |
 
 ## Inventaire du design system `2:3`
 
@@ -88,8 +88,8 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | KPI Card / Hero Compact | `HeroKpiCard` | `present` | Couverture suffisante pour la landing actuelle. |
 | Project Card / Source Compact | `SourceCompactCard` | `present` | Utilise dans la demonstration produit. |
 | Section Header | `SectionHeader` | `present` | Structure partagee, largeurs explicites, alignement start/center et contenu additionnel optionnel. |
-| Header / Navigation | `HeaderNavigation` | `partiel` | Completer les ancres, le CTA et le comportement responsive. |
-| Footer / Layout Wide | `SiteFooter` | `partiel` | Passer du footer minimal a une navigation de fin de page utile. |
+| Header / Navigation | `HeaderNavigation` | `present` | Ancres reelles, CTA Contact, lien d'evitement et navigation mobile en grille. |
+| Footer / Layout Wide | `SiteFooter` | `present` | Composition en colonnes responsive avec navigation et zone de contact. |
 | Link | liens HTML et liens internes a `Button` | `partiel` | Formaliser seulement si plusieurs variantes de lien deviennent necessaires. |
 | Skill Card | aucun equivalent | `absent` | A creer pour la section expertise. |
 | Project Card | cartes internes de `LandingProjectsSection` | `partiel` | Extraire une carte reutilisable lors de la parite projets. |
@@ -138,6 +138,8 @@ branches expertise, projets et contact.
 | `Timeline / Decision Compact` | `DecisionTimelineCard` | `Components/UI` | Lecture decisionnelle courte associee a une metrique. |
 | `KPI Card / Hero Compact` | `HeroKpiCard` | `Components/UI` | Preuve chiffree compacte dans le hero ou les sections de preuve. |
 | `Section Header` | `SectionHeader` | `Components/UI` | En-tete reutilisable avec eyebrow, titre identifie, introduction et contenu optionnel. |
+| `Header / Navigation` | `HeaderNavigation` | `Components/Layout` | Navigation principale, lien d'evitement et CTA de contact. |
+| `Footer / Layout Wide` | `SiteFooter` | `Components/Layout` | Navigation de fin de page, disponibilite et acces direct au contact. |
 | `Concept Source Chip` | `ConceptSourceChip` | `Components/UI` | Source de donnees dans la scene conceptuelle sombre. |
 | `Concept Tab` | `ConceptTab` | `Components/UI` | Repere narratif de la sequence conceptuelle. |
 | `Concept Demo Card` | `ConceptDemoCard` | `Components/UI` | Carte pedagogique sous la scene conceptuelle. |

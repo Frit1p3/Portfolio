@@ -1,11 +1,18 @@
-<header class="site-header">
-    <a class="site-header__brand" href="/" aria-label="Retour a l'accueil">
+@using Portfolio.Content
+
+<header id="top" class="site-header">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <a class="site-header__brand" href="./" aria-label="Retour à l'accueil">
         Merryl Bouchereau
     </a>
 
     <nav class="site-header__nav" aria-label="Navigation principale">
-        <a href="#proof">Demo</a>
-        <a href="#approach">Approche</a>
-        <a href="#contact">Contact</a>
+        @foreach (var link in LandingContent.PrimaryNavigationLinks)
+        {
+            <a href="@link.Href">@link.Label</a>
+        }
     </nav>
+
+    <Button Href="#contact">Me contacter</Button>
 </header>

@@ -5,6 +5,14 @@ public static class LandingContent
     public const string Positioning =
         "Front-End .NET pour interfaces métier industrielles, dashboards et outils terrain";
 
+    public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
+    {
+        new NavigationLink("Démo", "#proof"),
+        new NavigationLink("Méthode", "#approach"),
+        new NavigationLink("Projets", "#projects"),
+        new NavigationLink("Étude de cas", "#case-study")
+    };
+
     public const string HeroEyebrow = "Portfolio applicatif";
 
     public const string HeroTitle =
@@ -304,3 +312,5 @@ public sealed record CaseStudyPoint(string Title, string Description, string Ton
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
 
 public sealed record ContactHighlight(string Title, string Description, string Tone);
+
+public sealed record NavigationLink(string Label, string Href);
