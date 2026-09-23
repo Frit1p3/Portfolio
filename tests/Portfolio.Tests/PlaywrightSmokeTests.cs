@@ -218,9 +218,14 @@ public sealed class PlaywrightSmokeTests
         await Expect(page.GetByRole(AriaRole.Main)).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Contentinfo)).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Navigation principale" })).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Navigation de pied de page" })).ToBeVisibleAsync();
+        await Expect(page.Locator(".skip-link")).ToHaveAttributeAsync("href", "#main-content");
+        await Expect(page.Locator(".site-header .button")).ToHaveAttributeAsync("href", "#contact");
 
         Assert.Equal(1, await page.Locator("h1").CountAsync());
         Assert.Equal(5, await page.Locator("main h2").CountAsync());
+        Assert.Equal(4, await page.Locator(".site-header__nav a").CountAsync());
+        Assert.Equal(5, await page.Locator(".site-footer__nav a").CountAsync());
 
         var anchorAudit = await page.EvaluateAsync<AnchorAudit>(
             @"() => {

@@ -71,12 +71,20 @@ public sealed class ComponentTests : BunitContext
     {
         var cut = Render<HeaderNavigation>();
 
-        Assert.NotNull(cut.Find("header"));
+        var header = cut.Find("header");
+        var navigationLinks = cut.FindAll(".site-header__nav a");
+
+        Assert.Equal("top", header.Id);
         Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Contains("Merryl", cut.Markup);
+        Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
+        Assert.Equal(4, navigationLinks.Count);
         Assert.Contains("#proof", cut.Markup);
         Assert.Contains("#approach", cut.Markup);
+        Assert.Contains("#projects", cut.Markup);
+        Assert.Contains("#case-study", cut.Markup);
         Assert.Contains("#contact", cut.Markup);
+        Assert.Equal("Me contacter", cut.Find(".button").TextContent);
     }
 
     [Fact]
@@ -88,7 +96,10 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Contains("site-footer", footer.ClassList);
         Assert.Contains("Front-End .NET", footer.TextContent);
-        Assert.StartsWith("mailto:", cut.Find("a").GetAttribute("href"));
+        Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
+        Assert.Equal(5, cut.FindAll(".site-footer__nav a").Count);
+        Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
+        Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
 
     [Fact]
@@ -578,6 +589,7 @@ public sealed class ComponentTests : BunitContext
 
         var section = cut.Find("section.projects-section");
 
+        Assert.Equal("projects", section.Id);
         Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--default", cut.Find(".section-header").ClassList);
         Assert.Contains("Des produits front-end", section.TextContent);
@@ -595,6 +607,7 @@ public sealed class ComponentTests : BunitContext
 
         var section = cut.Find("section.case-study-section");
 
+        Assert.Equal("case-study", section.Id);
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--wide", cut.Find(".section-header").ClassList);
         Assert.Contains("Rassembler les signaux atelier", section.TextContent);
