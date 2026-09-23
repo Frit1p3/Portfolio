@@ -67,6 +67,25 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void SkillCard_renders_expertise_content_tags_and_tone()
+    {
+        var cut = Render<SkillCard>(parameters => parameters
+            .Add(component => component.Code, "UX")
+            .Add(component => component.Category, "Conception métier")
+            .Add(component => component.Title, "UX métier")
+            .Add(component => component.Description, "Transformer une contrainte en parcours testable.")
+            .Add(component => component.Tags, new[] { "Audit", "Parcours", "Figma" })
+            .Add(component => component.Tone, "accent"));
+
+        var card = cut.Find("article");
+
+        Assert.Contains("skill-card--accent", card.ClassList);
+        Assert.Equal("UX métier - Conception métier", card.GetAttribute("aria-label"));
+        Assert.Equal(3, cut.FindAll(".skill-card__tags li").Count);
+        Assert.Contains("Transformer une contrainte", card.TextContent);
+    }
+
+    [Fact]
     public void HeaderNavigation_exposes_main_navigation_landmarks()
     {
         var cut = Render<HeaderNavigation>();
@@ -78,7 +97,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Contains("Merryl", cut.Markup);
         Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
-        Assert.Equal(4, navigationLinks.Count);
+        Assert.Equal(5, navigationLinks.Count);
+        Assert.Contains("#expertise", cut.Markup);
         Assert.Contains("#proof", cut.Markup);
         Assert.Contains("#approach", cut.Markup);
         Assert.Contains("#projects", cut.Markup);
@@ -97,7 +117,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("site-footer", footer.ClassList);
         Assert.Contains("Front-End .NET", footer.TextContent);
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
-        Assert.Equal(5, cut.FindAll(".site-footer__nav a").Count);
+        Assert.Equal(6, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
         Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
@@ -565,6 +585,22 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void LandingExpertiseSection_composes_three_data_driven_skill_cards()
+    {
+        var cut = Render<LandingExpertiseSection>();
+
+        var section = cut.Find("section.expertise-section");
+
+        Assert.Equal("expertise", section.Id);
+        Assert.Equal("expertise-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Contains("section-header--center", cut.Find(".section-header").ClassList);
+        Assert.Equal(3, cut.FindAll(".skill-card").Count);
+        Assert.Contains("UX métier", section.TextContent);
+        Assert.Contains("Front-End .NET", section.TextContent);
+        Assert.Contains("Data & KPI", section.TextContent);
+    }
+
+    [Fact]
     public void LandingMethodSection_composes_method_steps()
     {
         var cut = Render<LandingMethodSection>();
@@ -574,12 +610,14 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("approach", section.Id);
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--narrow", cut.Find(".section-header").ClassList);
+        Assert.Contains("section-header--center", cut.Find(".section-header").ClassList);
         Assert.Contains("De la complexité terrain", section.TextContent);
         Assert.Contains("écrans testables", section.TextContent);
         Assert.Equal(3, cut.FindAll(".method-section__step").Count);
-        Assert.Contains("Cadrer", section.TextContent);
-        Assert.Contains("Structurer", section.TextContent);
-        Assert.Contains("Livrer", section.TextContent);
+        Assert.Contains("Comprendre les contraintes", section.TextContent);
+        Assert.Contains("Structurer les écrans", section.TextContent);
+        Assert.Contains("Passer au code", section.TextContent);
+        Assert.Equal("step", cut.Find(".method-section__step--highlighted").GetAttribute("aria-current"));
     }
 
     [Fact]

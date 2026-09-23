@@ -1,0 +1,26 @@
+@using Portfolio.Content
+
+<section class="expertise-section" id="expertise" aria-labelledby="expertise-section-title">
+    <div class="expertise-section__inner">
+        <SectionHeader
+            Eyebrow="@LandingContent.ExpertiseEyebrow"
+            Title="@LandingContent.ExpertiseTitle"
+            TitleId="expertise-section-title"
+            Description="@LandingContent.ExpertiseIntro"
+            Width="wide"
+            Alignment="center" />
+
+        <div class="expertise-section__grid" aria-label="Domaines d'expertise">
+            @foreach (var skill in LandingContent.ExpertiseSkills)
+            {
+                <SkillCard
+                    Code="@skill.Code"
+                    Category="@skill.Category"
+                    Title="@skill.Title"
+                    Description="@skill.Description"
+                    Tags="@skill.Tags"
+                    Tone="@skill.Tone" />
+            }
+        </div>
+    </div>
+</section>
