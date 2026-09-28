@@ -75,8 +75,8 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Project cards riches | `ProjectCard` | `present` | Categorie, role, stack, impact, statut et action secondaire sont pilotes par les donnees. |
 | Case Study Block / Homepage Proof | `LandingCaseStudySection` | `present` | Recit, points, apercu dashboard, metriques et comparaison avant/apres composent la preuve. |
 | Alert / Status de materialite | bandeau de `LandingCaseStudySection` | `present` | Le contexte d'anonymisation est explicite avant la preuve projet. |
-| Contact Panel / Guidance | highlights de `LandingContactSection` | `partiel` | Les modes de collaboration couvrent l'intention, mais pas le panneau de recommandations structure. |
-| Contact Form / Homepage Wide | aucun equivalent | `absent` | Pas de champs, validation, etats erreur/succes ni strategie d'envoi. |
+| Contact Panel / Guidance | guidance de `LandingContactSection` | `present` | Introduction, sujets prioritaires et contact direct reprennent la structure Figma. |
+| Contact Form / Homepage Wide | `ContactForm` | `present` | Trois champs, validation textuelle, etats erreur/succes et handoff `mailto:` sans secret client. |
 | Footer / Layout Wide | `SiteFooter` | `present` | Identite, navigation, disponibilite, contact, copyright et retour en haut sont couverts. |
 
 ## Inventaire du design system `2:3`
@@ -97,8 +97,8 @@ navigation qui ne sont pas encore transposees dans la direction conceptuelle som
 | Tabs | `ConceptTab`, `LandingMotionTabs`, filtres de `LandingProjectsSection` | `present` | Les vues conceptuelles et le filtrage projets exposent leurs etats actifs. |
 | Accordion | aucun equivalent | `ignore` | Aucun parcours actuel ne justifie encore un accordion. |
 | Alert / Status | bandeau de materialite du case study | `present` | Composition locale adaptee au contexte unique d'anonymisation. |
-| Contact Panel | highlights de `LandingContactSection` | `partiel` | Recomposer avec la guidance Figma. |
-| Contact Form | aucun equivalent | `absent` | Necessite validation accessible et decision sur le transport du message. |
+| Contact Panel | guidance de `LandingContactSection` | `present` | Panneau compose localement pour les motifs de mission de la landing. |
+| Contact Form | `ContactForm` | `present` | Validation DataAnnotations et preparation d'un courriel local compatible GitHub Pages. |
 | Case Study Block | `LandingCaseStudySection` | `present` | Les sous-composants restent locaux tant qu'une seconde etude de cas ne justifie pas leur extraction. |
 
 ## Ordre d'implementation issu de l'inventaire

@@ -41,9 +41,9 @@ public sealed class PlaywrightSmokeTests
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Passons d'un besoin métier à une interface utile" }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Votre projet", Level = 2 }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Link, new() { Name = "Demarrer un echange" }))
+        await Expect(page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }))
             .ToBeVisibleAsync();
     }
 
@@ -231,7 +231,13 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
         Assert.Equal(2, await page.Locator(".case-study-section__comparison-item").CountAsync());
+        Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
         await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
+
+        await page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }).ClickAsync();
+        Assert.Equal(3, await page.Locator(".contact-form .validation-message").CountAsync());
+        await Expect(page.Locator(".contact-form__status"))
+            .ToContainTextAsync("Certains champs sont incomplets ou invalides");
 
         await page.Locator("[data-filter='data']").ClickAsync();
         await Expect(page.Locator("[data-filter='data']")).ToHaveAttributeAsync("aria-pressed", "true");

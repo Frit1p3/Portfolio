@@ -695,17 +695,52 @@ public sealed class ComponentTests : BunitContext
     public void LandingContactSection_composes_contact_call_to_action()
     {
         var cut = Render<LandingContactSection>();
-
+        var heading = cut.Find("h2");
         var section = cut.Find("section.contact-section");
-        var link = cut.Find("a.button");
+
+        Assert.Equal("contact-guidance-title", heading.Id);
+        Assert.Equal("Votre projet", heading.TextContent);
+        Assert.Equal("contact-guidance-title", section.GetAttribute("aria-labelledby"));
 
         Assert.Equal("contact", section.Id);
-        Assert.Equal("contact-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("section-header--fluid", cut.Find(".section-header").ClassList);
-        Assert.Contains("Passons d'un besoin métier", section.TextContent);
-        Assert.Contains("Demarrer un echange", link.TextContent);
-        Assert.Equal($"mailto:{LandingContent.ContactEmail}", link.GetAttribute("href"));
+        Assert.Contains("Décrire votre besoin", section.TextContent);
+        Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
-        Assert.Contains("Cadrage rapide", section.TextContent);
+        Assert.Contains("Audit UI métier", section.TextContent);
+    }
+
+    [Fact]
+    public void ContactForm_exposes_labels_helper_and_textual_validation()
+    {
+        var cut = Render<ContactForm>();
+
+        Assert.Equal(3, cut.FindAll(".contact-form__field").Count);
+        Assert.Equal("Nom", cut.Find("label[for='contact-name']").TextContent);
+        Assert.Equal("Email", cut.Find("label[for='contact-email']").TextContent);
+        Assert.Contains("Tous les champs sont obligatoires", cut.Find(".contact-form__helper").TextContent);
+
+        cut.Find("form").Submit();
+
+        Assert.Equal(3, cut.FindAll(".validation-message").Count);
+        Assert.Contains("incomplets ou invalides", cut.Find("[role='status']").TextContent);
+    }
+
+    [Fact]
+    public void ContactForm_prepares_an_encoded_mailto_after_valid_submission()
+    {
+        var cut = Render<ContactForm>();
+
+        cut.Find("#contact-name").Change("Merryl Dupont");
+        cut.Find("#contact-email").Change("contact@example.com");
+        cut.Find("#contact-message").Change("Je souhaite cadrer une interface métier industrielle.");
+        cut.Find("form").Submit();
+
+        var link = cut.Find(".contact-form__status a");
+        var href = link.GetAttribute("href");
+
+        Assert.StartsWith($"mailto:{LandingContent.ContactEmail}?", href, StringComparison.Ordinal);
+        Assert.Contains("Merryl%20Dupont", href);
+        Assert.Contains("contact%40example.com", href);
+        Assert.Contains("message est prêt", cut.Find("[role='status']").TextContent);
     }
 }

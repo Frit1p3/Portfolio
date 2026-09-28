@@ -1,25 +1,30 @@
 @using Portfolio.Content
 
-<section class="contact-section" id="contact" aria-labelledby="contact-section-title">
-    <SectionHeader
-        Eyebrow="@LandingContent.ContactEyebrow"
-        Title="@LandingContent.ContactTitle"
-        TitleId="contact-section-title"
-        Description="@LandingContent.ContactIntro"
-        Width="fluid">
-        <div class="contact-section__actions" aria-label="Actions de contact">
-            <Button Href="@($"mailto:{LandingContent.ContactEmail}")">Demarrer un echange</Button>
-            <span>@LandingContent.ContactAvailability</span>
-        </div>
-    </SectionHeader>
+<section class="contact-section" id="contact" aria-labelledby="contact-guidance-title">
+    <div class="contact-section__inner">
+        <div class="contact-section__layout">
+            <aside class="contact-section__guidance" aria-labelledby="contact-guidance-title">
+                <div class="contact-section__guidance-heading">
+                    <h2 id="contact-guidance-title">@LandingContent.ContactGuidanceTitle</h2>
+                    <p>@LandingContent.ContactGuidanceBody</p>
+                </div>
 
-    <div class="contact-section__highlights" aria-label="Modes de collaboration">
-        @foreach (var highlight in LandingContent.ContactHighlights)
-        {
-            <article class="contact-section__highlight contact-section__highlight--@highlight.Tone" aria-label="@highlight.Title">
-                <h3>@highlight.Title</h3>
-                <p>@highlight.Description</p>
-            </article>
-        }
+                <div class="contact-section__highlights" aria-label="Sujets de mission prioritaires">
+                    @foreach (var highlight in LandingContent.ContactHighlights)
+                    {
+                        <article class="contact-section__highlight contact-section__highlight--@highlight.Tone" aria-label="@highlight.Title">
+                            <h4>@highlight.Title</h4>
+                            <p>@highlight.Description</p>
+                        </article>
+                    }
+                </div>
+
+                <a class="contact-section__email" href="@($"mailto:{LandingContent.ContactEmail}")">
+                    Écrire directement à @LandingContent.ContactEmail
+                </a>
+            </aside>
+
+            <ContactForm />
+        </div>
     </div>
 </section>
