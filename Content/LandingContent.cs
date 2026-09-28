@@ -356,23 +356,36 @@ public static class LandingContent
             "success")
     };
 
-    public const string ContactEyebrow = "Contact";
+    public const string ContactEyebrow = "Travailler ensemble";
 
-    public const string ContactTitle =
-        "Passons d'un besoin métier à une interface utile";
+    //public const string ContactTitle =
+    //    "Un portfolio pensé comme point d'entrée vers des missions concrètes";
 
-    public const string ContactIntro =
-        "Disponible pour cadrer, concevoir ou renforcer une expérience front-end .NET orientée opérations, data et usage quotidien";
+    //public const string ContactIntro =
+    //    "La page permet de comprendre rapidement le profil, les preuves disponibles et le bon motif de contact";
 
     public const string ContactEmail = "fritp3@gmail.com";
 
     public const string ContactAvailability = "Ouvert aux missions front-end .NET, UI industrielle et design system";
 
+    public const string ContactGuidanceTitle = "Votre projet";
+
+    public const string ContactGuidanceBody =
+        "Refonte d'interface métier, design system Blazor, dashboard KPI, amélioration d'un parcours interne, audit accessibilité RGAA ou mise en cohérence UI/UX avant industrialisation.";
+
+    public const string ContactFormTitle = "Décrire votre besoin";
+
+    public const string ContactFormIntro =
+        "Quelques lignes suffisent pour identifier le contexte, les contraintes et la meilleure suite à donner.";
+
+    public const string ContactFormHelper =
+        "Tous les champs sont obligatoires. Les erreurs restent textuelles, pas uniquement colorées.";
+
     public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
     {
-        new ContactHighlight("Cadrage rapide", "Clarifier besoin, données sources et priorités produit.", "accent"),
-        new ContactHighlight("Prototype utile", "Transformer l'idée en écran testable avec composants réutilisables.", "success"),
-        new ContactHighlight("Passage à l'échelle", "Stabiliser CSS, accessibilité et tests pour livrer sereinement.", "warning")
+        new ContactHighlight("Audit UI métier", "Identifier les frictions, prioriser les corrections et documenter les décisions.", "accent"),
+        new ContactHighlight("Design system Blazor", "Transformer les maquettes en composants réutilisables et accessibles.", "success"),
+        new ContactHighlight("Dashboard KPI", "Clarifier les indicateurs, les statuts et les actions attendues.", "warning")
     };
 }
 
