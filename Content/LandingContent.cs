@@ -32,9 +32,9 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<string> ConceptStack = new[]
     {
-        "UX industrielle",
+        "UX",
         "Design system",
-        "KPI decisionnels"
+        "KPI"
     };
 
     public static readonly IReadOnlyList<ConceptStep> ConceptSteps = new[]

@@ -12,6 +12,8 @@
     transform: translateY(0);
     transition:
         border-color 420ms ease,
+        filter 560ms ease,
+        opacity 560ms ease,
         box-shadow 520ms ease,
         transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }

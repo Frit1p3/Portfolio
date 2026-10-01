@@ -319,6 +319,13 @@ public sealed class ComponentTests : BunitContext
         Assert.NotNull(cut.Find(".concept-hero__opening-signal"));
         Assert.NotNull(cut.Find(".concept-hero__globe"));
         Assert.Equal(3, cut.FindAll(".concept-hero__stack-layer").Count);
+        Assert.Equal(3, cut.FindAll(".concept-hero__stack-volume").Count);
+        Assert.Equal(9, cut.FindAll(".concept-hero__stack-face").Count);
+        Assert.Collection(
+            cut.FindAll(".concept-hero__stack-label"),
+            label => Assert.Equal("UX", label.TextContent),
+            label => Assert.Equal("Design system", label.TextContent),
+            label => Assert.Equal("KPI", label.TextContent));
 
         motionTabs[0].Click();
         section = cut.Find("section.concept-hero");

@@ -50,6 +50,11 @@
                 @foreach (var layer in LandingContent.ConceptStack)
                 {
                     <span class="concept-hero__stack-layer">
+                        <span class="concept-hero__stack-volume" aria-hidden="true">
+                            <span class="concept-hero__stack-face concept-hero__stack-face--top"></span>
+                            <span class="concept-hero__stack-face concept-hero__stack-face--left"></span>
+                            <span class="concept-hero__stack-face concept-hero__stack-face--right"></span>
+                        </span>
                         <span class="concept-hero__stack-label">@layer</span>
                     </span>
                 }
