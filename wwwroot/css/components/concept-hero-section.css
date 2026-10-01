@@ -178,6 +178,8 @@
     opacity: 0;
     transform: translateX(-50%) scale(0.72);
     transition:
+        top 700ms cubic-bezier(0.22, 1, 0.36, 1),
+        width 700ms cubic-bezier(0.22, 1, 0.36, 1),
         opacity 520ms ease,
         transform 700ms ease;
 }
@@ -303,27 +305,37 @@
 }
 
 :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__opening-signal {
-    opacity: 0.72;
+    opacity: 0.9;
     transform: scale(1.04);
 }
 
 :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__globe {
-    opacity: 0.78;
+    top: 4%;
+    width: clamp(84px, 12%, 112px);
+    opacity: 0.92;
     transform: translateX(-50%) scale(1);
 }
 
-.concept-hero--motion-system-assembly .concept-hero__sources,
-.concept-hero--motion-system-assembly .concept-hero__tabs,
+.concept-hero--motion-system-assembly .concept-hero__sources {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-12px);
+}
+
+.concept-hero--motion-system-assembly .concept-hero__tabs {
+    opacity: 1;
+}
+
 .concept-hero--motion-system-assembly .concept-hero__cards {
     opacity: 0.3;
     transform: translateY(6px);
 }
 
-:is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__scene {
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__scene {
     grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
 }
 
-:is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources {
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources {
     grid-row: 1;
     grid-column: 1;
     align-content: center;
@@ -333,20 +345,24 @@
     padding: var(--space-16) 0;
 }
 
-:is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources > * {
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources > * {
     width: 100%;
 }
 
-:is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack {
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack {
     grid-row: 1;
     grid-column: 2;
 }
 
-.concept-hero--motion-data-convergence .concept-hero__tabs,
 .concept-hero--motion-data-convergence .concept-hero__cards {
     grid-column: 1 / -1;
     opacity: 0.3;
     transform: translateY(6px);
+}
+
+.concept-hero--motion-data-convergence .concept-hero__tabs {
+    grid-column: 1 / -1;
+    opacity: 1;
 }
 
 .concept-hero--motion-concept-switch .concept-hero__tabs,
@@ -367,18 +383,12 @@
     left: calc(100% - 8px);
 }
 
-.concept-hero--motion-concept-switch .concept-hero__globe,
-.concept-hero--motion-concept-switch .concept-hero__sources,
-.concept-hero--motion-concept-switch .concept-hero__stack {
-    opacity: 0.46;
-}
-
 .concept-hero--motion-concept-switch .concept-hero__convergence {
-    opacity: 0.32;
+    opacity: 0.62;
 }
 
 .concept-hero--motion-concept-switch .concept-hero__flow-path {
-    opacity: 0.46;
+    opacity: 0.72;
     transform: rotate(var(--flow-angle)) scaleX(1);
 }
 
@@ -391,11 +401,11 @@
     transform: translateY(-4px);
 }
 
-.concept-hero--motion-concept-switch .concept-tab {
-    opacity: 0.34;
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-tab {
+    opacity: 0.3;
 }
 
-.concept-hero--motion-concept-switch .concept-tab--active {
+:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-tab--active {
     opacity: 1;
     transform: translateY(-2px);
 }
@@ -415,8 +425,20 @@
     transform: translateY(-6px) scale(1.015);
 }
 
+.concept-hero--motion-system-assembly .product-demo-panel {
+    filter: brightness(0.48);
+    opacity: 0.18;
+}
+
+.concept-hero--motion-data-convergence .product-demo-panel {
+    filter: brightness(0.78);
+    opacity: 0.56;
+}
+
 .concept-hero--motion-concept-switch .product-demo-panel {
     border-color: rgba(22, 191, 209, 0.26);
+    filter: brightness(1);
+    opacity: 1;
     box-shadow: 0 24px 72px rgba(9, 21, 33, 0.28);
     transform: translateY(-6px);
 }
@@ -461,86 +483,128 @@
 }
 
 .concept-hero__stack {
-    --stack-layer-width: calc((100% - (2 * var(--space-12))) / 3);
-    display: grid;
-    grid-template-areas: "stack";
-    place-items: center;
-    min-height: 54px;
-    perspective: 760px;
-    transition: min-height 620ms ease;
+    position: relative;
+    min-height: 112px;
+    isolation: isolate;
+    perspective: 900px;
+    transition: min-height 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .concept-hero__stack-layer {
-    grid-area: stack;
-    display: grid;
-    place-items: center;
-    width: var(--stack-layer-width);
-    min-height: 54px;
-    border: 1px solid rgba(22, 191, 209, 0.32);
-    border-radius: var(--radius-4);
-    background: rgba(22, 191, 209, 0.1);
-    box-shadow: 0 8px 20px rgba(4, 12, 24, 0.08);
-    transform: translateX(var(--stack-rest-x));
+    --stack-rest-x: 0;
+    --stack-assembly-y: 0;
+    --stack-delay: 0ms;
+    --stack-top: #2044ff;
+    --stack-left: #1538d1;
+    --stack-right: #102ca8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: min(68%, 366px);
+    aspect-ratio: 366 / 206;
+    opacity: 0.58;
+    transform: translate(-50%, -50%) translateX(var(--stack-rest-x)) scale(0.34);
+    transform-origin: center;
     transition:
-        width 620ms ease,
-        border-color 480ms ease,
-        background-color 480ms ease,
-        box-shadow 560ms ease,
-        transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 420ms ease,
+        transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .concept-hero__stack-layer:nth-child(1) {
-    --stack-rest-x: calc(-100% - var(--space-12));
+    --stack-rest-x: -96%;
     --stack-assembly-y: -52px;
-    z-index: 3;
+    --stack-delay: 0ms;
+    z-index: 1;
 }
 
 .concept-hero__stack-layer:nth-child(2) {
     --stack-rest-x: 0;
     --stack-assembly-y: 0;
+    --stack-delay: 90ms;
     z-index: 2;
 }
 
 .concept-hero__stack-layer:nth-child(3) {
-    --stack-rest-x: calc(100% + var(--space-12));
+    --stack-rest-x: 96%;
     --stack-assembly-y: 52px;
-    z-index: 1;
+    --stack-delay: 180ms;
+    z-index: 3;
+}
+
+.concept-hero__stack-volume,
+.concept-hero__stack-face {
+    position: absolute;
+    display: block;
+}
+
+.concept-hero__stack-volume {
+    inset: 0;
+    filter: drop-shadow(0 12px 14px rgba(2, 8, 25, 0.18));
+}
+
+.concept-hero__stack-face {
+    border: 1px solid rgba(121, 207, 255, 0.58);
+}
+
+.concept-hero__stack-face--top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 73%;
+    background: var(--stack-top);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.concept-hero__stack-face--left,
+.concept-hero__stack-face--right {
+    top: 36.5%;
+    width: 50%;
+    height: 63.5%;
+}
+
+.concept-hero__stack-face--left {
+    left: 0;
+    background: var(--stack-left);
+    clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 50%);
+}
+
+.concept-hero__stack-face--right {
+    right: 0;
+    background: var(--stack-right);
+    clip-path: polygon(0 50%, 100% 0, 100% 50%, 0 100%);
 }
 
 .concept-hero__stack-label {
+    position: absolute;
+    z-index: 2;
+    top: 17%;
+    left: 0;
     color: var(--color-text-inverse);
     font-family: var(--font-display);
     font-size: var(--text-small);
     font-weight: 800;
-    padding: var(--space-16);
-    text-align: center;
-    transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.42);
+    transform: translateY(-50%);
+}
+
+.concept-hero__stack-layer:nth-child(1) .concept-hero__stack-label {
+    left: 1%;
+}
+
+.concept-hero__stack-layer:nth-child(2) .concept-hero__stack-label {
+    left: -4%;
 }
 
 :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack {
-    min-height: 236px;
+    min-height: 300px;
 }
 
 :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack-layer {
-    width: min(62%, 440px);
-    border-color: rgba(112, 227, 255, 0.82);
-    background: rgba(31, 86, 255, 0.88);
-    box-shadow:
-        0 18px 32px rgba(2, 8, 25, 0.28),
-        0 0 28px rgba(22, 191, 209, 0.15);
-    transform: translateY(var(--stack-assembly-y)) rotateX(58deg) rotateZ(-4deg);
-}
-
-:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack-layer:nth-child(2) {
-    background: rgba(25, 72, 225, 0.9);
-}
-
-:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack-layer:nth-child(3) {
-    background: rgba(20, 58, 184, 0.92);
-}
-
-:is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack-label {
-    transform: rotateZ(4deg) scaleY(1.35);
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(var(--stack-assembly-y)) scale(1);
+    transition-delay: var(--stack-delay);
 }
 
 .concept-hero__cards,
@@ -609,42 +673,40 @@
         width: 56%;
     }
 
-    .concept-hero__stack {
-        --stack-layer-width: calc((100% - (2 * var(--space-8))) / 3);
+    .concept-hero__stack-layer {
+        width: min(82%, 330px);
     }
 
     .concept-hero__stack-layer:nth-child(1) {
-        --stack-rest-x: calc(-100% - var(--space-8));
+        --stack-rest-x: -78%;
+        --stack-assembly-y: -40px;
     }
 
     .concept-hero__stack-layer:nth-child(3) {
-        --stack-rest-x: calc(100% + var(--space-8));
+        --stack-rest-x: 78%;
+        --stack-assembly-y: 40px;
     }
 
-    .concept-hero--motion-system-assembly .concept-hero__stack-layer {
-        width: min(84%, 420px);
-    }
-
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__scene {
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__scene {
         grid-template-columns: 1fr;
     }
 
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources,
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack,
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__tabs,
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__cards {
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources,
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack,
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__tabs,
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__cards {
         grid-row: auto;
         grid-column: 1;
     }
 
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources {
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__sources {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         padding: 0;
     }
 
-    :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack-layer {
-        width: min(84%, 420px);
+    :is(.concept-hero--motion-system-assembly, .concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__stack {
+        min-height: 250px;
     }
 
     :is(.concept-hero--motion-data-convergence, .concept-hero--motion-concept-switch) .concept-hero__convergence {
@@ -664,11 +726,23 @@
     .concept-hero__flow-path::after,
     .concept-hero__stack,
     .concept-hero__stack-layer,
+    .concept-hero__stack-volume,
     .concept-hero__stack-label,
     .concept-tab,
     .concept-demo-card,
     .motion-sequence,
     .product-demo-panel {
         transition: none;
+    }
+
+    .concept-hero__stack {
+        min-height: 300px;
+        opacity: 1;
+        transform: none;
+    }
+
+    .concept-hero__stack-layer {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(var(--stack-assembly-y)) scale(1);
     }
 }

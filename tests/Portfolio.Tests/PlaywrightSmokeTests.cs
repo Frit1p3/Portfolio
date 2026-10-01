@@ -88,16 +88,48 @@ public sealed class PlaywrightSmokeTests
 
             Assert.Equal(6, await page.Locator(".motion-sequence__tab").CountAsync());
 
+            await page.GetByRole(AriaRole.Tab, new() { Name = "03 - Assemblage du système" }).ClickAsync();
+            await Expect(page.Locator(".concept-hero"))
+                .ToHaveAttributeAsync("data-motion-state", "system-assembly");
+            Assert.Equal(3, await page.Locator(".concept-hero__stack-volume").CountAsync());
+            Assert.Equal(9, await page.Locator(".concept-hero__stack-face").CountAsync());
+            await Expect(page.Locator(".concept-hero__stack-layer").First).ToBeVisibleAsync();
+            await page.WaitForTimeoutAsync(1000);
+
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "0");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "0.18");
+
+            var stackLayers = page.Locator(".concept-hero__stack-layer");
+            var uxLayer = await stackLayers.Nth(0).BoundingBoxAsync();
+            var designSystemLayer = await stackLayers.Nth(1).BoundingBoxAsync();
+            var kpiLayer = await stackLayers.Nth(2).BoundingBoxAsync();
+
+            Assert.NotNull(uxLayer);
+            Assert.NotNull(designSystemLayer);
+            Assert.NotNull(kpiLayer);
+            Assert.True(uxLayer.Y < designSystemLayer.Y);
+            Assert.True(designSystemLayer.Y < kpiLayer.Y);
+            Assert.InRange(Math.Abs(uxLayer.Width - kpiLayer.Width), 0, 1);
+
+            var uxLabel = await page.Locator(".concept-hero__stack-label").First.BoundingBoxAsync();
+            Assert.NotNull(uxLabel);
+            Assert.True(uxLabel.Y < uxLayer.Y + (uxLayer.Height * 0.3));
+
             await page.GetByRole(AriaRole.Tab, new() { Name = "04 - Convergence des données" }).ClickAsync();
             await Expect(page.Locator(".concept-hero"))
                 .ToHaveAttributeAsync("data-motion-state", "data-convergence");
             Assert.Equal(4, await page.Locator(".concept-hero__flow-path").CountAsync());
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "0.56");
 
             await page.GetByRole(AriaRole.Tab, new() { Name = "05 - Focus narratif" }).ClickAsync();
             await Expect(page.Locator(".concept-hero"))
                 .ToHaveAttributeAsync("data-motion-state", "concept-switch");
             await Expect(page.Locator(".concept-demo-card--highlighted"))
                 .ToContainTextAsync("Mettre les signaux en contexte");
+            await Expect(page.Locator(".concept-hero__stack")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "1");
 
             await page.GetByRole(AriaRole.Tab, new() { Name = "06 - Demo produit" }).ClickAsync();
             await Expect(page.Locator(".concept-hero"))
