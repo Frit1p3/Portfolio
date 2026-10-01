@@ -28,10 +28,12 @@ public sealed class FoundationTests
         Assert.Equal(3, LandingContent.MethodSteps.Count);
         Assert.Contains("usages industriels", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
+        Assert.Equal(4, LandingContent.ProjectFilters.Count);
         Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
-        Assert.Contains("besoin métier", LandingContent.ContactTitle, StringComparison.Ordinal);
+        Assert.Equal(2, LandingContent.CaseStudyComparisons.Count);
+        Assert.Equal("Votre projet", LandingContent.ContactGuidanceTitle);
         Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }
@@ -78,6 +80,8 @@ public sealed class FoundationTests
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/project-card.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/contact-form.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-contact-section.css", appCss, StringComparison.Ordinal);

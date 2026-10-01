@@ -1,0 +1,35 @@
+<div class="@CssClass">
+    <span class="section-header__eyebrow">@Eyebrow</span>
+    <h2 id="@TitleId">@Title</h2>
+    <p>@Description</p>
+
+    @if (ChildContent is not null)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Eyebrow { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string TitleId { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Width { get; set; } = "default";
+
+    [Parameter]
+    public string Alignment { get; set; } = "start";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private string CssClass => $"section-header section-header--{Width} section-header--{Alignment}";
+}

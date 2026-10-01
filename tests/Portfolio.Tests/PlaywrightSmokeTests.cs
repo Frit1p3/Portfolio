@@ -32,18 +32,18 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui rendent la donnée actionnable." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui rendent la donnée actionnable" }))
             .ToBeVisibleAsync();
         await Expect(page.GetByText("Cartographie opérationnelle des flux")).ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexité terrain à l'écran utile." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexité terrain à l'écran utile" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour usages industriels." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour usages industriels" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Passons d'un besoin métier à une interface utile." }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Votre projet", Level = 2 }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Link, new() { Name = "Demarrer un echange" }))
+        await Expect(page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }))
             .ToBeVisibleAsync();
     }
 
@@ -88,6 +88,56 @@ public sealed class PlaywrightSmokeTests
 
             Assert.Equal(6, await page.Locator(".motion-sequence__tab").CountAsync());
 
+            await page.GetByRole(AriaRole.Tab, new() { Name = "03 - Assemblage du système" }).ClickAsync();
+            await Expect(page.Locator(".concept-hero"))
+                .ToHaveAttributeAsync("data-motion-state", "system-assembly");
+            Assert.Equal(3, await page.Locator(".concept-hero__stack-volume").CountAsync());
+            Assert.Equal(9, await page.Locator(".concept-hero__stack-face").CountAsync());
+            await Expect(page.Locator(".concept-hero__stack-layer").First).ToBeVisibleAsync();
+            await page.WaitForTimeoutAsync(1000);
+
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "0");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "0.18");
+
+            var stackLayers = page.Locator(".concept-hero__stack-layer");
+            var uxLayer = await stackLayers.Nth(0).BoundingBoxAsync();
+            var designSystemLayer = await stackLayers.Nth(1).BoundingBoxAsync();
+            var kpiLayer = await stackLayers.Nth(2).BoundingBoxAsync();
+
+            Assert.NotNull(uxLayer);
+            Assert.NotNull(designSystemLayer);
+            Assert.NotNull(kpiLayer);
+            Assert.True(uxLayer.Y < designSystemLayer.Y);
+            Assert.True(designSystemLayer.Y < kpiLayer.Y);
+            Assert.InRange(Math.Abs(uxLayer.Width - kpiLayer.Width), 0, 1);
+
+            var uxLabel = await page.Locator(".concept-hero__stack-label").First.BoundingBoxAsync();
+            Assert.NotNull(uxLabel);
+            Assert.True(uxLabel.Y < uxLayer.Y + (uxLayer.Height * 0.3));
+
+            await page.GetByRole(AriaRole.Tab, new() { Name = "04 - Convergence des données" }).ClickAsync();
+            await Expect(page.Locator(".concept-hero"))
+                .ToHaveAttributeAsync("data-motion-state", "data-convergence");
+            Assert.Equal(4, await page.Locator(".concept-hero__flow-path").CountAsync());
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "0.56");
+
+            await page.GetByRole(AriaRole.Tab, new() { Name = "05 - Focus narratif" }).ClickAsync();
+            await Expect(page.Locator(".concept-hero"))
+                .ToHaveAttributeAsync("data-motion-state", "concept-switch");
+            await Expect(page.Locator(".concept-demo-card--highlighted"))
+                .ToContainTextAsync("Mettre les signaux en contexte");
+            await Expect(page.Locator(".concept-hero__stack")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".concept-hero__sources")).ToHaveCSSAsync("opacity", "1");
+            await Expect(page.Locator(".product-demo-panel")).ToHaveCSSAsync("opacity", "1");
+
+            await page.GetByRole(AriaRole.Tab, new() { Name = "06 - Demo produit" }).ClickAsync();
+            await Expect(page.Locator(".concept-hero"))
+                .ToHaveAttributeAsync("data-motion-state", "demo-takeover");
+            await Expect(page.Locator(".product-demo-panel")).ToBeVisibleAsync();
+            await Expect(page.Locator(".concept-tab--active"))
+                .ToContainTextAsync("Décider");
+
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1);
 
@@ -121,6 +171,7 @@ public sealed class PlaywrightSmokeTests
         {
             ".concept-hero",
             ".product-demo-panel",
+            ".expertise-section",
             ".method-section",
             ".projects-section",
             ".case-study-section",
@@ -200,9 +251,29 @@ public sealed class PlaywrightSmokeTests
         await Expect(page.GetByRole(AriaRole.Main)).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Contentinfo)).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Navigation principale" })).ToBeVisibleAsync();
+        await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Navigation de pied de page" })).ToBeVisibleAsync();
+        await Expect(page.Locator(".skip-link")).ToHaveAttributeAsync("href", "#main-content");
+        await Expect(page.Locator(".site-header .button")).ToHaveAttributeAsync("href", "#contact");
 
         Assert.Equal(1, await page.Locator("h1").CountAsync());
-        Assert.Equal(5, await page.Locator("main h2").CountAsync());
+        Assert.Equal(6, await page.Locator("main h2").CountAsync());
+        Assert.Equal(5, await page.Locator(".site-header__nav a").CountAsync());
+        Assert.Equal(6, await page.Locator(".site-footer__nav a").CountAsync());
+        Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
+        Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
+        Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
+        Assert.Equal(2, await page.Locator(".case-study-section__comparison-item").CountAsync());
+        Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
+        await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
+
+        await page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }).ClickAsync();
+        Assert.Equal(3, await page.Locator(".contact-form .validation-message").CountAsync());
+        await Expect(page.Locator(".contact-form__status"))
+            .ToContainTextAsync("Certains champs sont incomplets ou invalides");
+
+        await page.Locator("[data-filter='data']").ClickAsync();
+        await Expect(page.Locator("[data-filter='data']")).ToHaveAttributeAsync("aria-pressed", "true");
+        Assert.Equal(1, await page.Locator(".projects-section .project-card").CountAsync());
 
         var anchorAudit = await page.EvaluateAsync<AnchorAudit>(
             @"() => {

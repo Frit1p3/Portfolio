@@ -5,6 +5,15 @@ public static class LandingContent
     public const string Positioning =
         "Front-End .NET pour interfaces métier industrielles, dashboards et outils terrain";
 
+    public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
+    {
+        new NavigationLink("Expertise", "#expertise"),
+        new NavigationLink("Démo", "#proof"),
+        new NavigationLink("Méthode", "#approach"),
+        new NavigationLink("Projets", "#projects"),
+        new NavigationLink("Étude de cas", "#case-study")
+    };
+
     public const string HeroEyebrow = "Portfolio applicatif";
 
     public const string HeroTitle =
@@ -23,9 +32,9 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<string> ConceptStack = new[]
     {
-        "UX industrielle",
+        "UX",
         "Design system",
-        "KPI decisionnels"
+        "KPI"
     };
 
     public static readonly IReadOnlyList<ConceptStep> ConceptSteps = new[]
@@ -170,6 +179,39 @@ public static class LandingContent
             "success")
     };
 
+    public const string ExpertiseEyebrow = "Domaines d'intervention";
+
+    public const string ExpertiseTitle =
+        "UI, front-end et data réunis autour des usages métier";
+
+    public const string ExpertiseIntro =
+        "Une expertise pensée pour des équipes qui doivent lire vite, agir juste et transmettre des décisions fiables";
+
+    public static readonly IReadOnlyList<ExpertiseSkill> ExpertiseSkills = new[]
+    {
+        new ExpertiseSkill(
+            "UX",
+            "Conception métier",
+            "UX métier",
+            "Transformer une contrainte opérationnelle en parcours clair, mesurable et testable",
+            new[] { "Audit", "Parcours", "Figma" },
+            "accent"),
+        new ExpertiseSkill(
+            ".NET",
+            "Front-end durable",
+            "Front-End .NET",
+            "Concevoir des interfaces Blazor robustes, maintenables et alignées avec le design system",
+            new[] { "Blazor", "Composants", "CSS" },
+            "success"),
+        new ExpertiseSkill(
+            "KPI",
+            "Pilotage par la donnée",
+            "Data & KPI",
+            "Rendre les indicateurs lisibles pour suivre l'activité, comprendre les écarts et arbitrer",
+            new[] { "Dashboards", "KPI", "Data" },
+            "warning")
+    };
+
     public const string MethodEyebrow = "Méthode";
 
     public const string MethodTitle =
@@ -182,18 +224,25 @@ public static class LandingContent
     {
         new MethodStep(
             "01",
-            "Cadrer",
-            "Identifier les sources, les irritants terrain et les arbitrages attendus avant de dessiner l'interface",
+            "Cadrage",
+            "Comprendre les contraintes",
+            "Identifier les sources, les irritants terrain et les arbitrages attendus",
+            "Flux et priorités alignés",
             "muted"),
         new MethodStep(
             "02",
-            "Structurer",
-            "Organiser parcours, hiérarchie visuelle et composants réutilisables autour des usages critiques",
-            "accent"),
+            "Conception",
+            "Structurer les écrans",
+            "Hiérarchiser les parcours, tester les hypothèses et documenter les composants",
+            "Prototype testable",
+            "accent",
+            true),
         new MethodStep(
             "03",
-            "Livrer",
-            "Valider le responsive, l'accessibilité et les tests pour garder une base claire et évolutive",
+            "Industrialisation",
+            "Passer au code",
+            "Assembler Blazor, CSS Vanilla, accessibilité et tests dans une base maintenable",
+            "Composants documentés",
             "success")
     };
 
@@ -205,25 +254,54 @@ public static class LandingContent
     public const string ProjectsIntro =
         "Trois familles de produits pour connecter opérations, données et pilotage sans perdre le contexte métier";
 
+    public static readonly IReadOnlyList<ProjectFilter> ProjectFilters = new[]
+    {
+        new ProjectFilter("all", "Tous"),
+        new ProjectFilter("operations", "Opérations"),
+        new ProjectFilter("integration", "Intégration"),
+        new ProjectFilter("data", "Data & KPI")
+    };
+
     public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
     {
         new ProjectUseCase(
             "01",
+            "operations",
+            "Opérations",
             "Pilotage atelier",
             "Suivre rendement, incidents, alertes qualité et temps réels pour prioriser l'action terrain",
-            "KPI temps réel",
+            "Conception UX et front-end",
+            new[] { "Blazor", "KPI", "Temps réel" },
+            "Une lecture priorisée des écarts et des actions attendues",
+            "Prototype validé",
+            "Voir la preuve",
+            "#case-study",
             "success"),
         new ProjectUseCase(
             "02",
+            "integration",
+            "Intégration",
             "Flux ERP / opérations",
             "Rendre commandes, stocks, documents et statuts synchronisés et lisibles dans une même interface",
-            "Flux synchronisés",
+            "Architecture d'interface",
+            new[] { "ERP", "GED", "API" },
+            "Moins de ruptures entre consultation, contrôle et décision",
+            "Cadrage métier",
+            "Échanger sur ce besoin",
+            "#contact",
             "accent"),
         new ProjectUseCase(
             "03",
+            "data",
+            "Data & KPI",
             "Reporting décisionnel",
             "Transformer les signaux consolidés en synthèses courtes, lisibles et actionnables",
-            "Synthèse exec",
+            "Design data et restitution",
+            new[] { "BI", "Dashboard", "DataViz" },
+            "Des indicateurs contextualisés pour arbitrer plus vite",
+            "Concept produit",
+            "Échanger sur ce besoin",
+            "#contact",
             "warning")
     };
 
@@ -237,6 +315,9 @@ public static class LandingContent
 
     public const string CaseStudyContext =
         "Les équipes terrain consultent plusieurs sources pour suivre incidents, délais et qualité. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes";
+
+    public const string CaseStudyDisclosure =
+        "Cas anonymisé : la structure, les libellés et les données ont été adaptés pour préserver le contexte client.";
 
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
@@ -261,23 +342,50 @@ public static class LandingContent
         new CaseStudyMetric("0", "rupture de contexte", "preuve et action au même endroit", "warning")
     };
 
-    public const string ContactEyebrow = "Contact";
+    public static readonly IReadOnlyList<CaseStudyComparison> CaseStudyComparisons = new[]
+    {
+        new CaseStudyComparison(
+            "Avant",
+            "Lecture fragmentée",
+            "Plusieurs outils à rapprocher manuellement avant de comprendre la priorité du jour.",
+            "warning"),
+        new CaseStudyComparison(
+            "Après",
+            "Décision contextualisée",
+            "Une vue rassemble statut, criticité, preuve et prochaine action sans changer d'écran.",
+            "success")
+    };
 
-    public const string ContactTitle =
-        "Passons d'un besoin métier à une interface utile";
+    public const string ContactEyebrow = "Travailler ensemble";
 
-    public const string ContactIntro =
-        "Disponible pour cadrer, concevoir ou renforcer une expérience front-end .NET orientée opérations, data et usage quotidien";
+    //public const string ContactTitle =
+    //    "Un portfolio pensé comme point d'entrée vers des missions concrètes";
+
+    //public const string ContactIntro =
+    //    "La page permet de comprendre rapidement le profil, les preuves disponibles et le bon motif de contact";
 
     public const string ContactEmail = "fritp3@gmail.com";
 
     public const string ContactAvailability = "Ouvert aux missions front-end .NET, UI industrielle et design system";
 
+    public const string ContactGuidanceTitle = "Votre projet";
+
+    public const string ContactGuidanceBody =
+        "Refonte d'interface métier, design system Blazor, dashboard KPI, amélioration d'un parcours interne, audit accessibilité RGAA ou mise en cohérence UI/UX avant industrialisation.";
+
+    public const string ContactFormTitle = "Décrire votre besoin";
+
+    public const string ContactFormIntro =
+        "Quelques lignes suffisent pour identifier le contexte, les contraintes et la meilleure suite à donner.";
+
+    public const string ContactFormHelper =
+        "Tous les champs sont obligatoires. Les erreurs restent textuelles, pas uniquement colorées.";
+
     public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
     {
-        new ContactHighlight("Cadrage rapide", "Clarifier besoin, données sources et priorités produit.", "accent"),
-        new ContactHighlight("Prototype utile", "Transformer l'idée en écran testable avec composants réutilisables.", "success"),
-        new ContactHighlight("Passage à l'échelle", "Stabiliser CSS, accessibilité et tests pour livrer sereinement.", "warning")
+        new ContactHighlight("Audit UI métier", "Identifier les frictions, prioriser les corrections et documenter les décisions.", "accent"),
+        new ContactHighlight("Design system Blazor", "Transformer les maquettes en composants réutilisables et accessibles.", "success"),
+        new ContactHighlight("Dashboard KPI", "Clarifier les indicateurs, les statuts et les actions attendues.", "warning")
     };
 }
 
@@ -295,12 +403,45 @@ public sealed record DecisionMetric(string Step, string Meta, string Title, stri
 
 public sealed record MotionState(string Key, string Step, string Title, string Description, string Tone, bool IsActive = false);
 
-public sealed record MethodStep(string Step, string Title, string Description, string Tone);
+public sealed record ExpertiseSkill(
+    string Code,
+    string Category,
+    string Title,
+    string Description,
+    IReadOnlyList<string> Tags,
+    string Tone);
 
-public sealed record ProjectUseCase(string Step, string Title, string Description, string Meta, string Tone);
+public sealed record MethodStep(
+    string Step,
+    string Meta,
+    string Title,
+    string Description,
+    string Evidence,
+    string Tone,
+    bool IsHighlighted = false);
+
+public sealed record ProjectFilter(string Key, string Label);
+
+public sealed record ProjectUseCase(
+    string Step,
+    string CategoryKey,
+    string Category,
+    string Title,
+    string Description,
+    string Role,
+    IReadOnlyList<string> Stack,
+    string Impact,
+    string Status,
+    string ActionLabel,
+    string ActionHref,
+    string Tone);
 
 public sealed record CaseStudyPoint(string Title, string Description, string Tone);
 
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
 
+public sealed record CaseStudyComparison(string Label, string Title, string Description, string Tone);
+
 public sealed record ContactHighlight(string Title, string Description, string Tone);
+
+public sealed record NavigationLink(string Label, string Href);

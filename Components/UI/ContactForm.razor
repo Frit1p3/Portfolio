@@ -1,0 +1,96 @@
+@using System.ComponentModel.DataAnnotations
+@using Portfolio.Content
+
+<div class="contact-form">
+    <div class="contact-form__heading">
+        <h3>@LandingContent.ContactFormTitle</h3>
+        <p>@LandingContent.ContactFormIntro</p>
+    </div>
+
+    <EditForm Model="formData" OnValidSubmit="PrepareMessage" OnInvalidSubmit="ShowValidationStatus" novalidate>
+        <DataAnnotationsValidator />
+
+        <div class="contact-form__field">
+            <label for="contact-name">Nom</label>
+            <InputText id="contact-name" @bind-Value="formData.Name" autocomplete="name" maxlength="80" required aria-describedby="contact-name-error" />
+            <ValidationMessage id="contact-name-error" For="@(() => formData.Name)" />
+        </div>
+
+        <div class="contact-form__field">
+            <label for="contact-email">Email</label>
+            <InputText id="contact-email" @bind-Value="formData.Email" type="email" autocomplete="email" maxlength="160" required aria-describedby="contact-email-error" />
+            <ValidationMessage id="contact-email-error" For="@(() => formData.Email)" />
+        </div>
+
+        <div class="contact-form__field">
+            <label for="contact-message">Message</label>
+            <InputTextArea id="contact-message" @bind-Value="formData.Message" rows="5" maxlength="1200" required aria-describedby="contact-message-helper contact-message-error" />
+            <ValidationMessage id="contact-message-error" For="@(() => formData.Message)" />
+        </div>
+
+        <p class="contact-form__helper" id="contact-message-helper">@LandingContent.ContactFormHelper</p>
+
+        @if (!string.IsNullOrWhiteSpace(statusMessage))
+        {
+            <div class="contact-form__status contact-form__status--@statusTone" role="status" aria-live="polite">
+                <p>@statusMessage</p>
+                @if (isPrepared)
+                {
+                    <a href="@MailtoHref">Ouvrir le message dans ma messagerie</a>
+                }
+            </div>
+        }
+
+        <div class="contact-form__actions">
+            <button type="submit">Préparer le message</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private readonly ContactFormData formData = new();
+    private string statusMessage = string.Empty;
+    private string statusTone = "neutral";
+    private bool isPrepared;
+
+    private string MailtoHref
+    {
+        get
+        {
+            var subject = Uri.EscapeDataString($"Demande portfolio - {formData.Name}");
+            var body = Uri.EscapeDataString($"Nom : {formData.Name}\nEmail : {formData.Email}\n\nMessage :\n{formData.Message}");
+
+            return $"mailto:{LandingContent.ContactEmail}?subject={subject}&body={body}";
+        }
+    }
+
+    private void PrepareMessage()
+    {
+        isPrepared = true;
+        statusTone = "success";
+        statusMessage = "Votre message est prêt. Relisez-le dans votre messagerie avant de l'envoyer.";
+    }
+
+    private void ShowValidationStatus()
+    {
+        isPrepared = false;
+        statusTone = "error";
+        statusMessage = "Certains champs sont incomplets ou invalides. Vérifiez les indications ci-dessus.";
+    }
+
+    private sealed class ContactFormData
+    {
+        [Required(ErrorMessage = "Indiquez votre nom.")]
+        [StringLength(80, ErrorMessage = "Le nom ne doit pas dépasser 80 caractères.")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Indiquez votre adresse email.")]
+        [EmailAddress(ErrorMessage = "Saisissez une adresse email valide.")]
+        [StringLength(160, ErrorMessage = "L'adresse email ne doit pas dépasser 160 caractères.")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Décrivez brièvement votre besoin.")]
+        [StringLength(1200, MinimumLength = 20, ErrorMessage = "Le message doit contenir entre 20 et 1200 caractères.")]
+        public string Message { get; set; } = string.Empty;
+    }
+}

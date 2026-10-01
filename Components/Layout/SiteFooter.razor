@@ -1,6 +1,31 @@
 @using Portfolio.Content
 
 <footer class="site-footer">
-    <p>Front-End .NET, UI/UX industrielle et interfaces data-oriented.</p>
-    <a href="@($"mailto:{LandingContent.ContactEmail}")">@LandingContent.ContactEmail</a>
+    <div class="site-footer__main">
+        <div class="site-footer__identity">
+            <a class="site-footer__brand" href="./">Merryl Bouchereau</a>
+            <p>@LandingContent.Positioning</p>
+            <span>@LandingContent.ContactAvailability</span>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Navigation de pied de page">
+            <strong>Explorer</strong>
+            @foreach (var link in LandingContent.PrimaryNavigationLinks)
+            {
+                <a href="@link.Href">@link.Label</a>
+            }
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="site-footer__contact">
+            <strong>Parlons de votre projet</strong>
+            <p>Un besoin métier, une interface à clarifier ou un design system à consolider.</p>
+            <a href="@($"mailto:{LandingContent.ContactEmail}")">@LandingContent.ContactEmail</a>
+        </div>
+    </div>
+
+    <div class="site-footer__bottom">
+        <span>© @DateTime.UtcNow.Year Merryl Bouchereau</span>
+        <a href="#top">Retour en haut</a>
+    </div>
 </footer>
