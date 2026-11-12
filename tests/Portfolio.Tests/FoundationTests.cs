@@ -69,6 +69,9 @@ public sealed class FoundationTests
 
         Assert.Contains("data-static-head name=\"description\"", indexHtml, StringComparison.Ordinal);
         Assert.Contains("data-static-head rel=\"canonical\"", indexHtml, StringComparison.Ordinal);
+        Assert.Contains("property=\"og:image\"", indexHtml, StringComparison.Ordinal);
+        Assert.Contains("name=\"twitter:card\" content=\"summary_large_image\"", indexHtml, StringComparison.Ordinal);
+        Assert.True(File.Exists(Path.Combine(root, "wwwroot", "images", "og-portfolio.jpg")));
         Assert.Contains("[data-static-head]", indexHtml, StringComparison.Ordinal);
         Assert.Contains("mkdir -p publish/wwwroot/projets/pilotage-atelier", workflow, StringComparison.Ordinal);
         Assert.Contains(
@@ -76,6 +79,7 @@ public sealed class FoundationTests
             workflow,
             StringComparison.Ordinal);
         Assert.Contains("property=\"og:type\" content=\"article\"", workflow, StringComparison.Ordinal);
+        Assert.Contains("content=\"https://frit1p3.github.io/Portfolio/\"", workflow, StringComparison.Ordinal);
     }
 
     [Fact]
