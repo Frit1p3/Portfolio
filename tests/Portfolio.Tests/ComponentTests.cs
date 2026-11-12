@@ -125,6 +125,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("top", header.Id);
         Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Contains("Merryl", cut.Markup);
+        Assert.Contains("Merryl Bouchereau - Retour à l'accueil", cut.Find(".site-header__brand").GetAttribute("aria-label"));
         Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
         Assert.Equal(5, navigationLinks.Count);
         Assert.Contains("#expertise", cut.Markup);
@@ -134,6 +135,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("#contact", cut.Markup);
         Assert.Equal("Me contacter", cut.Find(".button").TextContent);
         Assert.Equal("false", cut.Find(".site-header__menu").GetAttribute("aria-expanded"));
+        Assert.Equal("Menu de navigation - Ouvrir", cut.Find(".site-header__menu").GetAttribute("aria-label"));
     }
 
     [Fact]
@@ -688,6 +690,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Décrire votre besoin", section.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
+        Assert.Equal(3, cut.FindAll(".contact-section__highlight h3").Count);
         Assert.Contains("Audit UI métier", section.TextContent);
     }
 
