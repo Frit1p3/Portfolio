@@ -31,6 +31,8 @@
             <ProjectCard
                 Step="@project.Step"
                 Category="@project.Category"
+                Preview="@project.CategoryKey"
+                Featured="@(selectedFilter == "all" && project.Step == "01")"
                 Title="@project.Title"
                 Description="@project.Description"
                 Role="@project.Role"

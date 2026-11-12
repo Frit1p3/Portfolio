@@ -13,6 +13,34 @@
     align-items: stretch;
 }
 
+.case-study-section__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-16);
+    margin: 0;
+}
+
+.case-study-section__facts div {
+    display: grid;
+    gap: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 0 var(--space-16);
+}
+
+.case-study-section__facts dt {
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.case-study-section__facts dd {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+
 .case-study-section__disclosure {
     display: flex;
     align-items: center;
@@ -118,6 +146,50 @@
     gap: var(--space-12);
 }
 
+.case-study-section__priority {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    overflow: hidden;
+    border: 1px solid rgba(255, 209, 102, 0.32);
+    border-radius: var(--radius-8);
+    background: rgba(255, 209, 102, 0.08);
+    padding: var(--space-16);
+}
+
+.case-study-section__priority::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: #ffd166;
+    content: "";
+}
+
+.case-study-section__priority span,
+.case-study-section__priority small {
+    color: rgba(247, 251, 255, 0.58);
+    font-size: 0.75rem;
+}
+
+.case-study-section__priority strong {
+    color: var(--color-text-inverse);
+    font-size: var(--text-small);
+}
+
+.case-study-section__priority i {
+    width: fit-content;
+    margin-top: var(--space-8);
+    border-radius: 999px;
+    background: rgba(255, 209, 102, 0.14);
+    padding: var(--space-4) var(--space-8);
+    color: #ffe59a;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 800;
+}
+
 .case-study-section__metric {
     display: grid;
     align-content: center;
@@ -201,7 +273,8 @@
 @media (max-width: 900px) {
     .case-study-section__layout,
     .case-study-section__points,
-    .case-study-section__comparison {
+    .case-study-section__comparison,
+    .case-study-section__facts {
         grid-template-columns: 1fr;
     }
 }

@@ -13,6 +13,16 @@
         <p>@LandingContent.CaseStudyDisclosure</p>
     </aside>
 
+    <dl class="case-study-section__facts" aria-label="Informations clés de l'étude de cas">
+        @foreach (var fact in LandingContent.CaseStudyFacts)
+        {
+            <div>
+                <dt>@fact.Label</dt>
+                <dd>@fact.Value</dd>
+            </div>
+        }
+    </dl>
+
     <div class="case-study-section__layout">
         <article class="case-study-section__story" aria-label="Synthese de la preuve projet">
             <p>@LandingContent.CaseStudyContext</p>
@@ -46,6 +56,13 @@
                         <p>@metric.Detail</p>
                     </div>
                 }
+            </div>
+
+            <div class="case-study-section__priority" aria-label="Signal prioritaire">
+                <span>Signal prioritaire</span>
+                <strong>Écart qualité · Ligne 04</strong>
+                <small>Action requise avant le prochain cycle</small>
+                <i aria-hidden="true">Priorité haute</i>
             </div>
         </article>
     </div>

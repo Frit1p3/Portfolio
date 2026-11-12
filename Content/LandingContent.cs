@@ -318,6 +318,13 @@ public static class LandingContent
     public const string CaseStudyDisclosure =
         "Cas anonymisé : la structure, les libellés et les données ont été adaptés pour préserver le contexte client.";
 
+    public static readonly IReadOnlyList<CaseStudyFact> CaseStudyFacts = new[]
+    {
+        new CaseStudyFact("Rôle", "Conception UX & front-end"),
+        new CaseStudyFact("Périmètre", "ERP, atelier et reporting"),
+        new CaseStudyFact("Livrable", "Dashboard responsive")
+    };
+
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
         new CaseStudyPoint(
@@ -436,6 +443,8 @@ public sealed record ProjectUseCase(
     string Tone);
 
 public sealed record CaseStudyPoint(string Title, string Description, string Tone);
+
+public sealed record CaseStudyFact(string Label, string Value);
 
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
 

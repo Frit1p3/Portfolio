@@ -99,9 +99,14 @@ public sealed class ComponentTests : BunitContext
             .Add(component => component.Status, "Prototype validé")
             .Add(component => component.ActionLabel, "Voir la preuve")
             .Add(component => component.ActionHref, "#case-study")
-            .Add(component => component.Tone, "success"));
+            .Add(component => component.Tone, "success")
+            .Add(component => component.Preview, "operations")
+            .Add(component => component.Featured, true));
 
         Assert.Contains("project-card--success", cut.Find("article").ClassList);
+        Assert.Contains("project-card--featured", cut.Find("article").ClassList);
+        Assert.Contains("project-card__visual--operations", cut.Find(".project-card__visual").ClassList);
+        Assert.Equal(3, cut.FindAll(".project-card__preview-kpis > div").Count);
         Assert.Equal(2, cut.FindAll(".project-card__stack li").Count);
         Assert.Contains("Conception UX", cut.Markup);
         Assert.Contains("Décisions plus rapides", cut.Markup);
@@ -610,6 +615,10 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("usages industriels", section.TextContent);
         Assert.Equal(4, cut.FindAll(".projects-section__filter").Count);
         Assert.Equal(3, cut.FindAll(".project-card").Count);
+        Assert.Single(cut.FindAll(".project-card--featured"));
+        Assert.Single(cut.FindAll(".project-card__visual--operations"));
+        Assert.Single(cut.FindAll(".project-card__visual--integration"));
+        Assert.Single(cut.FindAll(".project-card__visual--data"));
         Assert.Contains("Pilotage atelier", section.TextContent);
         Assert.Contains("Flux ERP", section.TextContent);
         Assert.Contains("Reporting décisionnel", section.TextContent);
@@ -635,7 +644,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("équipes terrain", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
+        Assert.Equal(3, cut.FindAll(".case-study-section__facts > div").Count);
         Assert.Equal(2, cut.FindAll(".case-study-section__comparison-item").Count);
+        Assert.Contains("Écart qualité", cut.Find(".case-study-section__priority").TextContent);
         Assert.Contains("Cas anonymisé", section.TextContent);
         Assert.Contains("Lecture fragmentée", section.TextContent);
         Assert.Contains("Décision contextualisée", section.TextContent);
