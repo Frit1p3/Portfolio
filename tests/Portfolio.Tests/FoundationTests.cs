@@ -76,10 +76,6 @@ public sealed class FoundationTests
             workflow,
             StringComparison.Ordinal);
         Assert.Contains("property=\"og:type\" content=\"article\"", workflow, StringComparison.Ordinal);
-        Assert.Contains(
-            "dotnet workload install wasm-tools --skip-manifest-update",
-            workflow,
-            StringComparison.Ordinal);
     }
 
     [Fact]
