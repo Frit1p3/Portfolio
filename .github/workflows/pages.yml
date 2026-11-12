@@ -31,6 +31,9 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Install WebAssembly build tools
+        run: dotnet workload install wasm-tools --skip-manifest-update
+
       - name: Restore dependencies
         run: dotnet restore Portfolio.slnx
 
