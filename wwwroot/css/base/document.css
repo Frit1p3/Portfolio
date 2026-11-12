@@ -24,8 +24,31 @@ h3 {
     outline-offset: 3px;
 }
 
+h1[tabindex="-1"]:focus {
+    outline: none;
+}
+
+[data-reveal][data-reveal-ready] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity 520ms ease,
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal][data-reveal-ready].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    [data-reveal][data-reveal-ready] {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

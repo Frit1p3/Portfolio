@@ -4,6 +4,7 @@ using Portfolio.Components.Layout;
 using Portfolio.Components.Sections;
 using Portfolio.Components.UI;
 using Portfolio.Content;
+using Portfolio.Pages;
 
 namespace Portfolio.Tests;
 
@@ -653,6 +654,23 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Problème", section.TextContent);
         Assert.Contains("Réponse UX", section.TextContent);
         Assert.Contains("Livrable", section.TextContent);
+        Assert.Equal("projets/pilotage-atelier", cut.Find(".case-study-section__link").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void ProjectPilotageAtelier_composes_a_complete_and_honest_case_study()
+    {
+        var cut = Render<ProjectPilotageAtelier>();
+
+        Assert.Contains("Rendre les priorités atelier", cut.Find("h1").TextContent);
+        Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
+        Assert.Equal(3, cut.FindAll(".project-study__problem-grid article").Count);
+        Assert.Equal(3, cut.FindAll(".project-study__decisions li").Count);
+        Assert.Equal(3, cut.FindAll(".project-study__system-grid article").Count);
+        Assert.Equal(2, cut.FindAll(".project-study__outcome").Count);
+        Assert.Equal(4, cut.FindAll("[data-reveal]").Count);
+        Assert.Contains("sans inventer de résultat client", cut.Find("#project-outcome-title").TextContent);
+        Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 
     [Fact]

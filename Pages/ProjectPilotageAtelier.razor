@@ -1,0 +1,186 @@
+@page "/projets/pilotage-atelier"
+@using Portfolio.Content
+
+<PageTitle>Étude de cas Pilotage atelier - Merryl Bouchereau</PageTitle>
+
+<article class="project-study">
+    <header class="project-study__hero">
+        <div class="project-study__hero-inner">
+            <a class="project-study__back" href="./#projects">← Retour aux projets</a>
+
+            <div class="project-study__hero-grid">
+                <div class="project-study__hero-content">
+                    <span class="project-study__eyebrow">Étude de cas · Interface industrielle</span>
+                    <h1>Rendre les priorités atelier lisibles en quelques secondes</h1>
+                    <p>
+                        Une exploration produit pour réunir rendement, qualité et incidents dans une vue opérationnelle
+                        unique — sans perdre le contexte métier entre le signal et l'action.
+                    </p>
+                </div>
+
+                <dl class="project-study__summary" aria-label="Synthèse du projet">
+                    @foreach (var fact in LandingContent.CaseStudyFacts)
+                    {
+                        <div>
+                            <dt>@fact.Label</dt>
+                            <dd>@fact.Value</dd>
+                        </div>
+                    }
+                    <div>
+                        <dt>Socle</dt>
+                        <dd>Blazor · CSS · composants</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="project-study__dashboard" aria-label="Prototype du dashboard de pilotage atelier">
+                <aside class="project-study__dashboard-nav" aria-hidden="true">
+                    <strong>MB</strong>
+                    <span class="is-active"></span><span></span><span></span><span></span>
+                </aside>
+
+                <div class="project-study__dashboard-main">
+                    <header>
+                        <div>
+                            <span>Vue opérations</span>
+                            <strong>Priorités atelier</strong>
+                        </div>
+                        <span class="project-study__live"><i aria-hidden="true"></i>Données synchronisées</span>
+                    </header>
+
+                    <div class="project-study__dashboard-kpis">
+                        <div class="is-primary"><span>Rendement atelier</span><strong>87%</strong><small>+6 pts cette semaine</small></div>
+                        <div><span>Alertes critiques</span><strong>12</strong><small>3 à traiter en priorité</small></div>
+                        <div><span>Cycle moyen</span><strong>2,8 j</strong><small>Objectif : 3 jours</small></div>
+                    </div>
+
+                    <div class="project-study__dashboard-bottom">
+                        <div class="project-study__trend">
+                            <div><span>Évolution du rendement</span><small>7 derniers jours</small></div>
+                            <div class="project-study__trend-bars" aria-hidden="true">
+                                <i style="--height: 42%"></i><i style="--height: 56%"></i><i style="--height: 49%"></i>
+                                <i style="--height: 68%"></i><i style="--height: 61%"></i><i style="--height: 82%"></i><i style="--height: 88%"></i>
+                            </div>
+                        </div>
+                        <div class="project-study__alert">
+                            <span>Priorité haute</span>
+                            <strong>Écart qualité · Ligne 04</strong>
+                            <small>Action requise avant le prochain cycle</small>
+                            <button type="button" tabindex="-1">Voir l'action</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-study__section project-study__section--intro" data-reveal aria-labelledby="project-context-title">
+        <div class="project-study__section-label">01 · Contexte</div>
+        <div class="project-study__section-content">
+            <h2 id="project-context-title">Le problème n'était pas le manque de données, mais leur dispersion.</h2>
+            <p class="project-study__lead">
+                ERP, suivi atelier et reporting présentaient chacun une partie de la situation. Les équipes devaient
+                rapprocher mentalement plusieurs écrans avant de comprendre la priorité du jour.
+            </p>
+
+            <div class="project-study__problem-grid">
+                <article>
+                    <span>Situation initiale</span>
+                    <h3>Une lecture fragmentée</h3>
+                    <p>Des statuts et KPI consultés dans des outils séparés, avec des niveaux de détail différents.</p>
+                </article>
+                <article>
+                    <span>Risque métier</span>
+                    <h3>Une décision retardée</h3>
+                    <p>Le temps consacré à reconstituer le contexte ralentit l'identification de la prochaine action.</p>
+                </article>
+                <article>
+                    <span>Objectif UX</span>
+                    <h3>Une priorité explicite</h3>
+                    <p>Faire tenir statut, criticité, preuve et action attendue dans une même lecture.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="project-decisions-title">
+        <div class="project-study__section-label">02 · Décisions UX</div>
+        <div class="project-study__section-content">
+            <h2 id="project-decisions-title">Trois décisions pour réduire la charge cognitive.</h2>
+
+            <ol class="project-study__decisions">
+                <li>
+                    <span>01</span>
+                    <div>
+                        <h3>Hiérarchiser avant de détailler</h3>
+                        <p>Une synthèse courte installe la situation ; le détail reste disponible sans bloquer la lecture initiale.</p>
+                    </div>
+                    <strong>Lecture en deux niveaux</strong>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div>
+                        <h3>Associer chaque signal à une action</h3>
+                        <p>Les alertes indiquent leur criticité et la prochaine action plutôt qu'un statut isolé.</p>
+                    </div>
+                    <strong>Signal → preuve → action</strong>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div>
+                        <h3>Conserver le contexte entre les sources</h3>
+                        <p>ERP, atelier et reporting alimentent une lecture commune sans exposer leur complexité technique.</p>
+                    </div>
+                    <strong>3 sources, 1 lecture</strong>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="project-study__section project-study__section--dark" data-reveal aria-labelledby="project-system-title">
+        <div class="project-study__section-label">03 · Système d'interface</div>
+        <div class="project-study__section-content">
+            <h2 id="project-system-title">Un langage visuel conçu pour rester lisible sous contrainte.</h2>
+            <p class="project-study__lead">
+                La couleur signale un état, jamais une décoration. Les composants partagent les mêmes règles de densité,
+                de contraste et de hiérarchie pour faciliter la maintenance comme l'usage terrain.
+            </p>
+
+            <div class="project-study__system-grid">
+                <article><span>Composants</span><strong>KPI, alertes, statuts, filtres</strong><p>Des blocs réutilisables avec des responsabilités visuelles explicites.</p></article>
+                <article><span>Accessibilité</span><strong>Contrastes et focus visibles</strong><p>La couleur n'est jamais le seul moyen de comprendre une priorité.</p></article>
+                <article><span>Front-end</span><strong>Blazor et CSS piloté par tokens</strong><p>Une structure maintenable, testable et compatible avec le responsive.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="project-outcome-title">
+        <div class="project-study__section-label">04 · Résultat</div>
+        <div class="project-study__section-content">
+            <h2 id="project-outcome-title">Une preuve de conception, sans inventer de résultat client.</h2>
+            <p class="project-study__lead">
+                Le cas étant anonymisé, les données présentées démontrent le modèle de lecture et les décisions UX.
+                Elles ne sont pas présentées comme des mesures de production réelles.
+            </p>
+
+            <div class="project-study__outcomes">
+                @foreach (var comparison in LandingContent.CaseStudyComparisons)
+                {
+                    <article class="project-study__outcome project-study__outcome--@comparison.Tone">
+                        <span>@comparison.Label</span>
+                        <h3>@comparison.Title</h3>
+                        <p>@comparison.Description</p>
+                    </article>
+                }
+            </div>
+
+            <div class="project-study__next">
+                <div>
+                    <span>Un besoin similaire ?</span>
+                    <h2>Clarifions les signaux, les décisions et les actions attendues.</h2>
+                </div>
+                <Button Href="./#contact">Échanger sur votre interface</Button>
+            </div>
+        </div>
+    </section>
+</article>

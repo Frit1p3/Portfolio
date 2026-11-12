@@ -340,6 +340,47 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
     }
 
+    [Fact]
+    public async Task Project_case_study_exposes_complete_narrative_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/pilotage-atelier").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rendre les priorités atelier lisibles en quelques secondes" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".project-study__dashboard")).ToBeVisibleAsync();
+            Assert.Equal(3, await page.Locator(".project-study__decisions li").CountAsync());
+            Assert.Equal(3, await page.Locator(".project-study__system-grid article").CountAsync());
+            Assert.Equal(2, await page.Locator(".project-study__outcome").CountAsync());
+            Assert.Equal(4, await page.Locator("[data-reveal]").CountAsync());
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"Case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
     private static bool TryGetBaseUrl(out string baseUrl)
     {
         baseUrl = Environment.GetEnvironmentVariable("PORTFOLIO_BASE_URL") ?? string.Empty;

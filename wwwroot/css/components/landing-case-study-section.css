@@ -240,6 +240,28 @@
     font-size: var(--text-small);
 }
 
+.case-study-section__link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: var(--space-8);
+    color: var(--color-brand);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.case-study-section__link span {
+    transition: transform 180ms ease;
+}
+
+.case-study-section__link:hover {
+    color: var(--color-accent-strong, #087f8c);
+}
+
+.case-study-section__link:hover span {
+    transform: translateX(4px);
+}
+
 .case-study-section__metric--accent {
     border-color: rgba(22, 191, 209, 0.34);
 }

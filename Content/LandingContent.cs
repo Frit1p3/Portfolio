@@ -273,8 +273,8 @@ public static class LandingContent
             new[] { "Blazor", "KPI", "Temps réel" },
             "Une lecture priorisée des écarts et des actions attendues",
             "Prototype validé",
-            "Voir la preuve",
-            "#case-study",
+            "Lire l'étude de cas",
+            "projets/pilotage-atelier",
             "success"),
         new ProjectUseCase(
             "02",
