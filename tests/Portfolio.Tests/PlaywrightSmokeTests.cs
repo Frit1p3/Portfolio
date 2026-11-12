@@ -301,6 +301,10 @@ public sealed class PlaywrightSmokeTests
             "https://frit1p3.github.io/Portfolio/",
             await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
         Assert.Equal("website", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+        Assert.Equal(
+            "https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg",
+            await page.Locator("meta[property='og:image']").GetAttributeAsync("content"));
+        Assert.Equal("summary_large_image", await page.Locator("meta[name='twitter:card']").GetAttributeAsync("content"));
         Assert.Equal("#091521", await page.Locator("meta[name='theme-color']").GetAttributeAsync("content"));
         Assert.Equal("/", await page.Locator("base").GetAttributeAsync("href"));
         await Expect(page.GetByRole(AriaRole.Heading, new() { Level = 1 })).ToBeVisibleAsync();
@@ -385,6 +389,10 @@ public sealed class PlaywrightSmokeTests
                 "https://frit1p3.github.io/Portfolio/projets/pilotage-atelier",
                 await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
             Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg",
+                await page.Locator("meta[property='og:image']").GetAttributeAsync("content"));
+            Assert.Equal("summary_large_image", await page.Locator("meta[name='twitter:card']").GetAttributeAsync("content"));
 
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1, $"Case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
