@@ -297,6 +297,10 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(
             "Portfolio Front-End .NET pour interfaces industrielles, dashboards métier et outils terrain B2B.",
             await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+        Assert.Equal(
+            "https://frit1p3.github.io/Portfolio/",
+            await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+        Assert.Equal("website", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
         Assert.Equal("#091521", await page.Locator("meta[name='theme-color']").GetAttributeAsync("content"));
         Assert.Equal("/", await page.Locator("base").GetAttributeAsync("href"));
         await Expect(page.GetByRole(AriaRole.Heading, new() { Level = 1 })).ToBeVisibleAsync();
@@ -373,6 +377,14 @@ public sealed class PlaywrightSmokeTests
             Assert.Equal(3, await page.Locator(".project-study__system-grid article").CountAsync());
             Assert.Equal(2, await page.Locator(".project-study__outcome").CountAsync());
             Assert.Equal(4, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/pilotage-atelier",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
 
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1, $"Case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
