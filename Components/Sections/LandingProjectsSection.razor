@@ -1,6 +1,6 @@
 @using Portfolio.Content
 
-<section class="projects-section" id="projects" aria-labelledby="projects-section-title">
+<section class="projects-section" id="projects" data-reveal aria-labelledby="projects-section-title">
     <SectionHeader
         Eyebrow="@LandingContent.ProjectsEyebrow"
         Title="@LandingContent.ProjectsTitle"
@@ -31,6 +31,8 @@
             <ProjectCard
                 Step="@project.Step"
                 Category="@project.Category"
+                Preview="@project.CategoryKey"
+                Featured="@(selectedFilter == "all" && project.Step == "01")"
                 Title="@project.Title"
                 Description="@project.Description"
                 Role="@project.Role"

@@ -1,34 +1,98 @@
-<article class="project-card project-card--@Tone" aria-label="@($"{Title} - {Category}")">
-    <div class="project-card__header">
-        <span class="project-card__index">@Step</span>
-        <span class="project-card__status">@Status</span>
-    </div>
-
-    <div class="project-card__content">
-        <p class="project-card__category">@Category</p>
-        <h3>@Title</h3>
-        <p class="project-card__description">@Description</p>
-    </div>
-
-    <dl class="project-card__details">
-        <div>
-            <dt>Rôle</dt>
-            <dd>@Role</dd>
+<article class="@CardClass" aria-label="@($"{Title} - {Category}")">
+    <div class="project-card__visual project-card__visual--@Preview" aria-hidden="true">
+        <div class="project-card__window-bar">
+            <span></span><span></span><span></span>
+            <small>@PreviewLabel</small>
         </div>
-        <div>
-            <dt>Impact</dt>
-            <dd>@Impact</dd>
-        </div>
-    </dl>
 
-    <ul class="project-card__stack" aria-label="Technologies et domaines associés">
-        @foreach (var item in Stack)
+        @if (Preview == "operations")
         {
-            <li>@item</li>
+            <div class="project-card__operations-preview">
+                <div class="project-card__preview-sidebar">
+                    <i></i><i></i><i></i><i></i>
+                </div>
+                <div class="project-card__preview-content">
+                    <div class="project-card__preview-heading"><span></span><i></i></div>
+                    <div class="project-card__preview-kpis">
+                        <div><small>OEE</small><strong>87%</strong></div>
+                        <div><small>Alertes</small><strong>12</strong></div>
+                        <div><small>Cycle</small><strong>2,8 j</strong></div>
+                    </div>
+                    <div class="project-card__preview-chart">
+                        <span style="--bar-height: 44%"></span>
+                        <span style="--bar-height: 62%"></span>
+                        <span style="--bar-height: 54%"></span>
+                        <span style="--bar-height: 78%"></span>
+                        <span style="--bar-height: 68%"></span>
+                        <span style="--bar-height: 88%"></span>
+                    </div>
+                </div>
+            </div>
         }
-    </ul>
+        else if (Preview == "integration")
+        {
+            <div class="project-card__flow-preview">
+                <div class="project-card__flow-node"><i></i><span>ERP</span><small>Commandes</small></div>
+                <div class="project-card__flow-line"><span></span></div>
+                <div class="project-card__flow-node project-card__flow-node--active"><i></i><span>API</span><small>Synchronisation</small></div>
+                <div class="project-card__flow-line"><span></span></div>
+                <div class="project-card__flow-node"><i></i><span>Atelier</span><small>Temps réel</small></div>
+            </div>
+        }
+        else
+        {
+            <div class="project-card__reporting-preview">
+                <div class="project-card__reporting-summary">
+                    <span>Performance consolidée</span>
+                    <strong>+18%</strong>
+                    <small>vs période précédente</small>
+                </div>
+                <div class="project-card__reporting-bars">
+                    <span style="--bar-height: 36%"></span>
+                    <span style="--bar-height: 52%"></span>
+                    <span style="--bar-height: 46%"></span>
+                    <span style="--bar-height: 72%"></span>
+                    <span style="--bar-height: 64%"></span>
+                    <span style="--bar-height: 86%"></span>
+                </div>
+            </div>
+        }
+    </div>
 
-    <a class="project-card__link" href="@ActionHref">@ActionLabel</a>
+    <div class="project-card__body">
+        <div class="project-card__header">
+            <span class="project-card__index">@Step</span>
+            <span class="project-card__status">@Status</span>
+        </div>
+
+        <div class="project-card__content">
+            <p class="project-card__category">@Category</p>
+            <h3>@Title</h3>
+            <p class="project-card__description">@Description</p>
+        </div>
+
+        <dl class="project-card__details">
+            <div>
+                <dt>Rôle</dt>
+                <dd>@Role</dd>
+            </div>
+            <div>
+                <dt>Résultat attendu</dt>
+                <dd>@Impact</dd>
+            </div>
+        </dl>
+
+        <ul class="project-card__stack" aria-label="Technologies et domaines associés">
+            @foreach (var item in Stack)
+            {
+                <li>@item</li>
+            }
+        </ul>
+
+        <a class="project-card__link" href="@ActionHref">
+            @ActionLabel <span aria-hidden="true">→</span>
+        </a>
+    </div>
 </article>
 
 @code {
@@ -64,4 +128,19 @@
 
     [Parameter]
     public string Tone { get; set; } = "neutral";
+
+    [Parameter]
+    public string Preview { get; set; } = "operations";
+
+    [Parameter]
+    public bool Featured { get; set; }
+
+    private string CardClass => $"project-card project-card--{Tone}{(Featured ? " project-card--featured" : string.Empty)}";
+
+    private string PreviewLabel => Preview switch
+    {
+        "integration" => "Flux synchronisés",
+        "data" => "Reporting décisionnel",
+        _ => "Vue opérations"
+    };
 }

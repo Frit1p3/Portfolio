@@ -1,6 +1,6 @@
 @using Portfolio.Content
 
-<section class="case-study-section" id="case-study" aria-labelledby="case-study-section-title">
+<section class="case-study-section" id="case-study" data-reveal aria-labelledby="case-study-section-title">
     <SectionHeader
         Eyebrow="@LandingContent.CaseStudyEyebrow"
         Title="@LandingContent.CaseStudyTitle"
@@ -12,6 +12,16 @@
         <Badge Tone="accent">Preuve contextualisée</Badge>
         <p>@LandingContent.CaseStudyDisclosure</p>
     </aside>
+
+    <dl class="case-study-section__facts" aria-label="Informations clés de l'étude de cas">
+        @foreach (var fact in LandingContent.CaseStudyFacts)
+        {
+            <div>
+                <dt>@fact.Label</dt>
+                <dd>@fact.Value</dd>
+            </div>
+        }
+    </dl>
 
     <div class="case-study-section__layout">
         <article class="case-study-section__story" aria-label="Synthese de la preuve projet">
@@ -47,6 +57,13 @@
                     </div>
                 }
             </div>
+
+            <div class="case-study-section__priority" aria-label="Signal prioritaire">
+                <span>Signal prioritaire</span>
+                <strong>Écart qualité · Ligne 04</strong>
+                <small>Action requise avant le prochain cycle</small>
+                <i aria-hidden="true">Priorité haute</i>
+            </div>
         </article>
     </div>
 
@@ -60,4 +77,8 @@
             </article>
         }
     </div>
+
+    <a class="case-study-section__link" href="projets/pilotage-atelier">
+        Lire l'étude de cas complète <span aria-hidden="true">→</span>
+    </a>
 </section>

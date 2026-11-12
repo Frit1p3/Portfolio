@@ -25,6 +25,7 @@
 @import url("components/landing-case-study-section.css");
 @import url("components/landing-contact-section.css");
 @import url("pages/home.css");
+@import url("pages/project-case-study.css");
 
 #blazor-error-ui {
     color-scheme: light only;
