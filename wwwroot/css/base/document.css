@@ -1,3 +1,8 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 92px;
+}
+
 body {
     min-width: 320px;
     background: var(--color-background);
@@ -17,4 +22,10 @@ h3 {
 :focus-visible {
     outline: 3px solid var(--color-accent);
     outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }

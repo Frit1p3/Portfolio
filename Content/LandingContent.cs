@@ -7,20 +7,19 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
     {
-        new NavigationLink("Expertise", "#expertise"),
-        new NavigationLink("Démo", "#proof"),
-        new NavigationLink("Méthode", "#approach"),
         new NavigationLink("Projets", "#projects"),
-        new NavigationLink("Étude de cas", "#case-study")
+        new NavigationLink("Étude de cas", "#case-study"),
+        new NavigationLink("Expertise", "#expertise"),
+        new NavigationLink("Méthode", "#approach")
     };
 
-    public const string HeroEyebrow = "Portfolio applicatif";
+    public const string HeroEyebrow = "Front-End .NET · UI/UX industriel";
 
     public const string HeroTitle =
         "Interfaces industrielles qui rendent la donnée actionnable";
 
     public const string HeroIntro =
-        "Développeur Front-End .NET, je conçois des expériences B2B où dashboards, design systems et contraintes terrain convergent vers des décisions plus rapides";
+        "Je transforme des flux métier complexes en interfaces B2B claires, accessibles et maintenables — du cadrage UX à l'industrialisation Blazor.";
 
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {

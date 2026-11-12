@@ -3,7 +3,7 @@
     width: min(1120px, calc(100% - 32px));
     margin: 0 auto;
     gap: var(--space-32);
-    padding: 0 0 var(--space-96);
+    padding: var(--space-96) 0;
 }
 
 .projects-section__filters {
@@ -71,7 +71,7 @@
 @media (max-width: 560px) {
     .projects-section {
         width: min(100% - 24px, 1120px);
-        padding-bottom: var(--space-64);
+        padding: var(--space-64) 0;
     }
 
     .projects-section__filters {
