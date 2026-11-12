@@ -55,7 +55,7 @@
     padding: var(--space-12) var(--space-16);
 }
 
-.contact-section__highlight h4 {
+.contact-section__highlight h3 {
     color: var(--color-text-primary);
     font-size: var(--text-small);
 }

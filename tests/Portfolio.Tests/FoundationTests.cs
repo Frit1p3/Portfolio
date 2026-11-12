@@ -61,6 +61,24 @@ public sealed class FoundationTests
     }
 
     [Fact]
+    public void GitHub_pages_emits_static_metadata_and_a_real_case_study_route()
+    {
+        var root = FindRepositoryRoot();
+        var indexHtml = File.ReadAllText(Path.Combine(root, "wwwroot", "index.html"));
+        var workflow = File.ReadAllText(Path.Combine(root, ".github", "workflows", "pages.yml"));
+
+        Assert.Contains("data-static-head name=\"description\"", indexHtml, StringComparison.Ordinal);
+        Assert.Contains("data-static-head rel=\"canonical\"", indexHtml, StringComparison.Ordinal);
+        Assert.Contains("[data-static-head]", indexHtml, StringComparison.Ordinal);
+        Assert.Contains("mkdir -p publish/wwwroot/projets/pilotage-atelier", workflow, StringComparison.Ordinal);
+        Assert.Contains(
+            "cp publish/wwwroot/index.html publish/wwwroot/projets/pilotage-atelier/index.html",
+            workflow,
+            StringComparison.Ordinal);
+        Assert.Contains("property=\"og:type\" content=\"article\"", workflow, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Css_entrypoint_imports_foundation_layers()
     {
         var root = FindRepositoryRoot();

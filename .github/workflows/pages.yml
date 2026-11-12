@@ -56,6 +56,15 @@ jobs:
         run: |
           sed -i 's#<base href="/" />#<base href="/Portfolio/" />#g' publish/wwwroot/index.html
           cp publish/wwwroot/index.html publish/wwwroot/404.html
+          mkdir -p publish/wwwroot/projets/pilotage-atelier
+          cp publish/wwwroot/index.html publish/wwwroot/projets/pilotage-atelier/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Interfaces industrielles .NET#Étude de cas Pilotage atelier - Merryl Bouchereau#g' \
+            -e 's#Portfolio Front-End .NET pour interfaces industrielles, dashboards métier et outils terrain B2B.#Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable.#g' \
+            -e 's#Conception UX et développement Blazor pour interfaces industrielles, dashboards métier et outils terrain B2B.#Du signal dispersé à une priorité explicite : décisions UX, composants et architecture front-end d’un dashboard industriel.#g' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#https://frit1p3.github.io/Portfolio/#https://frit1p3.github.io/Portfolio/projets/pilotage-atelier#g' \
+            publish/wwwroot/projets/pilotage-atelier/index.html
           touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact
