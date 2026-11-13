@@ -625,6 +625,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Portail de Business Intelligence", section.TextContent);
         Assert.Contains("POC d'architecture décisionnelle SSIS", section.TextContent);
         Assert.Contains("Chaîne de livraison CI/CD", section.TextContent);
+        var biCard = cut.FindAll(".project-card")
+            .Single(card => card.TextContent.Contains("Portail de Business Intelligence", StringComparison.Ordinal));
+        Assert.Equal("projets/portail-bi", biCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
         var ssisCard = cut.FindAll(".project-card")
             .Single(card => card.TextContent.Contains("POC d'architecture décisionnelle SSIS", StringComparison.Ordinal));
         Assert.Equal("projets/poc-ssis", ssisCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
@@ -647,19 +650,19 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--wide", cut.Find(".section-header").ClassList);
         Assert.Contains("portail BI", section.TextContent);
-        Assert.Contains("visualisations de données de production", section.TextContent);
+        Assert.Contains("ancien outil de reporting", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__facts > div").Count);
         Assert.Equal(2, cut.FindAll(".case-study-section__comparison-item").Count);
-        Assert.Contains("Filtres, tableaux", cut.Find(".case-study-section__priority").TextContent);
+        Assert.Contains("Filtres avancés", cut.Find(".case-study-section__priority").TextContent);
         Assert.Contains("Expérience professionnelle anonymisée", section.TextContent);
-        Assert.Contains("Accéder à la donnée", section.TextContent);
-        Assert.Contains("écrans complets", section.TextContent);
+        Assert.Contains("Remplacer un reporting", section.TextContent);
+        Assert.Contains("portail en production", section.TextContent);
         Assert.Contains("Besoin", section.TextContent);
         Assert.Contains("Réalisation", section.TextContent);
         Assert.Contains("Valeur vérifiée", section.TextContent);
-        Assert.Equal("#contact", cut.Find(".case-study-section__link").GetAttribute("href"));
+        Assert.Equal("projets/portail-bi", cut.Find(".case-study-section__link").GetAttribute("href"));
     }
 
     [Fact]
@@ -698,6 +701,26 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(5, cut.FindAll("[data-reveal]").Count);
         Assert.Contains("Aucun gain de temps", cut.Find("#ssis-outcome-title").ParentElement?.TextContent);
         Assert.Contains("volontairement anonymisés", cut.Find(".ssis-study__confidentiality").TextContent);
+        Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void ProjectPortailBi_composes_a_factual_production_case_study()
+    {
+        var cut = Render<ProjectPortailBi>();
+
+        Assert.Contains("Rendre les données industrielles accessibles", cut.Find("h1").TextContent);
+        Assert.Contains("Produit en production", cut.Find(".project-study__eyebrow").TextContent);
+        Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
+        Assert.Single(cut.FindAll(".bi-screen"));
+        Assert.Equal(4, cut.FindAll(".bi-study__uses article").Count);
+        Assert.Equal(4, cut.FindAll(".bi-study__decisions li").Count);
+        Assert.Equal(3, cut.FindAll(".bi-study__architecture article").Count);
+        Assert.Equal(3, cut.FindAll(".bi-study__system-grid article").Count);
+        Assert.Equal(4, cut.FindAll(".bi-study__outcomes .project-study__outcome").Count);
+        Assert.Equal(5, cut.FindAll("[data-reveal]").Count);
+        Assert.Contains("aucune mesure d'usage", cut.Find("#bi-outcome-title").ParentElement?.TextContent);
+        Assert.Contains("reconstitution anonymisée", cut.Find(".bi-study__confidentiality").TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 

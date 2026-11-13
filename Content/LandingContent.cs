@@ -271,10 +271,10 @@ public static class LandingContent
             "Concevoir et développer des visualisations de données de production adaptées au périmètre de chaque service",
             "Développeur Full-Stack à dominante Front-End",
             new[] { "Blazor", ".NET 9/10", "MudBlazor", "Figma" },
-            "Écrans complets, filtres, tableaux et exploration structurée des données",
-            "Expérience professionnelle",
-            "Voir la preuve Front-End",
-            "#case-study",
+            "Plusieurs interfaces métier déployées : tableaux, filtres, graphiques et exports",
+            "En production · évolution continue",
+            "Lire l'étude de cas",
+            "projets/portail-bi",
             "success"),
         new ProjectUseCase(
             "02",
@@ -310,55 +310,55 @@ public static class LandingContent
         "Concevoir un portail BI adapté aux besoins de chaque service";
 
     public const string CaseStudyIntro =
-        "Une expérience réelle de développement Full-Stack à dominante Front-End, présentée sans résultat chiffré non documenté";
+        "Un produit interne en production, développé de la demande métier à la livraison sans inventer de résultat chiffré";
 
     public const string CaseStudyContext =
-        "Le portail organise l'accès à des visualisations de données de production selon le périmètre des services. Mon rôle a couvert la conception d'écrans, les interactions d'exploration et les éléments Full-Stack nécessaires à leur fonctionnement.";
+        "Le portail remplace progressivement un ancien outil de reporting. Mon rôle a couvert la traduction des besoins, les maquettes, les composants Blazor responsive, l'intégration des données et la livraison.";
 
     public const string CaseStudyDisclosure =
-        "Expérience professionnelle anonymisée : seuls le rôle, le périmètre livré et les technologies confirmées sont présentés. Aucun gain chiffré n'est revendiqué.";
+        "Expérience professionnelle anonymisée : produit en production et résultats qualitatifs documentés, sans donnée industrielle ni gain chiffré exposé.";
 
     public static readonly IReadOnlyList<CaseStudyFact> CaseStudyFacts = new[]
     {
         new CaseStudyFact("Rôle", "Full-Stack à dominante Front-End"),
-        new CaseStudyFact("Nature", "Expérience professionnelle"),
-        new CaseStudyFact("Socle", "Blazor · .NET 9/10 · MudBlazor · Figma")
+        new CaseStudyFact("État", "En production · évolution continue"),
+        new CaseStudyFact("Socle", "Blazor · .NET · MudBlazor · SQL/LINQ")
     };
 
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
         new CaseStudyPoint(
             "Besoin",
-            "Donner à chaque service un accès adapté aux visualisations de ses données d'analyse de production",
+            "Rétablir un accès opérationnel aux données après l'arrêt progressif de l'ancien reporting",
             "warning"),
         new CaseStudyPoint(
             "Réalisation",
-            "Construire des écrans complets avec filtres, tableaux et interactions d'exploration",
+            "Construire des écrans responsive, filtres avancés, graphiques et exports adaptés aux services",
             "accent"),
         new CaseStudyPoint(
             "Valeur vérifiée",
-            "Mettre à disposition les visualisations dans un portail dédié, sans inventer d'impact mesuré",
+            "Plusieurs interfaces métier déployées dans un portail déjà en production",
             "success")
     };
 
     public static readonly IReadOnlyList<CaseStudyMetric> CaseStudyMetrics = new[]
     {
-        new CaseStudyMetric("BI", "visualisations par service", "accès organisé selon le périmètre", "accent"),
-        new CaseStudyMetric(".NET", "socle applicatif", "Blazor, .NET 9/10 et MudBlazor", "success"),
-        new CaseStudyMetric("UX", "exploration structurée", "filtres, tableaux et écrans complets", "warning")
+        new CaseStudyMetric("Tables", "détail manipulable", "filtres multiples et recherche", "accent"),
+        new CaseStudyMetric("Charts", "lecture synthétique", "graphiques dynamiques par usage", "success"),
+        new CaseStudyMetric("Exports", "continuité bureautique", "sorties PDF et CSV", "warning")
     };
 
     public static readonly IReadOnlyList<CaseStudyComparison> CaseStudyComparisons = new[]
     {
         new CaseStudyComparison(
             "Besoin",
-            "Accéder à la donnée selon son périmètre",
-            "Chaque service doit pouvoir consulter des visualisations adaptées à ses usages d'analyse de production.",
+            "Remplacer un reporting devenu indisponible",
+            "La transformation de l'ERP impose de maintenir un accès fiable aux données utiles aux services.",
             "warning"),
         new CaseStudyComparison(
             "Livré",
-            "Des écrans complets et manipulables",
-            "Le portail réunit visualisations, filtres et tableaux dans une interface développée en environnement .NET.",
+            "Un portail en production et évolutif",
+            "Plusieurs interfaces réunissent tableaux, graphiques, filtres, exports et droits d'accès en environnement .NET.",
             "success")
     };
 

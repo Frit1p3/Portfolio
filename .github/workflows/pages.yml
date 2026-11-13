@@ -76,6 +76,16 @@ jobs:
             -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
             -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
             publish/wwwroot/projets/poc-ssis/index.html
+          mkdir -p publish/wwwroot/projets/portail-bi
+          cp publish/wwwroot/index.html publish/wwwroot/projets/portail-bi/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Applications métier .NET#Portail BI industriel en Blazor - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Étude de cas d’un portail BI industriel en production : écrans Blazor, filtres, graphiques, exports et intégrations Full-Stack."#' \
+            -e '/og.description/ s#content="[^"]*"#content="Conception et développement Full-Stack à dominante Front-End d’un portail de reporting interne en production."#' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
+            -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
+            publish/wwwroot/projets/portail-bi/index.html
           touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact

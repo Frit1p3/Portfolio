@@ -1,0 +1,250 @@
+@page "/projets/portail-bi"
+
+<PageTitle>Portail BI industriel en Blazor - Merryl Bouchereau</PageTitle>
+
+<HeadContent>
+    <meta name="description" content="Étude de cas d'un portail BI industriel en production : écrans Blazor responsive, filtres avancés, graphiques, exports et intégrations Full-Stack." />
+    <link rel="canonical" href="https://frit1p3.github.io/Portfolio/projets/portail-bi" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Portail BI industriel en Blazor - Merryl Bouchereau" />
+    <meta property="og:description" content="Conception et développement Full-Stack à dominante Front-End d'un portail de reporting interne en production." />
+    <meta property="og:url" content="https://frit1p3.github.io/Portfolio/projets/portail-bi" />
+    <meta property="og:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Merryl Bouchereau — Portail BI et interfaces métier .NET" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta name="twitter:image:alt" content="Merryl Bouchereau — Portail BI et interfaces métier .NET" />
+</HeadContent>
+
+<article class="project-study bi-study">
+    <header class="project-study__hero">
+        <div class="project-study__hero-inner">
+            <a class="project-study__back" href="./#projects">← Retour aux projets</a>
+
+            <div class="project-study__hero-grid">
+                <div class="project-study__hero-content">
+                    <span class="project-study__eyebrow">Expérience professionnelle · Produit en production</span>
+                    <h1>Rendre les données industrielles accessibles dans un portail BI</h1>
+                    <p>
+                        Contribution Full-Stack à dominante Front-End à un produit interne conçu pour remplacer
+                        progressivement un ancien outil de reporting et restituer à chaque service les données utiles à son activité.
+                    </p>
+                </div>
+
+                <dl class="project-study__summary" aria-label="Synthèse du projet">
+                    <div>
+                        <dt>État documenté</dt>
+                        <dd>En production · évolution continue</dd>
+                    </div>
+                    <div>
+                        <dt>Rôle</dt>
+                        <dd>Full-Stack à dominante Front-End</dd>
+                    </div>
+                    <div>
+                        <dt>Utilisateurs</dt>
+                        <dd>Services métier et direction</dd>
+                    </div>
+                    <div>
+                        <dt>Socle</dt>
+                        <dd>Blazor · .NET · MudBlazor</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="bi-screen" aria-label="Reconstitution anonymisée d'un écran du portail BI avec données de démonstration">
+                <aside class="bi-screen__nav" aria-hidden="true">
+                    <strong>BI</strong>
+                    <span class="is-active">Vue</span>
+                    <span>KPI</span>
+                    <span>Exports</span>
+                </aside>
+
+                <div class="bi-screen__main">
+                    <header class="bi-screen__header">
+                        <div>
+                            <span>Analyse métier</span>
+                            <strong>Suivi fournisseurs</strong>
+                        </div>
+                        <span class="bi-screen__profile"><i aria-hidden="true"></i>Profil autorisé</span>
+                    </header>
+
+                    <div class="bi-screen__filters" aria-label="Exemple de filtres disponibles">
+                        <span><small>Période</small><strong>Plage sélectionnée</strong></span>
+                        <span><small>Fournisseur</small><strong>Tous</strong></span>
+                        <span><small>Recherche</small><strong>Filtrer les résultats</strong></span>
+                        <button type="button" tabindex="-1">Exporter en PDF</button>
+                    </div>
+
+                    <div class="bi-screen__content">
+                        <div class="bi-screen__chart" aria-hidden="true">
+                            <header><strong>Évolution des indicateurs</strong><small>Données de démonstration</small></header>
+                            <div class="bi-screen__bars">
+                                <i style="--bar: 42%"></i><i style="--bar: 66%"></i><i style="--bar: 54%"></i>
+                                <i style="--bar: 78%"></i><i style="--bar: 63%"></i><i style="--bar: 84%"></i>
+                            </div>
+                        </div>
+
+                        <div class="bi-screen__table" aria-hidden="true">
+                            <header><strong>Détail filtré</strong><small>Vue responsive</small></header>
+                            <div class="bi-screen__table-head"><span>Référence</span><span>État</span><span>Tendance</span></div>
+                            <div><span>Élément A</span><span class="is-success">Conforme</span><span>Stable</span></div>
+                            <div><span>Élément B</span><span class="is-warning">À suivre</span><span>Évolution</span></div>
+                            <div><span>Élément C</span><span class="is-success">Conforme</span><span>Stable</span></div>
+                        </div>
+                    </div>
+
+                    <p class="bi-screen__disclaimer">Reconstitution anonymisée — aucune donnée de production réelle</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-study__section" data-reveal aria-labelledby="bi-context-title">
+        <div class="project-study__section-label">01 · Contexte</div>
+        <div class="project-study__section-content">
+            <h2 id="bi-context-title">Maintenir l'accès au reporting pendant une transformation du SI.</h2>
+            <p class="project-study__lead">
+                La modernisation de l'ERP et l'abandon de l'ancien outil de reporting créaient un manque applicatif.
+                Le portail devait rétablir un accès fiable et lisible aux données de production, tout en restant assez
+                flexible pour suivre des procédés et des besoins métier qui évoluent régulièrement.
+            </p>
+
+            <div class="project-study__problem-grid">
+                <article>
+                    <span>Continuité</span>
+                    <h3>Remplacer progressivement l'ancien outil</h3>
+                    <p>Déployer les restitutions utiles sans attendre une refonte globale de tous les usages.</p>
+                </article>
+                <article>
+                    <span>Compréhension</span>
+                    <h3>Rendre les analyses manipulables</h3>
+                    <p>Organiser tableaux, filtres et graphiques autour des questions propres à chaque service.</p>
+                </article>
+                <article>
+                    <span>Contrainte</span>
+                    <h3>Protéger des données sensibles</h3>
+                    <p>Conserver profils, droits et infrastructure privée dans une architecture de services maîtrisée.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="bi-uses-title">
+        <div class="project-study__section-label">02 · Usages</div>
+        <div class="project-study__section-content">
+            <h2 id="bi-uses-title">Des restitutions construites à partir de besoins métier distincts.</h2>
+            <p class="project-study__lead">
+                Le portail n'est pas un dashboard unique. Il rassemble des interfaces adaptées aux données, aux décisions
+                et aux droits de chaque périmètre.
+            </p>
+
+            <div class="bi-study__uses">
+                <article><span>HSE</span><h3>Suivi des matières premières</h3><p>Tableau filtrable et responsive avec export CSV pour retrouver les matières utilisées dans un article.</p></article>
+                <article><span>Achats</span><h3>KPI fournisseurs</h3><p>Graphiques dynamiques et génération d'un rapport PDF compatible avec les usages bureautiques.</p></article>
+                <article><span>Direction &amp; IT</span><h3>Suivi mensuel des tickets</h3><p>Lecture par volume, demandeur, développeur, durée et complexité, avec accès restreint.</p></article>
+                <article><span>Qualité &amp; Programmes</span><h3>Cycles de cuisson</h3><p>Analyse de l'existant, modélisation du flux et cahier des charges pour remplacer un outil critique.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section project-study__section--dark" data-reveal aria-labelledby="bi-interface-title">
+        <div class="project-study__section-label">03 · Interface</div>
+        <div class="project-study__section-content">
+            <h2 id="bi-interface-title">Concevoir vite, puis ajuster avec les utilisateurs.</h2>
+            <p class="project-study__lead">
+                Les écrans ont été construits de manière itérative : maquette, développement, présentation au demandeur,
+                puis reprise lorsque la lecture ou l'interaction ne répondait pas encore au besoin.
+            </p>
+
+            <ol class="project-study__decisions bi-study__decisions">
+                <li>
+                    <span>01</span>
+                    <div><h3>Maintenir des repères connus</h3><p>Conserver une continuité avec l'ancien outil pour réduire l'effort d'adaptation.</p></div>
+                    <strong>Transition progressive</strong>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div><h3>Créer un filtre multiple réutilisable</h3><p>Sélection multiple, recherche textuelle, filtrage dynamique et réinitialisation dans plusieurs pages Razor.</p></div>
+                    <strong>Composant métier</strong>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div><h3>Combiner synthèse et détail</h3><p>Graphiques pour la tendance, tableaux pour l'analyse et exports PDF/CSV pour prolonger l'usage.</p></div>
+                    <strong>Plusieurs niveaux de lecture</strong>
+                </li>
+                <li>
+                    <span>04</span>
+                    <div><h3>Prévoir plusieurs formats d'écran</h3><p>Concevoir des composants responsive pour le bureau, la tablette et le téléphone.</p></div>
+                    <strong>Responsive livré</strong>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="bi-stack-title">
+        <div class="project-study__section-label">04 · Full-Stack</div>
+        <div class="project-study__section-content">
+            <h2 id="bi-stack-title">Relier l'interface aux services, aux données et aux droits.</h2>
+            <p class="project-study__lead">
+                Mon intervention était principalement Front-End, avec les contributions Full-Stack nécessaires pour
+                intégrer chaque fonctionnalité jusqu'à sa livraison.
+            </p>
+
+            <div class="bi-study__architecture" aria-label="Architecture publique simplifiée du portail BI">
+                <article><span>01</span><strong>Interface Blazor</strong><small>Razor · MudBlazor · CSS · JavaScript</small></article>
+                <i aria-hidden="true">→</i>
+                <article><span>02</span><strong>Services applicatifs</strong><small>API REST · services SOAP</small></article>
+                <i aria-hidden="true">→</i>
+                <article><span>03</span><strong>Données préparées</strong><small>SQL · LINQ · SQL Server</small></article>
+            </div>
+
+            <div class="project-study__system-grid bi-study__system-grid">
+                <article><span>Accès</span><strong>Profils et droits</strong><p>Authentification côté serveur et association des utilisateurs via Active Directory / LDAP.</p></article>
+                <article><span>Sécurité</span><strong>Infrastructure privée</strong><p>HTTPS, accès restreints et services indépendants pour limiter la propagation d'une panne.</p></article>
+                <article><span>Données</span><strong>Réplique dédiée</strong><p>Utilisation documentée d'une réplique comme data warehouse pour les développements et restitutions.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="bi-outcome-title">
+        <div class="project-study__section-label">05 · Bilan</div>
+        <div class="project-study__section-content">
+            <h2 id="bi-outcome-title">Un produit en production, sans figer son évolution.</h2>
+            <p class="project-study__lead">
+                Le rapport de mai 2025 établit la mise en production et le déploiement de plusieurs interfaces métier.
+                Il documente des effets qualitatifs, mais aucune mesure d'usage, de gain de temps ou de performance.
+            </p>
+
+            <div class="project-study__outcomes bi-study__outcomes">
+                <article class="project-study__outcome project-study__outcome--success">
+                    <span>Livré</span><h3>Plusieurs interfaces déployées</h3><p>Tableaux, filtres, graphiques, exports et accès par profil réunis dans un portail interne.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--success">
+                    <span>Effet qualitatif</span><h3>Une donnée plus lisible et accessible</h3><p>Amélioration documentée de l'accès aux données, réduction qualitative des erreurs et retours positifs.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--warning">
+                    <span>Non mesuré</span><h3>Aucun impact chiffré revendiqué</h3><p>Pas de volume réel d'utilisateurs, de taux d'adoption, de gain de temps ni de performance mesurée.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--warning">
+                    <span>Suite</span><h3>Un produit encore évolutif</h3><p>Nouveaux écrans, performance, documentation et consolidation de composants restent des sujets continus.</p>
+                </article>
+            </div>
+
+            <p class="bi-study__confidentiality">
+                <strong>À propos du visuel.</strong> L'écran présenté est une reconstitution anonymisée fondée sur les
+                fonctions documentées. Les libellés et données de démonstration ne reproduisent aucun environnement réel.
+            </p>
+
+            <div class="project-study__next">
+                <div>
+                    <span>Une interface data à structurer ?</span>
+                    <h2>Transformons les données métier en parcours lisibles et utilisables.</h2>
+                </div>
+                <Button Href="./#contact">Échanger sur votre projet</Button>
+            </div>
+        </div>
+    </section>
+</article>

@@ -450,6 +450,55 @@ public sealed class PlaywrightSmokeTests
         }
     }
 
+    [Fact]
+    public async Task Bi_case_study_exposes_production_evidence_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/portail-bi").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rendre les données industrielles accessibles dans un portail BI" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".bi-screen")).ToBeVisibleAsync();
+            Assert.Equal(4, await page.Locator(".bi-study__uses article").CountAsync());
+            Assert.Equal(4, await page.Locator(".bi-study__decisions li").CountAsync());
+            Assert.Equal(4, await page.Locator(".bi-study__outcomes .project-study__outcome").CountAsync());
+            Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas d'un portail BI industriel en production : écrans Blazor responsive, filtres avancés, graphiques, exports et intégrations Full-Stack.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/portail-bi",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"BI case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
     private static bool TryGetBaseUrl(out string baseUrl)
     {
         baseUrl = Environment.GetEnvironmentVariable("PORTFOLIO_BASE_URL") ?? string.Empty;
