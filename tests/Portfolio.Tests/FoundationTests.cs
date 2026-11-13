@@ -9,13 +9,13 @@ public sealed class FoundationTests
     public void Landing_positioning_content_is_available()
     {
         Assert.Contains(".NET", LandingContent.Positioning, StringComparison.Ordinal);
-        Assert.Contains("interfaces métier industrielles", LandingContent.Positioning, StringComparison.Ordinal);
+        Assert.Contains("applications métier", LandingContent.Positioning, StringComparison.Ordinal);
     }
 
     [Fact]
     public void Landing_concept_hero_content_is_available()
     {
-        Assert.Contains("Interfaces industrielles", LandingContent.HeroTitle, StringComparison.Ordinal);
+        Assert.Contains("interfaces et la donnée", LandingContent.HeroTitle, StringComparison.Ordinal);
         Assert.Equal(4, LandingContent.ConceptSources.Count);
         Assert.Equal(3, LandingContent.ConceptStack.Count);
         Assert.Equal(4, LandingContent.ConceptSteps.Count);
@@ -24,16 +24,16 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.ConceptSteps, step => step.IsActive);
         Assert.Equal(6, LandingContent.LandingMotionStates.Count);
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
-        Assert.Contains("complexité terrain", LandingContent.MethodTitle, StringComparison.Ordinal);
+        Assert.Contains("solution vérifiable", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
-        Assert.Contains("usages industriels", LandingContent.ProjectsTitle, StringComparison.Ordinal);
+        Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
         Assert.Equal(4, LandingContent.ProjectFilters.Count);
-        Assert.Contains("dashboard", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
+        Assert.Contains("portail BI", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
         Assert.Equal(2, LandingContent.CaseStudyComparisons.Count);
-        Assert.Equal("Votre projet", LandingContent.ContactGuidanceTitle);
+        Assert.Equal("Votre besoin métier", LandingContent.ContactGuidanceTitle);
         Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
     }
@@ -41,11 +41,11 @@ public sealed class FoundationTests
     [Fact]
     public void Landing_product_demo_content_is_available()
     {
-        Assert.Contains("Cartographie", LandingContent.ProductDemoTitle, StringComparison.Ordinal);
+        Assert.Contains("Chaîne applicative", LandingContent.ProductDemoTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProductSources.Count);
         Assert.Equal(3, LandingContent.ProductDecisionMetrics.Count);
-        Assert.Contains(LandingContent.ProductSources, source => source.Label == "ERP");
-        Assert.Contains(LandingContent.ProductDecisionMetrics, metric => metric.Meta == "OEE atelier");
+        Assert.Contains(LandingContent.ProductSources, source => source.Label == "Data");
+        Assert.Contains(LandingContent.ProductDecisionMetrics, metric => metric.Meta == "Réalisation");
     }
 
     [Fact]
@@ -79,6 +79,22 @@ public sealed class FoundationTests
             workflow,
             StringComparison.Ordinal);
         Assert.Contains("property=\"og:type\" content=\"article\"", workflow, StringComparison.Ordinal);
+        Assert.Contains("Prototype UI Pilotage atelier", workflow, StringComparison.Ordinal);
+        Assert.Contains("mkdir -p publish/wwwroot/projets/poc-ssis", workflow, StringComparison.Ordinal);
+        Assert.Contains(
+            "cp publish/wwwroot/index.html publish/wwwroot/projets/poc-ssis/index.html",
+            workflow,
+            StringComparison.Ordinal);
+        Assert.Contains("POC SSIS : architecture décisionnelle", workflow, StringComparison.Ordinal);
+        Assert.Contains("Portfolio/projets/poc-ssis", workflow, StringComparison.Ordinal);
+        Assert.Contains("mkdir -p publish/wwwroot/projets/portail-bi", workflow, StringComparison.Ordinal);
+        Assert.Contains(
+            "cp publish/wwwroot/index.html publish/wwwroot/projets/portail-bi/index.html",
+            workflow,
+            StringComparison.Ordinal);
+        Assert.Contains("Portail BI industriel en Blazor", workflow, StringComparison.Ordinal);
+        Assert.Contains("Portfolio/projets/portail-bi", workflow, StringComparison.Ordinal);
+        Assert.Contains("/og.description/", workflow, StringComparison.Ordinal);
         Assert.Contains("content=\"https://frit1p3.github.io/Portfolio/\"", workflow, StringComparison.Ordinal);
     }
 
@@ -108,6 +124,9 @@ public sealed class FoundationTests
         Assert.Contains("components/landing-case-study-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-contact-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/home.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("pages/project-case-study.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("pages/project-ssis.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("pages/project-bi.css", appCss, StringComparison.Ordinal);
     }
 
     [Fact]

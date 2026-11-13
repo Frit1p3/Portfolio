@@ -50,13 +50,13 @@
     min-height: 100%;
 }
 
-.project-card__visual--integration {
+.project-card__visual--data {
     background:
         radial-gradient(circle at 50% 50%, rgba(22, 191, 209, 0.16), transparent 42%),
         var(--color-surface-dark);
 }
 
-.project-card__visual--data {
+.project-card__visual--delivery {
     background:
         radial-gradient(circle at 72% 28%, rgba(255, 199, 80, 0.13), transparent 34%),
         var(--color-surface-dark);

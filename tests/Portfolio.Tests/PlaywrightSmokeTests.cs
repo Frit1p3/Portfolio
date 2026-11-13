@@ -32,16 +32,16 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui rendent la donnée actionnable" }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Relier les usages, les interfaces et la donnée" }))
             .ToBeVisibleAsync();
-        await Expect(page.Locator(".concept-hero__dashboard")).ToContainTextAsync("Pilotage atelier");
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "De la complexité terrain à l'écran utile" }))
+        await Expect(page.Locator(".concept-hero__dashboard")).ToContainTextAsync("Applications métier .NET");
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Du besoin métier à une solution vérifiable" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des produits front-end pour usages industriels" }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des réalisations réelles, chacune avec son statut" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rassembler les signaux atelier dans un dashboard actionnable" }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Concevoir un portail BI adapté aux besoins de chaque service" }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Votre projet", Level = 2 }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Votre besoin métier", Level = 2 }))
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }))
             .ToBeVisibleAsync();
@@ -81,7 +81,7 @@ public sealed class PlaywrightSmokeTests
             });
 
             await Expect(page.Locator(".concept-hero__dashboard")).ToBeVisibleAsync();
-            await Expect(page.Locator(".concept-hero__primary-metric")).ToContainTextAsync("87%");
+            await Expect(page.Locator(".concept-hero__primary-metric")).ToContainTextAsync(".NET");
             Assert.Equal(3, await page.Locator(".concept-hero__dashboard-footer li").CountAsync());
             Assert.Equal(3, await page.Locator(".concept-hero__credentials li").CountAsync());
             Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
@@ -247,7 +247,7 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
         await Expect(page.Locator(".concept-hero__dashboard")).ToHaveAttributeAsync(
             "aria-label",
-            "Aperçu d'un tableau de pilotage atelier");
+            "Synthèse des domaines d'intervention");
     }
 
     [Fact]
@@ -289,13 +289,13 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        Assert.Equal("Merryl Bouchereau - Interfaces industrielles .NET", await page.TitleAsync());
+        Assert.Equal("Merryl Bouchereau - Applications métier .NET", await page.TitleAsync());
         Assert.Equal("fr", await page.Locator("html").GetAttributeAsync("lang"));
         Assert.Equal(
             "width=device-width, initial-scale=1.0",
             await page.Locator("meta[name='viewport']").GetAttributeAsync("content"));
         Assert.Equal(
-            "Portfolio Front-End .NET pour interfaces industrielles, dashboards métier et outils terrain B2B.",
+            "Portfolio de Merryl Bouchereau, développeur Full-Stack .NET spécialisé en applications métier, interfaces Blazor et valorisation de la donnée.",
             await page.Locator("meta[name='description']").GetAttributeAsync("content"));
         Assert.Equal(
             "https://frit1p3.github.io/Portfolio/",
@@ -343,7 +343,7 @@ public sealed class PlaywrightSmokeTests
         });
 
         await Expect(page.Locator(".concept-hero__dashboard")).ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Interfaces industrielles qui rendent la donnée actionnable" }))
+        await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Relier les usages, les interfaces et la donnée" }))
             .ToBeVisibleAsync();
         Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
     }
@@ -374,7 +374,7 @@ public sealed class PlaywrightSmokeTests
 
             await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
 
-            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rendre les priorités atelier lisibles en quelques secondes" }))
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Explorer la lisibilité d'un dashboard de pilotage atelier" }))
                 .ToBeVisibleAsync();
             await Expect(page.Locator(".project-study__dashboard")).ToBeVisibleAsync();
             Assert.Equal(3, await page.Locator(".project-study__decisions li").CountAsync());
@@ -383,7 +383,7 @@ public sealed class PlaywrightSmokeTests
             Assert.Equal(4, await page.Locator("[data-reveal]").CountAsync());
 
             Assert.Equal(
-                "Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable.",
+                "Prototype conceptuel UX et Blazor utilisant des données de démonstration pour explorer la lisibilité d'un dashboard industriel.",
                 await page.Locator("meta[name='description']").GetAttributeAsync("content"));
             Assert.Equal(
                 "https://frit1p3.github.io/Portfolio/projets/pilotage-atelier",
@@ -396,6 +396,104 @@ public sealed class PlaywrightSmokeTests
 
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1, $"Case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
+    [Fact]
+    public async Task Ssis_case_study_exposes_factual_architecture_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/poc-ssis").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Standardiser un flux ERP avec une architecture SSIS traçable" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".ssis-flow")).ToBeVisibleAsync();
+            Assert.Equal(5, await page.Locator(".ssis-flow__pipeline li").CountAsync());
+            Assert.Equal(4, await page.Locator(".ssis-study__steps li").CountAsync());
+            Assert.Equal(4, await page.Locator(".ssis-study__outcomes .project-study__outcome").CountAsync());
+            Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas d'un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles, journalisation et chargement SQL Server.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/poc-ssis",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"SSIS case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
+    [Fact]
+    public async Task Bi_case_study_exposes_production_evidence_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/portail-bi").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Rendre les données industrielles accessibles dans un portail BI" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".bi-screen")).ToBeVisibleAsync();
+            Assert.Equal(4, await page.Locator(".bi-study__uses article").CountAsync());
+            Assert.Equal(4, await page.Locator(".bi-study__decisions li").CountAsync());
+            Assert.Equal(4, await page.Locator(".bi-study__outcomes .project-study__outcome").CountAsync());
+            Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas d'un portail BI industriel en production : écrans Blazor responsive, filtres avancés, graphiques, exports et intégrations Full-Stack.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/portail-bi",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"BI case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
 
             await page.CloseAsync();
         }

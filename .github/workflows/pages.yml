@@ -59,13 +59,33 @@ jobs:
           mkdir -p publish/wwwroot/projets/pilotage-atelier
           cp publish/wwwroot/index.html publish/wwwroot/projets/pilotage-atelier/index.html
           sed -i \
-            -e 's#Merryl Bouchereau - Interfaces industrielles .NET#Étude de cas Pilotage atelier - Merryl Bouchereau#g' \
-            -e 's#Portfolio Front-End .NET pour interfaces industrielles, dashboards métier et outils terrain B2B.#Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable.#g' \
-            -e 's#Conception UX et développement Blazor pour interfaces industrielles, dashboards métier et outils terrain B2B.#Du signal dispersé à une priorité explicite : décisions UX, composants et architecture front-end d’un dashboard industriel.#g' \
+            -e 's#Merryl Bouchereau - Applications métier .NET#Prototype UI Pilotage atelier - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Prototype conceptuel UX et Blazor : données de démonstration pour explorer un dashboard industriel."#' \
+            -e '/og.description/ s#content="[^"]*"#content="Prototype UI Blazor avec données de démonstration, distinct des expériences professionnelles."#' \
             -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
             -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \
             -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \
             publish/wwwroot/projets/pilotage-atelier/index.html
+          mkdir -p publish/wwwroot/projets/poc-ssis
+          cp publish/wwwroot/index.html publish/wwwroot/projets/poc-ssis/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Applications métier .NET#POC SSIS : architecture décisionnelle - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Étude de cas d’un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles et chargement SQL Server."#' \
+            -e '/og.description/ s#content="[^"]*"#content="POC ETL documenté reliant une source ERP de test à un data warehouse SQL Server."#' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
+            -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
+            publish/wwwroot/projets/poc-ssis/index.html
+          mkdir -p publish/wwwroot/projets/portail-bi
+          cp publish/wwwroot/index.html publish/wwwroot/projets/portail-bi/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Applications métier .NET#Portail BI industriel en Blazor - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Étude de cas d’un portail BI industriel en production : écrans Blazor, filtres, graphiques, exports et intégrations Full-Stack."#' \
+            -e '/og.description/ s#content="[^"]*"#content="Conception et développement Full-Stack à dominante Front-End d’un portail de reporting interne en production."#' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
+            -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
+            publish/wwwroot/projets/portail-bi/index.html
           touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact

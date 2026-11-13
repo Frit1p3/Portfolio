@@ -3,30 +3,30 @@ namespace Portfolio.Content;
 public static class LandingContent
 {
     public const string Positioning =
-        "Front-End .NET pour interfaces métier industrielles, dashboards et outils terrain";
+        "Développeur Full-Stack .NET · applications métier, interfaces et data";
 
     public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
     {
         new NavigationLink("Projets", "#projects"),
-        new NavigationLink("Étude de cas", "#case-study"),
-        new NavigationLink("Expertise", "#expertise"),
+        new NavigationLink("Preuve Front-End", "#case-study"),
+        new NavigationLink("Expertises", "#expertise"),
         new NavigationLink("Méthode", "#approach")
     };
 
-    public const string HeroEyebrow = "Front-End .NET · UI/UX industriel";
+    public const string HeroEyebrow = "Full-Stack .NET · Applications métier";
 
     public const string HeroTitle =
-        "Interfaces industrielles qui rendent la donnée actionnable";
+        "Relier les usages, les interfaces et la donnée";
 
     public const string HeroIntro =
-        "Je transforme des flux métier complexes en interfaces B2B claires, accessibles et maintenables — du cadrage UX à l'industrialisation Blazor.";
+        "Je conçois et développe des solutions .NET pour des environnements où l'interface, les flux de données et la fiabilité opérationnelle doivent fonctionner ensemble.";
 
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {
-        new ConceptSource("ERP", "accent", "Commandes et stocks"),
-        new ConceptSource("Atelier", "success", "Terrain et qualité"),
-        new ConceptSource("BI", "warning", "KPI consolidés"),
-        new ConceptSource("GED", "muted", "Preuves et procédures")
+        new ConceptSource("Blazor", "accent", "Interfaces métier"),
+        new ConceptSource("SQL / SSIS", "success", "Flux de données"),
+        new ConceptSource("BI", "warning", "Exploration et restitution"),
+        new ConceptSource("CI/CD", "muted", "Livraison contrôlée")
     };
 
     public static readonly IReadOnlyList<string> ConceptStack = new[]
@@ -72,46 +72,46 @@ public static class LandingContent
     public static readonly IReadOnlyList<HeroKpi> HeroKpis = new[]
     {
         new HeroKpi(
-            "Expérience",
-            "3 ans",
             "Industrie",
-            "Dashboards, KPI et parcours métier",
+            "3 ans",
+            "2023–2026",
+            "Applications métier, data et coordination technique",
             "accent"),
         new HeroKpi(
-            "Objectif UX",
-            "- friction",
-            "Décision",
-            "Moins d'allers-retours entre signal, preuve et action",
+            "Approche",
+            "Full-Stack",
+            ".NET",
+            "Du besoin métier à une solution testable et documentée",
             "success"),
         new HeroKpi(
-            "Socle",
-            ".NET",
-            "Blazor",
-            "Composants réutilisables, CSS Vanilla et tests",
+            "Spécialisation",
+            "Front-End",
+            "UX & data",
+            "Interfaces Blazor, visualisation et composants maintenables",
             "neutral")
     };
 
-    public const string ProductDemoTitle = "Cartographie opérationnelle des flux";
+    public const string ProductDemoTitle = "Chaîne applicative métier";
 
     public static readonly IReadOnlyList<ProductSource> ProductSources = new[]
     {
         new ProductSource(
-            "ERP",
-            "Source métier",
-            "Commandes, stocks et factures synchronisés",
-            "sync",
+            "Métier",
+            "Besoin",
+            "Usages, contraintes et responsabilités clarifiés",
+            "cadré",
             "accent"),
         new ProductSource(
-            "Atelier",
-            "Terrain",
-            "Incidents, temps réels et qualité terrain",
-            "live",
+            "Data",
+            "Flux",
+            "Sources, transformations et contrôles documentés",
+            "tracé",
             "success"),
         new ProductSource(
-            "GED",
-            "Documentation",
-            "Procédures et preuves associées aux flux",
-            "ok",
+            "Application",
+            "Livrable",
+            "Interface, services et livraison testés",
+            "vérifié",
             "neutral")
     };
 
@@ -119,21 +119,21 @@ public static class LandingContent
     {
         new DecisionMetric(
             "01",
-            "OEE atelier",
-            "87% de rendement",
-            "+6 pts face à la semaine précédente",
+            "Besoin métier",
+            "Périmètre explicite",
+            "Objectifs, risques et arbitrages identifiés",
             "success"),
         new DecisionMetric(
             "02",
-            "Alertes critiques",
-            "12 points ouverts",
-            "3 priorités qualité à traiter en premier",
+            "Réalisation",
+            "Livrable testable",
+            "Interfaces, flux et contrôles reliés",
             "warning"),
         new DecisionMetric(
             "03",
-            "Cycle moyen",
-            "2.8 j / objectif 3 j",
-            "Délai sous contrôle face à la cible",
+            "Validation",
+            "Résultats vérifiés",
+            "Limites et suites distinguées du périmètre livré",
             "neutral")
     };
 
@@ -181,184 +181,184 @@ public static class LandingContent
     public const string ExpertiseEyebrow = "Domaines d'intervention";
 
     public const string ExpertiseTitle =
-        "UI, front-end et data réunis autour des usages métier";
+        "Trois façons de rendre une application métier utile";
 
     public const string ExpertiseIntro =
-        "Une expertise pensée pour des équipes qui doivent lire vite, agir juste et transmettre des décisions fiables";
+        "Une pratique Full-Stack structurée autour des usages, de la donnée et de la fiabilité de livraison";
 
     public static readonly IReadOnlyList<ExpertiseSkill> ExpertiseSkills = new[]
     {
         new ExpertiseSkill(
-            "UX",
-            "Conception métier",
-            "UX métier",
-            "Transformer une contrainte opérationnelle en parcours clair, mesurable et testable",
-            new[] { "Audit", "Parcours", "Figma" },
+            "UI",
+            "Concevoir l'expérience métier",
+            "Front-End & UX",
+            "Traduire un besoin opérationnel en écrans complets, lisibles et maintenables",
+            new[] { "Blazor", "Figma", "MudBlazor" },
             "accent"),
         new ExpertiseSkill(
-            ".NET",
-            "Front-end durable",
-            "Front-End .NET",
-            "Concevoir des interfaces Blazor robustes, maintenables et alignées avec le design system",
-            new[] { "Blazor", "Composants", "CSS" },
+            "ETL",
+            "Structurer et valoriser",
+            "Data & architecture",
+            "Relier les sources, contrôler les transformations et préparer des données exploitables",
+            new[] { "SQL Server", "SSIS", "BI" },
             "success"),
         new ExpertiseSkill(
-            "KPI",
-            "Pilotage par la donnée",
-            "Data & KPI",
-            "Rendre les indicateurs lisibles pour suivre l'activité, comprendre les écarts et arbitrer",
-            new[] { "Dashboards", "KPI", "Data" },
+            "OPS",
+            "Fiabiliser et coordonner",
+            "Delivery & projet",
+            "Sécuriser la livraison, documenter les décisions et coordonner les parties prenantes",
+            new[] { "Tests", "CI/CD", "Cadrage" },
             "warning")
     };
 
     public const string MethodEyebrow = "Méthode";
 
     public const string MethodTitle =
-        "De la complexité terrain à l'écran utile";
+        "Du besoin métier à une solution vérifiable";
 
     public const string MethodIntro =
-        "Une approche courte pour transformer contraintes industrielles, données et arbitrages en écrans testables et maintenables";
+        "Une méthode qui sépare clairement le problème, le périmètre livré, les résultats constatés et les suites recommandées";
 
     public static readonly IReadOnlyList<MethodStep> MethodSteps = new[]
     {
         new MethodStep(
             "01",
             "Cadrage",
-            "Comprendre les contraintes",
-            "Identifier les sources, les irritants terrain et les arbitrages attendus",
-            "Flux et priorités alignés",
+            "Définir le problème et le périmètre",
+            "Clarifier les usages, les responsabilités, les risques et les décisions attendues",
+            "Responsabilités explicites",
             "muted"),
         new MethodStep(
             "02",
-            "Conception",
-            "Structurer les écrans",
-            "Hiérarchiser les parcours, tester les hypothèses et documenter les composants",
-            "Prototype testable",
+            "Réalisation",
+            "Concevoir, développer, documenter",
+            "Relier interface, services et données dans un livrable testable et maintenable",
+            "Périmètre livré et tracé",
             "accent",
             true),
         new MethodStep(
             "03",
-            "Industrialisation",
-            "Passer au code",
-            "Assembler Blazor, CSS Vanilla, accessibilité et tests dans une base maintenable",
-            "Composants documentés",
+            "Validation",
+            "Distinguer résultats et suites",
+            "Vérifier ce qui fonctionne, documenter les limites et ne chiffrer que les effets mesurés",
+            "Preuves et limites séparées",
             "success")
     };
 
-    public const string ProjectsEyebrow = "Cas d'usage";
+    public const string ProjectsEyebrow = "Expériences sélectionnées";
 
     public const string ProjectsTitle =
-        "Des produits front-end pour usages industriels";
+        "Des réalisations réelles, chacune avec son statut";
 
     public const string ProjectsIntro =
-        "Trois familles de produits pour connecter opérations, données et pilotage sans perdre le contexte métier";
+        "Une sélection volontairement courte pour montrer le Front-End, la data et la livraison sans mélanger projet professionnel, POC et formation";
 
     public static readonly IReadOnlyList<ProjectFilter> ProjectFilters = new[]
     {
         new ProjectFilter("all", "Tous"),
-        new ProjectFilter("operations", "Opérations"),
-        new ProjectFilter("integration", "Intégration"),
-        new ProjectFilter("data", "Data & KPI")
+        new ProjectFilter("frontend", "Front-End & BI"),
+        new ProjectFilter("data", "Data & architecture"),
+        new ProjectFilter("delivery", "Delivery")
     };
 
     public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
     {
         new ProjectUseCase(
             "01",
-            "operations",
-            "Opérations",
-            "Pilotage atelier",
-            "Suivre rendement, incidents, alertes qualité et temps réels pour prioriser l'action terrain",
-            "Conception UX et front-end",
-            new[] { "Blazor", "KPI", "Temps réel" },
-            "Une lecture priorisée des écarts et des actions attendues",
-            "Prototype validé",
+            "frontend",
+            "Front-End & BI",
+            "Portail de Business Intelligence",
+            "Concevoir et développer des visualisations de données de production adaptées au périmètre de chaque service",
+            "Développeur Full-Stack à dominante Front-End",
+            new[] { "Blazor", ".NET 9/10", "MudBlazor", "Figma" },
+            "Plusieurs interfaces métier déployées : tableaux, filtres, graphiques et exports",
+            "En production · évolution continue",
             "Lire l'étude de cas",
-            "projets/pilotage-atelier",
+            "projets/portail-bi",
             "success"),
         new ProjectUseCase(
             "02",
-            "integration",
-            "Intégration",
-            "Flux ERP / opérations",
-            "Rendre commandes, stocks, documents et statuts synchronisés et lisibles dans une même interface",
-            "Architecture d'interface",
-            new[] { "ERP", "GED", "API" },
-            "Moins de ruptures entre consultation, contrôle et décision",
-            "Cadrage métier",
-            "Échanger sur ce besoin",
-            "#contact",
+            "data",
+            "Data & architecture",
+            "POC d'architecture décisionnelle SSIS",
+            "Valider la standardisation d'un flux ETL entre une source ERP de test et un data warehouse SQL Server",
+            "Développeur et chef de projet du POC",
+            new[] { "SSIS", "SQL Server", "C#", "ETL" },
+            "POC opérationnel, extraction incrémentale, contrôles, rejets et journalisation",
+            "POC professionnel terminé",
+            "Lire l'étude de cas",
+            "projets/poc-ssis",
             "accent"),
         new ProjectUseCase(
             "03",
-            "data",
-            "Data & KPI",
-            "Reporting décisionnel",
-            "Transformer les signaux consolidés en synthèses courtes, lisibles et actionnables",
-            "Design data et restitution",
-            new[] { "BI", "Dashboard", "DataViz" },
-            "Des indicateurs contextualisés pour arbitrer plus vite",
-            "Concept produit",
-            "Échanger sur ce besoin",
+            "delivery",
+            "Delivery",
+            "Chaîne de livraison CI/CD",
+            "Automatiser les tests, les contrôles de sécurité, la création des images et le déploiement multi-environnements",
+            "Conception et réalisation en autonomie",
+            new[] { "GitHub Actions", "Docker", "Azure", "Trivy" },
+            "Pipeline fonctionnel, traçable, observable et réversible",
+            "Projet scolaire terminé",
+            "Échanger sur ce projet",
             "#contact",
             "warning")
     };
 
-    public const string CaseStudyEyebrow = "Preuve projet";
+    public const string CaseStudyEyebrow = "Preuve Front-End professionnelle";
 
     public const string CaseStudyTitle =
-        "Rassembler les signaux atelier dans un dashboard actionnable";
+        "Concevoir un portail BI adapté aux besoins de chaque service";
 
     public const string CaseStudyIntro =
-        "Un exemple de cadrage produit pour faire ressortir les priorités sans multiplier les écrans";
+        "Un produit interne en production, développé de la demande métier à la livraison sans inventer de résultat chiffré";
 
     public const string CaseStudyContext =
-        "Les équipes terrain consultent plusieurs sources pour suivre incidents, délais et qualité. L'enjeu est de rapprocher ces signaux dans une interface claire, lisible en quelques secondes";
+        "Le portail remplace progressivement un ancien outil de reporting. Mon rôle a couvert la traduction des besoins, les maquettes, les composants Blazor responsive, l'intégration des données et la livraison.";
 
     public const string CaseStudyDisclosure =
-        "Cas anonymisé : la structure, les libellés et les données ont été adaptés pour préserver le contexte client.";
+        "Expérience professionnelle anonymisée : produit en production et résultats qualitatifs documentés, sans donnée industrielle ni gain chiffré exposé.";
 
     public static readonly IReadOnlyList<CaseStudyFact> CaseStudyFacts = new[]
     {
-        new CaseStudyFact("Rôle", "Conception UX & front-end"),
-        new CaseStudyFact("Périmètre", "ERP, atelier et reporting"),
-        new CaseStudyFact("Livrable", "Dashboard responsive")
+        new CaseStudyFact("Rôle", "Full-Stack à dominante Front-End"),
+        new CaseStudyFact("État", "En production · évolution continue"),
+        new CaseStudyFact("Socle", "Blazor · .NET · MudBlazor · SQL/LINQ")
     };
 
     public static readonly IReadOnlyList<CaseStudyPoint> CaseStudyPoints = new[]
     {
         new CaseStudyPoint(
-            "Problème",
-            "Des indicateurs dispersés entre ERP, atelier et reporting ralentissent les arbitrages quotidiens",
+            "Besoin",
+            "Rétablir un accès opérationnel aux données après l'arrêt progressif de l'ancien reporting",
             "warning"),
         new CaseStudyPoint(
-            "Réponse UX",
-            "Organiser la lecture par statut, niveau de criticité et prochaine action attendue",
+            "Réalisation",
+            "Construire des écrans responsive, filtres avancés, graphiques et exports adaptés aux services",
             "accent"),
         new CaseStudyPoint(
-            "Livrable",
-            "Un dashboard responsive avec composants réutilisables, KPI contextualisés et parcours court",
+            "Valeur vérifiée",
+            "Plusieurs interfaces métier déployées dans un portail déjà en production",
             "success")
     };
 
     public static readonly IReadOnlyList<CaseStudyMetric> CaseStudyMetrics = new[]
     {
-        new CaseStudyMetric("3", "sources reliées", "ERP, atelier, reporting", "accent"),
-        new CaseStudyMetric("1", "lecture priorisée", "statut, criticité, action", "success"),
-        new CaseStudyMetric("0", "rupture de contexte", "preuve et action au même endroit", "warning")
+        new CaseStudyMetric("Tables", "détail manipulable", "filtres multiples et recherche", "accent"),
+        new CaseStudyMetric("Charts", "lecture synthétique", "graphiques dynamiques par usage", "success"),
+        new CaseStudyMetric("Exports", "continuité bureautique", "sorties PDF et CSV", "warning")
     };
 
     public static readonly IReadOnlyList<CaseStudyComparison> CaseStudyComparisons = new[]
     {
         new CaseStudyComparison(
-            "Avant",
-            "Lecture fragmentée",
-            "Plusieurs outils à rapprocher manuellement avant de comprendre la priorité du jour.",
+            "Besoin",
+            "Remplacer un reporting devenu indisponible",
+            "La transformation de l'ERP impose de maintenir un accès fiable aux données utiles aux services.",
             "warning"),
         new CaseStudyComparison(
-            "Après",
-            "Décision contextualisée",
-            "Une vue rassemble statut, criticité, preuve et prochaine action sans changer d'écran.",
+            "Livré",
+            "Un portail en production et évolutif",
+            "Plusieurs interfaces réunissent tableaux, graphiques, filtres, exports et droits d'accès en environnement .NET.",
             "success")
     };
 
@@ -372,12 +372,12 @@ public static class LandingContent
 
     public const string ContactEmail = "fritp3@gmail.com";
 
-    public const string ContactAvailability = "Ouvert aux missions front-end .NET, UI industrielle et design system";
+    public const string ContactAvailability = "Ouvert aux missions .NET, applications métier, Front-End et data";
 
-    public const string ContactGuidanceTitle = "Votre projet";
+    public const string ContactGuidanceTitle = "Votre besoin métier";
 
     public const string ContactGuidanceBody =
-        "Refonte d'interface métier, design system Blazor, dashboard KPI, amélioration d'un parcours interne, audit accessibilité RGAA ou mise en cohérence UI/UX avant industrialisation.";
+        "Application .NET, portail de données, flux ETL, amélioration d'une interface métier ou cadrage d'une intégration technique.";
 
     public const string ContactFormTitle = "Décrire votre besoin";
 
@@ -389,9 +389,9 @@ public static class LandingContent
 
     public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
     {
-        new ContactHighlight("Audit UI métier", "Identifier les frictions, prioriser les corrections et documenter les décisions.", "accent"),
-        new ContactHighlight("Design system Blazor", "Transformer les maquettes en composants réutilisables et accessibles.", "success"),
-        new ContactHighlight("Dashboard KPI", "Clarifier les indicateurs, les statuts et les actions attendues.", "warning")
+        new ContactHighlight("Front-End métier", "Concevoir des écrans Blazor lisibles, structurés et maintenables.", "accent"),
+        new ContactHighlight("Data & ETL", "Relier les sources, contrôler les transformations et documenter les flux.", "success"),
+        new ContactHighlight("Cadrage & delivery", "Clarifier le périmètre, les risques, les responsabilités et la livraison.", "warning")
     };
 }
 

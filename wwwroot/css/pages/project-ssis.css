@@ -1,0 +1,209 @@
+.ssis-study .project-study__hero {
+    background:
+        linear-gradient(rgba(247, 251, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 251, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 78% 16%, rgba(87, 222, 169, 0.12), transparent 28%),
+        radial-gradient(circle at 12% 64%, rgba(22, 191, 209, 0.1), transparent 34%),
+        var(--color-surface-dark);
+    background-size: 64px 64px, 64px 64px, auto, auto, auto;
+}
+
+.ssis-flow {
+    display: grid;
+    gap: var(--space-24);
+    border: 1px solid rgba(247, 251, 255, 0.14);
+    border-radius: 16px;
+    background: rgba(7, 22, 34, 0.86);
+    padding: var(--space-24);
+    box-shadow: 0 34px 90px rgba(0, 0, 0, 0.28);
+}
+
+.ssis-flow__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+    border-bottom: 1px solid rgba(247, 251, 255, 0.1);
+    padding-bottom: var(--space-16);
+}
+
+.ssis-flow__header > div {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.ssis-flow__header span,
+.ssis-flow__pipeline span,
+.ssis-flow__pipeline small {
+    color: rgba(247, 251, 255, 0.5);
+    font-size: 0.72rem;
+}
+
+.ssis-flow__header strong,
+.ssis-flow__pipeline strong {
+    color: var(--color-text-inverse);
+}
+
+.ssis-flow__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    border: 1px solid rgba(87, 222, 169, 0.24);
+    border-radius: 999px;
+    background: rgba(87, 222, 169, 0.08);
+    padding: var(--space-4) var(--space-8);
+    color: #a9efc9 !important;
+    font-weight: 700;
+}
+
+.ssis-flow__status i,
+.ssis-flow__guardrails i {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #57dea9;
+    box-shadow: 0 0 10px rgba(87, 222, 169, 0.58);
+}
+
+.ssis-flow__pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-12);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ssis-flow__pipeline li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: var(--space-8);
+    min-height: 140px;
+    border: 1px solid rgba(247, 251, 255, 0.1);
+    border-radius: var(--radius-8);
+    background: rgba(247, 251, 255, 0.035);
+    padding: var(--space-16);
+}
+
+.ssis-flow__pipeline li:not(:last-child)::after {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: calc(var(--space-12) * -1 - 1px);
+    width: var(--space-12);
+    height: 1px;
+    background: rgba(22, 191, 209, 0.5);
+    content: "";
+}
+
+.ssis-flow__pipeline li.is-active {
+    border-color: rgba(22, 191, 209, 0.48);
+    background: rgba(22, 191, 209, 0.1);
+}
+
+.ssis-flow__pipeline strong {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+}
+
+.ssis-flow__guardrails {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-12);
+}
+
+.ssis-flow__guardrails span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    color: rgba(247, 251, 255, 0.62);
+    font-size: 0.72rem;
+}
+
+.ssis-study__role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-16);
+}
+
+.ssis-study__role-grid article {
+    display: grid;
+    gap: var(--space-8);
+    border-top: 2px solid var(--color-accent);
+    background: var(--color-surface);
+    padding: var(--space-24);
+}
+
+.ssis-study__role-grid span {
+    color: var(--color-accent-strong, #087f8c);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.ssis-study__role-grid h3 {
+    color: var(--color-text-primary);
+    font-size: 1.15rem;
+}
+
+.ssis-study__role-grid p,
+.ssis-study__confidentiality {
+    color: var(--color-text-secondary);
+}
+
+.ssis-study__outcomes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ssis-study__confidentiality {
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: var(--space-16) var(--space-24);
+}
+
+.ssis-study__confidentiality strong {
+    color: var(--color-brand);
+}
+
+@media (max-width: 900px) {
+    .ssis-flow__pipeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ssis-flow__pipeline li:not(:last-child)::after {
+        display: none;
+    }
+
+    .ssis-flow__pipeline li:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .ssis-flow__guardrails {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .ssis-flow {
+        padding: var(--space-16);
+    }
+
+    .ssis-flow__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .ssis-flow__pipeline,
+    .ssis-study__role-grid,
+    .ssis-study__outcomes {
+        grid-template-columns: 1fr;
+    }
+
+    .ssis-flow__pipeline li,
+    .ssis-flow__pipeline li:last-child {
+        grid-column: auto;
+        min-height: 0;
+    }
+}

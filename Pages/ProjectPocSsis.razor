@@ -1,0 +1,289 @@
+@page "/projets/poc-ssis"
+
+<PageTitle>POC SSIS : architecture décisionnelle - Merryl Bouchereau</PageTitle>
+
+<HeadContent>
+    <meta name="description" content="Étude de cas d'un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles, journalisation et chargement SQL Server." />
+    <link rel="canonical" href="https://frit1p3.github.io/Portfolio/projets/poc-ssis" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="POC SSIS : architecture décisionnelle - Merryl Bouchereau" />
+    <meta property="og:description" content="Conception et pilotage d'un POC ETL documenté reliant une source ERP de test à un data warehouse SQL Server." />
+    <meta property="og:url" content="https://frit1p3.github.io/Portfolio/projets/poc-ssis" />
+    <meta property="og:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Merryl Bouchereau — Applications métier et architecture data .NET" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta name="twitter:image:alt" content="Merryl Bouchereau — Applications métier et architecture data .NET" />
+</HeadContent>
+
+<article class="project-study ssis-study">
+    <header class="project-study__hero">
+        <div class="project-study__hero-inner">
+            <a class="project-study__back" href="./#projects">← Retour aux projets</a>
+
+            <div class="project-study__hero-grid">
+                <div class="project-study__hero-content">
+                    <span class="project-study__eyebrow">Expérience professionnelle · POC terminé</span>
+                    <h1>Standardiser un flux ERP avec une architecture SSIS traçable</h1>
+                    <p>
+                        Conception et pilotage d'une chaîne ETL opérationnelle pour valider la faisabilité d'une
+                        standardisation progressive des traitements de données dans un groupe industriel multi-sites.
+                    </p>
+                </div>
+
+                <dl class="project-study__summary" aria-label="Synthèse du projet">
+                    <div>
+                        <dt>Période</dt>
+                        <dd>Février — août 2026</dd>
+                    </div>
+                    <div>
+                        <dt>Rôle</dt>
+                        <dd>Développeur &amp; chef de projet du POC</dd>
+                    </div>
+                    <div>
+                        <dt>Livrable</dt>
+                        <dd>POC opérationnel et documenté</dd>
+                    </div>
+                    <div>
+                        <dt>Socle</dt>
+                        <dd>SSIS · SQL Server · C#</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="ssis-flow" aria-label="Architecture du flux ETL SSIS">
+                <div class="ssis-flow__header">
+                    <div>
+                        <span>Chaîne de traitement</span>
+                        <strong>Du changement ERP à la donnée contrôlée</strong>
+                    </div>
+                    <span class="ssis-flow__status"><i aria-hidden="true"></i>Exécution journalisée</span>
+                </div>
+
+                <ol class="ssis-flow__pipeline">
+                    <li>
+                        <span>01 · Source</span>
+                        <strong>ERP</strong>
+                        <small>Réplique de test</small>
+                    </li>
+                    <li>
+                        <span>02 · Extraction</span>
+                        <strong>Incrémental</strong>
+                        <small>Depuis le dernier succès</small>
+                    </li>
+                    <li class="is-active">
+                        <span>03 · Contrôle</span>
+                        <strong>Staging</strong>
+                        <small>Types, règles et rejets</small>
+                    </li>
+                    <li>
+                        <span>04 · Chargement</span>
+                        <strong>Data warehouse</strong>
+                        <small>Insertions et mises à jour</small>
+                    </li>
+                    <li>
+                        <span>05 · Sortie</span>
+                        <strong>Export Excel</strong>
+                        <small>Après réussite uniquement</small>
+                    </li>
+                </ol>
+
+                <div class="ssis-flow__guardrails">
+                    <span><i aria-hidden="true"></i>RUNNING · SUCCESS · ERROR</span>
+                    <span><i aria-hidden="true"></i>Volumes extraits, insérés, mis à jour et rejetés</span>
+                    <span><i aria-hidden="true"></i>Date de reprise actualisée seulement après succès</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-study__section project-study__section--intro" data-reveal aria-labelledby="ssis-context-title">
+        <div class="project-study__section-label">01 · Contexte</div>
+        <div class="project-study__section-content">
+            <h2 id="ssis-context-title">Valider une alternative maintenable aux ETL historiques en C#.</h2>
+            <p class="project-study__lead">
+                Les traitements existants étaient fortement liés à une application interne et exigeaient une expertise
+                C# et LINQ importante. Le POC devait éprouver SSIS avant toute généralisation, sur un périmètre maîtrisé :
+                les ordres de fabrication issus d'une réplique de test de l'ERP.
+            </p>
+
+            <div class="project-study__problem-grid">
+                <article>
+                    <span>Problème</span>
+                    <h3>Des flux difficiles à faire évoluer</h3>
+                    <p>Une logique ETL spécifique, peu standardisée et fortement dépendante de compétences applicatives.</p>
+                </article>
+                <article>
+                    <span>Hypothèse</span>
+                    <h3>Un socle Microsoft commun</h3>
+                    <p>Rendre les traitements plus explicites, contrôlables et intégrables dans l'écosystème existant.</p>
+                </article>
+                <article>
+                    <span>Périmètre</span>
+                    <h3>Une preuve, pas un déploiement groupe</h3>
+                    <p>Valider l'architecture sur un premier domaine sans revendiquer une industrialisation complète.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="ssis-processing-title">
+        <div class="project-study__section-label">02 · Traitement</div>
+        <div class="project-study__section-content">
+            <h2 id="ssis-processing-title">Une séquence explicite, contrôlée de bout en bout.</h2>
+            <p class="project-study__lead">
+                Le flux sépare orchestration, transformation et connexions. Chaque étape produit les informations
+                nécessaires pour comprendre l'exécution et reprendre correctement après un échec.
+            </p>
+
+            <ol class="project-study__decisions ssis-study__steps">
+                <li>
+                    <span>01</span>
+                    <div>
+                        <h3>Extraire uniquement les changements</h3>
+                        <p>Lecture de la dernière exécution réussie, création du journal RUNNING et sélection incrémentale côté ERP.</p>
+                    </div>
+                    <strong>Reprise maîtrisée</strong>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div>
+                        <h3>Transformer et isoler les anomalies</h3>
+                        <p>Conversion des types et codes métier, contrôle du modèle attendu, staging et séparation des lignes rejetées.</p>
+                    </div>
+                    <strong>Qualité observable</strong>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div>
+                        <h3>Distinguer insertions et mises à jour</h3>
+                        <p>Recherche des ordres déjà connus, chargement adapté puis consolidation des compteurs d'exécution.</p>
+                    </div>
+                    <strong>Lookup SSIS</strong>
+                </li>
+                <li>
+                    <span>04</span>
+                    <div>
+                        <h3>Clore seulement après succès</h3>
+                        <p>Statut final, actualisation de la date de reprise et export Excel via ClosedXML une fois le traitement validé.</p>
+                    </div>
+                    <strong>Sortie conditionnelle</strong>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="project-study__section project-study__section--dark" data-reveal aria-labelledby="ssis-reliability-title">
+        <div class="project-study__section-label">03 · Fiabilité</div>
+        <div class="project-study__section-content">
+            <h2 id="ssis-reliability-title">La traçabilité fait partie du produit livré.</h2>
+            <p class="project-study__lead">
+                L'objectif n'était pas seulement de déplacer des données. Le package devait permettre de savoir ce qui
+                s'est passé, sur quel volume, à quelle étape et avec quelles anomalies.
+            </p>
+
+            <div class="project-study__system-grid">
+                <article>
+                    <span>Exécution</span>
+                    <strong>Statuts et horodatages</strong>
+                    <p>Identifiant d'exécution, début, fin et état RUNNING, SUCCESS ou ERROR.</p>
+                </article>
+                <article>
+                    <span>Volumes</span>
+                    <strong>Compteurs vérifiables</strong>
+                    <p>Lignes extraites, insérées, mises à jour et rejetées conservées dans le journal.</p>
+                </article>
+                <article>
+                    <span>Anomalies</span>
+                    <strong>Erreur localisable</strong>
+                    <p>Source, tâche, code, message et données rejetées lorsque leur conservation est nécessaire.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="ssis-role-title">
+        <div class="project-study__section-label">04 · Rôle</div>
+        <div class="project-study__section-content">
+            <h2 id="ssis-role-title">Développer le POC et organiser sa validation.</h2>
+            <p class="project-study__lead">
+                Ressource principale à temps partiel, j'ai assuré la conception, l'implémentation et la documentation,
+                avec validation du Tech Lead et coordination avec la DSI, les administrateurs de bases, les responsables
+                ERP et les référents métier.
+            </p>
+
+            <div class="ssis-study__role-grid">
+                <article>
+                    <span>Conception technique</span>
+                    <h3>Architecture et développement</h3>
+                    <p>Flux de contrôle et de données, variables, connexions, staging, SQL, scripts C# et export ClosedXML.</p>
+                </article>
+                <article>
+                    <span>Pilotage hybride</span>
+                    <h3>Apprendre et sécuriser</h3>
+                    <p>Principes Lean, itérations inspirées de Scrum et jalons de validation issus du Cycle en V.</p>
+                </article>
+                <article>
+                    <span>Documentation</span>
+                    <h3>Rendre les décisions transmissibles</h3>
+                    <p>WBS, Gantt, PERT, RACI, registre des risques et documentation de l'architecture cible.</p>
+                </article>
+                <article>
+                    <span>Coordination</span>
+                    <h3>Relier technique et métier</h3>
+                    <p>Points réguliers avec les acteurs de la donnée pour préciser les règles et valider le périmètre.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="ssis-outcome-title">
+        <div class="project-study__section-label">05 · Bilan</div>
+        <div class="project-study__section-content">
+            <h2 id="ssis-outcome-title">Une faisabilité démontrée, des limites documentées.</h2>
+            <p class="project-study__lead">
+                Le POC valide la chaîne technique sur le périmètre retenu. Aucun gain de temps, de coût ou de performance
+                n'ayant été mesuré, ces bénéfices ne sont pas présentés comme acquis.
+            </p>
+
+            <div class="project-study__outcomes ssis-study__outcomes">
+                <article class="project-study__outcome project-study__outcome--success">
+                    <span>Résultats vérifiés</span>
+                    <h3>Un flux opérationnel et traçable</h3>
+                    <p>Extraction incrémentale, staging, transformations, contrôles, insertions, mises à jour, rejets et export automatisé.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--success">
+                    <span>Décision éclairée</span>
+                    <h3>Une architecture validée techniquement</h3>
+                    <p>La faisabilité d'une standardisation progressive avec SSIS est démontrée et documentée.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--warning">
+                    <span>Limite actuelle</span>
+                    <h3>Un modèle volontairement simple</h3>
+                    <p>Pas encore de clés de substitution, d'historisation complète ni de séparation dimensionnelle aboutie.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--warning">
+                    <span>Suite recommandée</span>
+                    <h3>Préparer l'industrialisation</h3>
+                    <p>Modèle en étoile, dimensions, historisation, optimisation SQL et extension progressive aux autres domaines.</p>
+                </article>
+            </div>
+
+            <p class="ssis-study__confidentiality">
+                <strong>Confidentialité.</strong> Les noms de serveurs, bases, schémas, tables et données métier ont été
+                volontairement anonymisés. Cette étude restitue l'architecture et les responsabilités sans exposer le système réel.
+            </p>
+
+            <div class="project-study__next">
+                <div>
+                    <span>Un flux métier à structurer ?</span>
+                    <h2>Relions architecture, contrôles et usages de la donnée.</h2>
+                </div>
+                <Button Href="./#contact">Échanger sur votre projet</Button>
+            </div>
+        </div>
+    </section>
+</article>
