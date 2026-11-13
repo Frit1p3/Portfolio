@@ -625,6 +625,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Portail de Business Intelligence", section.TextContent);
         Assert.Contains("POC d'architecture décisionnelle SSIS", section.TextContent);
         Assert.Contains("Chaîne de livraison CI/CD", section.TextContent);
+        var ssisCard = cut.FindAll(".project-card")
+            .Single(card => card.TextContent.Contains("POC d'architecture décisionnelle SSIS", StringComparison.Ordinal));
+        Assert.Equal("projets/poc-ssis", ssisCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
 
         cut.Find("[data-filter='data']").Click();
 
@@ -674,6 +677,27 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("sans inventer de résultat client", cut.Find("#project-outcome-title").TextContent);
         Assert.Contains("Prototype conceptuel", cut.Find(".project-study__eyebrow").TextContent);
         Assert.Contains("Aucun déploiement client", cut.Find(".project-study__outcomes").TextContent);
+        Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void ProjectPocSsis_composes_a_factual_professional_case_study()
+    {
+        var cut = Render<ProjectPocSsis>();
+
+        Assert.Contains("Standardiser un flux ERP", cut.Find("h1").TextContent);
+        Assert.Contains("Expérience professionnelle", cut.Find(".project-study__eyebrow").TextContent);
+        Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
+        Assert.Equal(5, cut.FindAll(".ssis-flow__pipeline li").Count);
+        Assert.Equal(3, cut.FindAll(".ssis-flow__guardrails span").Count);
+        Assert.Equal(3, cut.FindAll(".project-study__problem-grid article").Count);
+        Assert.Equal(4, cut.FindAll(".ssis-study__steps li").Count);
+        Assert.Equal(3, cut.FindAll(".project-study__system-grid article").Count);
+        Assert.Equal(4, cut.FindAll(".ssis-study__role-grid article").Count);
+        Assert.Equal(4, cut.FindAll(".ssis-study__outcomes .project-study__outcome").Count);
+        Assert.Equal(5, cut.FindAll("[data-reveal]").Count);
+        Assert.Contains("Aucun gain de temps", cut.Find("#ssis-outcome-title").ParentElement?.TextContent);
+        Assert.Contains("volontairement anonymisés", cut.Find(".ssis-study__confidentiality").TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 

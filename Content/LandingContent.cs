@@ -286,8 +286,8 @@ public static class LandingContent
             new[] { "SSIS", "SQL Server", "C#", "ETL" },
             "POC opérationnel, extraction incrémentale, contrôles, rejets et journalisation",
             "POC professionnel terminé",
-            "Échanger sur ce projet",
-            "#contact",
+            "Lire l'étude de cas",
+            "projets/poc-ssis",
             "accent"),
         new ProjectUseCase(
             "03",
