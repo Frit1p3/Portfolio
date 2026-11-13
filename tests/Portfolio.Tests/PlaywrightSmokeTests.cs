@@ -401,6 +401,55 @@ public sealed class PlaywrightSmokeTests
         }
     }
 
+    [Fact]
+    public async Task Ssis_case_study_exposes_factual_architecture_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/poc-ssis").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Standardiser un flux ERP avec une architecture SSIS traçable" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".ssis-flow")).ToBeVisibleAsync();
+            Assert.Equal(5, await page.Locator(".ssis-flow__pipeline li").CountAsync());
+            Assert.Equal(4, await page.Locator(".ssis-study__steps li").CountAsync());
+            Assert.Equal(4, await page.Locator(".ssis-study__outcomes .project-study__outcome").CountAsync());
+            Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas d'un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles, journalisation et chargement SQL Server.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/poc-ssis",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"SSIS case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
     private static bool TryGetBaseUrl(out string baseUrl)
     {
         baseUrl = Environment.GetEnvironmentVariable("PORTFOLIO_BASE_URL") ?? string.Empty;

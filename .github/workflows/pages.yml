@@ -66,6 +66,16 @@ jobs:
             -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \
             -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \
             publish/wwwroot/projets/pilotage-atelier/index.html
+          mkdir -p publish/wwwroot/projets/poc-ssis
+          cp publish/wwwroot/index.html publish/wwwroot/projets/poc-ssis/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Applications métier .NET#POC SSIS : architecture décisionnelle - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Étude de cas d’un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles et chargement SQL Server."#' \
+            -e '/og.description/ s#content="[^"]*"#content="POC ETL documenté reliant une source ERP de test à un data warehouse SQL Server."#' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
+            -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/poc-ssis"#g' \
+            publish/wwwroot/projets/poc-ssis/index.html
           touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact
