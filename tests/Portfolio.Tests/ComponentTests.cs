@@ -101,12 +101,12 @@ public sealed class ComponentTests : BunitContext
             .Add(component => component.ActionLabel, "Voir la preuve")
             .Add(component => component.ActionHref, "#case-study")
             .Add(component => component.Tone, "success")
-            .Add(component => component.Preview, "operations")
+            .Add(component => component.Preview, "frontend")
             .Add(component => component.Featured, true));
 
         Assert.Contains("project-card--success", cut.Find("article").ClassList);
         Assert.Contains("project-card--featured", cut.Find("article").ClassList);
-        Assert.Contains("project-card__visual--operations", cut.Find(".project-card__visual").ClassList);
+        Assert.Contains("project-card__visual--frontend", cut.Find(".project-card__visual").ClassList);
         Assert.Equal(3, cut.FindAll(".project-card__preview-kpis > div").Count);
         Assert.Equal(2, cut.FindAll(".project-card__stack li").Count);
         Assert.Contains("Conception UX", cut.Markup);
@@ -163,7 +163,7 @@ public sealed class ComponentTests : BunitContext
         var footer = cut.Find("footer");
 
         Assert.Contains("site-footer", footer.ClassList);
-        Assert.Contains("Front-End .NET", footer.TextContent);
+        Assert.Contains("Full-Stack .NET", footer.TextContent);
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Equal(5, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
@@ -299,12 +299,12 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.concept-hero");
 
         Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
-        Assert.Contains("Interfaces industrielles", section.TextContent);
-        Assert.Contains("Je transforme des flux métier complexes", section.TextContent);
+        Assert.Contains("Relier les usages", section.TextContent);
+        Assert.Contains("Je conçois et développe des solutions .NET", section.TextContent);
         Assert.Equal("#projects", cut.FindAll(".concept-hero__actions a")[0].GetAttribute("href"));
         Assert.Equal("#case-study", cut.FindAll(".concept-hero__actions a")[1].GetAttribute("href"));
         Assert.NotNull(cut.Find(".concept-hero__dashboard"));
-        Assert.Contains("87%", cut.Find(".concept-hero__primary-metric").TextContent);
+        Assert.Contains(".NET", cut.Find(".concept-hero__primary-metric").TextContent);
         Assert.Equal(2, cut.FindAll(".concept-hero__signal-list > div").Count);
         Assert.Equal(3, cut.FindAll(".concept-hero__dashboard-footer li").Count);
         Assert.Empty(cut.FindAll(".hero-kpi-card"));
@@ -321,9 +321,9 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Collection(
             specialties,
-            item => Assert.Equal("UX métier", item.TextContent),
+            item => Assert.Equal("Applications métier", item.TextContent),
             item => Assert.Equal("Blazor & .NET", item.TextContent),
-            item => Assert.Equal("Data & KPI", item.TextContent));
+            item => Assert.Equal("Data & architecture", item.TextContent));
     }
 
     [Fact]
@@ -560,12 +560,12 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("proof", panel.Id);
         Assert.Contains("product-demo-panel", panel.ClassList);
-        Assert.Equal("Aperçu de démonstration produit - Cartographie opérationnelle des flux", panel.GetAttribute("aria-label"));
+        Assert.Equal("Aperçu de démonstration produit - Chaîne applicative métier", panel.GetAttribute("aria-label"));
         Assert.Equal(3, cut.FindAll(".source-compact-card").Count);
         Assert.Equal(3, cut.FindAll(".decision-timeline-card").Count);
-        Assert.Contains("Cartographie opérationnelle des flux", panel.TextContent);
-        Assert.Contains("OEE atelier", panel.TextContent);
-        Assert.Contains("GED", panel.TextContent);
+        Assert.Contains("Chaîne applicative métier", panel.TextContent);
+        Assert.Contains("Réalisation", panel.TextContent);
+        Assert.Contains("Data", panel.TextContent);
     }
 
     [Fact]
@@ -579,9 +579,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("expertise-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--center", cut.Find(".section-header").ClassList);
         Assert.Equal(3, cut.FindAll(".skill-card").Count);
-        Assert.Contains("UX métier", section.TextContent);
-        Assert.Contains("Front-End .NET", section.TextContent);
-        Assert.Contains("Data & KPI", section.TextContent);
+        Assert.Contains("Front-End & UX", section.TextContent);
+        Assert.Contains("Data & architecture", section.TextContent);
+        Assert.Contains("Delivery & projet", section.TextContent);
     }
 
     [Fact]
@@ -595,12 +595,12 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("method-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--narrow", cut.Find(".section-header").ClassList);
         Assert.Contains("section-header--center", cut.Find(".section-header").ClassList);
-        Assert.Contains("De la complexité terrain", section.TextContent);
-        Assert.Contains("écrans testables", section.TextContent);
+        Assert.Contains("solution vérifiable", section.TextContent);
+        Assert.Contains("sépare clairement", section.TextContent);
         Assert.Equal(3, cut.FindAll(".method-section__step").Count);
-        Assert.Contains("Comprendre les contraintes", section.TextContent);
-        Assert.Contains("Structurer les écrans", section.TextContent);
-        Assert.Contains("Passer au code", section.TextContent);
+        Assert.Contains("Définir le problème", section.TextContent);
+        Assert.Contains("Concevoir, développer, documenter", section.TextContent);
+        Assert.Contains("Distinguer résultats et suites", section.TextContent);
         Assert.Equal("step", cut.Find(".method-section__step--highlighted").GetAttribute("aria-current"));
     }
 
@@ -614,23 +614,23 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("projects", section.Id);
         Assert.Equal("projects-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--default", cut.Find(".section-header").ClassList);
-        Assert.Contains("Des produits front-end", section.TextContent);
-        Assert.Contains("usages industriels", section.TextContent);
+        Assert.Contains("réalisations réelles", section.TextContent);
+        Assert.Contains("projet professionnel", section.TextContent);
         Assert.Equal(4, cut.FindAll(".projects-section__filter").Count);
         Assert.Equal(3, cut.FindAll(".project-card").Count);
         Assert.Single(cut.FindAll(".project-card--featured"));
-        Assert.Single(cut.FindAll(".project-card__visual--operations"));
-        Assert.Single(cut.FindAll(".project-card__visual--integration"));
+        Assert.Single(cut.FindAll(".project-card__visual--frontend"));
         Assert.Single(cut.FindAll(".project-card__visual--data"));
-        Assert.Contains("Pilotage atelier", section.TextContent);
-        Assert.Contains("Flux ERP", section.TextContent);
-        Assert.Contains("Reporting décisionnel", section.TextContent);
+        Assert.Single(cut.FindAll(".project-card__visual--delivery"));
+        Assert.Contains("Portail de Business Intelligence", section.TextContent);
+        Assert.Contains("POC d'architecture décisionnelle SSIS", section.TextContent);
+        Assert.Contains("Chaîne de livraison CI/CD", section.TextContent);
 
         cut.Find("[data-filter='data']").Click();
 
         Assert.Equal("true", cut.Find("[data-filter='data']").GetAttribute("aria-pressed"));
         Assert.Single(cut.FindAll(".project-card"));
-        Assert.Contains("Reporting décisionnel", section.TextContent);
+        Assert.Contains("POC d'architecture décisionnelle SSIS", section.TextContent);
     }
 
     [Fact]
@@ -643,20 +643,20 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("case-study", section.Id);
         Assert.Equal("case-study-section-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("section-header--wide", cut.Find(".section-header").ClassList);
-        Assert.Contains("Rassembler les signaux atelier", section.TextContent);
-        Assert.Contains("équipes terrain", section.TextContent);
+        Assert.Contains("portail BI", section.TextContent);
+        Assert.Contains("visualisations de données de production", section.TextContent);
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__facts > div").Count);
         Assert.Equal(2, cut.FindAll(".case-study-section__comparison-item").Count);
-        Assert.Contains("Écart qualité", cut.Find(".case-study-section__priority").TextContent);
-        Assert.Contains("Cas anonymisé", section.TextContent);
-        Assert.Contains("Lecture fragmentée", section.TextContent);
-        Assert.Contains("Décision contextualisée", section.TextContent);
-        Assert.Contains("Problème", section.TextContent);
-        Assert.Contains("Réponse UX", section.TextContent);
-        Assert.Contains("Livrable", section.TextContent);
-        Assert.Equal("projets/pilotage-atelier", cut.Find(".case-study-section__link").GetAttribute("href"));
+        Assert.Contains("Filtres, tableaux", cut.Find(".case-study-section__priority").TextContent);
+        Assert.Contains("Expérience professionnelle anonymisée", section.TextContent);
+        Assert.Contains("Accéder à la donnée", section.TextContent);
+        Assert.Contains("écrans complets", section.TextContent);
+        Assert.Contains("Besoin", section.TextContent);
+        Assert.Contains("Réalisation", section.TextContent);
+        Assert.Contains("Valeur vérifiée", section.TextContent);
+        Assert.Equal("#contact", cut.Find(".case-study-section__link").GetAttribute("href"));
     }
 
     [Fact]
@@ -664,7 +664,7 @@ public sealed class ComponentTests : BunitContext
     {
         var cut = Render<ProjectPilotageAtelier>();
 
-        Assert.Contains("Rendre les priorités atelier", cut.Find("h1").TextContent);
+        Assert.Contains("Explorer la lisibilité", cut.Find("h1").TextContent);
         Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
         Assert.Equal(3, cut.FindAll(".project-study__problem-grid article").Count);
         Assert.Equal(3, cut.FindAll(".project-study__decisions li").Count);
@@ -672,6 +672,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(2, cut.FindAll(".project-study__outcome").Count);
         Assert.Equal(4, cut.FindAll("[data-reveal]").Count);
         Assert.Contains("sans inventer de résultat client", cut.Find("#project-outcome-title").TextContent);
+        Assert.Contains("Prototype conceptuel", cut.Find(".project-study__eyebrow").TextContent);
+        Assert.Contains("Aucun déploiement client", cut.Find(".project-study__outcomes").TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 
@@ -683,7 +685,7 @@ public sealed class ComponentTests : BunitContext
         var section = cut.Find("section.contact-section");
 
         Assert.Equal("contact-guidance-title", heading.Id);
-        Assert.Equal("Votre projet", heading.TextContent);
+        Assert.Equal("Votre besoin métier", heading.TextContent);
         Assert.Equal("contact-guidance-title", section.GetAttribute("aria-labelledby"));
 
         Assert.Equal("contact", section.Id);
@@ -691,7 +693,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
         Assert.Equal(3, cut.FindAll(".contact-section__highlight h3").Count);
-        Assert.Contains("Audit UI métier", section.TextContent);
+        Assert.Contains("Front-End métier", section.TextContent);
     }
 
     [Fact]

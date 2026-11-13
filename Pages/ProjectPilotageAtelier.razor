@@ -1,14 +1,14 @@
 @page "/projets/pilotage-atelier"
 @using Portfolio.Content
 
-<PageTitle>Étude de cas Pilotage atelier - Merryl Bouchereau</PageTitle>
+<PageTitle>Prototype UI Pilotage atelier - Merryl Bouchereau</PageTitle>
 
 <HeadContent>
-    <meta name="description" content="Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable." />
+    <meta name="description" content="Prototype conceptuel UX et Blazor utilisant des données de démonstration pour explorer la lisibilité d'un dashboard industriel." />
     <link rel="canonical" href="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Étude de cas Pilotage atelier - Merryl Bouchereau" />
-    <meta property="og:description" content="Du signal dispersé à une priorité explicite : décisions UX, composants et architecture front-end d'un dashboard industriel." />
+    <meta property="og:title" content="Prototype UI Pilotage atelier - Merryl Bouchereau" />
+    <meta property="og:description" content="Exploration conceptuelle d'un dashboard industriel en Blazor, clairement séparée des expériences professionnelles présentées sur le portfolio." />
     <meta property="og:url" content="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier" />
     <meta property="og:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -27,22 +27,27 @@
 
             <div class="project-study__hero-grid">
                 <div class="project-study__hero-content">
-                    <span class="project-study__eyebrow">Étude de cas · Interface industrielle</span>
-                    <h1>Rendre les priorités atelier lisibles en quelques secondes</h1>
+                    <span class="project-study__eyebrow">Laboratoire UI · Prototype conceptuel</span>
+                    <h1>Explorer la lisibilité d'un dashboard de pilotage atelier</h1>
                     <p>
-                        Une exploration produit pour réunir rendement, qualité et incidents dans une vue opérationnelle
-                        unique — sans perdre le contexte métier entre le signal et l'action.
+                        Une démonstration UX et Front-End construite avec des données fictives pour explorer la relation
+                        entre signal, contexte et action. Elle ne décrit pas un projet client livré.
                     </p>
                 </div>
 
                 <dl class="project-study__summary" aria-label="Synthèse du projet">
-                    @foreach (var fact in LandingContent.CaseStudyFacts)
-                    {
-                        <div>
-                            <dt>@fact.Label</dt>
-                            <dd>@fact.Value</dd>
-                        </div>
-                    }
+                    <div>
+                        <dt>Nature</dt>
+                        <dd>Prototype conceptuel</dd>
+                    </div>
+                    <div>
+                        <dt>Rôle</dt>
+                        <dd>Exploration UX/UI &amp; Front-End</dd>
+                    </div>
+                    <div>
+                        <dt>Données</dt>
+                        <dd>Démonstration fictive</dd>
+                    </div>
                     <div>
                         <dt>Socle</dt>
                         <dd>Blazor · CSS · composants</dd>
@@ -94,25 +99,25 @@
     <section class="project-study__section project-study__section--intro" data-reveal aria-labelledby="project-context-title">
         <div class="project-study__section-label">01 · Contexte</div>
         <div class="project-study__section-content">
-            <h2 id="project-context-title">Le problème n'était pas le manque de données, mais leur dispersion.</h2>
+            <h2 id="project-context-title">Une hypothèse de conception autour de données dispersées.</h2>
             <p class="project-study__lead">
-                ERP, suivi atelier et reporting présentaient chacun une partie de la situation. Les équipes devaient
-                rapprocher mentalement plusieurs écrans avant de comprendre la priorité du jour.
+                Le prototype part d'un scénario fictif dans lequel ERP, suivi atelier et reporting présentent chacun
+                une partie de la situation. Ce scénario sert uniquement à éprouver une organisation d'interface.
             </p>
 
             <div class="project-study__problem-grid">
                 <article>
-                    <span>Situation initiale</span>
+                    <span>Hypothèse de départ</span>
                     <h3>Une lecture fragmentée</h3>
                     <p>Des statuts et KPI consultés dans des outils séparés, avec des niveaux de détail différents.</p>
                 </article>
                 <article>
-                    <span>Risque métier</span>
+                    <span>Risque simulé</span>
                     <h3>Une décision retardée</h3>
                     <p>Le temps consacré à reconstituer le contexte ralentit l'identification de la prochaine action.</p>
                 </article>
                 <article>
-                    <span>Objectif UX</span>
+                    <span>Objectif de démonstration</span>
                     <h3>Une priorité explicite</h3>
                     <p>Faire tenir statut, criticité, preuve et action attendue dans une même lecture.</p>
                 </article>
@@ -172,28 +177,30 @@
     </section>
 
     <section class="project-study__section" data-reveal aria-labelledby="project-outcome-title">
-        <div class="project-study__section-label">04 · Résultat</div>
+        <div class="project-study__section-label">04 · Limites</div>
         <div class="project-study__section-content">
             <h2 id="project-outcome-title">Une preuve de conception, sans inventer de résultat client.</h2>
             <p class="project-study__lead">
-                Le cas étant anonymisé, les données présentées démontrent le modèle de lecture et les décisions UX.
-                Elles ne sont pas présentées comme des mesures de production réelles.
+                Le scénario étant conceptuel, les données présentées servent uniquement à démontrer le modèle de
+                lecture et les décisions UX. Elles ne proviennent pas d'un système de production réel.
             </p>
 
             <div class="project-study__outcomes">
-                @foreach (var comparison in LandingContent.CaseStudyComparisons)
-                {
-                    <article class="project-study__outcome project-study__outcome--@comparison.Tone">
-                        <span>@comparison.Label</span>
-                        <h3>@comparison.Title</h3>
-                        <p>@comparison.Description</p>
-                    </article>
-                }
+                <article class="project-study__outcome project-study__outcome--success">
+                    <span>Prototype</span>
+                    <h3>Ce qui est démontré</h3>
+                    <p>Une hiérarchie visuelle, des composants d'interface et une logique de lecture responsive.</p>
+                </article>
+                <article class="project-study__outcome project-study__outcome--warning">
+                    <span>Non mesuré</span>
+                    <h3>Ce qui n'est pas revendiqué</h3>
+                    <p>Aucun déploiement client, gain opérationnel, KPI de production ou résultat utilisateur réel.</p>
+                </article>
             </div>
 
             <div class="project-study__next">
                 <div>
-                    <span>Un besoin similaire ?</span>
+                    <span>Une interface métier à clarifier ?</span>
                     <h2>Clarifions les signaux, les décisions et les actions attendues.</h2>
                 </div>
                 <Button Href="./#contact">Échanger sur votre interface</Button>

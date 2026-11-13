@@ -59,9 +59,9 @@ jobs:
           mkdir -p publish/wwwroot/projets/pilotage-atelier
           cp publish/wwwroot/index.html publish/wwwroot/projets/pilotage-atelier/index.html
           sed -i \
-            -e 's#Merryl Bouchereau - Interfaces industrielles .NET#Étude de cas Pilotage atelier - Merryl Bouchereau#g' \
-            -e 's#Portfolio Front-End .NET pour interfaces industrielles, dashboards métier et outils terrain B2B.#Étude de cas UX et Blazor : réunir rendement, qualité et incidents dans un dashboard industriel lisible et actionnable.#g' \
-            -e 's#Conception UX et développement Blazor pour interfaces industrielles, dashboards métier et outils terrain B2B.#Du signal dispersé à une priorité explicite : décisions UX, composants et architecture front-end d’un dashboard industriel.#g' \
+            -e 's#Merryl Bouchereau - Applications métier .NET#Prototype UI Pilotage atelier - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Prototype conceptuel UX et Blazor : données de démonstration pour explorer un dashboard industriel."#' \
+            -e '/og.description/ s#content="[^"]*"#content="Prototype UI Blazor avec données de démonstration, distinct des expériences professionnelles."#' \
             -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
             -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \
             -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/pilotage-atelier"#g' \

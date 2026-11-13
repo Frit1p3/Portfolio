@@ -5,7 +5,7 @@
             <small>@PreviewLabel</small>
         </div>
 
-        @if (Preview == "operations")
+        @if (Preview == "frontend")
         {
             <div class="project-card__operations-preview">
                 <div class="project-card__preview-sidebar">
@@ -14,9 +14,9 @@
                 <div class="project-card__preview-content">
                     <div class="project-card__preview-heading"><span></span><i></i></div>
                     <div class="project-card__preview-kpis">
-                        <div><small>OEE</small><strong>87%</strong></div>
-                        <div><small>Alertes</small><strong>12</strong></div>
-                        <div><small>Cycle</small><strong>2,8 j</strong></div>
+                        <div><small>Vues</small><strong>BI</strong></div>
+                        <div><small>Exploration</small><strong>Filtres</strong></div>
+                        <div><small>Détail</small><strong>Tables</strong></div>
                     </div>
                     <div class="project-card__preview-chart">
                         <span style="--bar-height: 44%"></span>
@@ -29,23 +29,23 @@
                 </div>
             </div>
         }
-        else if (Preview == "integration")
+        else if (Preview == "data")
         {
             <div class="project-card__flow-preview">
-                <div class="project-card__flow-node"><i></i><span>ERP</span><small>Commandes</small></div>
+                <div class="project-card__flow-node"><i></i><span>ERP</span><small>Source de test</small></div>
                 <div class="project-card__flow-line"><span></span></div>
-                <div class="project-card__flow-node project-card__flow-node--active"><i></i><span>API</span><small>Synchronisation</small></div>
+                <div class="project-card__flow-node project-card__flow-node--active"><i></i><span>SSIS</span><small>Contrôles ETL</small></div>
                 <div class="project-card__flow-line"><span></span></div>
-                <div class="project-card__flow-node"><i></i><span>Atelier</span><small>Temps réel</small></div>
+                <div class="project-card__flow-node"><i></i><span>DWH</span><small>SQL Server</small></div>
             </div>
         }
         else
         {
             <div class="project-card__reporting-preview">
                 <div class="project-card__reporting-summary">
-                    <span>Performance consolidée</span>
-                    <strong>+18%</strong>
-                    <small>vs période précédente</small>
+                    <span>Chaîne automatisée</span>
+                    <strong>CI/CD</strong>
+                    <small>Tests · sécurité · déploiement</small>
                 </div>
                 <div class="project-card__reporting-bars">
                     <span style="--bar-height: 36%"></span>
@@ -77,7 +77,7 @@
                 <dd>@Role</dd>
             </div>
             <div>
-                <dt>Résultat attendu</dt>
+                <dt>Preuve vérifiée</dt>
                 <dd>@Impact</dd>
             </div>
         </dl>
@@ -139,8 +139,8 @@
 
     private string PreviewLabel => Preview switch
     {
-        "integration" => "Flux synchronisés",
-        "data" => "Reporting décisionnel",
-        _ => "Vue opérations"
+        "frontend" => "Portail de Business Intelligence",
+        "data" => "Flux ETL documenté",
+        _ => "Pipeline de livraison"
     };
 }
