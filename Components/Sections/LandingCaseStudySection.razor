@@ -9,7 +9,7 @@
         Width="wide" />
 
     <aside class="case-study-section__disclosure" aria-label="Contexte de publication">
-        <Badge Tone="accent">Preuve contextualisée</Badge>
+        <Badge Tone="accent">Périmètre confirmé</Badge>
         <p>@LandingContent.CaseStudyDisclosure</p>
     </aside>
 
@@ -38,13 +38,13 @@
             </div>
         </article>
 
-        <article class="case-study-section__preview" aria-label="Aperçu du dashboard atelier">
+        <article class="case-study-section__preview" aria-label="Reconstitution anonymisée du portail BI">
             <header class="case-study-section__preview-header">
                 <div>
-                    <span>Vue opérations</span>
-                    <strong>Priorités atelier</strong>
+                    <span>Exploration des données</span>
+                    <strong>Portail de Business Intelligence</strong>
                 </div>
-                <Badge Tone="neutral">Données contextualisées</Badge>
+                <Badge Tone="neutral">Expérience professionnelle</Badge>
             </header>
 
             <div class="case-study-section__metrics" aria-label="Indicateurs de cadrage">
@@ -58,16 +58,16 @@
                 }
             </div>
 
-            <div class="case-study-section__priority" aria-label="Signal prioritaire">
-                <span>Signal prioritaire</span>
-                <strong>Écart qualité · Ligne 04</strong>
-                <small>Action requise avant le prochain cycle</small>
-                <i aria-hidden="true">Priorité haute</i>
+            <div class="case-study-section__priority" aria-label="Périmètre de la reconstitution">
+                <span>Fonctionnalités confirmées</span>
+                <strong>Filtres, tableaux et visualisations par service</strong>
+                <small>Reconstitution anonymisée — aucune donnée de production réelle</small>
+                <i aria-hidden="true">Périmètre vérifié</i>
             </div>
         </article>
     </div>
 
-    <div class="case-study-section__comparison" aria-label="Comparaison avant et après">
+    <div class="case-study-section__comparison" aria-label="Besoin et périmètre livré">
         @foreach (var comparison in LandingContent.CaseStudyComparisons)
         {
             <article class="case-study-section__comparison-item case-study-section__comparison-item--@comparison.Tone">
@@ -78,7 +78,7 @@
         }
     </div>
 
-    <a class="case-study-section__link" href="projets/pilotage-atelier">
-        Lire l'étude de cas complète <span aria-hidden="true">→</span>
+    <a class="case-study-section__link" href="#contact">
+        Échanger sur cette expérience <span aria-hidden="true">→</span>
     </a>
 </section>
