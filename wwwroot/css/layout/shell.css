@@ -147,6 +147,18 @@
     font-weight: 700;
 }
 
+.site-footer__profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8) var(--space-16);
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+}
+
+.site-footer__profiles a {
+    color: var(--color-text-primary);
+}
+
 .site-footer__bottom {
     display: flex;
     align-items: center;

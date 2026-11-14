@@ -168,6 +168,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Equal(6, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
+        Assert.Equal(3, cut.FindAll(".site-footer__profiles a").Count);
+        Assert.Equal(LandingContent.LinkedInUrl, cut.Find(".site-footer__profiles a").GetAttribute("href"));
+        Assert.Equal(LandingContent.CvRequestUrl, cut.FindAll(".site-footer__profiles a")[2].GetAttribute("href"));
         Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
 
@@ -784,6 +787,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("contact", section.Id);
         Assert.Contains("Décrire votre besoin", section.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
+        Assert.Equal(3, cut.FindAll(".contact-section__resources a").Count);
+        Assert.Equal(LandingContent.LinkedInUrl, cut.Find(".contact-section__resources a").GetAttribute("href"));
+        Assert.Equal(LandingContent.CvRequestUrl, cut.FindAll(".contact-section__resources a")[2].GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
         Assert.Equal(3, cut.FindAll(".contact-section__highlight h3").Count);
         Assert.Contains("Front-End métier", section.TextContent);
