@@ -42,6 +42,8 @@ public sealed class FoundationTests
         Assert.StartsWith("https://github.com/", LandingContent.GitHubUrl, StringComparison.Ordinal);
         Assert.StartsWith("mailto:", LandingContent.CvRequestUrl, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
+        Assert.Equal(3, CaseStudyNavigationContent.Studies.Count);
+        Assert.DoesNotContain(CaseStudyNavigationContent.Studies, study => study.Key == "pilotage-atelier");
     }
 
     [Fact]
