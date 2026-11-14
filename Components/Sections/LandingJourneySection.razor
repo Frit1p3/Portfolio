@@ -1,0 +1,75 @@
+@using Portfolio.Content
+
+<section class="journey-section" id="journey" data-reveal aria-labelledby="journey-section-title">
+    <SectionHeader
+        Eyebrow="@LandingContent.JourneyEyebrow"
+        Title="@LandingContent.JourneyTitle"
+        TitleId="journey-section-title"
+        Description="@LandingContent.JourneyIntro"
+        Width="wide" />
+
+    <div class="journey-section__layout">
+        <div class="journey-section__timeline-wrap">
+            <div class="journey-section__subheading">
+                <span>Parcours</span>
+                <h3>Une continuité dans la manière d'expliquer, cadrer et produire.</h3>
+            </div>
+
+            <ol class="journey-section__timeline">
+                @foreach (var milestone in LandingContent.JourneyMilestones)
+                {
+                    <li>
+                        <div class="journey-section__period">@milestone.Period</div>
+                        <div class="journey-section__milestone">
+                            <span>@milestone.Evidence</span>
+                            <h3>@milestone.Title</h3>
+                            <strong>@milestone.Organization</strong>
+                            <p>@milestone.Description</p>
+                        </div>
+                    </li>
+                }
+            </ol>
+        </div>
+
+        <aside class="journey-section__transfer" aria-label="Compétences transférables de l'enseignement">
+            <span>Fil conducteur</span>
+            <h3>Transmettre une technique, c'est déjà concevoir une expérience.</h3>
+            <p>
+                Préparer une progression, démontrer un geste complexe, adapter l'accompagnement et suivre une production
+                sont des compétences transférables à la conception d'interfaces et à la coordination technique.
+            </p>
+            <ul>
+                <li>Expliquer sans simplifier à l'excès</li>
+                <li>Adapter le cadre au niveau et au projet</li>
+                <li>Planifier les moyens, les coûts et la production</li>
+            </ul>
+        </aside>
+    </div>
+
+    <div class="journey-section__proofs-heading">
+        <span>Projets en cours et coordination</span>
+        <h3>Des preuves courtes, présentées selon leur maturité réelle.</h3>
+    </div>
+
+    <div class="journey-section__proofs">
+        @foreach (var proof in LandingContent.ComplementaryProofs)
+        {
+            <article class="journey-section__proof journey-section__proof--@proof.Tone">
+                <header>
+                    <span>@proof.Status</span>
+                    <i aria-hidden="true"></i>
+                </header>
+                <h3>@proof.Title</h3>
+                <strong>@proof.Role</strong>
+                <p>@proof.Description</p>
+                <ul>
+                    @foreach (var responsibility in proof.Responsibilities)
+                    {
+                        <li>@responsibility</li>
+                    }
+                </ul>
+                <footer>@proof.Limit</footer>
+            </article>
+        }
+    </div>
+</section>

@@ -127,8 +127,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Merryl", cut.Markup);
         Assert.Contains("Merryl Bouchereau - Retour à l'accueil", cut.Find(".site-header__brand").GetAttribute("aria-label"));
         Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
-        Assert.Equal(5, navigationLinks.Count);
+        Assert.Equal(6, navigationLinks.Count);
         Assert.Contains("#expertise", cut.Markup);
+        Assert.Contains("#journey", cut.Markup);
         Assert.Contains("#approach", cut.Markup);
         Assert.Contains("#projects", cut.Markup);
         Assert.Contains("#case-study", cut.Markup);
@@ -165,7 +166,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("site-footer", footer.ClassList);
         Assert.Contains("Full-Stack .NET", footer.TextContent);
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
-        Assert.Equal(5, cut.FindAll(".site-footer__nav a").Count);
+        Assert.Equal(6, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
         Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
@@ -585,6 +586,26 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
+    public void LandingJourneySection_distinguishes_parcours_and_project_maturity()
+    {
+        var cut = Render<LandingJourneySection>();
+        var section = cut.Find("section.journey-section");
+
+        Assert.Equal("journey", section.Id);
+        Assert.Equal("journey-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Equal(4, cut.FindAll(".journey-section__timeline li").Count);
+        Assert.Equal(2, cut.FindAll(".journey-section__proof").Count);
+        Assert.Contains("Moniteur en techniques d'édition", section.TextContent);
+        Assert.Contains("Enseignant en techniques de résine", section.TextContent);
+        Assert.Contains("Développement .NET en environnement industriel", section.TextContent);
+        Assert.Contains("Agent IA documentaire", section.TextContent);
+        Assert.Contains("En cadrage", section.TextContent);
+        Assert.Contains("Aucun résultat opérationnel revendiqué", section.TextContent);
+        Assert.Contains("Facturation électronique", section.TextContent);
+        Assert.Contains("Périmètre technique et résultats à documenter", section.TextContent);
+    }
+
+    [Fact]
     public void LandingMethodSection_composes_method_steps()
     {
         var cut = Render<LandingMethodSection>();
@@ -631,6 +652,9 @@ public sealed class ComponentTests : BunitContext
         var ssisCard = cut.FindAll(".project-card")
             .Single(card => card.TextContent.Contains("POC d'architecture décisionnelle SSIS", StringComparison.Ordinal));
         Assert.Equal("projets/poc-ssis", ssisCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
+        var cicdCard = cut.FindAll(".project-card")
+            .Single(card => card.TextContent.Contains("Chaîne de livraison CI/CD", StringComparison.Ordinal));
+        Assert.Equal("projets/ci-cd-cesizen", cicdCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
 
         cut.Find("[data-filter='data']").Click();
 
@@ -721,6 +745,28 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(5, cut.FindAll("[data-reveal]").Count);
         Assert.Contains("aucune mesure d'usage", cut.Find("#bi-outcome-title").ParentElement?.TextContent);
         Assert.Contains("reconstitution anonymisée", cut.Find(".bi-study__confidentiality").TextContent);
+        Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void ProjectCiCdCesizen_composes_a_factual_and_bounded_devops_case_study()
+    {
+        var cut = Render<ProjectCiCdCesizen>();
+
+        Assert.Contains("Transformer un déploiement ponctuel", cut.Find("h1").TextContent);
+        Assert.Contains("Projet scolaire terminé", cut.Find(".project-study__eyebrow").TextContent);
+        Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
+        Assert.Equal(6, cut.FindAll(".cicd-pipeline__stages li").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-pipeline__footer span").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__gates li").Count);
+        Assert.Equal(5, cut.FindAll(".cicd-study__services article").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__operations article").Count);
+        Assert.Equal(2, cut.FindAll(".cicd-study__scope .project-study__outcome").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__outcomes .project-study__outcome").Count);
+        Assert.Equal(6, cut.FindAll("[data-reveal]").Count);
+        Assert.Contains("mobile seulement validé par compilation", cut.Find("#cicd-scope-title").TextContent);
+        Assert.Contains("Une seule VM", cut.Find(".cicd-study__outcomes").TextContent);
+        Assert.Contains("aucune mesure historique", cut.Find("#cicd-outcome-title").ParentElement?.TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 

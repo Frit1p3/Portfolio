@@ -26,6 +26,9 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
         Assert.Contains("solution vérifiable", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
+        Assert.Contains("transmission", LandingContent.JourneyTitle, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(4, LandingContent.JourneyMilestones.Count);
+        Assert.Equal(2, LandingContent.ComplementaryProofs.Count);
         Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
         Assert.Equal(4, LandingContent.ProjectFilters.Count);
@@ -94,6 +97,13 @@ public sealed class FoundationTests
             StringComparison.Ordinal);
         Assert.Contains("Portail BI industriel en Blazor", workflow, StringComparison.Ordinal);
         Assert.Contains("Portfolio/projets/portail-bi", workflow, StringComparison.Ordinal);
+        Assert.Contains("mkdir -p publish/wwwroot/projets/ci-cd-cesizen", workflow, StringComparison.Ordinal);
+        Assert.Contains(
+            "cp publish/wwwroot/index.html publish/wwwroot/projets/ci-cd-cesizen/index.html",
+            workflow,
+            StringComparison.Ordinal);
+        Assert.Contains("CI/CD .NET sur Azure", workflow, StringComparison.Ordinal);
+        Assert.Contains("Portfolio/projets/ci-cd-cesizen", workflow, StringComparison.Ordinal);
         Assert.Contains("/og.description/", workflow, StringComparison.Ordinal);
         Assert.Contains("content=\"https://frit1p3.github.io/Portfolio/\"", workflow, StringComparison.Ordinal);
     }
@@ -118,6 +128,7 @@ public sealed class FoundationTests
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-journey-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/project-card.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/contact-form.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);
@@ -127,6 +138,7 @@ public sealed class FoundationTests
         Assert.Contains("pages/project-case-study.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/project-ssis.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/project-bi.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("pages/project-cicd.css", appCss, StringComparison.Ordinal);
     }
 
     [Fact]
