@@ -206,7 +206,7 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(1, await page.Locator("h1").CountAsync());
         Assert.Equal(5, await page.Locator("main h2").CountAsync());
         Assert.Equal(5, await page.Locator(".site-header__nav a").CountAsync());
-        Assert.Equal(5, await page.Locator(".site-footer__nav a").CountAsync());
+        Assert.Equal(6, await page.Locator(".site-footer__nav a").CountAsync());
         Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
         Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
@@ -216,6 +216,9 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(3, await page.Locator(".case-study-section__facts > div").CountAsync());
         Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
         await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
+        await Expect(page.Locator("#journey")).ToBeVisibleAsync();
+        Assert.Equal(4, await page.Locator(".journey-section__timeline li").CountAsync());
+        Assert.Equal(2, await page.Locator(".journey-section__proof").CountAsync());
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }).ClickAsync();
         Assert.Equal(3, await page.Locator(".contact-form .validation-message").CountAsync());
@@ -494,6 +497,55 @@ public sealed class PlaywrightSmokeTests
 
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1, $"BI case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
+    [Fact]
+    public async Task Cicd_case_study_exposes_traceability_and_limits_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/ci-cd-cesizen").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Transformer un déploiement ponctuel en livraison maîtrisée" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".cicd-pipeline")).ToBeVisibleAsync();
+            Assert.Equal(6, await page.Locator(".cicd-pipeline__stages li").CountAsync());
+            Assert.Equal(4, await page.Locator(".cicd-study__gates li").CountAsync());
+            Assert.Equal(5, await page.Locator(".cicd-study__services article").CountAsync());
+            Assert.Equal(6, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas CI/CD .NET : GitHub Actions, tests, Trivy, images Docker par SHA, déploiement Azure, supervision et rollback.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"CI/CD case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
 
             await page.CloseAsync();
         }

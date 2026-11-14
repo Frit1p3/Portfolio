@@ -10,6 +10,7 @@ public static class LandingContent
         new NavigationLink("Projets", "#projects"),
         new NavigationLink("Preuve Front-End", "#case-study"),
         new NavigationLink("Expertises", "#expertise"),
+        new NavigationLink("Parcours", "#journey"),
         new NavigationLink("Méthode", "#approach")
     };
 
@@ -297,10 +298,10 @@ public static class LandingContent
             "Automatiser les tests, les contrôles de sécurité, la création des images et le déploiement multi-environnements",
             "Conception et réalisation en autonomie",
             new[] { "GitHub Actions", "Docker", "Azure", "Trivy" },
-            "Pipeline fonctionnel, traçable, observable et réversible",
+            "Images Web/API par SHA, promotion sans rebuild, health checks, supervision et rollback",
             "Projet scolaire terminé",
-            "Échanger sur ce projet",
-            "#contact",
+            "Lire l'étude de cas",
+            "projets/ci-cd-cesizen",
             "warning")
     };
 
@@ -360,6 +361,72 @@ public static class LandingContent
             "Un portail en production et évolutif",
             "Plusieurs interfaces réunissent tableaux, graphiques, filtres, exports et droits d'accès en environnement .NET.",
             "success")
+    };
+
+    public const string JourneyEyebrow = "Parcours & coordination";
+
+    public const string JourneyTitle =
+        "De la transmission des techniques à la conception de systèmes métier";
+
+    public const string JourneyIntro =
+        "Un parcours qui relie culture visuelle, pédagogie, développement .NET et coordination de projets industriels";
+
+    public static readonly IReadOnlyList<JourneyMilestone> JourneyMilestones = new[]
+    {
+        new JourneyMilestone(
+            "2016 — 2018",
+            "Moniteur en techniques d'édition",
+            "ESADSE · Saint-Étienne",
+            "Initier aux pratiques traditionnelles et numériques, encadrer les exercices et accompagner l'apprentissage des logiciels.",
+            "Transmission"),
+        new JourneyMilestone(
+            "Jan. — mars 2022",
+            "Enseignant en techniques de résine",
+            "ENSBA Lyon",
+            "Démontrer les procédés de moulage, adapter la technique au projet et accompagner la production jusqu'à son achèvement.",
+            "Pédagogie"),
+        new JourneyMilestone(
+            "Sept. — déc. 2022",
+            "Enseignant en techniques d'impression",
+            "ESADSE · Saint-Étienne",
+            "Construire le programme, organiser les moyens et suivre des projets d'édition de la définition à la production finale.",
+            "Cadrage"),
+        new JourneyMilestone(
+            "2023 — 2026",
+            "Développement .NET en environnement industriel",
+            "Applications métier · Data · Coordination",
+            "Transformer les besoins opérationnels en interfaces, flux de données et projets techniques documentés.",
+            "Reconversion")
+    };
+
+    public static readonly IReadOnlyList<ComplementaryProof> ComplementaryProofs = new[]
+    {
+        new ComplementaryProof(
+            "Projet professionnel · En cadrage",
+            "Agent IA documentaire",
+            "Chef de projet et référent technique infrastructure & intégration",
+            "Cadrer l'intégration d'un agent RAG à une application de maintenance en production, avec des exigences de confidentialité et de fiabilité.",
+            new[]
+            {
+                "Coordination Maintenance · DSI · prestataire",
+                "Budget, planning, risques et gouvernance des données",
+                "Flux et environnements de test / production"
+            },
+            "Aucun résultat opérationnel revendiqué",
+            "accent"),
+        new ComplementaryProof(
+            "Projet professionnel · 2025—2026",
+            "Facturation électronique",
+            "Coordinateur et référent technique data",
+            "Relier la solution du prestataire, l'ERP interne et le besoin du service comptable dans un projet d'intégration SI.",
+            new[]
+            {
+                "Coordination du technicien prestataire",
+                "Coordination du technicien ERP interne",
+                "Coordination avec le responsable comptabilité"
+            },
+            "Périmètre technique et résultats à documenter",
+            "warning")
     };
 
     public const string ContactEyebrow = "Travailler ensemble";
@@ -449,6 +516,22 @@ public sealed record CaseStudyFact(string Label, string Value);
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
 
 public sealed record CaseStudyComparison(string Label, string Title, string Description, string Tone);
+
+public sealed record JourneyMilestone(
+    string Period,
+    string Title,
+    string Organization,
+    string Description,
+    string Evidence);
+
+public sealed record ComplementaryProof(
+    string Status,
+    string Title,
+    string Role,
+    string Description,
+    IReadOnlyList<string> Responsibilities,
+    string Limit,
+    string Tone);
 
 public sealed record ContactHighlight(string Title, string Description, string Tone);
 

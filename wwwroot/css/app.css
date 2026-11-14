@@ -20,6 +20,7 @@
 @import url("components/concept-hero-section.css");
 @import url("components/landing-motion-sequence.css");
 @import url("components/landing-expertise-section.css");
+@import url("components/landing-journey-section.css");
 @import url("components/landing-method-section.css");
 @import url("components/landing-projects-section.css");
 @import url("components/landing-case-study-section.css");
@@ -28,6 +29,7 @@
 @import url("pages/project-case-study.css");
 @import url("pages/project-ssis.css");
 @import url("pages/project-bi.css");
+@import url("pages/project-cicd.css");
 
 #blazor-error-ui {
     color-scheme: light only;
