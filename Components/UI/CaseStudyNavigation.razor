@@ -1,0 +1,52 @@
+@using Portfolio.Content
+
+<section id="case-study-navigation" class="case-study-navigation" aria-labelledby="case-study-navigation-title">
+    <div class="case-study-navigation__header">
+        <div>
+            <span>Parcours de lecture</span>
+            <h2 id="case-study-navigation-title">Continuer l'exploration</h2>
+            <p>Trois études de cas, trois angles complémentaires d'une même pratique Full-Stack .NET.</p>
+        </div>
+        <strong aria-label="Étude @CurrentPosition sur @Studies.Count">@CurrentPosition / @Studies.Count</strong>
+    </div>
+
+    <nav class="case-study-navigation__links" aria-label="Navigation entre les études de cas">
+        <a class="case-study-navigation__card case-study-navigation__card--previous" href="@Previous.Href">
+            <span>← Étude précédente</span>
+            <small>@Previous.Axis</small>
+            <strong>@Previous.Title</strong>
+            <p>@Previous.Description</p>
+            <em>@Previous.Status</em>
+        </a>
+
+        <a class="case-study-navigation__card case-study-navigation__card--next" href="@Next.Href">
+            <span>Étude suivante →</span>
+            <small>@Next.Axis</small>
+            <strong>@Next.Title</strong>
+            <p>@Next.Description</p>
+            <em>@Next.Status</em>
+        </a>
+    </nav>
+</section>
+
+@code {
+    private static IReadOnlyList<CaseStudyNavigationItem> Studies => CaseStudyNavigationContent.Studies;
+
+    [Parameter, EditorRequired]
+    public string CurrentKey { get; set; } = string.Empty;
+
+    private int CurrentIndex
+    {
+        get
+        {
+            var index = Studies.ToList().FindIndex(study => study.Key == CurrentKey);
+            return index >= 0 ? index : throw new InvalidOperationException($"Unknown case study key '{CurrentKey}'.");
+        }
+    }
+
+    private int CurrentPosition => CurrentIndex + 1;
+
+    private CaseStudyNavigationItem Previous => Studies[(CurrentIndex - 1 + Studies.Count) % Studies.Count];
+
+    private CaseStudyNavigationItem Next => Studies[(CurrentIndex + 1) % Studies.Count];
+}
