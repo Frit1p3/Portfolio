@@ -207,6 +207,8 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(5, await page.Locator("main h2").CountAsync());
         Assert.Equal(5, await page.Locator(".site-header__nav a").CountAsync());
         Assert.Equal(6, await page.Locator(".site-footer__nav a").CountAsync());
+        Assert.Equal(3, await page.Locator(".site-footer__profiles a").CountAsync());
+        Assert.Equal(3, await page.Locator(".contact-section__resources a").CountAsync());
         Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
         Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
@@ -437,6 +439,7 @@ public sealed class PlaywrightSmokeTests
             Assert.Equal(4, await page.Locator(".ssis-study__steps li").CountAsync());
             Assert.Equal(4, await page.Locator(".ssis-study__outcomes .project-study__outcome").CountAsync());
             Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+            Assert.Equal(2, await page.Locator(".case-study-navigation__card").CountAsync());
 
             Assert.Equal(
                 "Étude de cas d'un POC SSIS opérationnel : extraction ERP incrémentale, staging, contrôles, journalisation et chargement SQL Server.",
@@ -486,6 +489,7 @@ public sealed class PlaywrightSmokeTests
             Assert.Equal(4, await page.Locator(".bi-study__decisions li").CountAsync());
             Assert.Equal(4, await page.Locator(".bi-study__outcomes .project-study__outcome").CountAsync());
             Assert.Equal(5, await page.Locator("[data-reveal]").CountAsync());
+            Assert.Equal(2, await page.Locator(".case-study-navigation__card").CountAsync());
 
             Assert.Equal(
                 "Étude de cas d'un portail BI industriel en production : écrans Blazor responsive, filtres avancés, graphiques, exports et intégrations Full-Stack.",
@@ -535,6 +539,7 @@ public sealed class PlaywrightSmokeTests
             Assert.Equal(4, await page.Locator(".cicd-study__gates li").CountAsync());
             Assert.Equal(5, await page.Locator(".cicd-study__services article").CountAsync());
             Assert.Equal(6, await page.Locator("[data-reveal]").CountAsync());
+            Assert.Equal(2, await page.Locator(".case-study-navigation__card").CountAsync());
 
             Assert.Equal(
                 "Étude de cas CI/CD .NET : GitHub Actions, tests, Trivy, images Docker par SHA, déploiement Azure, supervision et rollback.",

@@ -168,6 +168,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Equal(6, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
+        Assert.Equal(3, cut.FindAll(".site-footer__profiles a").Count);
+        Assert.Equal(LandingContent.LinkedInUrl, cut.Find(".site-footer__profiles a").GetAttribute("href"));
+        Assert.Equal(LandingContent.CvRequestUrl, cut.FindAll(".site-footer__profiles a")[2].GetAttribute("href"));
         Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
 
@@ -726,6 +729,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Aucun gain de temps", cut.Find("#ssis-outcome-title").ParentElement?.TextContent);
         Assert.Contains("volontairement anonymisés", cut.Find(".ssis-study__confidentiality").TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+        Assert.Equal(2, cut.FindAll(".case-study-navigation__card").Count);
+        Assert.Equal("projets/ci-cd-cesizen", cut.Find(".case-study-navigation__card--next").GetAttribute("href"));
     }
 
     [Fact]
@@ -746,6 +751,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("aucune mesure d'usage", cut.Find("#bi-outcome-title").ParentElement?.TextContent);
         Assert.Contains("reconstitution anonymisée", cut.Find(".bi-study__confidentiality").TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+        Assert.Equal(2, cut.FindAll(".case-study-navigation__card").Count);
+        Assert.Equal("projets/poc-ssis", cut.Find(".case-study-navigation__card--next").GetAttribute("href"));
     }
 
     [Fact]
@@ -768,6 +775,24 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Une seule VM", cut.Find(".cicd-study__outcomes").TextContent);
         Assert.Contains("aucune mesure historique", cut.Find("#cicd-outcome-title").ParentElement?.TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+        Assert.Equal(2, cut.FindAll(".case-study-navigation__card").Count);
+        Assert.Equal("projets/portail-bi", cut.Find(".case-study-navigation__card--next").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void CaseStudyNavigation_exposes_previous_and_next_real_case_studies()
+    {
+        var cut = Render<CaseStudyNavigation>(parameters => parameters
+            .Add(component => component.CurrentKey, "portail-bi"));
+
+        Assert.Equal("Continuer l'exploration", cut.Find("h2").TextContent);
+        Assert.Equal("case-study-navigation", cut.Find("section").Id);
+        Assert.Equal("Navigation entre les études de cas", cut.Find("nav").GetAttribute("aria-label"));
+        Assert.Equal(2, cut.FindAll(".case-study-navigation__card").Count);
+        Assert.Equal("projets/ci-cd-cesizen", cut.Find(".case-study-navigation__card--previous").GetAttribute("href"));
+        Assert.Equal("projets/poc-ssis", cut.Find(".case-study-navigation__card--next").GetAttribute("href"));
+        Assert.Contains("1 / 3", cut.Markup);
+        Assert.DoesNotContain("Pilotage atelier", cut.Markup);
     }
 
     [Fact]
@@ -784,6 +809,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("contact", section.Id);
         Assert.Contains("Décrire votre besoin", section.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
+        Assert.Equal(3, cut.FindAll(".contact-section__resources a").Count);
+        Assert.Equal(LandingContent.LinkedInUrl, cut.Find(".contact-section__resources a").GetAttribute("href"));
+        Assert.Equal(LandingContent.CvRequestUrl, cut.FindAll(".contact-section__resources a")[2].GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__highlight").Count);
         Assert.Equal(3, cut.FindAll(".contact-section__highlight h3").Count);
         Assert.Contains("Front-End métier", section.TextContent);

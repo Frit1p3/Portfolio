@@ -82,6 +82,31 @@
     border-radius: var(--radius-4);
 }
 
+.contact-section__resources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+}
+
+.contact-section__resources a {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    gap: var(--space-8);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-4);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    padding: var(--space-8) var(--space-12);
+    font-size: var(--text-small);
+    font-weight: 800;
+}
+
+.contact-section__resources a:hover {
+    border-color: var(--color-accent);
+    color: var(--color-brand);
+}
+
 @media (max-width: 900px) {
     .contact-section__layout {
         grid-template-columns: 1fr;

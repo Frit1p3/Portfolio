@@ -439,6 +439,12 @@ public static class LandingContent
 
     public const string ContactEmail = "fritp3@gmail.com";
 
+    public const string LinkedInUrl = "https://www.linkedin.com/in/merryl-bouchereau/";
+
+    public const string GitHubUrl = "https://github.com/Frit1p3";
+
+    public const string CvRequestUrl = "mailto:fritp3@gmail.com?subject=Demande%20de%20CV";
+
     public const string ContactAvailability = "Ouvert aux missions .NET, applications métier, Front-End et data";
 
     public const string ContactGuidanceTitle = "Votre besoin métier";
