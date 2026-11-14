@@ -206,7 +206,7 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(1, await page.Locator("h1").CountAsync());
         Assert.Equal(5, await page.Locator("main h2").CountAsync());
         Assert.Equal(5, await page.Locator(".site-header__nav a").CountAsync());
-        Assert.Equal(5, await page.Locator(".site-footer__nav a").CountAsync());
+        Assert.Equal(6, await page.Locator(".site-footer__nav a").CountAsync());
         Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
         Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
@@ -216,6 +216,9 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(3, await page.Locator(".case-study-section__facts > div").CountAsync());
         Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
         await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
+        await Expect(page.Locator("#journey")).ToBeVisibleAsync();
+        Assert.Equal(4, await page.Locator(".journey-section__timeline li").CountAsync());
+        Assert.Equal(2, await page.Locator(".journey-section__proof").CountAsync());
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }).ClickAsync();
         Assert.Equal(3, await page.Locator(".contact-form .validation-message").CountAsync());

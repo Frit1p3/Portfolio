@@ -26,6 +26,9 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
         Assert.Contains("solution vérifiable", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
+        Assert.Contains("transmission", LandingContent.JourneyTitle, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(4, LandingContent.JourneyMilestones.Count);
+        Assert.Equal(2, LandingContent.ComplementaryProofs.Count);
         Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
         Assert.Equal(4, LandingContent.ProjectFilters.Count);
@@ -125,6 +128,7 @@ public sealed class FoundationTests
         Assert.Contains("components/concept-hero-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-motion-sequence.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-method-section.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("components/landing-journey-section.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/project-card.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/contact-form.css", appCss, StringComparison.Ordinal);
         Assert.Contains("components/landing-projects-section.css", appCss, StringComparison.Ordinal);

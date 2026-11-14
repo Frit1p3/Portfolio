@@ -127,8 +127,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Merryl", cut.Markup);
         Assert.Contains("Merryl Bouchereau - Retour à l'accueil", cut.Find(".site-header__brand").GetAttribute("aria-label"));
         Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
-        Assert.Equal(5, navigationLinks.Count);
+        Assert.Equal(6, navigationLinks.Count);
         Assert.Contains("#expertise", cut.Markup);
+        Assert.Contains("#journey", cut.Markup);
         Assert.Contains("#approach", cut.Markup);
         Assert.Contains("#projects", cut.Markup);
         Assert.Contains("#case-study", cut.Markup);
@@ -165,7 +166,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("site-footer", footer.ClassList);
         Assert.Contains("Full-Stack .NET", footer.TextContent);
         Assert.Equal("Navigation de pied de page", cut.Find("nav").GetAttribute("aria-label"));
-        Assert.Equal(5, cut.FindAll(".site-footer__nav a").Count);
+        Assert.Equal(6, cut.FindAll(".site-footer__nav a").Count);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".site-footer__contact a").GetAttribute("href"));
         Assert.Equal("#top", cut.Find(".site-footer__bottom a").GetAttribute("href"));
     }
@@ -582,6 +583,26 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Front-End & UX", section.TextContent);
         Assert.Contains("Data & architecture", section.TextContent);
         Assert.Contains("Delivery & projet", section.TextContent);
+    }
+
+    [Fact]
+    public void LandingJourneySection_distinguishes_parcours_and_project_maturity()
+    {
+        var cut = Render<LandingJourneySection>();
+        var section = cut.Find("section.journey-section");
+
+        Assert.Equal("journey", section.Id);
+        Assert.Equal("journey-section-title", section.GetAttribute("aria-labelledby"));
+        Assert.Equal(4, cut.FindAll(".journey-section__timeline li").Count);
+        Assert.Equal(2, cut.FindAll(".journey-section__proof").Count);
+        Assert.Contains("Moniteur en techniques d'édition", section.TextContent);
+        Assert.Contains("Enseignant en techniques de résine", section.TextContent);
+        Assert.Contains("Développement .NET en environnement industriel", section.TextContent);
+        Assert.Contains("Agent IA documentaire", section.TextContent);
+        Assert.Contains("En cadrage", section.TextContent);
+        Assert.Contains("Aucun résultat opérationnel revendiqué", section.TextContent);
+        Assert.Contains("Facturation électronique", section.TextContent);
+        Assert.Contains("Périmètre technique et résultats à documenter", section.TextContent);
     }
 
     [Fact]
