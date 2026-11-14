@@ -22,6 +22,12 @@
                 <a class="contact-section__email" href="@($"mailto:{LandingContent.ContactEmail}")">
                     Écrire directement à @LandingContent.ContactEmail
                 </a>
+
+                <nav class="contact-section__resources" aria-label="Profil professionnel et CV">
+                    <a href="@LandingContent.LinkedInUrl" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                    <a href="@LandingContent.GitHubUrl" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                    <a href="@LandingContent.CvRequestUrl">Demander le CV <span aria-hidden="true">→</span></a>
+                </nav>
             </aside>
 
             <ContactForm />

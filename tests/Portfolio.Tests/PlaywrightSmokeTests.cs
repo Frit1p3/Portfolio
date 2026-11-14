@@ -207,6 +207,8 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(5, await page.Locator("main h2").CountAsync());
         Assert.Equal(5, await page.Locator(".site-header__nav a").CountAsync());
         Assert.Equal(6, await page.Locator(".site-footer__nav a").CountAsync());
+        Assert.Equal(3, await page.Locator(".site-footer__profiles a").CountAsync());
+        Assert.Equal(3, await page.Locator(".contact-section__resources a").CountAsync());
         Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
         Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
