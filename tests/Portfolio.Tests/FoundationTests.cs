@@ -94,6 +94,13 @@ public sealed class FoundationTests
             StringComparison.Ordinal);
         Assert.Contains("Portail BI industriel en Blazor", workflow, StringComparison.Ordinal);
         Assert.Contains("Portfolio/projets/portail-bi", workflow, StringComparison.Ordinal);
+        Assert.Contains("mkdir -p publish/wwwroot/projets/ci-cd-cesizen", workflow, StringComparison.Ordinal);
+        Assert.Contains(
+            "cp publish/wwwroot/index.html publish/wwwroot/projets/ci-cd-cesizen/index.html",
+            workflow,
+            StringComparison.Ordinal);
+        Assert.Contains("CI/CD .NET sur Azure", workflow, StringComparison.Ordinal);
+        Assert.Contains("Portfolio/projets/ci-cd-cesizen", workflow, StringComparison.Ordinal);
         Assert.Contains("/og.description/", workflow, StringComparison.Ordinal);
         Assert.Contains("content=\"https://frit1p3.github.io/Portfolio/\"", workflow, StringComparison.Ordinal);
     }
@@ -127,6 +134,7 @@ public sealed class FoundationTests
         Assert.Contains("pages/project-case-study.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/project-ssis.css", appCss, StringComparison.Ordinal);
         Assert.Contains("pages/project-bi.css", appCss, StringComparison.Ordinal);
+        Assert.Contains("pages/project-cicd.css", appCss, StringComparison.Ordinal);
     }
 
     [Fact]

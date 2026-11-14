@@ -631,6 +631,9 @@ public sealed class ComponentTests : BunitContext
         var ssisCard = cut.FindAll(".project-card")
             .Single(card => card.TextContent.Contains("POC d'architecture décisionnelle SSIS", StringComparison.Ordinal));
         Assert.Equal("projets/poc-ssis", ssisCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
+        var cicdCard = cut.FindAll(".project-card")
+            .Single(card => card.TextContent.Contains("Chaîne de livraison CI/CD", StringComparison.Ordinal));
+        Assert.Equal("projets/ci-cd-cesizen", cicdCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
 
         cut.Find("[data-filter='data']").Click();
 
@@ -721,6 +724,28 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(5, cut.FindAll("[data-reveal]").Count);
         Assert.Contains("aucune mesure d'usage", cut.Find("#bi-outcome-title").ParentElement?.TextContent);
         Assert.Contains("reconstitution anonymisée", cut.Find(".bi-study__confidentiality").TextContent);
+        Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void ProjectCiCdCesizen_composes_a_factual_and_bounded_devops_case_study()
+    {
+        var cut = Render<ProjectCiCdCesizen>();
+
+        Assert.Contains("Transformer un déploiement ponctuel", cut.Find("h1").TextContent);
+        Assert.Contains("Projet scolaire terminé", cut.Find(".project-study__eyebrow").TextContent);
+        Assert.Equal(4, cut.FindAll(".project-study__summary > div").Count);
+        Assert.Equal(6, cut.FindAll(".cicd-pipeline__stages li").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-pipeline__footer span").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__gates li").Count);
+        Assert.Equal(5, cut.FindAll(".cicd-study__services article").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__operations article").Count);
+        Assert.Equal(2, cut.FindAll(".cicd-study__scope .project-study__outcome").Count);
+        Assert.Equal(4, cut.FindAll(".cicd-study__outcomes .project-study__outcome").Count);
+        Assert.Equal(6, cut.FindAll("[data-reveal]").Count);
+        Assert.Contains("mobile seulement validé par compilation", cut.Find("#cicd-scope-title").TextContent);
+        Assert.Contains("Une seule VM", cut.Find(".cicd-study__outcomes").TextContent);
+        Assert.Contains("aucune mesure historique", cut.Find("#cicd-outcome-title").ParentElement?.TextContent);
         Assert.Equal("./#contact", cut.Find(".project-study__next .button").GetAttribute("href"));
     }
 

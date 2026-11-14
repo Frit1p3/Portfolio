@@ -28,6 +28,7 @@
 @import url("pages/project-case-study.css");
 @import url("pages/project-ssis.css");
 @import url("pages/project-bi.css");
+@import url("pages/project-cicd.css");
 
 #blazor-error-ui {
     color-scheme: light only;

@@ -86,6 +86,16 @@ jobs:
             -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
             -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/portail-bi"#g' \
             publish/wwwroot/projets/portail-bi/index.html
+          mkdir -p publish/wwwroot/projets/ci-cd-cesizen
+          cp publish/wwwroot/index.html publish/wwwroot/projets/ci-cd-cesizen/index.html
+          sed -i \
+            -e 's#Merryl Bouchereau - Applications métier .NET#CI/CD .NET sur Azure : étude de cas CESIZen - Merryl Bouchereau#g' \
+            -e '/name="description"/ s#content="[^"]*"#content="Étude de cas CI/CD .NET : tests, Trivy, images Docker par SHA, déploiement Azure, supervision et rollback."#' \
+            -e '/og.description/ s#content="[^"]*"#content="Conception autonome d’une chaîne de livraison .NET sécurisée, traçable, supervisée et réversible."#' \
+            -e 's#property="og:type" content="website"#property="og:type" content="article"#g' \
+            -e 's#href="https://frit1p3.github.io/Portfolio/"#href="https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen"#g' \
+            -e 's#content="https://frit1p3.github.io/Portfolio/"#content="https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen"#g' \
+            publish/wwwroot/projets/ci-cd-cesizen/index.html
           touch publish/wwwroot/.nojekyll
 
       - name: Upload Pages artifact

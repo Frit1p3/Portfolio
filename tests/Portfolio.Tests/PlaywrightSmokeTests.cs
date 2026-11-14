@@ -499,6 +499,55 @@ public sealed class PlaywrightSmokeTests
         }
     }
 
+    [Fact]
+    public async Task Cicd_case_study_exposes_traceability_and_limits_across_responsive_viewports()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var projectUrl = new Uri(new Uri(baseUrl.EndsWith('/') ? baseUrl : $"{baseUrl}/"), "projets/ci-cd-cesizen").ToString();
+        var viewports = new[]
+        {
+            new ViewportSize { Width = 1440, Height = 1000 },
+            new ViewportSize { Width = 390, Height = 900 }
+        };
+
+        foreach (var viewport in viewports)
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+
+            await page.GotoAsync(projectUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Transformer un déploiement ponctuel en livraison maîtrisée" }))
+                .ToBeVisibleAsync();
+            await Expect(page.Locator(".cicd-pipeline")).ToBeVisibleAsync();
+            Assert.Equal(6, await page.Locator(".cicd-pipeline__stages li").CountAsync());
+            Assert.Equal(4, await page.Locator(".cicd-study__gates li").CountAsync());
+            Assert.Equal(5, await page.Locator(".cicd-study__services article").CountAsync());
+            Assert.Equal(6, await page.Locator("[data-reveal]").CountAsync());
+
+            Assert.Equal(
+                "Étude de cas CI/CD .NET : GitHub Actions, tests, Trivy, images Docker par SHA, déploiement Azure, supervision et rollback.",
+                await page.Locator("meta[name='description']").GetAttributeAsync("content"));
+            Assert.Equal(
+                "https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen",
+                await page.Locator("link[rel='canonical']").GetAttributeAsync("href"));
+            Assert.Equal("article", await page.Locator("meta[property='og:type']").GetAttributeAsync("content"));
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1, $"CI/CD case study at {viewport.Width}px has horizontal scroll width {scrollWidth}px.");
+
+            await page.CloseAsync();
+        }
+    }
+
     private static bool TryGetBaseUrl(out string baseUrl)
     {
         baseUrl = Environment.GetEnvironmentVariable("PORTFOLIO_BASE_URL") ?? string.Empty;

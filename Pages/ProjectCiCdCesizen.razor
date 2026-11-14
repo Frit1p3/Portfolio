@@ -1,0 +1,209 @@
+@page "/projets/ci-cd-cesizen"
+
+<PageTitle>CI/CD .NET sur Azure : étude de cas CESIZen - Merryl Bouchereau</PageTitle>
+
+<HeadContent>
+    <meta name="description" content="Étude de cas CI/CD .NET : GitHub Actions, tests, Trivy, images Docker par SHA, déploiement Azure, supervision et rollback." />
+    <link rel="canonical" href="https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="CI/CD .NET sur Azure : étude de cas CESIZen - Merryl Bouchereau" />
+    <meta property="og:description" content="Conception autonome d'une chaîne de livraison .NET sécurisée, traçable, supervisée et réversible." />
+    <meta property="og:url" content="https://frit1p3.github.io/Portfolio/projets/ci-cd-cesizen" />
+    <meta property="og:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Merryl Bouchereau — Chaîne CI/CD .NET et Azure" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://frit1p3.github.io/Portfolio/images/og-portfolio.jpg" />
+    <meta name="twitter:image:alt" content="Merryl Bouchereau — Chaîne CI/CD .NET et Azure" />
+</HeadContent>
+
+<article class="project-study cicd-study">
+    <header class="project-study__hero">
+        <div class="project-study__hero-inner">
+            <a class="project-study__back" href="./#projects">← Retour aux projets</a>
+
+            <div class="project-study__hero-grid">
+                <div class="project-study__hero-content">
+                    <span class="project-study__eyebrow">Projet scolaire terminé · 27 août 2026</span>
+                    <h1>Transformer un déploiement ponctuel en livraison maîtrisée</h1>
+                    <p>
+                        Conception autonome de la chaîne CI/CD de CESIZen : chaque version est compilée, testée,
+                        analysée, identifiée par son SHA, promue sans reconstruction et réversible en cas d'incident.
+                    </p>
+                </div>
+
+                <dl class="project-study__summary" aria-label="Synthèse du projet">
+                    <div>
+                        <dt>Nature</dt>
+                        <dd>Projet scolaire terminé</dd>
+                    </div>
+                    <div>
+                        <dt>Rôle</dt>
+                        <dd>Conception et réalisation individuelles</dd>
+                    </div>
+                    <div>
+                        <dt>Niveau</dt>
+                        <dd>Première expérience DevOps autonome</dd>
+                    </div>
+                    <div>
+                        <dt>Cible</dt>
+                        <dd>Web &amp; API sur Azure</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="cicd-pipeline" aria-label="Chaîne de livraison de la Pull Request à la supervision">
+                <header class="cicd-pipeline__header">
+                    <div>
+                        <span>Chaîne de livraison</span>
+                        <strong>Un même SHA, de la validation à la production</strong>
+                    </div>
+                    <span class="cicd-pipeline__badge"><i aria-hidden="true"></i>Artefact immuable</span>
+                </header>
+
+                <ol class="cicd-pipeline__stages">
+                    <li><span>01</span><strong>Pull Request</strong><small>feature → develop</small></li>
+                    <li><span>02</span><strong>Build &amp; tests</strong><small>.NET · PostgreSQL · Playwright</small></li>
+                    <li><span>03</span><strong>Security gates</strong><small>NuGet Audit · Trivy</small></li>
+                    <li class="is-active"><span>04</span><strong>Images par SHA</strong><small>Web &amp; API dans GHCR</small></li>
+                    <li><span>05</span><strong>Recette Azure</strong><small>SSH · Docker Compose</small></li>
+                    <li><span>06</span><strong>Production</strong><small>Même SHA, sans rebuild</small></li>
+                </ol>
+
+                <div class="cicd-pipeline__footer">
+                    <span><i aria-hidden="true"></i>Caddy · HTTPS</span>
+                    <span><i aria-hidden="true"></i>/health/live · /health/ready</span>
+                    <span><i aria-hidden="true"></i>Uptime Kuma · GitHub Issues</span>
+                    <span><i aria-hidden="true"></i>Rollback vers un SHA stable</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="project-study__section" data-reveal aria-labelledby="cicd-context-title">
+        <div class="project-study__section-label">01 · Contexte</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-context-title">Livrer une application manipulant des données sensibles.</h2>
+            <p class="project-study__lead">
+                CESIZen associe une application Web Blazor, une API ASP.NET Core, PostgreSQL et un client .NET MAUI.
+                La chaîne devait automatiser la livraison tout en protégeant les données liées au journal, aux émotions
+                et au stress, puis permettre une reprise contrôlée après un échec.
+            </p>
+
+            <div class="project-study__problem-grid">
+                <article><span>Qualité</span><h3>Bloquer une version non conforme</h3><p>Compilation, tests, audits et vulnérabilités deviennent des portes de contrôle obligatoires.</p></article>
+                <article><span>Traçabilité</span><h3>Relier code, image et déploiement</h3><p>Le SHA identifie le commit, les rapports, les images, la configuration et la version exécutée.</p></article>
+                <article><span>Reprise</span><h3>Préparer l'incident avant qu'il arrive</h3><p>Health checks, sauvegardes, journaux et rollback font partie du processus de livraison.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="cicd-gates-title">
+        <div class="project-study__section-label">02 · Contrôles</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-gates-title">Des quality gates avant toute promotion.</h2>
+            <p class="project-study__lead">
+                GitHub Actions interrompt automatiquement la chaîne si une étape obligatoire échoue. Seuls les artefacts
+                déjà validés sont publiés dans GHCR puis promus vers les environnements Azure.
+            </p>
+
+            <ol class="project-study__decisions cicd-study__gates">
+                <li><span>01</span><div><h3>Compiler et auditer les dépendances</h3><p>Restauration .NET, compilation de la solution et NuGet Audit avant les tests.</p></div><strong>Base vérifiée</strong></li>
+                <li><span>02</span><div><h3>Tester avec les bons contextes</h3><p>Tests unitaires, intégration avec PostgreSQL, composants Blazor et parcours E2E Playwright.</p></div><strong>4 niveaux de tests</strong></li>
+                <li><span>03</span><div><h3>Analyser le dépôt et les images</h3><p>Trivy recherche vulnérabilités, mauvaises configurations et secrets avant et après construction.</p></div><strong>Défense en profondeur</strong></li>
+                <li><span>04</span><div><h3>Publier un artefact immuable</h3><p>Les images Web et API portent le SHA du commit ; le tag mouvant latest n'est pas la référence de déploiement.</p></div><strong>Traçabilité complète</strong></li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="project-study__section project-study__section--dark" data-reveal aria-labelledby="cicd-architecture-title">
+        <div class="project-study__section-label">03 · Architecture</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-architecture-title">Une VM Azure simple à exploiter, avec des frontières explicites.</h2>
+            <p class="project-study__lead">
+                GitHub Actions orchestre le déploiement à distance via SSH. Aucun runner auto-hébergé n'est installé
+                sur la VM. Caddy reste le seul point d'entrée public et PostgreSQL demeure isolé sur le réseau Docker interne.
+            </p>
+
+            <div class="cicd-study__architecture" aria-label="Architecture de déploiement Azure simplifiée">
+                <div class="cicd-study__external"><span>GitHub Actions</span><strong>SSH</strong><small>Images validées par SHA</small></div>
+                <i aria-hidden="true">→</i>
+                <div class="cicd-study__vm">
+                    <header><span>VM Linux · Azure France Central</span><small>NSG + UFW</small></header>
+                    <div class="cicd-study__services">
+                        <article class="is-entry"><span>Caddy</span><small>HTTPS · routage</small></article>
+                        <article><span>Web Blazor</span><small>Conteneur</small></article>
+                        <article><span>API ASP.NET</span><small>Règles métier</small></article>
+                        <article class="is-private"><span>PostgreSQL</span><small>Réseau interne</small></article>
+                        <article><span>Uptime Kuma</span><small>Supervision</small></article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-study__system-grid">
+                <article><span>Secrets</span><strong>Hors du code et des images</strong><p>GitHub Secrets et configuration serveur protégée, avec principe du moindre privilège.</p></article>
+                <article><span>Persistance</span><strong>Volumes et sauvegardes</strong><p>Sauvegarde avant migration sensible, sauvegardes régulières hors VM et essais de restauration.</p></article>
+                <article><span>Exposition</span><strong>Ports strictement nécessaires</strong><p>Filtrage Azure et UFW, Caddy en frontal, services internes non exposés à Internet.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="cicd-operations-title">
+        <div class="project-study__section-label">04 · Exploitation</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-operations-title">Vérifier, superviser et reprendre.</h2>
+            <p class="project-study__lead">
+                Le déploiement n'est validé qu'après le démarrage ordonné des services, le contrôle HTTPS et les probes
+                de vie et de disponibilité. Les incidents restent liés au SHA exécuté dans GitHub Issues.
+            </p>
+
+            <div class="cicd-study__operations">
+                <article><span>Après déploiement</span><h3>Health checks distincts</h3><p><code>/health/live</code> vérifie le processus ; <code>/health/ready</code> confirme que l'API peut réellement servir.</p></article>
+                <article><span>Supervision</span><h3>Uptime Kuma et journaux</h3><p>HTTPS, Web, API, temps de réponse, interruptions et journaux techniques alimentent le diagnostic.</p></article>
+                <article><span>Rollback</span><h3>Revenir au SHA stable</h3><p>Redéploiement de l'image précédente ; restauration PostgreSQL seulement si les données l'exigent.</p></article>
+                <article><span>Maintenance</span><h3>Tickets et preuves</h3><p>Contexte, environnement, priorité, impact, diagnostic et résolution sont conservés jusqu'à validation.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="cicd-scope-title">
+        <div class="project-study__section-label">05 · Périmètre</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-scope-title">Web et API déployés, mobile seulement validé par compilation.</h2>
+            <p class="project-study__lead">
+                La CI Windows vérifie que le client .NET MAUI et le code partagé restent compilables. Elle ne couvre ni
+                les appareils réels, ni la signature, ni la diffusion bêta, ni la publication sur les boutiques.
+            </p>
+
+            <div class="project-study__outcomes cicd-study__scope">
+                <article class="project-study__outcome project-study__outcome--success"><span>Déployé</span><h3>Web, API et PostgreSQL</h3><p>Conteneurs promus sur Azure, HTTPS, migrations, health checks et supervision opérationnels.</p></article>
+                <article class="project-study__outcome project-study__outcome--warning"><span>Compilé uniquement</span><h3>Client .NET MAUI</h3><p>Compatibilité vérifiée dans la CI, sans signature, test sur appareil ni publication publique.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-study__section" data-reveal aria-labelledby="cicd-outcome-title">
+        <div class="project-study__section-label">06 · Bilan</div>
+        <div class="project-study__section-content">
+            <h2 id="cicd-outcome-title">Une chaîne reproductible, avec des limites assumées.</h2>
+            <p class="project-study__lead">
+                Le livrable valide une première pratique DevOps autonome et opérationnelle. Il ne constitue pas une
+                expertise confirmée et ne fournit aucune mesure historique de disponibilité ou de vitesse de livraison.
+            </p>
+
+            <div class="project-study__outcomes cicd-study__outcomes">
+                <article class="project-study__outcome project-study__outcome--success"><span>Vérifié</span><h3>Livraison automatisée et traçable</h3><p>Tests, audits, images immuables, promotion, déploiement et rollback reliés au SHA.</p></article>
+                <article class="project-study__outcome project-study__outcome--success"><span>Vérifié</span><h3>Sécurité et exploitation documentées</h3><p>Segmentation réseau, secrets, HTTPS, supervision, sauvegardes et gestion des incidents.</p></article>
+                <article class="project-study__outcome project-study__outcome--warning"><span>Limite</span><h3>Une seule VM</h3><p>Web, API, base et supervision partagent un point unique de défaillance, sans haute disponibilité.</p></article>
+                <article class="project-study__outcome project-study__outcome--warning"><span>Non mesuré</span><h3>Aucune performance revendiquée</h3><p>Disponibilité, fréquence de déploiement et temps de restauration restent à collecter dans la durée.</p></article>
+            </div>
+
+            <div class="project-study__next">
+                <div><span>Une livraison à fiabiliser ?</span><h2>Relions qualité, sécurité, traçabilité et reprise.</h2></div>
+                <Button Href="./#contact">Échanger sur votre projet</Button>
+            </div>
+        </div>
+    </section>
+</article>

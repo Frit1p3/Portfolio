@@ -297,10 +297,10 @@ public static class LandingContent
             "Automatiser les tests, les contrôles de sécurité, la création des images et le déploiement multi-environnements",
             "Conception et réalisation en autonomie",
             new[] { "GitHub Actions", "Docker", "Azure", "Trivy" },
-            "Pipeline fonctionnel, traçable, observable et réversible",
+            "Images Web/API par SHA, promotion sans rebuild, health checks, supervision et rollback",
             "Projet scolaire terminé",
-            "Échanger sur ce projet",
-            "#contact",
+            "Lire l'étude de cas",
+            "projets/ci-cd-cesizen",
             "warning")
     };
 
