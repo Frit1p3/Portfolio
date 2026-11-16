@@ -204,6 +204,21 @@ public sealed class PlaywrightSmokeTests
             await Expect(page.Locator(".case-study-section__layout")).ToBeHiddenAsync();
             await Expect(page.Locator(".case-study-section__link")).ToBeVisibleAsync();
 
+            var pilotageCard = page.Locator(".expertise-section .skill-card--warning");
+            var frontendCard = page.Locator(".expertise-section .skill-card--accent");
+            await Expect(pilotageCard).ToBeVisibleAsync();
+            Assert.True(
+                (await pilotageCard.BoundingBoxAsync())!.Y < (await frontendCard.BoundingBoxAsync())!.Y,
+                "Pilotage & delivery should be the first expertise on mobile.");
+            await Expect(pilotageCard.Locator(".skill-card__tags li").Nth(2)).ToBeHiddenAsync();
+
+            await Expect(page.Locator(".journey-section__proof").First.Locator(":scope > p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__proof").First.Locator("li").Nth(2)).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__timeline li").First.Locator(".journey-section__milestone p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__timeline li").Last.Locator(".journey-section__milestone p")).ToBeVisibleAsync();
+            await Expect(page.Locator(".journey-section__profile img")).ToBeVisibleAsync();
+            await Expect(page.Locator(".journey-section__profile > div")).ToBeHiddenAsync();
+
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1);
 
