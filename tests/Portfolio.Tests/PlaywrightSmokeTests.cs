@@ -34,7 +34,8 @@ public sealed class PlaywrightSmokeTests
 
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Relier les usages, les interfaces et la donnée" }))
             .ToBeVisibleAsync();
-        await Expect(page.Locator(".concept-hero__dashboard")).ToContainTextAsync("Applications métier .NET");
+        await Expect(page.Locator(".concept-hero__dashboard")).ToContainTextAsync("Pilotage · .NET · Data");
+        await Expect(page.Locator(".site-header__brand img")).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Du besoin métier à une solution vérifiable" }))
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Des réalisations réelles, chacune avec son statut" }))
@@ -43,7 +44,7 @@ public sealed class PlaywrightSmokeTests
             .ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Votre besoin métier", Level = 2 }))
             .ToBeVisibleAsync();
-        await Expect(page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }))
+        await Expect(page.GetByRole(AriaRole.Button, new() { Name = "Préparer l'e-mail" }))
             .ToBeVisibleAsync();
     }
 
@@ -210,26 +211,22 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(3, await page.Locator(".site-footer__profiles a").CountAsync());
         Assert.Equal(3, await page.Locator(".contact-section__resources a").CountAsync());
         Assert.Equal(3, await page.Locator(".expertise-section .skill-card").CountAsync());
-        Assert.Equal(4, await page.Locator(".projects-section__filter").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card").CountAsync());
         Assert.Equal(1, await page.Locator(".projects-section .project-card--featured").CountAsync());
         Assert.Equal(3, await page.Locator(".projects-section .project-card__visual").CountAsync());
-        Assert.Equal(2, await page.Locator(".case-study-section__comparison-item").CountAsync());
+        Assert.Equal(0, await page.Locator(".case-study-section__comparison-item").CountAsync());
         Assert.Equal(3, await page.Locator(".case-study-section__facts > div").CountAsync());
         Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
         await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
         await Expect(page.Locator("#journey")).ToBeVisibleAsync();
         Assert.Equal(4, await page.Locator(".journey-section__timeline li").CountAsync());
         Assert.Equal(2, await page.Locator(".journey-section__proof").CountAsync());
+        await Expect(page.Locator(".journey-section__profile img")).ToHaveAttributeAsync("alt", "Portrait de Merryl Bouchereau");
 
-        await page.GetByRole(AriaRole.Button, new() { Name = "Préparer le message" }).ClickAsync();
+        await page.GetByRole(AriaRole.Button, new() { Name = "Préparer l'e-mail" }).ClickAsync();
         Assert.Equal(3, await page.Locator(".contact-form .validation-message").CountAsync());
         await Expect(page.Locator(".contact-form__status"))
             .ToContainTextAsync("Certains champs sont incomplets ou invalides");
-
-        await page.Locator("[data-filter='data']").ClickAsync();
-        await Expect(page.Locator("[data-filter='data']")).ToHaveAttributeAsync("aria-pressed", "true");
-        Assert.Equal(1, await page.Locator(".projects-section .project-card").CountAsync());
 
         var anchorAudit = await page.EvaluateAsync<AnchorAudit>(
             @"() => {
@@ -294,13 +291,13 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        Assert.Equal("Merryl Bouchereau - Applications métier .NET", await page.TitleAsync());
+        Assert.Equal("Merryl Bouchereau - Chef de projet technique & développeur .NET", await page.TitleAsync());
         Assert.Equal("fr", await page.Locator("html").GetAttributeAsync("lang"));
         Assert.Equal(
             "width=device-width, initial-scale=1.0",
             await page.Locator("meta[name='viewport']").GetAttributeAsync("content"));
         Assert.Equal(
-            "Portfolio de Merryl Bouchereau, développeur Full-Stack .NET spécialisé en applications métier, interfaces Blazor et valorisation de la donnée.",
+            "Portfolio de Merryl Bouchereau, chef de projet technique et développeur Full-Stack .NET spécialisé en applications métier, interfaces Blazor et data.",
             await page.Locator("meta[name='description']").GetAttributeAsync("content"));
         Assert.Equal(
             "https://frit1p3.github.io/Portfolio/",

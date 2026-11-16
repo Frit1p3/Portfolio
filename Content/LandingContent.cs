@@ -3,24 +3,22 @@ namespace Portfolio.Content;
 public static class LandingContent
 {
     public const string Positioning =
-        "Développeur Full-Stack .NET · applications métier, interfaces et data";
+        "Chef de projet technique · Développeur Full-Stack .NET";
 
     public static readonly IReadOnlyList<NavigationLink> PrimaryNavigationLinks = new[]
     {
         new NavigationLink("Projets", "#projects"),
-        new NavigationLink("Preuve Front-End", "#case-study"),
+        new NavigationLink("Étude Portail BI", "#case-study"),
         new NavigationLink("Expertises", "#expertise"),
         new NavigationLink("Parcours", "#journey"),
         new NavigationLink("Méthode", "#approach")
     };
 
-    public const string HeroEyebrow = "Full-Stack .NET · Applications métier";
-
     public const string HeroTitle =
         "Relier les usages, les interfaces et la donnée";
 
     public const string HeroIntro =
-        "Je conçois et développe des solutions .NET pour des environnements où l'interface, les flux de données et la fiabilité opérationnelle doivent fonctionner ensemble.";
+        "Je cadre, coordonne et développe des solutions .NET pour des environnements où les usages, les flux de données et la fiabilité opérationnelle doivent fonctionner ensemble.";
 
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {
@@ -204,11 +202,11 @@ public static class LandingContent
             new[] { "SQL Server", "SSIS", "BI" },
             "success"),
         new ExpertiseSkill(
-            "OPS",
-            "Fiabiliser et coordonner",
-            "Delivery & projet",
-            "Sécuriser la livraison, documenter les décisions et coordonner les parties prenantes",
-            new[] { "Tests", "CI/CD", "Cadrage" },
+            "PM",
+            "Piloter et fiabiliser",
+            "Pilotage & delivery",
+            "Cadrer le périmètre, les risques et les responsabilités, puis coordonner les parties prenantes jusqu'à la livraison",
+            new[] { "Cadrage", "Coordination", "CI/CD" },
             "warning")
     };
 
@@ -254,14 +252,6 @@ public static class LandingContent
     public const string ProjectsIntro =
         "Une sélection volontairement courte pour montrer le Front-End, la data et la livraison sans mélanger projet professionnel, POC et formation";
 
-    public static readonly IReadOnlyList<ProjectFilter> ProjectFilters = new[]
-    {
-        new ProjectFilter("all", "Tous"),
-        new ProjectFilter("frontend", "Front-End & BI"),
-        new ProjectFilter("data", "Data & architecture"),
-        new ProjectFilter("delivery", "Delivery")
-    };
-
     public static readonly IReadOnlyList<ProjectUseCase> ProjectUseCases = new[]
     {
         new ProjectUseCase(
@@ -305,7 +295,7 @@ public static class LandingContent
             "warning")
     };
 
-    public const string CaseStudyEyebrow = "Preuve Front-End professionnelle";
+    public const string CaseStudyEyebrow = "Étude Portail BI · expérience professionnelle";
 
     public const string CaseStudyTitle =
         "Concevoir un portail BI adapté aux besoins de chaque service";
@@ -349,27 +339,13 @@ public static class LandingContent
         new CaseStudyMetric("Exports", "continuité bureautique", "sorties PDF et CSV", "warning")
     };
 
-    public static readonly IReadOnlyList<CaseStudyComparison> CaseStudyComparisons = new[]
-    {
-        new CaseStudyComparison(
-            "Besoin",
-            "Remplacer un reporting devenu indisponible",
-            "La transformation de l'ERP impose de maintenir un accès fiable aux données utiles aux services.",
-            "warning"),
-        new CaseStudyComparison(
-            "Livré",
-            "Un portail en production et évolutif",
-            "Plusieurs interfaces réunissent tableaux, graphiques, filtres, exports et droits d'accès en environnement .NET.",
-            "success")
-    };
-
-    public const string JourneyEyebrow = "Parcours & coordination";
+    public const string JourneyEyebrow = "Pilotage & parcours";
 
     public const string JourneyTitle =
-        "De la transmission des techniques à la conception de systèmes métier";
+        "De la transmission au pilotage de systèmes métier";
 
     public const string JourneyIntro =
-        "Un parcours qui relie culture visuelle, pédagogie, développement .NET et coordination de projets industriels";
+        "Un parcours qui relie pédagogie, cadrage, développement .NET et coordination de projets techniques en environnement industriel";
 
     public static readonly IReadOnlyList<JourneyMilestone> JourneyMilestones = new[]
     {
@@ -445,20 +421,20 @@ public static class LandingContent
 
     public const string CvRequestUrl = "mailto:fritp3@gmail.com?subject=Demande%20de%20CV";
 
-    public const string ContactAvailability = "Ouvert aux missions .NET, applications métier, Front-End et data";
+    public const string ContactAvailability = "Ouvert aux missions de pilotage technique, .NET, Front-End et data";
 
     public const string ContactGuidanceTitle = "Votre besoin métier";
 
     public const string ContactGuidanceBody =
-        "Application .NET, portail de données, flux ETL, amélioration d'une interface métier ou cadrage d'une intégration technique.";
+        "Pilotage technique, application .NET, portail de données, flux ETL ou cadrage d'une intégration métier–SI.";
 
-    public const string ContactFormTitle = "Décrire votre besoin";
+    public const string ContactFormTitle = "Préparer un e-mail";
 
     public const string ContactFormIntro =
-        "Quelques lignes suffisent pour identifier le contexte, les contraintes et la meilleure suite à donner.";
+        "Décrivez votre besoin : le formulaire préparera un e-mail dans votre messagerie, sans rien envoyer automatiquement.";
 
     public const string ContactFormHelper =
-        "Tous les champs sont obligatoires. Les erreurs restent textuelles, pas uniquement colorées.";
+        "Tous les champs sont obligatoires. Après validation, votre application de messagerie s'ouvrira pour vous laisser relire et envoyer l'e-mail.";
 
     public static readonly IReadOnlyList<ContactHighlight> ContactHighlights = new[]
     {
@@ -499,8 +475,6 @@ public sealed record MethodStep(
     string Tone,
     bool IsHighlighted = false);
 
-public sealed record ProjectFilter(string Key, string Label);
-
 public sealed record ProjectUseCase(
     string Step,
     string CategoryKey,
@@ -520,8 +494,6 @@ public sealed record CaseStudyPoint(string Title, string Description, string Ton
 public sealed record CaseStudyFact(string Label, string Value);
 
 public sealed record CaseStudyMetric(string Value, string Label, string Detail, string Tone);
-
-public sealed record CaseStudyComparison(string Label, string Title, string Description, string Tone);
 
 public sealed record JourneyMilestone(
     string Period,
