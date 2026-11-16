@@ -298,7 +298,7 @@ public sealed class ComponentTests : BunitContext
     }
 
     [Fact]
-    public void ConceptHeroSection_prioritizes_message_product_preview_and_evidence()
+    public void ConceptHeroSection_prioritizes_message_and_portfolio_index()
     {
         var cut = Render<ConceptHeroSection>();
 
@@ -307,30 +307,30 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("Relier les usages", section.TextContent);
         Assert.Contains("Je cadre, coordonne et développe des solutions .NET", section.TextContent);
-        Assert.Empty(cut.FindAll(".concept-hero__identity"));
-        Assert.Equal("#projects", cut.FindAll(".concept-hero__actions a")[0].GetAttribute("href"));
-        Assert.Equal("#case-study", cut.FindAll(".concept-hero__actions a")[1].GetAttribute("href"));
-        Assert.NotNull(cut.Find(".concept-hero__dashboard"));
-        Assert.Contains("Projet", cut.Find(".concept-hero__primary-metric").TextContent);
-        Assert.Equal(2, cut.FindAll(".concept-hero__signal-list > div").Count);
-        Assert.Equal(3, cut.FindAll(".concept-hero__dashboard-footer li").Count);
+        Assert.Equal("Explorer le portfolio", cut.Find(".concept-hero__index").GetAttribute("aria-label"));
+        Assert.Equal(4, cut.FindAll(".concept-hero__index a").Count);
+        Assert.Equal("#projects", cut.FindAll(".concept-hero__index a")[0].GetAttribute("href"));
+        Assert.Equal("#contact", cut.FindAll(".concept-hero__index a")[3].GetAttribute("href"));
+        Assert.Contains("Pilotage · .NET · Data", cut.Find(".concept-hero__footer").TextContent);
+        Assert.Empty(cut.FindAll(".concept-hero__dashboard"));
         Assert.Empty(cut.FindAll(".hero-kpi-card"));
         Assert.Empty(cut.FindAll(".motion-sequence"));
         Assert.Empty(cut.FindAll(".concept-demo-card"));
     }
 
     [Fact]
-    public void ConceptHeroSection_exposes_compact_specialties()
+    public void ConceptHeroSection_exposes_four_clear_destinations()
     {
         var cut = Render<ConceptHeroSection>();
 
-        var specialties = cut.FindAll(".concept-hero__credentials li");
+        var destinations = cut.FindAll(".concept-hero__index-copy strong");
 
         Assert.Collection(
-            specialties,
-            item => Assert.Equal("Pilotage technique", item.TextContent),
-            item => Assert.Equal("Blazor & .NET", item.TextContent),
-            item => Assert.Equal("Data & architecture", item.TextContent));
+            destinations,
+            item => Assert.Equal("Projets", item.TextContent),
+            item => Assert.Equal("Pilotage & expertises", item.TextContent),
+            item => Assert.Equal("Parcours", item.TextContent),
+            item => Assert.Equal("Contact", item.TextContent));
     }
 
     [Fact]
