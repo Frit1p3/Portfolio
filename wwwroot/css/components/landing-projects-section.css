@@ -30,7 +30,15 @@
 @media (max-width: 560px) {
     .projects-section {
         width: min(100% - 24px, 1120px);
+        gap: var(--space-24);
         padding: var(--space-64) 0;
     }
 
+    .projects-section__result {
+        display: none;
+    }
+
+    .projects-section__grid {
+        gap: var(--space-12);
+    }
 }

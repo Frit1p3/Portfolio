@@ -8,6 +8,26 @@
         Description="@LandingContent.CaseStudyIntro"
         Width="wide" />
 
+    <article class="case-study-section__mobile-proof" aria-label="Preuve principale du projet Portail BI">
+        <header>
+            <Badge Tone="success">@LandingContent.CaseStudyFacts[1].Value</Badge>
+            <span>Expérience professionnelle</span>
+        </header>
+
+        <p>@LandingContent.CaseStudyContext</p>
+
+        <dl>
+            <div>
+                <dt>@LandingContent.CaseStudyFacts[0].Label</dt>
+                <dd>@LandingContent.CaseStudyFacts[0].Value</dd>
+            </div>
+            <div>
+                <dt>Preuve vérifiée</dt>
+                <dd>@LandingContent.CaseStudyPoints[2].Description</dd>
+            </div>
+        </dl>
+    </article>
+
     <aside class="case-study-section__disclosure" aria-label="Contexte de publication">
         <Badge Tone="accent">Périmètre confirmé</Badge>
         <p>@LandingContent.CaseStudyDisclosure</p>
