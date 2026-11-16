@@ -34,7 +34,8 @@ public sealed class PlaywrightSmokeTests
 
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Relier les usages, les interfaces et la donnée" }))
             .ToBeVisibleAsync();
-        await Expect(page.Locator(".concept-hero__dashboard")).ToContainTextAsync("Pilotage · .NET · Data");
+        await Expect(page.GetByRole(AriaRole.Navigation, new() { Name = "Explorer le portfolio" })).ToBeVisibleAsync();
+        Assert.Equal(4, await page.Locator(".concept-hero__index a").CountAsync());
         await Expect(page.Locator(".site-header__brand img")).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Du besoin métier à une solution vérifiable" }))
             .ToBeVisibleAsync();
@@ -81,10 +82,9 @@ public sealed class PlaywrightSmokeTests
                 WaitUntil = WaitUntilState.NetworkIdle
             });
 
-            await Expect(page.Locator(".concept-hero__dashboard")).ToBeVisibleAsync();
-            await Expect(page.Locator(".concept-hero__primary-metric")).ToContainTextAsync(".NET");
-            Assert.Equal(3, await page.Locator(".concept-hero__dashboard-footer li").CountAsync());
-            Assert.Equal(3, await page.Locator(".concept-hero__credentials li").CountAsync());
+            await Expect(page.Locator(".concept-hero__index")).ToBeVisibleAsync();
+            Assert.Equal(4, await page.Locator(".concept-hero__index a").CountAsync());
+            await Expect(page.Locator(".concept-hero__footer")).ToContainTextAsync("Pilotage · .NET · Data");
             Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
 
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
@@ -119,7 +119,7 @@ public sealed class PlaywrightSmokeTests
         var sectionSelectors = new[]
         {
             ".concept-hero",
-            ".concept-hero__dashboard",
+            ".concept-hero__index",
             ".expertise-section",
             ".method-section",
             ".projects-section",
@@ -247,9 +247,9 @@ public sealed class PlaywrightSmokeTests
         Assert.Empty(anchorAudit.DuplicateIds);
 
         Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());
-        await Expect(page.Locator(".concept-hero__dashboard")).ToHaveAttributeAsync(
+        await Expect(page.Locator(".concept-hero__index")).ToHaveAttributeAsync(
             "aria-label",
-            "Synthèse des domaines d'intervention");
+            "Explorer le portfolio");
     }
 
     [Fact]
@@ -344,7 +344,7 @@ public sealed class PlaywrightSmokeTests
             WaitUntil = WaitUntilState.NetworkIdle
         });
 
-        await Expect(page.Locator(".concept-hero__dashboard")).ToBeVisibleAsync();
+        await Expect(page.Locator(".concept-hero__index")).ToBeVisibleAsync();
         await Expect(page.GetByRole(AriaRole.Heading, new() { Name = "Relier les usages, les interfaces et la donnée" }))
             .ToBeVisibleAsync();
         Assert.Equal(0, await page.Locator(".motion-sequence").CountAsync());

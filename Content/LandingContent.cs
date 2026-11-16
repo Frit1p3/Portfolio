@@ -20,6 +20,14 @@ public static class LandingContent
     public const string HeroIntro =
         "Je cadre, coordonne et développe des solutions .NET pour des environnements où les usages, les flux de données et la fiabilité opérationnelle doivent fonctionner ensemble.";
 
+    public static readonly IReadOnlyList<HeroIndexItem> HeroIndexItems = new[]
+    {
+        new HeroIndexItem("01", "Projets", "Trois réalisations vérifiées", "#projects"),
+        new HeroIndexItem("02", "Pilotage & expertises", "Cadrage, .NET et data", "#expertise"),
+        new HeroIndexItem("03", "Parcours", "De la transmission au pilotage", "#journey"),
+        new HeroIndexItem("04", "Contact", "Échanger sur un besoin métier", "#contact")
+    };
+
     public static readonly IReadOnlyList<ConceptSource> ConceptSources = new[]
     {
         new ConceptSource("Blazor", "accent", "Interfaces métier"),
@@ -445,6 +453,8 @@ public static class LandingContent
 }
 
 public sealed record ConceptSource(string Label, string Tone, string? Description = null);
+
+public sealed record HeroIndexItem(string Number, string Label, string Description, string Href);
 
 public sealed record ConceptStep(string Step, string Label, string Tone, bool IsActive = false);
 

@@ -2,65 +2,29 @@
 
 <section class="concept-hero" aria-labelledby="concept-hero-title">
     <div class="concept-hero__inner">
-        <div class="concept-hero__lead">
-            <div class="concept-hero__content">
-                <h1 id="concept-hero-title">@LandingContent.HeroTitle</h1>
-
-                <p>@LandingContent.HeroIntro</p>
-
-                <div class="concept-hero__actions" aria-label="Actions principales">
-                    <Button Href="#projects">Voir mes projets</Button>
-                    <Button Href="#case-study" Variant="secondary">Lire l'étude de cas</Button>
-                </div>
-
-                <ul class="concept-hero__credentials" aria-label="Spécialités principales">
-                    <li>Pilotage technique</li>
-                    <li>Blazor &amp; .NET</li>
-                    <li>Data &amp; architecture</li>
-                </ul>
-            </div>
-
-            <article class="concept-hero__dashboard" aria-label="Synthèse des domaines d'intervention">
-                <header class="concept-hero__dashboard-header">
-                    <div>
-                        <span>Domaines d'intervention</span>
-                        <strong>Pilotage · .NET · Data</strong>
-                    </div>
-                    <span class="concept-hero__status"><i aria-hidden="true"></i>Expérience industrielle</span>
-                </header>
-
-                <div class="concept-hero__dashboard-main">
-                    <div class="concept-hero__primary-metric">
-                        <span>Pilotage</span>
-                        <strong>Projet</strong>
-                        <small>Cadrage, risques, planning et coordination</small>
-                    </div>
-
-                    <div class="concept-hero__signal-list" aria-label="Expertises complémentaires">
-                        <div>
-                            <span>Réalisation</span>
-                            <strong>.NET</strong>
-                            <small>Blazor, services et composants</small>
-                        </div>
-                        <div>
-                            <span>Data &amp; architecture</span>
-                            <strong>ETL</strong>
-                            <small>SQL Server, SSIS, BI</small>
-                        </div>
-                    </div>
-                </div>
-
-                <footer class="concept-hero__dashboard-footer">
-                    <span>Domaines vérifiés</span>
-                    <ul>
-                        @foreach (var source in LandingContent.ConceptSources.Take(3))
-                        {
-                            <li><i class="concept-hero__source-dot concept-hero__source-dot--@source.Tone" aria-hidden="true"></i>@source.Label</li>
-                        }
-                    </ul>
-                </footer>
-            </article>
+        <div class="concept-hero__content">
+            <span class="concept-hero__eyebrow"><i aria-hidden="true"></i>Portfolio professionnel</span>
+            <h1 id="concept-hero-title">@LandingContent.HeroTitle</h1>
+            <p>@LandingContent.HeroIntro</p>
         </div>
 
+        <nav class="concept-hero__index" aria-label="Explorer le portfolio">
+            @foreach (var item in LandingContent.HeroIndexItems)
+            {
+                <a href="@item.Href">
+                    <span class="concept-hero__index-number">@item.Number</span>
+                    <span class="concept-hero__index-copy">
+                        <strong>@item.Label</strong>
+                        <small>@item.Description</small>
+                    </span>
+                    <span class="concept-hero__index-arrow" aria-hidden="true">→</span>
+                </a>
+            }
+        </nav>
+
+        <footer class="concept-hero__footer">
+            <span>Domaines d'intervention</span>
+            <strong>Pilotage <i>·</i> .NET <i>·</i> Data</strong>
+        </footer>
     </div>
 </section>

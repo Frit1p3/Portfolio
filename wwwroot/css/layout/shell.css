@@ -18,8 +18,8 @@
     z-index: 20;
     top: 0;
     width: 100%;
-    border-bottom: 1px solid rgba(216, 225, 231, 0.82);
-    background: rgba(244, 247, 248, 0.92);
+    border-bottom: 1px solid rgba(247, 251, 255, 0.12);
+    background: rgba(9, 21, 33, 0.94);
     backdrop-filter: blur(16px);
 }
 
@@ -75,12 +75,12 @@
 }
 
 .site-header__brand strong {
-    color: var(--color-text-primary);
+    color: var(--color-text-inverse);
     font-size: var(--text-base);
 }
 
 .site-header__brand-copy > span {
-    color: var(--color-text-secondary);
+    color: rgba(247, 251, 255, 0.58);
     font-family: var(--font-sans);
     font-size: 0.72rem;
     font-weight: 700;
@@ -93,7 +93,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: var(--space-16);
-    color: var(--color-text-secondary);
+    color: rgba(247, 251, 255, 0.68);
     font-size: var(--text-small);
     font-weight: 700;
 }
@@ -117,6 +117,10 @@
 .site-footer__bottom a:hover {
     color: var(--color-text-primary);
     text-decoration-line: underline;
+}
+
+.site-header__nav a:hover {
+    color: var(--color-text-inverse);
 }
 
 .site-footer {
@@ -237,9 +241,9 @@
         align-items: stretch;
         justify-content: stretch;
         gap: 0;
-        border: 1px solid var(--color-border);
+        border: 1px solid rgba(247, 251, 255, 0.14);
         border-radius: var(--radius-8);
-        background: var(--color-surface);
+        background: var(--color-surface-dark);
         padding: var(--space-8);
         box-shadow: 0 20px 50px rgba(9, 21, 33, 0.18);
     }
@@ -259,20 +263,20 @@
     }
 
     .site-header__nav a:hover {
-        background: var(--color-surface-muted);
+        background: rgba(247, 251, 255, 0.08);
         text-decoration: none;
     }
 
     .site-header__nav-contact {
         display: inline-flex;
         margin-top: var(--space-4);
-        background: var(--color-brand);
-        color: var(--color-text-inverse);
+        background: var(--color-accent);
+        color: var(--color-surface-dark);
     }
 
     .site-header__nav-contact:hover {
-        background: var(--color-brand) !important;
-        color: var(--color-text-inverse) !important;
+        background: var(--color-accent) !important;
+        color: var(--color-surface-dark) !important;
     }
 
     .site-header__action {
@@ -284,10 +288,10 @@
         min-height: 42px;
         align-items: center;
         gap: var(--space-8);
-        border: 1px solid var(--color-border);
+        border: 1px solid rgba(247, 251, 255, 0.18);
         border-radius: var(--radius-4);
-        background: var(--color-surface);
-        color: var(--color-text-primary);
+        background: rgba(247, 251, 255, 0.06);
+        color: var(--color-text-inverse);
         padding: var(--space-8) var(--space-12);
         font: inherit;
         font-size: var(--text-small);

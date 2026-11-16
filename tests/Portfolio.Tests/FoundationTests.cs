@@ -16,6 +16,8 @@ public sealed class FoundationTests
     public void Landing_concept_hero_content_is_available()
     {
         Assert.Contains("interfaces et la donnée", LandingContent.HeroTitle, StringComparison.Ordinal);
+        Assert.Equal(4, LandingContent.HeroIndexItems.Count);
+        Assert.Contains(LandingContent.HeroIndexItems, item => item.Href == "#contact");
         Assert.Equal(4, LandingContent.ConceptSources.Count);
         Assert.Equal(3, LandingContent.ConceptStack.Count);
         Assert.Equal(4, LandingContent.ConceptSteps.Count);
