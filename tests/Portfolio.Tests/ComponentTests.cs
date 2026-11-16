@@ -609,6 +609,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Aucun résultat opérationnel revendiqué", section.TextContent);
         Assert.Contains("Facturation électronique", section.TextContent);
         Assert.Contains("Périmètre technique et résultats à documenter", section.TextContent);
+        Assert.Equal("Portrait de Merryl Bouchereau", cut.Find(".journey-section__profile img").GetAttribute("alt"));
+        Assert.Equal("images/merryl-bouchereau-portrait.jpg", cut.Find(".journey-section__profile img").GetAttribute("src"));
     }
 
     [Fact]
