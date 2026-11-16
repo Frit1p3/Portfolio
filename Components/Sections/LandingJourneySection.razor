@@ -8,6 +8,33 @@
         Description="@LandingContent.JourneyIntro"
         Width="wide" />
 
+    <div class="journey-section__proofs-heading">
+        <span>Pilotage technique</span>
+        <h3>Des responsabilités présentées selon leur maturité réelle.</h3>
+    </div>
+
+    <div class="journey-section__proofs">
+        @foreach (var proof in LandingContent.ComplementaryProofs)
+        {
+            <article class="journey-section__proof journey-section__proof--@proof.Tone">
+                <header>
+                    <span>@proof.Status</span>
+                    <i aria-hidden="true"></i>
+                </header>
+                <h3>@proof.Title</h3>
+                <strong>@proof.Role</strong>
+                <p>@proof.Description</p>
+                <ul>
+                    @foreach (var responsibility in proof.Responsibilities)
+                    {
+                        <li>@responsibility</li>
+                    }
+                </ul>
+                <footer>@proof.Limit</footer>
+            </article>
+        }
+    </div>
+
     <div class="journey-section__layout">
         <div class="journey-section__timeline-wrap">
             <div class="journey-section__subheading">
@@ -46,30 +73,4 @@
         </aside>
     </div>
 
-    <div class="journey-section__proofs-heading">
-        <span>Projets en cours et coordination</span>
-        <h3>Des preuves courtes, présentées selon leur maturité réelle.</h3>
-    </div>
-
-    <div class="journey-section__proofs">
-        @foreach (var proof in LandingContent.ComplementaryProofs)
-        {
-            <article class="journey-section__proof journey-section__proof--@proof.Tone">
-                <header>
-                    <span>@proof.Status</span>
-                    <i aria-hidden="true"></i>
-                </header>
-                <h3>@proof.Title</h3>
-                <strong>@proof.Role</strong>
-                <p>@proof.Description</p>
-                <ul>
-                    @foreach (var responsibility in proof.Responsibilities)
-                    {
-                        <li>@responsibility</li>
-                    }
-                </ul>
-                <footer>@proof.Limit</footer>
-            </article>
-        }
-    </div>
 </section>

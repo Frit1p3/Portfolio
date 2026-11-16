@@ -7,32 +7,18 @@
         TitleId="projects-section-title"
         Description="@LandingContent.ProjectsIntro" />
 
-    <div class="projects-section__filters" role="group" aria-label="Filtrer les projets">
-        @foreach (var filter in LandingContent.ProjectFilters)
-        {
-            <button
-                class="@GetFilterClass(filter.Key)"
-                type="button"
-                data-filter="@filter.Key"
-                aria-pressed="@(selectedFilter == filter.Key ? "true" : "false")"
-                @onclick="() => SelectFilter(filter.Key)">
-                @filter.Label
-            </button>
-        }
-    </div>
-
-    <p class="projects-section__result" aria-live="polite">
-        @VisibleProjects.Count @GetResultLabel()
+    <p class="projects-section__result">
+        3 études de cas complémentaires · produit, data et delivery
     </p>
 
     <div class="projects-section__grid" aria-label="Cas d'usage representatifs">
-        @foreach (var project in VisibleProjects)
+        @foreach (var project in LandingContent.ProjectUseCases)
         {
             <ProjectCard
                 Step="@project.Step"
                 Category="@project.Category"
                 Preview="@project.CategoryKey"
-                Featured="@(selectedFilter == "all" && project.Step == "01")"
+                Featured="@(project.Step == "01")"
                 Title="@project.Title"
                 Description="@project.Description"
                 Role="@project.Role"
@@ -45,30 +31,3 @@
         }
     </div>
 </section>
-
-@code {
-    private string selectedFilter = "all";
-
-    private IReadOnlyList<ProjectUseCase> VisibleProjects => selectedFilter == "all"
-        ? LandingContent.ProjectUseCases
-        : LandingContent.ProjectUseCases
-            .Where(project => project.CategoryKey == selectedFilter)
-            .ToArray();
-
-    private void SelectFilter(string filterKey)
-    {
-        selectedFilter = filterKey;
-    }
-
-    private string GetFilterClass(string filterKey)
-    {
-        return selectedFilter == filterKey
-            ? "projects-section__filter projects-section__filter--active"
-            : "projects-section__filter";
-    }
-
-    private string GetResultLabel()
-    {
-        return VisibleProjects.Count > 1 ? "projets affichés" : "projet affiché";
-    }
-}

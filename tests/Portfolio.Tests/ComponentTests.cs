@@ -126,6 +126,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("Navigation principale", cut.Find("nav").GetAttribute("aria-label"));
         Assert.Contains("Merryl", cut.Markup);
         Assert.Contains("Merryl Bouchereau - Retour à l'accueil", cut.Find(".site-header__brand").GetAttribute("aria-label"));
+        Assert.Equal("images/merryl-bouchereau-portrait.jpg", cut.Find(".site-header__brand img").GetAttribute("src"));
+        Assert.Equal(string.Empty, cut.Find(".site-header__brand img").GetAttribute("alt"));
         Assert.Equal("#main-content", cut.Find(".skip-link").GetAttribute("href"));
         Assert.Equal(6, navigationLinks.Count);
         Assert.Contains("#expertise", cut.Markup);
@@ -304,11 +306,12 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("concept-hero-title", section.GetAttribute("aria-labelledby"));
         Assert.Contains("Relier les usages", section.TextContent);
-        Assert.Contains("Je conçois et développe des solutions .NET", section.TextContent);
+        Assert.Contains("Je cadre, coordonne et développe des solutions .NET", section.TextContent);
+        Assert.Empty(cut.FindAll(".concept-hero__identity"));
         Assert.Equal("#projects", cut.FindAll(".concept-hero__actions a")[0].GetAttribute("href"));
         Assert.Equal("#case-study", cut.FindAll(".concept-hero__actions a")[1].GetAttribute("href"));
         Assert.NotNull(cut.Find(".concept-hero__dashboard"));
-        Assert.Contains(".NET", cut.Find(".concept-hero__primary-metric").TextContent);
+        Assert.Contains("Projet", cut.Find(".concept-hero__primary-metric").TextContent);
         Assert.Equal(2, cut.FindAll(".concept-hero__signal-list > div").Count);
         Assert.Equal(3, cut.FindAll(".concept-hero__dashboard-footer li").Count);
         Assert.Empty(cut.FindAll(".hero-kpi-card"));
@@ -325,7 +328,7 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Collection(
             specialties,
-            item => Assert.Equal("Applications métier", item.TextContent),
+            item => Assert.Equal("Pilotage technique", item.TextContent),
             item => Assert.Equal("Blazor & .NET", item.TextContent),
             item => Assert.Equal("Data & architecture", item.TextContent));
     }
@@ -585,7 +588,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(3, cut.FindAll(".skill-card").Count);
         Assert.Contains("Front-End & UX", section.TextContent);
         Assert.Contains("Data & architecture", section.TextContent);
-        Assert.Contains("Delivery & projet", section.TextContent);
+        Assert.Contains("Pilotage & delivery", section.TextContent);
     }
 
     [Fact]
@@ -640,7 +643,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("section-header--default", cut.Find(".section-header").ClassList);
         Assert.Contains("réalisations réelles", section.TextContent);
         Assert.Contains("projet professionnel", section.TextContent);
-        Assert.Equal(4, cut.FindAll(".projects-section__filter").Count);
+        Assert.Contains("3 études de cas complémentaires", section.TextContent);
         Assert.Equal(3, cut.FindAll(".project-card").Count);
         Assert.Single(cut.FindAll(".project-card--featured"));
         Assert.Single(cut.FindAll(".project-card__visual--frontend"));
@@ -659,11 +662,6 @@ public sealed class ComponentTests : BunitContext
             .Single(card => card.TextContent.Contains("Chaîne de livraison CI/CD", StringComparison.Ordinal));
         Assert.Equal("projets/ci-cd-cesizen", cicdCard.QuerySelector(".project-card__link")?.GetAttribute("href"));
 
-        cut.Find("[data-filter='data']").Click();
-
-        Assert.Equal("true", cut.Find("[data-filter='data']").GetAttribute("aria-pressed"));
-        Assert.Single(cut.FindAll(".project-card"));
-        Assert.Contains("POC d'architecture décisionnelle SSIS", section.TextContent);
     }
 
     [Fact]
@@ -681,11 +679,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__facts > div").Count);
-        Assert.Equal(2, cut.FindAll(".case-study-section__comparison-item").Count);
+        Assert.Empty(cut.FindAll(".case-study-section__comparison-item"));
         Assert.Contains("Filtres avancés", cut.Find(".case-study-section__priority").TextContent);
         Assert.Contains("Expérience professionnelle anonymisée", section.TextContent);
-        Assert.Contains("Remplacer un reporting", section.TextContent);
-        Assert.Contains("portail en production", section.TextContent);
         Assert.Contains("Besoin", section.TextContent);
         Assert.Contains("Réalisation", section.TextContent);
         Assert.Contains("Valeur vérifiée", section.TextContent);
@@ -807,7 +803,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal("contact-guidance-title", section.GetAttribute("aria-labelledby"));
 
         Assert.Equal("contact", section.Id);
-        Assert.Contains("Décrire votre besoin", section.TextContent);
+        Assert.Contains("Préparer un e-mail", section.TextContent);
         Assert.Equal($"mailto:{LandingContent.ContactEmail}", cut.Find(".contact-section__email").GetAttribute("href"));
         Assert.Equal(3, cut.FindAll(".contact-section__resources a").Count);
         Assert.Equal(LandingContent.LinkedInUrl, cut.Find(".contact-section__resources a").GetAttribute("href"));
@@ -825,7 +821,7 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(3, cut.FindAll(".contact-form__field").Count);
         Assert.Equal("Nom", cut.Find("label[for='contact-name']").TextContent);
         Assert.Equal("Email", cut.Find("label[for='contact-email']").TextContent);
-        Assert.Contains("Tous les champs sont obligatoires", cut.Find(".contact-form__helper").TextContent);
+        Assert.Contains("application de messagerie", cut.Find(".contact-form__helper").TextContent);
 
         cut.Find("form").Submit();
 

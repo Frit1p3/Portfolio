@@ -67,17 +67,6 @@
         </article>
     </div>
 
-    <div class="case-study-section__comparison" aria-label="Besoin et périmètre livré">
-        @foreach (var comparison in LandingContent.CaseStudyComparisons)
-        {
-            <article class="case-study-section__comparison-item case-study-section__comparison-item--@comparison.Tone">
-                <span>@comparison.Label</span>
-                <h3>@comparison.Title</h3>
-                <p>@comparison.Description</p>
-            </article>
-        }
-    </div>
-
     <a class="case-study-section__link" href="projets/portail-bi">
         Lire l'étude de cas complète <span aria-hidden="true">→</span>
     </a>

@@ -9,7 +9,7 @@ public sealed class FoundationTests
     public void Landing_positioning_content_is_available()
     {
         Assert.Contains(".NET", LandingContent.Positioning, StringComparison.Ordinal);
-        Assert.Contains("applications métier", LandingContent.Positioning, StringComparison.Ordinal);
+        Assert.Contains("Chef de projet technique", LandingContent.Positioning, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -31,11 +31,9 @@ public sealed class FoundationTests
         Assert.Equal(2, LandingContent.ComplementaryProofs.Count);
         Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
-        Assert.Equal(4, LandingContent.ProjectFilters.Count);
         Assert.Contains("portail BI", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);
-        Assert.Equal(2, LandingContent.CaseStudyComparisons.Count);
         Assert.Equal("Votre besoin métier", LandingContent.ContactGuidanceTitle);
         Assert.Contains("@", LandingContent.ContactEmail, StringComparison.Ordinal);
         Assert.StartsWith("https://www.linkedin.com/", LandingContent.LinkedInUrl, StringComparison.Ordinal);
@@ -44,6 +42,7 @@ public sealed class FoundationTests
         Assert.Equal(3, LandingContent.ContactHighlights.Count);
         Assert.Equal(3, CaseStudyNavigationContent.Studies.Count);
         Assert.DoesNotContain(CaseStudyNavigationContent.Studies, study => study.Key == "pilotage-atelier");
+        Assert.Contains("Chef de projet technique", LandingContent.Positioning, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -80,6 +79,7 @@ public sealed class FoundationTests
         Assert.Contains("property=\"og:image\"", indexHtml, StringComparison.Ordinal);
         Assert.Contains("name=\"twitter:card\" content=\"summary_large_image\"", indexHtml, StringComparison.Ordinal);
         Assert.True(File.Exists(Path.Combine(root, "wwwroot", "images", "og-portfolio.jpg")));
+        Assert.True(File.Exists(Path.Combine(root, "wwwroot", "images", "merryl-bouchereau-portrait.jpg")));
         Assert.Contains("[data-static-head]", indexHtml, StringComparison.Ordinal);
         Assert.Contains("mkdir -p publish/wwwroot/projets/pilotage-atelier", workflow, StringComparison.Ordinal);
         Assert.Contains(
