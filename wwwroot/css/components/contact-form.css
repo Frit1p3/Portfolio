@@ -141,7 +141,41 @@
 
 @media (max-width: 560px) {
     .contact-form {
+        gap: var(--space-16);
         padding: var(--space-16);
+    }
+
+    .contact-form form {
+        gap: var(--space-12);
+    }
+
+    .contact-form__heading {
+        gap: var(--space-4);
+    }
+
+    .contact-form__heading h3 {
+        font-size: 1.15rem;
+    }
+
+    .contact-form__heading p,
+    .contact-form__helper {
+        display: none;
+    }
+
+    .contact-form__field {
+        gap: var(--space-4);
+    }
+
+    .contact-form__field input {
+        min-height: 44px;
+    }
+
+    .contact-form__field textarea {
+        min-height: 88px;
+    }
+
+    .contact-form__actions {
+        padding-top: 0;
     }
 
     .contact-form__actions button {

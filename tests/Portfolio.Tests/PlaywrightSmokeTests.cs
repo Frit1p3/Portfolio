@@ -219,6 +219,16 @@ public sealed class PlaywrightSmokeTests
             await Expect(page.Locator(".journey-section__profile img")).ToBeVisibleAsync();
             await Expect(page.Locator(".journey-section__profile > div")).ToBeHiddenAsync();
 
+            await Expect(page.Locator(".method-section__step").First.Locator("p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".method-section__step").First.Locator(".method-section__evidence")).ToBeVisibleAsync();
+            await Expect(page.Locator(".contact-section__highlight").First.Locator("p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".contact-form__helper")).ToBeHiddenAsync();
+            await Expect(page.Locator(".contact-form__actions button")).ToBeVisibleAsync();
+            await Expect(page.Locator(".site-footer__nav")).ToBeHiddenAsync();
+            await Expect(page.Locator(".site-footer__contact")).ToBeHiddenAsync();
+            await Expect(page.Locator(".site-footer__brand")).ToBeVisibleAsync();
+            await Expect(page.Locator(".site-footer__bottom a")).ToBeVisibleAsync();
+
             var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
             Assert.True(scrollWidth <= viewport.Width + 1);
 

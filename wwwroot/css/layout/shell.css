@@ -343,6 +343,35 @@
     }
 }
 
+@media (max-width: 560px) {
+    .site-footer {
+        padding-block: var(--space-24) var(--space-16);
+    }
+
+    .site-footer__main {
+        display: block;
+    }
+
+    .site-footer__identity {
+        gap: 0;
+    }
+
+    .site-footer__identity p,
+    .site-footer__identity span,
+    .site-footer__nav,
+    .site-footer__contact {
+        display: none;
+    }
+
+    .site-footer__bottom {
+        flex-direction: row;
+        align-items: center;
+        margin-top: var(--space-16);
+        padding-top: var(--space-16);
+        font-size: 0.75rem;
+    }
+}
+
 @media (max-width: 380px) {
     .site-header__brand-copy strong {
         display: none;
