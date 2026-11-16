@@ -169,6 +169,74 @@ public sealed class PlaywrightSmokeTests
     }
 
     [Fact]
+    public async Task Home_page_reduces_project_density_and_case_study_to_one_proof_on_mobile()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+
+        foreach (var viewport in new[]
+        {
+            new ViewportSize { Width = 390, Height = 900 },
+            new ViewportSize { Width = 360, Height = 800 }
+        })
+        {
+            var page = await browser.NewPageAsync(new BrowserNewPageOptions { ViewportSize = viewport });
+            await page.GotoAsync(baseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+            Assert.Equal(3, await page.Locator(".project-card").CountAsync());
+            await Expect(page.Locator(".project-card__visual").First).ToBeHiddenAsync();
+            await Expect(page.Locator(".project-card__description").First).ToBeHiddenAsync();
+            await Expect(page.Locator(".project-card__details").First).ToBeVisibleAsync();
+
+            await Expect(page.Locator(".case-study-section__mobile-proof")).ToBeVisibleAsync();
+            await Expect(page.Locator(".case-study-section__mobile-proof"))
+                .ToContainTextAsync("Plusieurs interfaces métier déployées");
+            await Expect(page.Locator(".case-study-section__disclosure")).ToBeHiddenAsync();
+            await Expect(page.Locator(".case-study-section__facts")).ToBeHiddenAsync();
+            await Expect(page.Locator(".case-study-section__layout")).ToBeHiddenAsync();
+            await Expect(page.Locator(".case-study-section__link")).ToBeVisibleAsync();
+
+            var pilotageCard = page.Locator(".expertise-section .skill-card--warning");
+            var frontendCard = page.Locator(".expertise-section .skill-card--accent");
+            await Expect(pilotageCard).ToBeVisibleAsync();
+            Assert.True(
+                (await pilotageCard.BoundingBoxAsync())!.Y < (await frontendCard.BoundingBoxAsync())!.Y,
+                "Pilotage & delivery should be the first expertise on mobile.");
+            await Expect(pilotageCard.Locator(".skill-card__tags li").Nth(2)).ToBeHiddenAsync();
+
+            await Expect(page.Locator(".journey-section__proof").First.Locator(":scope > p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__proof").First.Locator("li").Nth(2)).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__timeline li").First.Locator(".journey-section__milestone p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".journey-section__timeline li").Last.Locator(".journey-section__milestone p")).ToBeVisibleAsync();
+            await Expect(page.Locator(".journey-section__profile img")).ToBeVisibleAsync();
+            await Expect(page.Locator(".journey-section__profile > div")).ToBeHiddenAsync();
+
+            await Expect(page.Locator(".method-section__step").First.Locator("p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".method-section__step").First.Locator(".method-section__evidence")).ToBeVisibleAsync();
+            await Expect(page.Locator(".contact-section__highlight").First.Locator("p")).ToBeHiddenAsync();
+            await Expect(page.Locator(".contact-form__helper")).ToBeHiddenAsync();
+            await Expect(page.Locator(".contact-form__actions button")).ToBeVisibleAsync();
+            await Expect(page.Locator(".site-footer__nav")).ToBeHiddenAsync();
+            await Expect(page.Locator(".site-footer__contact")).ToBeHiddenAsync();
+            await Expect(page.Locator(".site-footer__brand")).ToBeVisibleAsync();
+            await Expect(page.Locator(".site-footer__bottom a")).ToBeVisibleAsync();
+
+            var scrollWidth = await page.EvaluateAsync<int>("() => document.documentElement.scrollWidth");
+            Assert.True(scrollWidth <= viewport.Width + 1);
+
+            await page.CloseAsync();
+        }
+    }
+
+    [Fact]
     public async Task Home_page_exposes_accessible_landmarks_and_anchors()
     {
         if (!TryGetBaseUrl(out var baseUrl))

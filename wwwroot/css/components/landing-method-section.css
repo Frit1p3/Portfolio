@@ -129,11 +129,39 @@
 @media (max-width: 560px) {
     .method-section__inner {
         width: min(100% - 24px, 1120px);
-        gap: var(--space-32);
-        padding: var(--space-32) 0 var(--space-48);
+        gap: var(--space-24);
+        padding: var(--space-24) 0 var(--space-32);
     }
 
-    .method-section__step {
-        padding: var(--space-16);
+    .method-section__steps {
+        gap: var(--space-8);
+    }
+
+    .method-section__steps::before {
+        display: none;
+    }
+
+    .method-section__step,
+    .method-section__step--highlighted {
+        gap: var(--space-8);
+        min-height: auto;
+        padding: var(--space-12);
+        box-shadow: none;
+    }
+
+    .method-section__step-content {
+        gap: 0;
+    }
+
+    .method-section__step h3 {
+        font-size: 1rem;
+    }
+
+    .method-section__step p {
+        display: none;
+    }
+
+    .method-section__evidence {
+        font-size: 0.72rem;
     }
 }

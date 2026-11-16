@@ -681,6 +681,8 @@ public sealed class ComponentTests : BunitContext
         Assert.Equal(3, cut.FindAll(".case-study-section__point").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__metric").Count);
         Assert.Equal(3, cut.FindAll(".case-study-section__facts > div").Count);
+        Assert.Single(cut.FindAll(".case-study-section__mobile-proof"));
+        Assert.Contains("Plusieurs interfaces métier déployées", cut.Find(".case-study-section__mobile-proof").TextContent);
         Assert.Empty(cut.FindAll(".case-study-section__comparison-item"));
         Assert.Contains("Filtres avancés", cut.Find(".case-study-section__priority").TextContent);
         Assert.Contains("Expérience professionnelle anonymisée", section.TextContent);
