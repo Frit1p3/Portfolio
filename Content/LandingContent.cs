@@ -213,9 +213,57 @@ public static class LandingContent
             "PM",
             "Piloter et fiabiliser",
             "Pilotage & delivery",
-            "Cadrer le périmètre, les risques et les responsabilités, puis coordonner les parties prenantes jusqu'à la livraison",
-            new[] { "Cadrage", "Coordination", "CI/CD" },
+            "Cadrer, planifier et suivre les risques, puis coordonner métier, DSI et prestataires jusqu'à la livraison",
+            new[] { "Planner / Teams", "OpenProject", "GitHub Projects" },
             "warning")
+    };
+
+    public const string ToolingEyebrow = "Environnement de travail";
+
+    public const string ToolingTitle =
+        "Des outils choisis selon la phase du projet";
+
+    public const string ToolingIntro =
+        "Un outillage utilisé pour planifier, documenter, modéliser, restituer et livrer — toujours relié à un usage concret.";
+
+    public static readonly IReadOnlyList<ToolPractice> ToolPractices = new[]
+    {
+        new ToolPractice(
+            "01",
+            "Cadrer et planifier",
+            "Structurer le périmètre, les jalons, les charges et le suivi collectif.",
+            new[] { "Planner / Teams", "GanttProject", "OpenProject", "monday.com" },
+            "Usage professionnel · 2023—2026",
+            "Pilotage documenté dans le POC SSIS",
+            "projets/poc-ssis",
+            "warning"),
+        new ToolPractice(
+            "02",
+            "Suivre et documenter",
+            "Conserver les demandes, décisions, responsabilités et livrables du projet.",
+            new[] { "GitHub Projects", "GitHub Issues", "GLPI", "SharePoint" },
+            "Usage professionnel et scolaire · 2023—2026",
+            "Traçabilité visible dans l'étude CI/CD",
+            "projets/ci-cd-cesizen",
+            "accent"),
+        new ToolPractice(
+            "03",
+            "Modéliser et restituer",
+            "Formaliser écrans, flux, modèles de données et restitutions métier.",
+            new[] { "Figma", "draw.io / Mermaid", "ChartDB", "Excel / Power BI" },
+            "Usage professionnel et scolaire · 2023—2026",
+            "Conception illustrée par le Portail BI",
+            "projets/portail-bi",
+            "success"),
+        new ToolPractice(
+            "04",
+            "Livrer et superviser",
+            "Relier versions, contrôles, déploiement et suivi de l'exploitation.",
+            new[] { "Git / GitHub", "GitLab / Azure DevOps", "GitHub Actions", "Uptime Kuma" },
+            "Usage professionnel et scolaire · 2023—2026",
+            "Chaîne complète dans l'étude CI/CD",
+            "projets/ci-cd-cesizen",
+            "neutral")
     };
 
     public const string MethodEyebrow = "Méthode";
@@ -474,6 +522,16 @@ public sealed record ExpertiseSkill(
     string Title,
     string Description,
     IReadOnlyList<string> Tags,
+    string Tone);
+
+public sealed record ToolPractice(
+    string Code,
+    string Title,
+    string Description,
+    IReadOnlyList<string> Tools,
+    string Context,
+    string EvidenceLabel,
+    string EvidenceHref,
     string Tone);
 
 public sealed record MethodStep(

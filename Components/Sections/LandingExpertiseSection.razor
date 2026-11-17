@@ -22,5 +22,36 @@
                     Tone="@skill.Tone" />
             }
         </div>
+
+        <section class="expertise-section__tooling" aria-labelledby="tooling-title">
+            <header class="expertise-section__tooling-heading">
+                <span>@LandingContent.ToolingEyebrow</span>
+                <h3 id="tooling-title">@LandingContent.ToolingTitle</h3>
+                <p>@LandingContent.ToolingIntro</p>
+            </header>
+
+            <div class="expertise-section__tooling-grid" aria-label="Outils classés par usage">
+                @foreach (var practice in LandingContent.ToolPractices)
+                {
+                    <article class="expertise-section__tool-practice expertise-section__tool-practice--@practice.Tone">
+                        <header>
+                            <span>@practice.Code</span>
+                            <h4>@practice.Title</h4>
+                        </header>
+                        <p>@practice.Description</p>
+                        <ul aria-label="@($"Outils pour {practice.Title}")">
+                            @foreach (var tool in practice.Tools)
+                            {
+                                <li>@tool</li>
+                            }
+                        </ul>
+                        <footer>
+                            <small>@practice.Context</small>
+                            <a href="@practice.EvidenceHref">@practice.EvidenceLabel <span aria-hidden="true">→</span></a>
+                        </footer>
+                    </article>
+                }
+            </div>
+        </section>
     </div>
 </section>

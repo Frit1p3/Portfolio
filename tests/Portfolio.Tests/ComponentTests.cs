@@ -589,6 +589,11 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Front-End & UX", section.TextContent);
         Assert.Contains("Data & architecture", section.TextContent);
         Assert.Contains("Pilotage & delivery", section.TextContent);
+        Assert.Equal(4, cut.FindAll(".expertise-section__tool-practice").Count);
+        Assert.Contains("Planner / Teams", section.TextContent);
+        Assert.Contains("GitHub Projects", section.TextContent);
+        Assert.Contains("Excel / Power BI", section.TextContent);
+        Assert.Equal(4, cut.FindAll(".expertise-section__tool-practice a").Count);
     }
 
     [Fact]
