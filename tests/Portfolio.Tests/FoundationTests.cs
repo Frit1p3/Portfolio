@@ -33,6 +33,7 @@ public sealed class FoundationTests
         Assert.Equal(2, LandingContent.ComplementaryProofs.Count);
         Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);
+        Assert.Equal(4, LandingContent.ToolPractices.Count);
         Assert.Contains("portail BI", LandingContent.CaseStudyTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.CaseStudyPoints.Count);
         Assert.Equal(3, LandingContent.CaseStudyMetrics.Count);

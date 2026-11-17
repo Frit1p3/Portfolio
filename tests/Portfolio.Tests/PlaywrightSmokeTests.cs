@@ -211,6 +211,9 @@ public sealed class PlaywrightSmokeTests
                 (await pilotageCard.BoundingBoxAsync())!.Y < (await frontendCard.BoundingBoxAsync())!.Y,
                 "Pilotage & delivery should be the first expertise on mobile.");
             await Expect(pilotageCard.Locator(".skill-card__tags li").Nth(2)).ToBeHiddenAsync();
+            Assert.Equal(4, await page.Locator(".expertise-section__tool-practice").CountAsync());
+            await Expect(page.Locator(".expertise-section__tool-practice").First).ToBeVisibleAsync();
+            await Expect(page.Locator(".expertise-section__tool-practice").First.Locator("li").Nth(3)).ToBeHiddenAsync();
 
             await Expect(page.Locator(".journey-section__proof").First.Locator(":scope > p")).ToBeHiddenAsync();
             await Expect(page.Locator(".journey-section__proof").First.Locator("li").Nth(2)).ToBeHiddenAsync();
