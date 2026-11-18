@@ -24,7 +24,7 @@ public static class LandingContent
     {
         new HeroIndexItem("01", "Projets", "Trois réalisations vérifiées", "#projects"),
         new HeroIndexItem("02", "Pilotage & expertises", "Cadrage, .NET et data", "#expertise"),
-        new HeroIndexItem("03", "Parcours", "De la transmission au pilotage", "#journey"),
+        new HeroIndexItem("03", "Parcours", "De l'art et du design au pilotage", "#journey"),
         new HeroIndexItem("04", "Contact", "Échanger sur un besoin métier", "#contact")
     };
 
@@ -395,13 +395,13 @@ public static class LandingContent
         new CaseStudyMetric("Exports", "continuité bureautique", "sorties PDF et CSV", "warning")
     };
 
-    public const string JourneyEyebrow = "Pilotage & parcours";
+    public const string JourneyEyebrow = "Art, design & pilotage";
 
     public const string JourneyTitle =
-        "De la transmission au pilotage de systèmes métier";
+        "De l'intention à la production, puis aux systèmes métier";
 
     public const string JourneyIntro =
-        "Un parcours qui relie pédagogie, cadrage, développement .NET et coordination de projets techniques en environnement industriel";
+        "Un parcours qui relie pratique artistique, conception graphique, pédagogie, développement .NET et coordination de projets techniques";
 
     public static readonly IReadOnlyList<JourneyMilestone> JourneyMilestones = new[]
     {
@@ -411,6 +411,13 @@ public static class LandingContent
             "ESADSE · Saint-Étienne",
             "Initier aux pratiques traditionnelles et numériques, encadrer les exercices et accompagner l'apprentissage des logiciels.",
             "Transmission"),
+        new JourneyMilestone(
+            "Fév. 2019 — avr. 2025",
+            "Artiste plasticien indépendant",
+            "Lyon · Activité indépendante",
+            "Concevoir et conduire des projets artistiques de l'intention à la production et à la diffusion, avec des activités de conception graphique et de coordination.",
+            "Art & design",
+            true),
         new JourneyMilestone(
             "Jan. — mars 2022",
             "Enseignant en techniques de résine",
@@ -428,7 +435,21 @@ public static class LandingContent
             "Développement .NET en environnement industriel",
             "Applications métier · Data · Coordination",
             "Transformer les besoins opérationnels en interfaces, flux de données et projets techniques documentés.",
-            "Reconversion")
+            "Reconversion",
+            true)
+    };
+
+    public static readonly IReadOnlyList<JourneyTransferSkill> JourneyTransferSkills = new[]
+    {
+        new JourneyTransferSkill(
+            "Concevoir",
+            "Transformer une intention en proposition visuelle structurée et compréhensible."),
+        new JourneyTransferSkill(
+            "Produire",
+            "Cadrer les étapes, organiser les ressources et suivre une réalisation jusqu'à sa diffusion."),
+        new JourneyTransferSkill(
+            "Transmettre",
+            "Expliquer une technique, adapter l'accompagnement et guider un projet jusqu'à son achèvement.")
     };
 
     public static readonly IReadOnlyList<ComplementaryProof> ComplementaryProofs = new[]
@@ -568,7 +589,10 @@ public sealed record JourneyMilestone(
     string Title,
     string Organization,
     string Description,
-    string Evidence);
+    string Evidence,
+    bool IsHighlighted = false);
+
+public sealed record JourneyTransferSkill(string Title, string Description);
 
 public sealed record ComplementaryProof(
     string Status,
