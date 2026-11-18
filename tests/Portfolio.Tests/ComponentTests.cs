@@ -144,6 +144,7 @@ public sealed class ComponentTests : BunitContext
     [Fact]
     public void HeaderNavigation_toggles_compact_navigation()
     {
+        JSInterop.Mode = JSRuntimeMode.Loose;
         var cut = Render<HeaderNavigation>();
         var menu = cut.Find(".site-header__menu");
 
@@ -153,6 +154,20 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("site-header__nav--open", cut.Find(".site-header__nav").ClassList);
 
         cut.Find(".site-header__nav a").Click();
+
+        Assert.Equal("false", cut.Find(".site-header__menu").GetAttribute("aria-expanded"));
+        Assert.DoesNotContain("site-header__nav--open", cut.Find(".site-header__nav").ClassList);
+    }
+
+    [Fact]
+    public void HeaderNavigation_closes_compact_navigation_with_escape()
+    {
+        JSInterop.Mode = JSRuntimeMode.Loose;
+        var cut = Render<HeaderNavigation>();
+        var menu = cut.Find(".site-header__menu");
+
+        menu.Click();
+        cut.Find("header").KeyDown(new KeyboardEventArgs { Key = "Escape" });
 
         Assert.Equal("false", cut.Find(".site-header__menu").GetAttribute("aria-expanded"));
         Assert.DoesNotContain("site-header__nav--open", cut.Find(".site-header__nav").ClassList);

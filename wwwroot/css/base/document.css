@@ -28,6 +28,11 @@ h1[tabindex="-1"]:focus {
     outline: none;
 }
 
+h2[tabindex="-1"]:focus,
+h3[tabindex="-1"]:focus {
+    outline: none;
+}
+
 [data-reveal][data-reveal-ready] {
     opacity: 0;
     transform: translateY(28px);

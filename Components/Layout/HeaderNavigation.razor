@@ -1,6 +1,8 @@
 @using Portfolio.Content
 
-<header id="top" class="site-header">
+@inject IJSRuntime JS
+
+<header id="top" class="site-header" @onkeydown="HandleKeyDown">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
 
     <div class="site-header__inner">
@@ -12,19 +14,8 @@
             </span>
         </a>
 
-        <nav id="primary-navigation" class="@NavigationClass" aria-label="Navigation principale">
-            @foreach (var link in LandingContent.PrimaryNavigationLinks)
-            {
-                <a href="@link.Href" @onclick="CloseMenu">@link.Label</a>
-            }
-            <a class="site-header__nav-contact" href="#contact" @onclick="CloseMenu">Me contacter</a>
-        </nav>
-
-        <div class="site-header__action">
-            <Button Href="#contact">Me contacter</Button>
-        </div>
-
         <button
+            @ref="menuButton"
             class="site-header__menu"
             type="button"
             aria-label="@MenuLabel"
@@ -34,11 +25,24 @@
             <span>Menu</span>
             <span class="site-header__menu-icon" aria-hidden="true"></span>
         </button>
+
+        <nav id="primary-navigation" class="@NavigationClass" aria-label="Navigation principale">
+            @foreach (var link in LandingContent.PrimaryNavigationLinks)
+            {
+                <a href="@link.Href" @onclick="() => NavigateToAsync(link.Href)" @onclick:preventDefault="true">@link.Label</a>
+            }
+            <a class="site-header__nav-contact" href="#contact" @onclick='() => NavigateToAsync("#contact")' @onclick:preventDefault="true">Me contacter</a>
+        </nav>
+
+        <div class="site-header__action">
+            <Button Href="#contact">Me contacter</Button>
+        </div>
     </div>
 </header>
 
 @code {
     private bool isMenuOpen;
+    private ElementReference menuButton;
 
     private string NavigationClass => isMenuOpen
         ? "site-header__nav site-header__nav--open"
@@ -48,5 +52,20 @@
 
     private void ToggleMenu() => isMenuOpen = !isMenuOpen;
 
-    private void CloseMenu() => isMenuOpen = false;
+    private async Task NavigateToAsync(string target)
+    {
+        isMenuOpen = false;
+        await JS.InvokeVoidAsync("portfolioMotion.navigateToAnchor", target);
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs args)
+    {
+        if (!isMenuOpen || args.Key != "Escape")
+        {
+            return;
+        }
+
+        isMenuOpen = false;
+        await menuButton.FocusAsync();
+    }
 }
