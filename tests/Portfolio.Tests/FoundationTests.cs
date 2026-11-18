@@ -28,8 +28,10 @@ public sealed class FoundationTests
         Assert.Contains(LandingContent.LandingMotionStates, state => state.IsActive);
         Assert.Contains("solution vérifiable", LandingContent.MethodTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.MethodSteps.Count);
-        Assert.Contains("transmission", LandingContent.JourneyTitle, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(4, LandingContent.JourneyMilestones.Count);
+        Assert.Contains("intention", LandingContent.JourneyTitle, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(5, LandingContent.JourneyMilestones.Count);
+        Assert.Equal(2, LandingContent.JourneyMilestones.Count(milestone => milestone.IsHighlighted));
+        Assert.Equal(3, LandingContent.JourneyTransferSkills.Count);
         Assert.Equal(2, LandingContent.ComplementaryProofs.Count);
         Assert.Contains("réalisations réelles", LandingContent.ProjectsTitle, StringComparison.Ordinal);
         Assert.Equal(3, LandingContent.ProjectUseCases.Count);

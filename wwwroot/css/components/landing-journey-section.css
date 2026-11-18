@@ -184,6 +184,20 @@
     font-size: var(--text-small);
 }
 
+.journey-section__transfer li {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.journey-section__transfer li strong {
+    color: var(--color-text-inverse);
+    font-size: var(--text-small);
+}
+
+.journey-section__transfer li span {
+    color: rgba(247, 251, 255, 0.68);
+}
+
 .journey-section__transfer li::before,
 .journey-section__proof li::before {
     position: absolute;
@@ -359,7 +373,7 @@
         display: none;
     }
 
-    .journey-section__timeline li:last-child .journey-section__milestone p {
+    .journey-section__timeline-item--highlighted .journey-section__milestone p {
         display: block;
         font-size: var(--text-small);
         line-height: 1.45;
@@ -397,7 +411,4 @@
         gap: var(--space-4);
     }
 
-    .journey-section__transfer li:nth-child(n + 3) {
-        display: none;
-    }
 }

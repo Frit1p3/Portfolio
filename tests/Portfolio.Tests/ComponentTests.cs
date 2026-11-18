@@ -619,11 +619,19 @@ public sealed class ComponentTests : BunitContext
 
         Assert.Equal("journey", section.Id);
         Assert.Equal("journey-section-title", section.GetAttribute("aria-labelledby"));
-        Assert.Equal(4, cut.FindAll(".journey-section__timeline li").Count);
+        Assert.Equal(5, cut.FindAll(".journey-section__timeline li").Count);
+        Assert.Equal(2, cut.FindAll(".journey-section__timeline-item--highlighted").Count);
         Assert.Equal(2, cut.FindAll(".journey-section__proof").Count);
         Assert.Contains("Moniteur en techniques d'édition", section.TextContent);
+        Assert.Contains("Artiste plasticien indépendant", section.TextContent);
+        Assert.Contains("Fév. 2019 — avr. 2025", section.TextContent);
+        Assert.Contains("Conception graphique", section.TextContent, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Enseignant en techniques de résine", section.TextContent);
         Assert.Contains("Développement .NET en environnement industriel", section.TextContent);
+        Assert.Equal(3, cut.FindAll(".journey-section__transfer li").Count);
+        Assert.Contains("Concevoir", section.TextContent);
+        Assert.Contains("Produire", section.TextContent);
+        Assert.Contains("Transmettre", section.TextContent);
         Assert.Contains("Agent IA documentaire", section.TextContent);
         Assert.Contains("En cadrage", section.TextContent);
         Assert.Contains("Aucun résultat opérationnel revendiqué", section.TextContent);
@@ -631,6 +639,9 @@ public sealed class ComponentTests : BunitContext
         Assert.Contains("Périmètre technique et résultats à documenter", section.TextContent);
         Assert.Equal("Portrait de Merryl Bouchereau", cut.Find(".journey-section__profile img").GetAttribute("alt"));
         Assert.Equal("images/merryl-bouchereau-portrait.jpg", cut.Find(".journey-section__profile img").GetAttribute("src"));
+        Assert.Equal(
+            "Compétences transférables de l'art, du design et de l'enseignement",
+            cut.Find(".journey-section__transfer").GetAttribute("aria-label"));
     }
 
     [Fact]
