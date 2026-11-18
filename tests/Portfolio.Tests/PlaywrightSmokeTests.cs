@@ -334,7 +334,7 @@ public sealed class PlaywrightSmokeTests
         Assert.Equal(3, await page.Locator(".contact-form__field").CountAsync());
         await Expect(page.Locator("#expertise")).ToBeVisibleAsync();
         await Expect(page.Locator("#journey")).ToBeVisibleAsync();
-        Assert.Equal(4, await page.Locator(".journey-section__timeline li").CountAsync());
+        Assert.Equal(5, await page.Locator(".journey-section__timeline li").CountAsync());
         Assert.Equal(2, await page.Locator(".journey-section__proof").CountAsync());
         await Expect(page.Locator(".journey-section__profile img")).ToHaveAttributeAsync("alt", "Portrait de Merryl Bouchereau");
 

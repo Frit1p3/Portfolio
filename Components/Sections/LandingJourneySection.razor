@@ -45,7 +45,7 @@
             <ol class="journey-section__timeline">
                 @foreach (var milestone in LandingContent.JourneyMilestones)
                 {
-                    <li>
+                    <li class="@(milestone.IsHighlighted ? "journey-section__timeline-item--highlighted" : null)">
                         <div class="journey-section__period">@milestone.Period</div>
                         <div class="journey-section__milestone">
                             <span>@milestone.Evidence</span>
@@ -58,7 +58,7 @@
             </ol>
         </div>
 
-        <aside class="journey-section__transfer" aria-label="Compétences transférables de l'enseignement">
+        <aside class="journey-section__transfer" aria-label="Compétences transférables de l'art, du design et de l'enseignement">
             <div class="journey-section__profile">
                 <img src="images/merryl-bouchereau-portrait.jpg" alt="Portrait de Merryl Bouchereau" width="112" height="132" loading="lazy" decoding="async" />
                 <div>
@@ -66,15 +66,19 @@
                     <strong>Merryl Bouchereau</strong>
                 </div>
             </div>
-            <h3>Transmettre une technique, c'est déjà concevoir une expérience.</h3>
+            <h3>Concevoir une intention, organiser sa production, la rendre compréhensible.</h3>
             <p>
-                Préparer une progression, démontrer un geste complexe, adapter l'accompagnement et suivre une production
-                sont des compétences transférables à la conception d'interfaces et à la coordination technique.
+                Six années de pratique indépendante et trois expériences d'enseignement ont construit une méthode qui nourrit
+                aujourd'hui la conception d'interfaces et la coordination de projets applicatifs.
             </p>
             <ul>
-                <li>Expliquer sans simplifier à l'excès</li>
-                <li>Adapter le cadre au niveau et au projet</li>
-                <li>Planifier les moyens, les coûts et la production</li>
+                @foreach (var skill in LandingContent.JourneyTransferSkills)
+                {
+                    <li>
+                        <strong>@skill.Title</strong>
+                        <span>@skill.Description</span>
+                    </li>
+                }
             </ul>
         </aside>
     </div>
