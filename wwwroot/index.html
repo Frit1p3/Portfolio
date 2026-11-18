@@ -47,6 +47,32 @@
     <script>
         window.portfolioMotion = {
             prefersReducedMotion: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+            navigateToAnchor: (selector) => {
+                const target = document.querySelector(selector);
+                if (!target) return;
+
+                const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                const scrollOffset = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+                const focusTarget = target.querySelector("h1, h2, h3") ?? target;
+                let targetTop = 0;
+
+                for (let element = target; element; element = element.offsetParent) {
+                    targetTop += element.offsetTop;
+                }
+
+                if (!focusTarget.hasAttribute("tabindex")) {
+                    focusTarget.setAttribute("tabindex", "-1");
+                }
+
+                if (window.location.hash === selector) {
+                    window.history.replaceState(null, "", selector);
+                } else {
+                    window.history.pushState(null, "", selector);
+                }
+
+                window.scrollTo({ top: targetTop - scrollOffset, behavior: reducedMotion ? "auto" : "smooth" });
+                focusTarget.focus({ preventScroll: true });
+            },
             observeReveals: () => {
                 const elements = document.querySelectorAll("[data-reveal]:not([data-reveal-ready])");
                 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

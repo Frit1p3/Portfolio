@@ -169,6 +169,50 @@ public sealed class PlaywrightSmokeTests
     }
 
     [Fact]
+    public async Task Home_mobile_navigation_preserves_keyboard_focus_and_anchor_offset()
+    {
+        if (!TryGetBaseUrl(out var baseUrl))
+        {
+            return;
+        }
+
+        using var playwright = await Playwright.CreateAsync();
+        await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+        {
+            Headless = true
+        });
+        var page = await browser.NewPageAsync(new BrowserNewPageOptions
+        {
+            ViewportSize = new ViewportSize { Width = 390, Height = 900 }
+        });
+
+        await page.GotoAsync(baseUrl, new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
+
+        var menu = page.Locator(".site-header__menu");
+        var firstNavigationLink = page.Locator("#primary-navigation a").First;
+
+        await menu.ClickAsync();
+        await Expect(menu).ToHaveAttributeAsync("aria-expanded", "true");
+        await page.Keyboard.PressAsync("Tab");
+        await Expect(firstNavigationLink).ToBeFocusedAsync();
+
+        await page.Keyboard.PressAsync("Escape");
+        await Expect(menu).ToHaveAttributeAsync("aria-expanded", "false");
+        await Expect(menu).ToBeFocusedAsync();
+
+        await menu.ClickAsync();
+        await firstNavigationLink.ClickAsync();
+        await page.WaitForTimeoutAsync(900);
+
+        await Expect(menu).ToHaveAttributeAsync("aria-expanded", "false");
+        await Expect(page.Locator("#projects h2")).ToBeFocusedAsync();
+
+        var projectsTop = await page.Locator("#projects").EvaluateAsync<double>(
+            "element => element.getBoundingClientRect().top");
+        Assert.InRange(projectsTop, 88, 96);
+    }
+
+    [Fact]
     public async Task Home_page_reduces_project_density_and_case_study_to_one_proof_on_mobile()
     {
         if (!TryGetBaseUrl(out var baseUrl))
